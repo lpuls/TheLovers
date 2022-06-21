@@ -1,0 +1,17 @@
+{
+    "name": "donuthole.hamster.editor",
+    "references": [
+        "GUID:71776923979c9414dad3683b3b9c6668"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

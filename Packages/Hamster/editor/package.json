@@ -1,0 +1,8 @@
+{
+  "name": "donuthole.hamster.editor",
+  "description": "Donut hole's game editor framework called hamster",
+  "version": "1.0.0",
+  "unity": "2020.3",
+  "displayName": "hamster editor",
+  "type": "library"
+}
