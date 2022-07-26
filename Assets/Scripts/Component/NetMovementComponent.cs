@@ -25,7 +25,8 @@ namespace Hamster.SpaceWar {
                 if (!currentData.NetInfoDict.TryGetValue(netID, out INetInfo currentNetInfo))
                     return;
 
-                float t = spaceWarWorld.LogicTime / SpaceWarWorld.LOGIC_FRAME;
+                // float t = spaceWarWorld.LogicTime / SpaceWarWorld.LOGIC_FRAME;
+                float t = spaceWarWorld.GetLogicFramepercentage();
 
                 Vector3 lastLocation = new Vector3(preNetInfo.X, 0, preNetInfo.Y);
                 Vector3 currentLocation = new Vector3(currentNetInfo.X, 0, currentNetInfo.Y);
