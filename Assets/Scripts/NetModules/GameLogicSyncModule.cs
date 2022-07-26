@@ -26,8 +26,7 @@ namespace Hamster.SpaceWar
         }
     }
 
-    public class GameLogicSyncModule : NetModule
-    {
+    public class GameLogicSyncModule : NetModule, IPlayerInputReceiver {
 
         public const int NET_GAME_LOGIC_SYNC_ID = 2;
 

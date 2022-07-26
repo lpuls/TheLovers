@@ -85,7 +85,7 @@ namespace Hamster.SpaceWar {
                         // 创建角色
                         GameObject ship = CreateShip(configID, netID, new Vector3(x, y, z));
                         if (null != ship && eventID == EReadEventID.SpawnShip)
-                            ship.AddComponent<LocalPlayerController>();
+                            ship.AddComponent<NetPlayerController>();
                     }
                     break;
                 case EReadEventID.AllPlayerReady:
