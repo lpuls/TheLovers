@@ -6,8 +6,8 @@ namespace Hamster.SpaceWar {
         None,
         MoveUp = 1,
         MoveDown = 2,
-        MoveRight = 4,
-        MoveLeft = 8,
+        MoveRight = 3,
+        MoveLeft = 4,
         Max
     }
 

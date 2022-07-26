@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LocalInputKeyMapValue
   m_EditorClassIdentifier: 
   InputKeys: 77000000730000006100000064000000
-  InputValues: 01000000020000000800000004000000
+  InputValues: 02000000040000001000000008000000

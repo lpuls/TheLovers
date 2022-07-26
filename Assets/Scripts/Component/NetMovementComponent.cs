@@ -13,7 +13,7 @@ namespace Hamster.SpaceWar {
             if (null == _netSyncComponent)
                 return;
 
-            SpaceWarWorld spaceWarWorld = World.GetWorld<SpaceWarWorld>();
+            NetSpaceWarWorld spaceWarWorld = World.GetWorld<NetSpaceWarWorld>();
 
             FrameData preData = spaceWarWorld.GetPreFrameData();
             FrameData currentData = spaceWarWorld.GetCurrentFrameData();

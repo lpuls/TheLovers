@@ -3,55 +3,61 @@ using UnityEngine;
 
 
 namespace Hamster.SpaceWar {
+    public class LocalPlayerController : BasePlayerController, IPlayerInputReceiver {
 
-    public interface IPlayerInputReceiver {
-        void SendOperator(int operate);
-    }
+        private LocalMovementComponent _localMovementComponent = null;
 
-    public class LocalPlayerController : MonoBehaviour {
-        public InputKeyMapValue InputKeyToValue = null;
+        public override void Awake() {
+            base.Awake();
 
-        protected IPlayerInputReceiver _playerInputReceiver = null;
-
-        public void Awake() {
-            CheckInputKeyToValue();
-            InitPlayerInputReceiver();
+            _localMovementComponent = GetComponent<LocalMovementComponent>();
         }
 
-        protected void CheckInputKeyToValue() {
-            if (null == InputKeyToValue) {
-                Debug.LogError("=====>Local LocalPlayerController Input Key To Value ");
-
-                InputKeyToValue = Asset.Load<InputKeyMapValue>("Res/ScriptObject/LocalInputKeyMapValue");
-                if (null == InputKeyToValue) {
-                    Debug.LogError("=====>Local LocalPlayerController Input Key To Value is null");
-                    return;
+        public void SendOperator(int operate) {
+            Vector3 moveDirection = Vector3.zero;
+            for (int i = 0; i < (int)EInputValue.Max; i++) {
+                EInputValue value = (EInputValue)i;
+                if (1 == ((operate >> i) & 1)) {
+                    switch (value) {
+                        case EInputValue.MoveUp:
+                            moveDirection += transform.forward;
+                            break;
+                        case EInputValue.MoveDown:
+                            moveDirection -= transform.forward;
+                            break;
+                        case EInputValue.MoveLeft:
+                            moveDirection -= transform.right;
+                            break;
+                        case EInputValue.MoveRight:
+                            moveDirection += transform.right;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
-            NetDevice netDeivce = World.GetWorld().GetManager<NetDevice>();
-            if (null == netDeivce || !netDeivce.IsValid) {
-                Debug.LogError("=====>Local LocalPlayerController Has not NetDevice ");
-                return;
-            }
+            if (!moveDirection.Equals(Vector3.zero))
+                _localMovementComponent.Move(moveDirection);
+            else
+                _localMovementComponent.Stop();
         }
 
-        protected virtual void InitPlayerInputReceiver() {
-            
+        protected override void InitPlayerInputReceiver() {
+            _playerInputReceiver = this;
         }
 
-        public virtual void Update() {
-            int operat = 0;
+        public override void Update() {
+            int operate = 0;
             for (int i = 0; i < InputKeyToValue.InputKeys.Count; i++) {
                 KeyCode keyCode = InputKeyToValue.InputKeys[i];
                 if (Input.GetKey(keyCode)) {
-                    operat |= (int)InputKeyToValue.InputValues[i];
+                    operate |= (1 << (int)InputKeyToValue.InputValues[i]);
                 }
             }
 
-            // 有操作的情况发送操作
-            if (0 != operat && null != _playerInputReceiver) {
-                _playerInputReceiver.SendOperator(operat);
+            if (null != _playerInputReceiver) {
+                _playerInputReceiver.SendOperator(operate);
             }
         }
 
