@@ -5,6 +5,7 @@ namespace Hamster {
 
     public interface INetDevice {
         Packet Malloc(int size);
+        void SendMessage(NetMessage message);
     }
 
     public class NetDevice : INetDevice {
@@ -22,7 +23,7 @@ namespace Hamster {
             _socket = new ClientSocket(_packetManager);
             _socket.OnConnectSuccess += OnConnectSuccess;
             _socket.OnSendMessageFailed += OnSendMessageFailed;
-            _socket.OnReceiveMessageCompleted += OnReceiveMessageCompleted;
+            // _socket.OnReceiveMessageCompleted += OnReceiveMessageCompleted;
         }
 
         public void Connect(string ip, int port) {
@@ -30,6 +31,7 @@ namespace Hamster {
         }
 
         private void OnConnectSuccess() {
+            UnityEngine.Debug.Log("Connect To Server Success");
         }
 
         private void OnReceiveMessageCompleted(Packet p) {
@@ -38,7 +40,7 @@ namespace Hamster {
                 module.OnReceiveMessage(p);
             }
             else {
-                UnityEngine.Debug.LogError("Can't Find Module By " + netType); 
+                UnityEngine.Debug.LogError("Can't Find Module By " + netType);
             }
         }
 
@@ -62,13 +64,45 @@ namespace Hamster {
             }
         }
 
+        public NetModule GetModule(int moduleID) {
+            if (!_modules.TryGetValue(moduleID, out NetModule netModule))
+            {
+                UnityEngine.Debug.LogError("Get Module Failed " + netModule.GetModuleID());
+            }
+            return netModule;
+        }
+
         public Packet Malloc(int size) {
             return _packetManager.Malloc(size);
         }
 
         public void SendMessage(NetMessage message) {
-            if (IsValid)
+            if (IsValid) {
                 _socket.SendMessage(message.ToPacket(this));
+                UnityEngine.Debug.Log("========>Send Message By Socket");
+            }
+        }
+
+        public void Update() {
+            Queue<Packet> packets = _packetManager.GetPackets();
+            { 
+                var it = packets.GetEnumerator();
+                while (it.MoveNext()) {
+                    Packet p = it.Current;
+                    OnReceiveMessageCompleted(p);
+                }
+                _packetManager.CleanPackets(packets);
+            }
+            
+            // 更新网络模块
+            {
+                var it = _modules.GetEnumerator();
+                while (it.MoveNext())
+                {
+                    it.Current.Value.Update();
+                }
+            }
+            
         }
 
         public void Close() {

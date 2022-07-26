@@ -18,5 +18,6 @@ namespace Hamster {
 
         public abstract void OnSendMessageFaile(Packet p, SocketError error);
 
+        public virtual void Update() { }
     }
 }

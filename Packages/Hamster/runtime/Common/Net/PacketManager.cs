@@ -5,15 +5,20 @@ using UnityEngine;
 
 namespace Hamster {
     public class PacketManager {
-        private static PacketManager _instance = null;
-        public static PacketManager GetInstance() {
-            if (null == _instance)
-                _instance = new PacketManager();
-            return _instance;
-        }
+        //private static PacketManager _instance = null;
+        //public static PacketManager GetInstance() {
+        //    if (null == _instance)
+        //        _instance = new PacketManager();
+        //    return _instance;
+        //}
 
         private List<Packet>[] _packetPool = new List<Packet>[10];
-        private Queue<Packet> _packetQueue = new Queue<Packet>();
+
+        private object _lock = new object();
+        private Queue<Packet> _packetQueue = null;  // new Queue<Packet>();
+        private Queue<Packet> _packetQueueFront = new Queue<Packet>();
+        private Queue<Packet> _packetQueueBack = new Queue<Packet>();
+        
         private Packet _readingPacket = null;
         private byte[] _data = new byte[4096];
         private BinaryReader _binaryReader = null;
@@ -21,19 +26,29 @@ namespace Hamster {
         public PacketManager() {
             for (int i = 0; i < _packetPool.Length; i++) {
                 _packetPool[i] = new List<Packet>();
-            } 
+            }
+            _packetQueue = _packetQueueFront;
         }
 
         public Packet Malloc(int size) {
-            size |= (size >> 1);
-            size |= (size >> 2);
-            size |= (size >> 4);
-            size |= (size >> 8);
-            size += 1;
+            //size |= (size >> 1);
+            //size |= (size >> 2);
+            //size |= (size >> 4);
+            //size |= (size >> 8);
+            //size += 1;
+            //for (int i = 0; i < 32; i++) {
+            //    if (1 == (size >> i & 1)) {
+            //        //return MallocImpl(i - 1);
+            //        return MallocImpl(i);
+            //    }
+            //}
+            //return null;
+            int realSize = 1;
             for (int i = 0; i < 32; i++) {
-                if (1 == (size >> i & 1)) {
-                    return MallocImpl(i - 1);
+                if (realSize >= size) {
+                    return MallocImpl(i);
                 }
+                realSize <<= 1;
             }
             return null;
         }
@@ -50,7 +65,7 @@ namespace Hamster {
                     if (i >= 0 && i < _packetPool.Length) {
                         List<Packet> pool = _packetPool[i];
                         pool.Add(packet);
-                        packet.Peek(0);
+                        packet.Clean();
                     }
                 }
             }
@@ -72,15 +87,26 @@ namespace Hamster {
         }
 
         public Queue<Packet> GetPackets() {
-            return _packetQueue; 
+            Queue<Packet> temp = _packetQueue;
+            lock (_lock) {
+                if (_packetQueue == _packetQueueFront) {
+                    _packetQueue = _packetQueueBack;
+                }
+                else {
+                    _packetQueue = _packetQueueFront;
+                }
+            }
+            return temp; 
         }
 
-        public void CleanPackets() {
-            var it = _packetQueue.GetEnumerator();
-            while (it.MoveNext()) {
-                Free(it.Current);
+        public void CleanPackets(Queue<Packet> queue) {
+            lock (_lock) {
+                var it = queue.GetEnumerator();
+                while (it.MoveNext()) {
+                    Free(it.Current);
+                }
+                queue.Clear();
             }
-            _packetQueue.Clear();
         }
 
         public int Analyze(byte[] bytes) {
@@ -90,50 +116,52 @@ namespace Hamster {
             Array.Copy(bytes, _data, bytes.Length);
             _binaryReader.BaseStream.Position = 0;
 
-            while (_binaryReader.BaseStream.Position < bytes.Length) {
-                if (null == _readingPacket) {
-                    // 读取标识符，非该标识符的包说明包体无法解析，直接退出
-                    int packetMark = _binaryReader.ReadInt32();
-                    if (packetMark != Packet.PACKET_MARK)
-                        break;
-
-                    // 读取包长
-                    int length = _binaryReader.ReadInt32();
-                    if (0 >= length)
-                        continue;
-
-                    _readingPacket = Malloc(length);
+            lock (_lock) {
+                while (_binaryReader.BaseStream.Position < bytes.Length) {
                     if (null == _readingPacket) {
-                        UnityEngine.Debug.LogError("Malloc Packet Failed By Length " + length);   
-                        break;  
-                    }
+                        // 读取标识符，非该标识符的包说明包体无法解析，直接退出
+                        int packetMark = _binaryReader.ReadInt32();
+                        if (packetMark != Packet.PACKET_MARK)
+                            break;
+
+                        // 读取包长
+                        int length = _binaryReader.ReadInt32();
+                        if (0 >= length)
+                            continue;
+
+                        _readingPacket = Malloc(length);
+                        if (null == _readingPacket) {
+                            UnityEngine.Debug.LogError("Malloc Packet Failed By Length " + length);   
+                            break;  
+                        }
                         
-                    int remainLength = (int)(bytes.Length - _binaryReader.BaseStream.Position);
-                    if (remainLength < length) {
-                        _readingPacket.WriteBytes(_binaryReader.ReadBytes(remainLength));
+                        int remainLength = (int)(bytes.Length - _binaryReader.BaseStream.Position);
+                        if (remainLength < length) {
+                            _readingPacket.WriteBytes(_binaryReader.ReadBytes(remainLength));
+                        }
+                        else {
+                            _readingPacket.WriteBytes(_binaryReader.ReadBytes(length));
+                            _packetQueue.Enqueue(_readingPacket);
+                            _readingPacket.Peek(0);
+                            _readingPacket = null;
+                        }
                     }
                     else {
-                        _readingPacket.WriteBytes(_binaryReader.ReadBytes(length));
-                        _packetQueue.Enqueue(_readingPacket);
-                        _readingPacket.Peek(0);
-                        _readingPacket = null;
+                        int needRemain = _readingPacket.Size - (int)_readingPacket.GetReadIndex();
+                        int remainLength = (int)(bytes.Length - _binaryReader.BaseStream.Position);
+                        if (needRemain < remainLength) {
+                            _readingPacket.WriteBytes(_binaryReader.ReadBytes(needRemain));
+                            _packetQueue.Enqueue(_readingPacket);
+                            _readingPacket.Peek(0);
+                            _readingPacket = null;
+                        }
+                        else {
+                            _readingPacket.WriteBytes(_binaryReader.ReadBytes(remainLength));
+                        }
                     }
                 }
-                else {
-                    int needRemain = _readingPacket.Size - (int)_readingPacket.GetReadIndex();
-                    int remainLength = (int)(bytes.Length - _binaryReader.BaseStream.Position);
-                    if (needRemain < remainLength) {
-                        _readingPacket.WriteBytes(_binaryReader.ReadBytes(needRemain));
-                        _packetQueue.Enqueue(_readingPacket);
-                        _readingPacket.Peek(0);
-                        _readingPacket = null;
-                    }
-                    else {
-                        _readingPacket.WriteBytes(_binaryReader.ReadBytes(remainLength));
-                    }
-                }
+                return _packetQueue.Count;
             }
-            return _packetQueue.Count;
         }
     }
 }
