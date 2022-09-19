@@ -58,7 +58,7 @@ namespace Hamster {
                 //    Packet p = it.Current;
                 //    OnReceiveMessageCompleted?.Invoke(p);
                 //}
-                //_packetManager.CleanPackets();
+                // _packetManager.CleanPackets();
             }
             Array.Clear(data, 0, data.Length);
             StartReceive();

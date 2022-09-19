@@ -3,14 +3,21 @@ using UnityEngine;
 
 
 namespace Hamster.SpaceWar {
-    public class LocalPlayerController : BasePlayerController, IPlayerInputReceiver {
 
+    public interface IDamage {
+        void OnHit(GameObject hitObject, GameObject hitTrajectory);
+    }
+
+    public class LocalPlayerController : BasePlayerController, IPlayerInputReceiver, IDamage {
+
+        private LocalAbilityComponent _localAbilityComponent = null;
         private LocalMovementComponent _localMovementComponent = null;
 
         public override void Awake() {
             base.Awake();
 
             _localMovementComponent = GetComponent<LocalMovementComponent>();
+            _localAbilityComponent = GetComponent<LocalAbilityComponent>();
         }
 
         public void SendOperator(int operate) {
@@ -30,6 +37,11 @@ namespace Hamster.SpaceWar {
                             break;
                         case EInputValue.MoveRight:
                             moveDirection += transform.right;
+                            break;
+                        case EInputValue.Ability1:
+                            _localAbilityComponent.CastAbility((int)EAbilityIndex.Fire);
+                            break;
+                        case EInputValue.Ability2:
                             break;
                         default:
                             break;
@@ -61,5 +73,7 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
+        }
     }
 }

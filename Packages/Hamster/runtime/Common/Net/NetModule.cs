@@ -11,13 +11,18 @@ namespace Hamster {
         }
 
         public virtual int GetModuleID() {
-            return 0;
+            throw new NotImplementedException();
         }
 
-        public abstract void OnReceiveMessage(Packet p);
+        // 客户端接收服务器的数据处理
+        public abstract void OnReceiveServerMessage(Packet p);
+
+        // 服务端接收客户端数据处理
+        public abstract void OnReceiveClientMessage(Packet p, ClientInstance inst);
 
         public abstract void OnSendMessageFaile(Packet p, SocketError error);
 
         public virtual void Update() { }
     }
+
 }

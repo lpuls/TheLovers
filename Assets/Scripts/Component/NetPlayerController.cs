@@ -6,7 +6,7 @@ namespace Hamster.SpaceWar
     public class NetPlayerController : LocalPlayerController
     {
         protected override void InitPlayerInputReceiver() {
-            NetDevice netDeivce = World.GetWorld().GetManager<NetDevice>();
+            ClientNetDevice netDeivce = World.GetWorld().GetManager<ClientNetDevice>();
             if (null == netDeivce || !netDeivce.IsValid) {
                 Debug.LogError("=====>Local LocalPlayerController Has not NetDevice ");
                 return;

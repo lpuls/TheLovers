@@ -4,15 +4,10 @@ using System.IO;
 using UnityEngine;
 
 namespace Hamster {
-    public class PacketManager {
-        //private static PacketManager _instance = null;
-        //public static PacketManager GetInstance() {
-        //    if (null == _instance)
-        //        _instance = new PacketManager();
-        //    return _instance;
-        //}
+    public class PacketManager : IPacketMallocer {
+        private const int PACKET_MANAGER_PACKET_SIZE = 10;
 
-        private List<Packet>[] _packetPool = new List<Packet>[10];
+        private List<Packet>[] _packetPool = null;
 
         private object _lock = new object();
         private Queue<Packet> _packetQueue = null;  // new Queue<Packet>();
@@ -24,25 +19,15 @@ namespace Hamster {
         private BinaryReader _binaryReader = null;
 
         public PacketManager() {
+            _packetPool = new List<Packet>[PACKET_MANAGER_PACKET_SIZE];
             for (int i = 0; i < _packetPool.Length; i++) {
                 _packetPool[i] = new List<Packet>();
             }
             _packetQueue = _packetQueueFront;
         }
 
+
         public Packet Malloc(int size) {
-            //size |= (size >> 1);
-            //size |= (size >> 2);
-            //size |= (size >> 4);
-            //size |= (size >> 8);
-            //size += 1;
-            //for (int i = 0; i < 32; i++) {
-            //    if (1 == (size >> i & 1)) {
-            //        //return MallocImpl(i - 1);
-            //        return MallocImpl(i);
-            //    }
-            //}
-            //return null;
             int realSize = 1;
             for (int i = 0; i < 32; i++) {
                 if (realSize >= size) {
@@ -100,6 +85,7 @@ namespace Hamster {
         }
 
         public void CleanPackets(Queue<Packet> queue) {
+            // todo 感觉这么写不太合理
             lock (_lock) {
                 var it = queue.GetEnumerator();
                 while (it.MoveNext()) {

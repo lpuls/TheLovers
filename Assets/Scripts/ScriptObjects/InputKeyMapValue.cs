@@ -8,6 +8,8 @@ namespace Hamster.SpaceWar {
         MoveDown = 2,
         MoveRight = 3,
         MoveLeft = 4,
+        Ability1 = 5,  // 普通开火
+        Ability2 = 6,  // 技能
         Max
     }
 

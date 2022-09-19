@@ -123,6 +123,8 @@ namespace Hamster.SpaceWar {
     public class FrameDataManager {
         public const float LOGIC_FRAME = 1 / 15.0f;
 
+
+        private int _netIDCreateIndex = 1;
         private List<FrameData> _frameDatas = new List<FrameData>();
         private Dictionary<int, NetSyncComponent> _netActors = new Dictionary<int, NetSyncComponent>(new Int32Comparer());
         private HashSet<int> _newActorIDs = new HashSet<int>(new Int32Comparer());
@@ -133,6 +135,21 @@ namespace Hamster.SpaceWar {
 
         private byte[] _analyzeBytes = new byte[1024];
         private BinaryReader _binaryReader = null;
+
+        public int MaxPlayerCount {
+            get;
+            set;
+        }
+
+        public int CurrentPlayerCount {
+            get;
+            set;
+        }
+
+        public bool IsGameStart {
+            get;
+            set;
+        }
 
         public int GameLogicFrame {
             get;
@@ -146,19 +163,47 @@ namespace Hamster.SpaceWar {
 
         public FrameDataManager() {
             _binaryReader = new BinaryReader(new MemoryStream(_analyzeBytes));
+
+            // todo 之后这个值需要读表
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>(0, out Config.GameSetting gameSetting)) {
+                MaxPlayerCount = gameSetting.MaxPlayer;
+            }
+            else {
+                MaxPlayerCount = 1;
+            }
+
+            CurrentPlayerCount = 0;
+            IsGameStart = false;
         }
 
-        public GameObject SpawnNetObject(int id, int ownerID, string path, Vector3 pos) {
+        public GameObject SpawnNetObject(int id, int ownerID, string path, int configID, Vector3 pos) {
             GameObject newNetActor = Asset.Load(path);
 
             NetSyncComponent netSyncComponent = newNetActor.TryGetOrAdd<NetSyncComponent>();
             netSyncComponent.NetID = id;
             netSyncComponent.OwnerID = ownerID;
+            netSyncComponent.ConfigID = configID;
             netSyncComponent.PendingKill = false;
 
             newNetActor.transform.position = pos;
 
             _netActors.Add(ownerID << 16 | id, netSyncComponent);
+
+            return newNetActor;
+        }
+
+        public GameObject SpawnServerNetObject(int ownerID, string path, int configID, Vector3 pos) {
+            GameObject newNetActor = Asset.Load(path);
+
+            NetSyncComponent netSyncComponent = newNetActor.TryGetOrAdd<NetSyncComponent>();
+            netSyncComponent.NetID = _netIDCreateIndex++;
+            netSyncComponent.OwnerID = ownerID;
+            netSyncComponent.ConfigID = configID;
+            netSyncComponent.PendingKill = false;
+
+            newNetActor.transform.position = pos;
+
+            _netActors.Add(ownerID << 16 | netSyncComponent.NetID, netSyncComponent);
 
             return newNetActor;
         }
@@ -201,14 +246,14 @@ namespace Hamster.SpaceWar {
             for (int i = 0; i < players.Count; i++) {
                 PlayerInfo playerInfo = players[i];
                 if (!_netActors.ContainsKey(playerInfo.GetUniqueID())) {
-                    SpawnNetObject(playerInfo.ID, 0, "Res/Ships/GreyShip", new Vector3(playerInfo.X, 0, playerInfo.Y));
+                    SpawnNetObject(playerInfo.ID, 0, "Res/Ships/GreyShip", 0, new Vector3(playerInfo.X, 0, playerInfo.Y));
                 }
             }
 
             for (int i = 0; i < spawnActors.Count; i++) {
                 SpawnActorInfo spawnActorInfo = spawnActors[i];
                 if (!_netActors.ContainsKey(spawnActorInfo.GetUniqueID())) {
-                    SpawnNetObject(spawnActorInfo.ID, spawnActorInfo.OwnerID, "Res/Bullet/Bullet", new Vector3(spawnActorInfo.X, 0, spawnActorInfo.Y));
+                    SpawnNetObject(spawnActorInfo.ID, spawnActorInfo.OwnerID, "Res/Bullet/Bullet", 0, new Vector3(spawnActorInfo.X, 0, spawnActorInfo.Y));
                 }
             }
         }
@@ -266,6 +311,10 @@ namespace Hamster.SpaceWar {
 
         public float GetLogicFramepercentage() {
             return LogicTime / LOGIC_FRAME;
+        }
+
+        public Dictionary<int, NetSyncComponent> GetAllNetActor() {
+            return _netActors;
         }
 
         public void Update() {
