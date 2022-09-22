@@ -317,6 +317,10 @@ namespace Hamster.SpaceWar {
             return _netActors;
         }
 
+        public bool TryGetNetActor(int id, out NetSyncComponent netSyncComponent) {
+            return _netActors.TryGetValue(id, out netSyncComponent);
+        }
+
         public void Update() {
             if (!_simulate) {
                 return;

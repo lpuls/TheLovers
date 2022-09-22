@@ -26,7 +26,7 @@ namespace Hamster.SpaceWar
         }
     }
 
-    public class GameLogicSyncModule : NetModule, IPlayerInputReceiver {
+    public class GameLogicSyncModule : NetModule {
 
         public const int NET_GAME_LOGIC_SYNC_ID = 2;
 
@@ -46,7 +46,8 @@ namespace Hamster.SpaceWar
         }
 
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {
-            throw new NotImplementedException();
+            int playerInput = p.ReadInt32();
+            GameLogicUtility.SetPlayerOperator(inst.UserData, playerInput);
         }
 
         public override void OnSendMessageFaile(Packet p, SocketError error)

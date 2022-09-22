@@ -100,6 +100,10 @@ namespace Hamster {
             return _binaryReader.ReadUInt64();
         }
 
+        public bool ReadBool() {
+            return _binaryReader.ReadBoolean();
+        }
+
         public float ReadFloat() {
             return _binaryReader.ReadSingle();
         }
@@ -155,6 +159,11 @@ namespace Hamster {
         public void WriteFloat(float value) {
             _binaryWriter.Write(value);
             Size += 4;
+        }
+
+        public void WriteBool(bool value) {
+            _binaryWriter.Write(value);
+            Size += sizeof(bool);
         }
 
         public void WriteString(string value) {

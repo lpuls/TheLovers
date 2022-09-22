@@ -23,17 +23,8 @@ namespace Hamster.SpaceWar {
             if (!_needMove)
                 return;
 
-
-            //float moveSpped = Time.deltaTime * Speed;
-            //World.GetWorld<LocalSpaceWarWorld>().InWorld(transform.position, _moveDirection, out float distance);
-            //distance = Mathf.Abs(distance);
-            ////if (distance <= moveSpped + HalfSize) {
-            ////    moveSpped = distance;
-            ////}
-            //Debug.Log("=======> " + distance);
-            //transform.position += _moveDirection * moveSpped;
             transform.position += _moveDirection * Speed * Time.deltaTime;
-            transform.position = World.GetWorld<LocalSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
+            transform.position = World.GetWorld<NetSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
         }
 
 #if UNITY_EDITOR

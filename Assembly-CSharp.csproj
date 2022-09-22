@@ -83,7 +83,7 @@
     <Compile Include="Assets\Scripts\ScriptObjects\InputKeyMapValue.cs" />
     <Compile Include="Assets\Scripts\Component\TrajectoryComponent.cs" />
     <Compile Include="Assets\Scripts\Component\BasePlayerController.cs" />
-    <Compile Include="Assets\Scripts\Manager\LogicProcessManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\ServerProcessManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXEffectCycler.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\VFX Library\UICanvasManager.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Assets\Scripts\SpaceWarWorlds\NetSpaceWarWorld.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Component\NetSyncComponent.cs" />
-    <Compile Include="Assets\Scripts\Utility\PlayerSpawnUtility.cs" />
+    <Compile Include="Assets\Scripts\Utility\GameLogicUtility.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
   </ItemGroup>
   <ItemGroup>

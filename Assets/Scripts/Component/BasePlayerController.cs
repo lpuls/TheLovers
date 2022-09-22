@@ -4,18 +4,13 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public interface IPlayerInputReceiver {
-        void SendOperator(int operate);
-    }
-
     public class BasePlayerController : MonoBehaviour {
         public InputKeyMapValue InputKeyToValue = null;
 
-        protected IPlayerInputReceiver _playerInputReceiver = null;
 
         public virtual void Awake() {
             CheckInputKeyToValue();
-            InitPlayerInputReceiver();
+            Init();
         }
 
         protected void CheckInputKeyToValue() {
@@ -30,23 +25,19 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        protected virtual void InitPlayerInputReceiver() {
+        public virtual void Init() {
+        }
 
+        public virtual int GetOperator(InputKeyMapValue inputKeyMapValue) {
+            return 0;
+        }
+
+        public virtual void ProcessorInput(int input) {
         }
 
         public virtual void Update() {
-            int operat = 0;
-            for (int i = 0; i < InputKeyToValue.InputKeys.Count; i++) {
-                KeyCode keyCode = InputKeyToValue.InputKeys[i];
-                if (Input.GetKey(keyCode)) {
-                    operat |= (int)InputKeyToValue.InputValues[i];
-                }
-            }
-
-            // 有操作的情况发送操作
-            if (0 != operat && null != _playerInputReceiver) {
-                _playerInputReceiver.SendOperator(operat);
-            }
+            int input = GetOperator(InputKeyToValue);
+            ProcessorInput(input);
         }
     }
 }
