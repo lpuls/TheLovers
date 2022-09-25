@@ -71,7 +71,7 @@ namespace Hamster.SpaceWar {
                 for (int i = 0; i < InputKeyToValue.InputKeys.Count; i++) {
                     KeyCode keyCode = InputKeyToValue.InputKeys[i];
                     if (Input.GetKey(keyCode)) {
-                        _operator |= (int)InputKeyToValue.InputValues[i];
+                        _operator |= (1 << (int)InputKeyToValue.InputValues[i]);
                     }
                 }
             }

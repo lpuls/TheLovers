@@ -60,17 +60,21 @@
     <Compile Include="Assets\Scripts\Component\LocalAbilityComponent.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXFireProjectile.cs" />
     <Compile Include="Assets\Scripts\NetModules\GameLogicSyncModule.cs" />
+    <Compile Include="Assets\Scripts\Manager\BaseFrameDataManager.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Scripts\ETFXLightFade.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXButtonScript.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\VFX Library\ParticleEffectsLibrary.cs" />
+    <Compile Include="Assets\Scripts\Utility\GameLogicUtility.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\Component\Trajectory\BoxBullet.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXTarget.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Scripts\ETFXRotation.cs" />
     <Compile Include="Assets\Scripts\Manager\FrameDataManager.cs" />
     <Compile Include="Assets\Scripts\SpaceWarWorlds\LocalSpaceWarWorld.cs" />
+    <Compile Include="Assets\Scripts\Config.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\Manager\ServerFrameDataManager.cs" />
     <Compile Include="Assets\Scripts\Component\NetPlayerController.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXEffectController.cs" />
     <Compile Include="Assets\Scripts\Component\LocalPlayerController.cs" />
@@ -92,8 +96,6 @@
     <Compile Include="Assets\Scripts\SpaceWarWorlds\NetSpaceWarWorld.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Component\NetSyncComponent.cs" />
-    <Compile Include="Assets\Scripts\Utility\GameLogicUtility.cs" />
-    <Compile Include="Assets\Scripts\Config.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\OriginRes\Epic Toon FX\Prefabs\Environment\Environment FX.txt" />

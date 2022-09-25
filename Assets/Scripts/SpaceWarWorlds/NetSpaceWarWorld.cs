@@ -6,7 +6,7 @@ namespace Hamster.SpaceWar {
     public class NetSpaceWarWorld : BaseSpaceWarWorld {
 
         private ServerNetDevice _netDevice = new ServerNetDevice();
-        private FrameDataManager frameDataManager = new FrameDataManager();
+        private ServerFrameDataManager _frameDataManager = new ServerFrameDataManager();
 
         public float LogicTime {
             get;
@@ -16,6 +16,12 @@ namespace Hamster.SpaceWar {
         public float LogicFrameTime {
             get {
                 return 1 / 15.0f;
+            }
+        }
+
+        public ServerNetDevice NetDevice {
+            get {
+                return _netDevice;
             }
         }
 
@@ -30,7 +36,7 @@ namespace Hamster.SpaceWar {
             _netDevice.Listen("127.0.0.1", 8888);
 
             // 注册管理器
-            RegisterManager<FrameDataManager>(frameDataManager);
+            RegisterManager<BaseFrameDataManager>(_frameDataManager);
             RegisterManager<ServerNetDevice>(_netDevice);
 
             // 服务端一起就创建服务器自己的飞机
@@ -46,8 +52,14 @@ namespace Hamster.SpaceWar {
             LogicTime += Time.deltaTime;
             if (LogicTime >= LogicFrameTime) {
                 LogicTime -= LogicFrameTime;
+
+                _frameDataManager.Update();
             }
 
+        }
+
+        public void OnDestroy() {
+            _netDevice.Close();
         }
 
         #region GM

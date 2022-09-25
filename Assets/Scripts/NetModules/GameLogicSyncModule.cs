@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 
 namespace Hamster.SpaceWar
@@ -23,6 +24,39 @@ namespace Hamster.SpaceWar
             packet.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
             packet.WriteInt32(Operator);
             return packet;
+        }
+    }
+
+    public class S2CGameFrameDataSyncMessage : NetMessage {
+
+        public FrameData SendFrameData = null;
+        private Packet _sendPacket = new Packet(2048);
+
+        private bool _needUpdateDatas = false;
+
+        public void UpdateData() {
+            _needUpdateDatas = true;
+        }
+
+        public override Packet ToPacket(IPacketMallocer mallocer) {
+            if (_needUpdateDatas) {
+                _sendPacket.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
+                _sendPacket.WriteInt32(SendFrameData.PlayerInfos.Count);
+                foreach (var it in SendFrameData.PlayerInfos) {
+                    it.Write(_sendPacket);
+                }
+                _sendPacket.WriteInt32(SendFrameData.SpawnActorInfos.Count);
+                foreach (var it in SendFrameData.SpawnActorInfos) {
+                    it.Write(_sendPacket);
+                }
+            
+                // 往头部写入长度
+                int size = _sendPacket.Size;
+                _sendPacket.Peek(0);
+                _sendPacket.WriteInt32(size);
+            }
+
+            return _sendPacket;
         }
     }
 

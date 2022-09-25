@@ -24,17 +24,19 @@ namespace Config {
     static ConfigReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFUZW1wL0NvbmZpZy5wcm90byImCgpTaGlwQ29uZmlnEgoKAklEGAEgASgF",
-            "EgwKBFBhdGgYAiABKAkiKwoIVmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIg",
-            "ASgCEgkKAVoYAyABKAIieAoLR2FtZVNldHRpbmcSCgoCSUQYASABKAUSEQoJ",
-            "TWF4UGxheWVyGAIgASgFEhAKCFNlcnZlcklQGAMgASgJEhIKClNlcnZlclBv",
-            "cnQYBCABKAUSEAoIQ2xpZW50SVAYBSABKAkSEgoKQ2xpZW50UG9ydBgGIAEo",
-            "BSobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAQgmqAgZDb25maWdiBnBy",
-            "b3RvMw=="));
+            "ChFUZW1wL0NvbmZpZy5wcm90byIwCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
+            "CgRQYXRoGAIgASgJEgoKAkNEGAMgASgFIjkKClNoaXBDb25maWcSCgoCSUQY",
+            "ASABKAUSDAoEUGF0aBgCIAEoCRIRCglBYmlsaXR5SUQYAyADKAUiKwoIVmVj",
+            "dG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIieAoLR2Ft",
+            "ZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNl",
+            "cnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAY",
+            "BSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBSobCgdFeGFtcGxlEhAKDEV4YW1w",
+            "bGVfTk9ORRAAQgmqAgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "CD" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "AbilityID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort" }, null, null, null)
           }));
@@ -50,6 +52,191 @@ namespace Config {
   #endregion
 
   #region Messages
+  public sealed partial class Abilitys : pb::IMessage<Abilitys> {
+    private static readonly pb::MessageParser<Abilitys> _parser = new pb::MessageParser<Abilitys>(() => new Abilitys());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Abilitys> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Abilitys() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Abilitys(Abilitys other) : this() {
+      iD_ = other.iD_;
+      path_ = other.path_;
+      cD_ = other.cD_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Abilitys Clone() {
+      return new Abilitys(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private int iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 2;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "CD" field.</summary>
+    public const int CDFieldNumber = 3;
+    private int cD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CD {
+      get { return cD_; }
+      set {
+        cD_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Abilitys);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Abilitys other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (Path != other.Path) return false;
+      if (CD != other.CD) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0) hash ^= ID.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (CD != 0) hash ^= CD.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ID);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Path);
+      }
+      if (CD != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(CD);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ID);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (CD != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CD);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Abilitys other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0) {
+        ID = other.ID;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      if (other.CD != 0) {
+        CD = other.CD;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Path = input.ReadString();
+            break;
+          }
+          case 24: {
+            CD = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ShipConfig : pb::IMessage<ShipConfig> {
     private static readonly pb::MessageParser<ShipConfig> _parser = new pb::MessageParser<ShipConfig>(() => new ShipConfig());
     private pb::UnknownFieldSet _unknownFields;
@@ -58,7 +245,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -77,6 +264,7 @@ namespace Config {
     public ShipConfig(ShipConfig other) : this() {
       iD_ = other.iD_;
       path_ = other.path_;
+      abilityID_ = other.abilityID_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -107,6 +295,16 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "AbilityID" field.</summary>
+    public const int AbilityIDFieldNumber = 3;
+    private static readonly pb::FieldCodec<int> _repeated_abilityID_codec
+        = pb::FieldCodec.ForInt32(26);
+    private readonly pbc::RepeatedField<int> abilityID_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> AbilityID {
+      get { return abilityID_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ShipConfig);
@@ -122,6 +320,7 @@ namespace Config {
       }
       if (ID != other.ID) return false;
       if (Path != other.Path) return false;
+      if(!abilityID_.Equals(other.abilityID_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -130,6 +329,7 @@ namespace Config {
       int hash = 1;
       if (ID != 0) hash ^= ID.GetHashCode();
       if (Path.Length != 0) hash ^= Path.GetHashCode();
+      hash ^= abilityID_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,6 +351,7 @@ namespace Config {
         output.WriteRawTag(18);
         output.WriteString(Path);
       }
+      abilityID_.WriteTo(output, _repeated_abilityID_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -165,6 +366,7 @@ namespace Config {
       if (Path.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
       }
+      size += abilityID_.CalculateSize(_repeated_abilityID_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -182,6 +384,7 @@ namespace Config {
       if (other.Path.Length != 0) {
         Path = other.Path;
       }
+      abilityID_.Add(other.abilityID_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -201,6 +404,11 @@ namespace Config {
             Path = input.ReadString();
             break;
           }
+          case 26:
+          case 24: {
+            abilityID_.AddEntriesFrom(input, _repeated_abilityID_codec);
+            break;
+          }
         }
       }
     }
@@ -215,7 +423,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -400,7 +608,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

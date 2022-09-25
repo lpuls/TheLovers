@@ -9,14 +9,21 @@ namespace Hamster.SpaceWar {
         ROLE_Authority = 4,         // 对角色的权威控制。
     }
 
-    public class NetSyncComponent : MonoBehaviour, IServerTicker {
+    public enum ENetType {
+        None = 0,
+        Player = 1,
+        Bullet = 2
+    }
+
+    public class NetSyncComponent : MonoBehaviour {
         public int NetID = 0;
         public int OwnerID = 0;
         public int ConfigID = 0;
         public bool PendingKill = false;
-        protected int _role = 0;
+        public ENetType NetType = ENetType.None;
 
-        protected ServerProcessManager _serverTickManager = new ServerProcessManager();
+        protected int _role = 0;
+        protected int _childCreateIndex = 0;
 
         public int GetUniqueID() {
             return OwnerID << 16 | NetID;
@@ -61,32 +68,20 @@ namespace Hamster.SpaceWar {
             return (_role & 0x04) != 0x04;
         }
 
-        public void Update() {
-            if (PendingKill) {
-                PendingKill = false;
-
-                AssetPool.Destroy(gameObject);
-            }
-        }
-
-        public void AddTicker(IServerTicker serverTicker) {
-            _serverTickManager.AddTicker(serverTicker);
-        }
-
-        public void RemoveTicker(IServerTicker serverTicker) {
-            _serverTickManager.RemoveTicker(serverTicker);
-        }
-
-        public void Tick() {
-            _serverTickManager.Update();
-        }
-
         public void Kill() {
             PendingKill = true;
         }
 
         public bool IsPendingKill() {
             return PendingKill;
+        }
+
+        public int GetSpawnIndex() {
+            return OwnerID << 16 | ++_childCreateIndex;
+        }
+
+        private void OnDestroy() {
+            Debug.Log("=====?");
         }
     }
 }

@@ -51,12 +51,8 @@ namespace Hamster.SpaceWar {
             _moveDelay = 0;
             Move();
 
-            if (!World.GetWorld<LocalSpaceWarWorld>().InWorld(transform.position)) {
-                _pendingKill = true;
-            }
-
-            if (_pendingKill) {
-                AssetPool.Destroy(gameObject);
+            if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position)) {
+                Parent.OnOutOfWold(gameObject);
             }
         }
 
@@ -85,7 +81,6 @@ namespace Hamster.SpaceWar {
             // 命中后是否销毁
             if (HitOnDestroy) {
                 Parent.OnHitDestroy(gameObject);
-                _pendingKill = true;
             }
         }
 

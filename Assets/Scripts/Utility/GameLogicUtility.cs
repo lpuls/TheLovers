@@ -5,22 +5,22 @@ namespace Hamster.SpaceWar {
     public static class GameLogicUtility {
 
         public static GameObject CreateShip(int configID) {
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-5, 0, 0) : new Vector3(5, 0, 0);
 
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
-                return frameDataManager.SpawnServerNetObject(0, shipConfig.Path, configID, spawnLocation);
+                return frameDataManager.SpawnNetObject(0, 0, shipConfig.Path, configID, spawnLocation, ENetType.Player);
 
-            return frameDataManager.SpawnServerNetObject(0, "Res/Ships/GreyShip", configID, spawnLocation);
+            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/GreyShip", configID, spawnLocation, ENetType.Player);
         }
 
         public static GameObject ClientCreateShip(int configID, int netID, Vector3 position) {
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             if (!frameDataManager.HasNetObject(netID, 0)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
-                    return frameDataManager.SpawnServerNetObject(0, shipConfig.Path, configID, position);    
+                    return frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);    
                 }
             }
             return null;
@@ -37,12 +37,14 @@ namespace Hamster.SpaceWar {
 
             // 需要直接添加控制器
             ship.AddComponent<LocalMovementComponent>();
+            LocalAbilityComponent localAbilityComponent = ship.AddComponent<LocalAbilityComponent>();
+            localAbilityComponent.Init(configID);
             LocalPlayerController localPlayerController = ship.AddComponent<LocalPlayerController>();
             localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
 
             // 需要直接接收准备完成数据
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
             frameDataManager.CurrentPlayerCount++;
 
@@ -50,7 +52,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static void SetPlayerOperator(int userData, int playerOperator) {
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             if (frameDataManager.TryGetNetActor(userData, out NetSyncComponent netSyncComponent)) {
@@ -58,6 +60,21 @@ namespace Hamster.SpaceWar {
                     netPlayerController.SetOperator(playerOperator);
                 }
             }
+        }
+
+        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, ITrajectorySpanwer spanwer, out float CD) {
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            CD = 0;
+            GameObject bullet = null;
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+                TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
+                trajectoryComponent.Init(spanwer);
+                CD = abilityConfig.CD / 1000.0f;
+            }
+            return bullet;
         }
 
     }
