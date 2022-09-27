@@ -9,9 +9,14 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = null;
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
 
+        public int ServerLogicFrame {
+            get;
+            private set;
+        }
+
         private ServerNetDevice GetNetDevice() {
             if (null == _netDevice) {
-                NetSpaceWarWorld netSpaceWarWorld = World.GetWorld<NetSpaceWarWorld>();
+                ServerSpaceWarWorld netSpaceWarWorld = World.GetWorld<ServerSpaceWarWorld>();
                 _netDevice = netSpaceWarWorld.NetDevice;
             }
             return _netDevice;
@@ -27,7 +32,6 @@ namespace Hamster.SpaceWar {
             else {
                 netSyncComponent.NetID = ++_shipCreateIndex;
             }
-            netSyncComponent.NetID = ++_shipCreateIndex;
             netSyncComponent.OwnerID = ownerID;
             netSyncComponent.ConfigID = configID;
             netSyncComponent.PendingKill = false;
@@ -40,8 +44,12 @@ namespace Hamster.SpaceWar {
             return newNetActor;
         }
 
-        public void Update() {
+        public override void Update() {
+            if (!IsGameStart)
+                return;
+
             FrameData frameData = ObjectPool<FrameData>.Malloc();
+            frameData.FrameIndex = ServerLogicFrame++;
 
             List<int> pendingKillActors = ListPool<int>.Malloc();
             // todo 这里也许可以改成有变更再添加
@@ -80,7 +88,7 @@ namespace Hamster.SpaceWar {
                 }
 
             }
-            // Debug.Log("======>Send\n " + frameData.ToString());
+            Debug.Log("======>Send\n " + frameData.ToString());
 
             // 将死亡的actor从列表中移除
             foreach (var deadActor in pendingKillActors) {
@@ -91,6 +99,7 @@ namespace Hamster.SpaceWar {
             ListPool<int>.Free(pendingKillActors);
 
             // 更新消息包之后发送
+            _syncMessage.SendFrameData = frameData;
             _syncMessage.UpdateData();
             GetNetDevice().SendMessage(_syncMessage);
 

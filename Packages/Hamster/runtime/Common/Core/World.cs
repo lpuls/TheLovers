@@ -50,7 +50,7 @@ namespace Hamster {
 
             // 初始化资源
 #if UNITY_EDITOR
-            Asset.UseAssetBundle = false;
+            Asset.UseAssetBundle = true;
 #else
             Asset.UseAssetBundle = true;
 #endif

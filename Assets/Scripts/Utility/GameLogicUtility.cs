@@ -17,13 +17,14 @@ namespace Hamster.SpaceWar {
         }
 
         public static GameObject ClientCreateShip(int configID, int netID, Vector3 position) {
+            GameObject ship = null;
             BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             if (!frameDataManager.HasNetObject(netID, 0)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
-                    return frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);    
+                    ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);
                 }
             }
-            return null;
+            return ship;
         }
 
         public static GameObject ServerInitShip(int configID, bool isCreateForSelf) {

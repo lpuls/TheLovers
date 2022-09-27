@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public class NetSpaceWarWorld : BaseSpaceWarWorld {
+    public class ServerSpaceWarWorld : BaseSpaceWarWorld {
 
         private ServerNetDevice _netDevice = new ServerNetDevice();
         private ServerFrameDataManager _frameDataManager = new ServerFrameDataManager();
@@ -26,8 +26,9 @@ namespace Hamster.SpaceWar {
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
-            ConfigHelper = Single<ConfigHelper>.GetInstance();
-            base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
+            // ConfigHelper = Single<ConfigHelper>.GetInstance();
+            // base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
+            base.InitWorld();
 
             // ÆôÓÃÍøÂç
             _netDevice.RegistModule(new NetPingModule());
@@ -59,7 +60,12 @@ namespace Hamster.SpaceWar {
         }
 
         public void OnDestroy() {
+            Debug.Log("=======>Close Net Device");
             _netDevice.Close();
+        }
+
+        public void OnGUI() {
+            GUILayout.Label("Frame " + _frameDataManager.ServerLogicFrame);
         }
 
         #region GM

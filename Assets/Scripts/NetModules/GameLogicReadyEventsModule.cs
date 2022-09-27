@@ -176,19 +176,29 @@ namespace Hamster.SpaceWar {
                 // 创建角色
                 GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0));
                 if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    netSyncComponent.SetAuthority(false);
                     if (userShip)
                         netSyncComponent.SetAutonomousProxy(true);
                     else
                         netSyncComponent.SetSimulatedProxy(true);
                 }
+                ship.AddComponent<NetMovementComponent>();
                 if (userShip) {
                     ship.AddComponent<NetPlayerController>();
                 }
             }
+
+            RequestReadyToServer();
         }
 
         private void OnReceiveGameStartMessage(Packet packet) {
             Debug.Log("========>GameStart");
+        }
+
+        public void RequestReadyToServer() {
+            C2SAllReadyMessage c2SAllReadyMessage = ObjectPool<C2SAllReadyMessage>.Malloc();
+            _device.SendMessage(c2SAllReadyMessage);
+            ObjectPool<C2SAllReadyMessage>.Free(c2SAllReadyMessage);
         }
 
         public void RequestSpawnShipToServer(int configID) {
@@ -213,7 +223,7 @@ namespace Hamster.SpaceWar {
 
         // 收到客户端准备完成的消息
         private void OnReceiveAllReadyRequestMessage(Packet packet, ClientInstance clientInstance) {
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
@@ -249,7 +259,7 @@ namespace Hamster.SpaceWar {
         public void ResponSpawnShipToClients(int configID, int netID, Vector3 location) {
             S2CSpawnShipMessage message = ObjectPool<S2CSpawnShipMessage>.Malloc();
 
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             var netActors = frameDataManager.GetAllNetActor();

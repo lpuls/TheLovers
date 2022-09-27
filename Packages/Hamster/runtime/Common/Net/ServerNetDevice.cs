@@ -112,5 +112,11 @@ namespace Hamster {
         public Dictionary<int, ClientInstance> GetAllClients() {
             return _clients;
         }
+
+        public override void Close() {
+            if (null != _socket)
+                _socket.Close();
+        }
+
     }
 }

@@ -13,25 +13,34 @@ namespace Hamster.SpaceWar {
             if (null == _netSyncComponent)
                 return;
 
-            NetSpaceWarWorld spaceWarWorld = World.GetWorld<NetSpaceWarWorld>();
+            if (_netSyncComponent.IsAuthority()) {
+                Debug.LogError("=========> Can't run Net Movement In Server");
+                return;
+            }
 
-            //FrameData preData = spaceWarWorld.GetPreFrameData();
-            //FrameData currentData = spaceWarWorld.GetCurrentFrameData();
-            //if (null != preData && null != currentData) {
+            ClientSpaceWarWorld spaceWarWorld = World.GetWorld<ClientSpaceWarWorld>();
+            if (null == spaceWarWorld) {
+                Debug.LogError("=========> clientSpaceWarWorld is null");
+                return;
+            }
 
-            //    int netID = _netSyncComponent.OwnerID << 16 | _netSyncComponent.NetID;
-            //    if (!preData.NetInfoDict.TryGetValue(netID, out INetInfo preNetInfo))
-            //        return;
-            //    if (!currentData.NetInfoDict.TryGetValue(netID, out INetInfo currentNetInfo))
-            //        return;
+            FrameData preData = spaceWarWorld.GetPreFrameData();
+            FrameData currentData = spaceWarWorld.GetCurrentFrameData();
+            if (null != preData && null != currentData) {
 
-            //    // float t = spaceWarWorld.LogicTime / SpaceWarWorld.LOGIC_FRAME;
-            //    float t = spaceWarWorld.GetLogicFramepercentage();
+                int netID = _netSyncComponent.OwnerID << 16 | _netSyncComponent.NetID;
+                if (!preData.NetInfoDict.TryGetValue(netID, out INetInfo preNetInfo))
+                    return;
+                if (!currentData.NetInfoDict.TryGetValue(netID, out INetInfo currentNetInfo))
+                    return;
 
-            //    Vector3 lastLocation = new Vector3(preNetInfo.X, 0, preNetInfo.Y);
-            //    Vector3 currentLocation = new Vector3(currentNetInfo.X, 0, currentNetInfo.Y);
-            //    transform.position = Vector3.Lerp(lastLocation, currentLocation, t);
-            //}
+                // float t = spaceWarWorld.LogicTime / SpaceWarWorld.LOGIC_FRAME;
+                float t = spaceWarWorld.GetLogicFramepercentage();
+
+                Vector3 lastLocation = new Vector3(preNetInfo.X, 0, preNetInfo.Y);
+                Vector3 currentLocation = new Vector3(currentNetInfo.X, 0, currentNetInfo.Y);
+                transform.position = Vector3.Lerp(lastLocation, currentLocation, t);
+            }
         }
 
     }

@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
                 return;
 
             transform.position += _moveDirection * Speed * Time.deltaTime;
-            transform.position = World.GetWorld<NetSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
+            transform.position = World.GetWorld<ServerSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
         }
 
 #if UNITY_EDITOR

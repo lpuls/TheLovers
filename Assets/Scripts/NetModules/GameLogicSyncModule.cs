@@ -40,7 +40,10 @@ namespace Hamster.SpaceWar
 
         public override Packet ToPacket(IPacketMallocer mallocer) {
             if (_needUpdateDatas) {
+                _sendPacket.Clean();
                 _sendPacket.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
+                _sendPacket.WriteInt32(0);
+                _sendPacket.WriteInt32(SendFrameData.FrameIndex);
                 _sendPacket.WriteInt32(SendFrameData.PlayerInfos.Count);
                 foreach (var it in SendFrameData.PlayerInfos) {
                     it.Write(_sendPacket);
@@ -52,7 +55,7 @@ namespace Hamster.SpaceWar
             
                 // 往头部写入长度
                 int size = _sendPacket.Size;
-                _sendPacket.Peek(0);
+                _sendPacket.Peek(sizeof(int));
                 _sendPacket.WriteInt32(size);
             }
 
@@ -73,7 +76,7 @@ namespace Hamster.SpaceWar
         public override void OnReceiveServerMessage(Packet p)
         {
             UnityEngine.Debug.Log(string.Format("Receive Logic Mirror Data: {0}", p.GetLength()));
-            FrameDataManager frameDataManager = World.GetWorld().GetManager<FrameDataManager>();
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ClientFrameDataManager;
             int dataSize = p.ReadInt32();
             byte[] byteArray = p.ReadBytes(dataSize);
             frameDataManager.AnalyzeBinary(byteArray);

@@ -69,8 +69,8 @@
     <Compile Include="Assets\Scripts\Component\Trajectory\BoxBullet.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXTarget.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Scripts\ETFXRotation.cs" />
-    <Compile Include="Assets\Scripts\Manager\FrameDataManager.cs" />
-    <Compile Include="Assets\Scripts\SpaceWarWorlds\LocalSpaceWarWorld.cs" />
+    <Compile Include="Assets\Scripts\Manager\ClientFrameDataManager.cs" />
+    <Compile Include="Assets\Scripts\SpaceWarWorlds\ClientSpaceWarWorld.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
@@ -93,9 +93,11 @@
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\VFX Library\UICanvasManager.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXEffectControllerPooled.cs" />
     <Compile Include="Assets\Scripts\NetModules\NetPingModule.cs" />
-    <Compile Include="Assets\Scripts\SpaceWarWorlds\NetSpaceWarWorld.cs" />
+    <Compile Include="Assets\Scripts\SpaceWarWorlds\ServerSpaceWarWorld.cs" />
     <Compile Include="Assets\OriginRes\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Component\NetSyncComponent.cs" />
+    <Compile Include="Assets\Scripts\SpaceWarWorlds\GameOutsideWorld.cs" />
+    <Compile Include="Assets\Scripts\SpaceWarWorlds\BaseSpaceWarWorld.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\OriginRes\Epic Toon FX\Prefabs\Environment\Environment FX.txt" />

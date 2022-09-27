@@ -5,15 +5,20 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public class INetInfo : IPool {
-        public int ID;
+        private int _id = 0;
+
+        public int ID {
+            get {
+                return _id;
+            }
+            set {
+                _id = value;
+            }
+        }
         public int OwnerID;
         public float X;
         public float Y;
         public float Angle;
-
-        public int GetUniqueID() {
-            return OwnerID << 16 | ID;
-        }
 
         public virtual void Read(BinaryReader binaryReader) {
         }
@@ -41,7 +46,7 @@ namespace Hamster.SpaceWar {
             int temp = binaryReader.ReadInt32();
             Tags = temp & 0x3FFFFF;
             Health = (temp >> 22) & 0x7F;
-            ID = temp >> 29;
+            ID = (temp >> 29) & 0x7;
             X = binaryReader.ReadSingle();
             Y = binaryReader.ReadSingle();
             Angle = binaryReader.ReadSingle();
@@ -51,7 +56,7 @@ namespace Hamster.SpaceWar {
             int temp = 0;
             temp |= ID;
             temp = (temp << 7) | Health;
-            temp |= (temp << 22) | Tags;
+            temp = (temp << 22) | Tags;
             packet.WriteInt32(temp);
             packet.WriteFloat(X);
             packet.WriteFloat(Y);
@@ -151,7 +156,6 @@ namespace Hamster.SpaceWar {
         }
 
         public void Free() {
-            
             ObjectPool<FrameData>.Free(this);
         }
 
@@ -159,9 +163,11 @@ namespace Hamster.SpaceWar {
             string log = "";
             foreach (var it in PlayerInfos) {
                 log += it.ToString();
+                log += "\n";
             }
             foreach (var it in SpawnActorInfos) {
                 log += it.ToString();
+                log += "\n";
             }
             return log;
         }
@@ -228,6 +234,30 @@ namespace Hamster.SpaceWar {
 
         public bool HasNetObject(int id, int ownerID) {
             return _netActors.ContainsKey(ownerID << 16 | id);
+        }
+
+        public virtual void Update() {
+            List<int> pendingKillActors = ListPool<int>.Malloc();
+
+            var it = _netActors.GetEnumerator();
+            while (it.MoveNext()) {
+                NetSyncComponent netSyncComponent = it.Current.Value;
+
+                // 如果已死亡，则从列表中移除去
+                if (netSyncComponent.IsPendingKill()) {
+                    pendingKillActors.Add(it.Current.Key);
+                    continue;
+                }
+            }
+
+            // 将死亡的actor从列表中移除
+            foreach (var deadActor in pendingKillActors) {
+                GameObject deadGO = _netActors[deadActor].gameObject;
+                _netActors.Remove(deadActor);
+                AssetPool.Free(deadGO);
+            }
+
+            ListPool<int>.Free(pendingKillActors);
         }
     }
 }

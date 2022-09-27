@@ -80,8 +80,5 @@ namespace Hamster.SpaceWar {
             return OwnerID << 16 | ++_childCreateIndex;
         }
 
-        private void OnDestroy() {
-            Debug.Log("=====?");
-        }
     }
 }
