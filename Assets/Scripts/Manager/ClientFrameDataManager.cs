@@ -57,27 +57,8 @@ namespace Hamster.SpaceWar {
         }
 
         public void ReceiveNewFrame(FrameData frameData) {
-            //{
-            //    int preFrameInDEX = _preFrameData != null ? _preFrameData.FrameIndex : -1;
-            //    var frameDataIt = _frameDatas.GetEnumerator();
-            //    while (frameDataIt.MoveNext()) {
-            //        bool isBreak = false;
-            //        var frameTemp = frameDataIt.Current;
-            //        foreach (var playerInfoData in frameTemp.PlayerInfos) {
-            //            if (0 == playerInfoData.ID) {
-            //                Debug.Log("============>Error");
-            //                isBreak = true;
-            //                break;
-            //            }
-            //        }
-            //        if (isBreak) {
-            //            break;
-            //        }
-            //    }
-            //}
-            currentNetInfo
-            //if (null != _preFrameData)
-            //    _preFrameData.Free();
+            if (null != _preFrameData)
+                _preFrameData.Free();
             _preFrameData = _currentFrameData;
             _currentFrameData = frameData;
 
@@ -125,10 +106,7 @@ namespace Hamster.SpaceWar {
             binary.CopyTo(_analyzeBytes, 0);
             _binaryReader.BaseStream.Position = 0;
 
-            // FrameData frameData = FrameData.Malloc(_binaryReader.ReadInt32());
-            // todo 这边暂时先new出来，gc先不管了
-            FrameData frameData = new FrameData();
-            frameData.FrameIndex = _binaryReader.ReadInt32();
+            FrameData frameData = FrameData.Malloc(_binaryReader.ReadInt32());
 
             int playerSize = _binaryReader.ReadInt32();
             for (int i = 0; i < playerSize; i++) {

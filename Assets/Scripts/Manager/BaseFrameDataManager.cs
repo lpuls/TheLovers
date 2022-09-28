@@ -129,12 +129,12 @@ namespace Hamster.SpaceWar {
         public void Reset() {
             FrameIndex = 0;
             {
-                foreach (var it in PlayerInfos) {
-                    ObjectPool<PlayerInfo>.Free(it);
-                }
-                foreach (var it in SpawnActorInfos) {
-                    ObjectPool<SpawnActorInfo>.Free(it);
-                }
+                //foreach (var it in PlayerInfos) {
+                //    ObjectPool<PlayerInfo>.Free(it);
+                //}
+                //foreach (var it in SpawnActorInfos) {
+                //    ObjectPool<SpawnActorInfo>.Free(it);
+                //}
                 PlayerInfos.Clear();
                 SpawnActorInfos.Clear();
             }
