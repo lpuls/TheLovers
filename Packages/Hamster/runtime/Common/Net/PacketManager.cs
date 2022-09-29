@@ -39,7 +39,7 @@ namespace Hamster {
         }
 
         public void Free(Packet packet) {
-            int size = packet.Size;
+            int size = packet.MaxSize;
             size |= (size >> 1);
             size |= (size >> 2);
             size |= (size >> 4);
