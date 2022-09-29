@@ -40,19 +40,15 @@ namespace Hamster {
 
         public void Free(Packet packet) {
             int size = packet.MaxSize;
-            size |= (size >> 1);
-            size |= (size >> 2);
-            size |= (size >> 4);
-            size |= (size >> 8);
-            size += 1;
+            int realSize = 1;
             for (int i = 0; i < 32; i++) {
-                if (1 == (size >> i & 1)) {
-                    if (i >= 0 && i < _packetPool.Length) {
-                        List<Packet> pool = _packetPool[i];
-                        pool.Add(packet);
-                        packet.Clean();
-                    }
+                if (realSize >= size) {
+                    List<Packet> pool = _packetPool[i];
+                    pool.Add(packet);
+                    packet.Clean();
+                    break;
                 }
+                realSize <<= 1;
             }
         }
 
