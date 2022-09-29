@@ -43,7 +43,6 @@ namespace Hamster {
         public override void SendMessage(NetMessage message) {
             if (IsValid) {
                 _socket.SendMessage(message.ToPacket(_packetManager));
-                UnityEngine.Debug.Log("========>Send Message By Socket");
             }
         }
 

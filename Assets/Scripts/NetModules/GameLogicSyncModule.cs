@@ -84,6 +84,7 @@ namespace Hamster.SpaceWar
 
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {
             int playerInput = p.ReadInt32();
+            UnityEngine.Debug.Log("Receive Player Input " + inst.UserData + ", " + playerInput);
             GameLogicUtility.SetPlayerOperator(inst.UserData, playerInput);
         }
 

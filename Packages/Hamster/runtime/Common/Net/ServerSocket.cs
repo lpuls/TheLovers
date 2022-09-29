@@ -10,6 +10,7 @@ namespace Hamster {
         public const int BUFFER_LENGTH = 1024;
 
         public string IP;
+        public int CreateIndex;
         public int UserData;
         public Socket Handle;
         protected byte[] _receiveBuff = new byte[BUFFER_LENGTH];
@@ -69,7 +70,7 @@ namespace Hamster {
         }
 
         public void Reset() {
-            UserData = 0;
+            CreateIndex = 0;
             IP = String.Empty;
             Handle = null;
             Array.Clear(_receiveBuff, 0, BUFFER_LENGTH);

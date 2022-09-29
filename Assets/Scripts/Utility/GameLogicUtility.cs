@@ -33,7 +33,7 @@ namespace Hamster.SpaceWar {
 
             // 服务端即是客户端也是服务端
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                netSyncComponent.SetAuthority(true);
+                netSyncComponent.SetAuthority();
             }
 
             // 需要直接添加控制器

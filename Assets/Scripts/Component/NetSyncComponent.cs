@@ -22,50 +22,35 @@ namespace Hamster.SpaceWar {
         public bool PendingKill = false;
         public ENetType NetType = ENetType.None;
 
-        protected int _role = 0;
+        protected ENetRole _role = ENetRole.ROLE_None;
         protected int _childCreateIndex = 0;
 
         public int GetUniqueID() {
             return OwnerID << 16 | NetID;
         }
 
-        public void SetSimulatedProxy(bool set) {
-            if (set) {
-                _role |= 0x01;
-            }
-            else {
-                _role ^= 0x01;
-            }
+        public void SetSimulatedProxy() {
+            _role = ENetRole.ROLE_SimulatedProxy;
         }
 
         public bool IsSimulatedProxy() {
-            return (_role & 0x01) != 0x01;
+            return ENetRole.ROLE_SimulatedProxy == _role;
         }
 
-        public void SetAutonomousProxy(bool set) {
-            if (set) {
-                _role |= 0x02;
-            }
-            else {
-                _role ^= 0x02;
-            }
+        public void SetAutonomousProxy() {
+            _role = ENetRole.ROLE_AutonomousProxy;
         }
 
         public bool IsAutonomousProxy() {
-            return (_role & 0x02) != 0x02;
+            return ENetRole.ROLE_AutonomousProxy == _role;
         }
 
-        public void SetAuthority(bool set) {
-            if (set) {
-                _role |= 0x04;
-            }
-            else {
-                _role ^= 0x04;
-            }
+        public void SetAuthority() {
+            _role = ENetRole.ROLE_Authority;
         }
 
         public bool IsAuthority() {
-            return (_role & 0x04) != 0x04;
+            return ENetRole.ROLE_Authority == _role;
         }
 
         public void Kill() {

@@ -78,10 +78,10 @@ namespace Hamster.SpaceWar {
             // 服务端收到客户端信息之后，只要将当前时间减去发送时间就能得到ping
             float time = Time.realtimeSinceStartup;
             Ping = time - sendTime;
-            Debug.Log("[Server] Ping " + Ping + " RTT " + Ping + " Frame " + frame + " Client " + inst.UserData);
+            Debug.Log("[Server] Ping " + Ping + " RTT " + Ping + " Frame " + frame + " Client " + inst.CreateIndex);
 
             // 更新该客户端收到消息的时间
-            _clientLastPingTime[inst.UserData] = time;
+            _clientLastPingTime[inst.CreateIndex] = time;
 
             SendServerPingMessage(inst, sendTime);
         }

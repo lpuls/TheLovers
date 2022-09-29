@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public class ClientFrameDataManager : BaseFrameDataManager {
+        public const int MAX_SERVER_FRAME_COUNT = 3;
+
         private List<FrameData> _frameDatas = new List<FrameData>();
         private HashSet<int> _newActorIDs = new HashSet<int>(new Int32Comparer());
 
@@ -128,7 +130,7 @@ namespace Hamster.SpaceWar {
             _frameDatas.Add(frameData);
 
             // 还未开始模拟便已有三个逻辑帧了，开始进行模拟
-            if (!_simulate && _frameDatas.Count > 3) {
+            if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
                 _simulate = true;
             }
         }
@@ -163,8 +165,16 @@ namespace Hamster.SpaceWar {
                 return;
             }
 
+            // 如果服务端存放的帧数较多了，直接一路追上去
+            if (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
+                LogicTime = LOGIC_FRAME;
+                while (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
+                    NextFrame();
+                }
+                LogicTime = 0;
+            }
+
             // 更新逻辑时间
-            // todo 这样更新可能会有问题，如果客户端卡顿可能会导致逻辑帧数据不能被有效处理
             LogicTime += Time.deltaTime;
             while (LogicTime >= LOGIC_FRAME) {
                 NextFrame();

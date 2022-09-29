@@ -36,10 +36,10 @@ namespace Hamster {
 
         private void OnAcceptClient(ClientInstance inst) {
             inst.ServerNetDevice = this;
-            inst.UserData = _clientIndex++;
+            inst.CreateIndex = _clientIndex++;
             inst.OnReceiveMessage += OnReceiveMessage;
             inst.OnSendComplete += OnSendMessage;
-            _clients.Add(inst.UserData, inst);
+            _clients.Add(inst.CreateIndex, inst);
         }
 
         private void OnReceiveMessage(ClientInstance inst) {
@@ -55,9 +55,9 @@ namespace Hamster {
         }
 
         private void OnCloseClient(ClientInstance inst) {
-            if (!_clients.ContainsKey(inst.UserData))
+            if (!_clients.ContainsKey(inst.CreateIndex))
                 UnityEngine.Debug.LogError("IP " + inst.IP + " never be manager");
-            _clients.Remove(inst.UserData);
+            _clients.Remove(inst.CreateIndex);
         }
 
         protected void OnReceiveMessageCompleted(Packet p, ClientInstance inst) {
@@ -95,7 +95,7 @@ namespace Hamster {
                 while (it.MoveNext()) {
                     ClientInstance clientInstance = it.Current;
                     _socket.Disconnect(clientInstance);
-                    _clients.Remove(clientInstance.UserData);
+                    _clients.Remove(clientInstance.CreateIndex);
                 }
             }
 

@@ -129,6 +129,13 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        protected override int PacketSize => base.PacketSize + sizeof(int); 
+        public override Packet ToPacket(IPacketMallocer mallocer) {
+            Packet packet = base.ToPacket(mallocer);
+            packet.WriteInt32(0);
+            return packet;
+        }
+
         public void Reset() {
         }
     }
@@ -172,15 +179,14 @@ namespace Hamster.SpaceWar {
                 float x = packet.ReadFloat();
                 float y = packet.ReadFloat();
                 bool userShip = packet.ReadBool();
-            
+
                 // 创建角色
                 GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0));
                 if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                    netSyncComponent.SetAuthority(false);
                     if (userShip)
-                        netSyncComponent.SetAutonomousProxy(true);
+                        netSyncComponent.SetAutonomousProxy();
                     else
-                        netSyncComponent.SetSimulatedProxy(true);
+                        netSyncComponent.SetSimulatedProxy();
                 }
                 ship.AddComponent<NetMovementComponent>();
                 if (userShip) {
@@ -241,6 +247,7 @@ namespace Hamster.SpaceWar {
 
             GameObject ship = GameLogicUtility.ServerInitShip(shipID, false);
             if (null != ship && ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                clientInstance.UserData = netSyncComponent.NetID;
                 ResponSpawnShipToClients(shipID, netSyncComponent.NetID, ship.transform.position);
             }
             else {
@@ -267,7 +274,7 @@ namespace Hamster.SpaceWar {
             while (it.MoveNext()) {
                 NetSyncComponent netSyncComponent = it.Current.Value;
                 GameObject ship = netSyncComponent.gameObject;
-                message.AddShipInfo(netSyncComponent.ConfigID, netSyncComponent.NetID, 
+                message.AddShipInfo(netSyncComponent.ConfigID, netSyncComponent.NetID,
                     ship.transform.position.x,
                     ship.transform.position.y,
                     netSyncComponent.NetID == netID);

@@ -61,8 +61,8 @@ namespace Hamster.SpaceWar {
         }
 
         public void SetOperator(int input) {
-            if (!_readByInputDevice)
-                _operator = input;
+            // if (!_readByInputDevice)
+            _operator = input;
         }
         
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
