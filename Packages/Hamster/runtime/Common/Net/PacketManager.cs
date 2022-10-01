@@ -29,7 +29,7 @@ namespace Hamster {
 
         public Packet Malloc(int size) {
             int realSize = 1;
-            for (int i = 0; i < 32; i++) {
+            for (int i = 0; i < _packetPool.Length; i++) {
                 if (realSize >= size) {
                     return MallocImpl(i);
                 }
@@ -41,7 +41,7 @@ namespace Hamster {
         public void Free(Packet packet) {
             int size = packet.MaxSize;
             int realSize = 1;
-            for (int i = 0; i < 32; i++) {
+            for (int i = 0; i < _packetPool.Length; i++) {
                 if (realSize >= size) {
                     List<Packet> pool = _packetPool[i];
                     pool.Add(packet);
@@ -129,7 +129,7 @@ namespace Hamster {
                         }
                     }
                     else {
-                        int needRemain = _readingPacket.Size - (int)_readingPacket.GetReadIndex();
+                        int needRemain = _readingPacket.MaxSize - (int)_readingPacket.GetLength() + Packet.HEAD_LENGTH;
                         int remainLength = (int)(bytes.Length - _binaryReader.BaseStream.Position);
                         if (needRemain < remainLength) {
                             _readingPacket.WriteBytes(_binaryReader.ReadBytes(needRemain));
