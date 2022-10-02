@@ -36,6 +36,7 @@ namespace Hamster.SpaceWar {
             netSyncComponent.ConfigID = configID;
             netSyncComponent.PendingKill = false;
             netSyncComponent.NetType = type;
+            netSyncComponent.IsNewObject = true;
 
             newNetActor.transform.position = pos;
 
@@ -60,32 +61,67 @@ namespace Hamster.SpaceWar {
                 // 如果已死亡，则从列表中移除去
                 if (netSyncComponent.IsPendingKill()) {
                     pendingKillActors.Add(it.Current.Key);
+
+                    DestroyInfo destroyInfo = ObjectPool<DestroyInfo>.Malloc();
+                    destroyInfo.NetID = netSyncComponent.NetID;
+                    destroyInfo.Reason = netSyncComponent.DestroyReason;
+                    frameData.DestroyInfos.Add(destroyInfo);
+
                     continue;
                 }
+                else if (netSyncComponent.IsNewObject) {
+                    netSyncComponent.IsNewObject = false;
 
-                // 记录数据
-                switch (netSyncComponent.NetType) {
-                    case ENetType.Player:
-                        PlayerInfo playerInfo = ObjectPool<PlayerInfo>.Malloc();
-                        playerInfo.ID = netSyncComponent.NetID;
-                        playerInfo.Angle = 0;
-                        playerInfo.OwnerID = 0;
-                        playerInfo.Tags = 0;
-                        playerInfo.Health = 100;
-                        playerInfo.X = netSyncComponent.transform.position.x;
-                        playerInfo.Y = netSyncComponent.transform.position.y;
-                        frameData.PlayerInfos.Add(playerInfo);
-                        break;
-                    case ENetType.Bullet:
-                        SpawnActorInfo spawnActorInfo = ObjectPool<SpawnActorInfo>.Malloc();
-                        spawnActorInfo.ID = netSyncComponent.NetID;
-                        spawnActorInfo.OwnerID = netSyncComponent.OwnerID;
-                        spawnActorInfo.Angle = 0;
-                        spawnActorInfo.X = netSyncComponent.transform.position.x;
-                        spawnActorInfo.Y = netSyncComponent.transform.position.y;
-                        frameData.SpawnActorInfos.Add(spawnActorInfo);
-                        break;
+                    SpawnInfo spawnInfo = ObjectPool<SpawnInfo>.Malloc();
+                    spawnInfo.NetID = netSyncComponent.NetID;
+                    spawnInfo.ConfigID = netSyncComponent.ConfigID;
+                    spawnInfo.OwnerID = netSyncComponent.OwnerID;
+                    spawnInfo.Position = netSyncComponent.transform.position;
+                    spawnInfo.NetType = netSyncComponent.NetType;
+                    frameData.SpawnInfos.Add(spawnInfo);
                 }
+
+                HashSet<EUpdateActorType> updateTypes = netSyncComponent.UpdateTypes;
+                var updateIt = updateTypes.GetEnumerator();
+                while (updateIt.MoveNext()) {
+                    var type = updateIt.Current;
+                    UpdateInfo updateInfo = ObjectPool<UpdateInfo>.Malloc();
+                    updateInfo.UpdateType = type;
+                    switch (type) {
+                        case EUpdateActorType.Position:
+                            updateInfo.SetVec3(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
+                            break;
+                        case EUpdateActorType.Angle:
+                            updateInfo.SetFloat(netSyncComponent.transform.rotation.eulerAngles.y);
+                            break;
+                    }
+                    frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);
+                }
+                netSyncComponent.CleanUpdate();
+
+                //// 记录数据
+                //switch (netSyncComponent.NetType) {
+                //    case ENetType.Player:
+                //        PlayerInfo playerInfo = ObjectPool<PlayerInfo>.Malloc();
+                //        playerInfo.ID = netSyncComponent.NetID;
+                //        playerInfo.Angle = 0;
+                //        playerInfo.OwnerID = 0;
+                //        playerInfo.Tags = 0;
+                //        playerInfo.Health = 100;
+                //        playerInfo.X = netSyncComponent.transform.position.x;
+                //        playerInfo.Y = netSyncComponent.transform.position.z;
+                //        frameData.PlayerInfos.Add(playerInfo);
+                //        break;
+                //    case ENetType.Bullet:
+                //        SpawnActorInfo spawnActorInfo = ObjectPool<SpawnActorInfo>.Malloc();
+                //        spawnActorInfo.ID = netSyncComponent.NetID;
+                //        spawnActorInfo.OwnerID = netSyncComponent.OwnerID;
+                //        spawnActorInfo.Angle = 0;
+                //        spawnActorInfo.X = netSyncComponent.transform.position.x;
+                //        spawnActorInfo.Y = netSyncComponent.transform.position.z;
+                //        frameData.SpawnActorInfos.Add(spawnActorInfo);
+                //        break;
+                //}
 
             }
             Debug.Log("======>Send\n " + frameData.ToString());

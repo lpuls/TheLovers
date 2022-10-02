@@ -71,11 +71,25 @@ namespace Hamster.SpaceWar {
             GameObject bullet = null;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
                 trajectoryComponent.Init(spanwer);
+                
                 CD = abilityConfig.CD / 1000.0f;
             }
             return bullet;
+        }
+
+        public static void SetPositionUpdate(GameObject gameObject) {
+            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                netSyncComponent.AddNewUpdate(EUpdateActorType.Position);
+            }
+        }
+
+        public static void SetAngleUpdate(GameObject gameObject) {
+            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                netSyncComponent.AddNewUpdate(EUpdateActorType.Angle);
+            }
         }
 
     }

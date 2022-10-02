@@ -44,15 +44,33 @@ namespace Hamster.SpaceWar
                 _sendPacket.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
                 _sendPacket.WriteInt32(0);
                 _sendPacket.WriteInt32(SendFrameData.FrameIndex);
-                _sendPacket.WriteInt32(SendFrameData.PlayerInfos.Count);
-                foreach (var it in SendFrameData.PlayerInfos) {
+
+                _sendPacket.WriteInt32(SendFrameData.SpawnInfos.Count);
+                foreach (var it in SendFrameData.SpawnInfos) {
                     it.Write(_sendPacket);
                 }
-                _sendPacket.WriteInt32(SendFrameData.SpawnActorInfos.Count);
-                foreach (var it in SendFrameData.SpawnActorInfos) {
+                _sendPacket.WriteInt32(SendFrameData.DestroyInfos.Count);
+                foreach (var it in SendFrameData.DestroyInfos) {
                     it.Write(_sendPacket);
                 }
-            
+                _sendPacket.WriteInt32(SendFrameData.UpdateInfos.Count);
+                foreach (var it in SendFrameData.UpdateInfos) {
+                    _sendPacket.WriteInt32(it.Key);
+                    _sendPacket.WriteInt32(it.Value.Count);
+                    for (int i = 0; i < it.Value.Count; i++) {
+                        it.Value[i].Write(_sendPacket);
+                    }
+                }
+
+                //_sendPacket.WriteInt32(SendFrameData.PlayerInfos.Count);
+                //foreach (var it in SendFrameData.PlayerInfos) {
+                //    it.Write(_sendPacket);
+                //}
+                //_sendPacket.WriteInt32(SendFrameData.SpawnActorInfos.Count);
+                //foreach (var it in SendFrameData.SpawnActorInfos) {
+                //    it.Write(_sendPacket);
+                //}
+
                 // 往头部写入长度
                 int size = _sendPacket.Size;
                 _sendPacket.Peek(sizeof(int));

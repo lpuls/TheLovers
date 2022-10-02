@@ -37,6 +37,8 @@ namespace Hamster.SpaceWar {
         }
 
         protected override void Update() {
+            ActiveWorld();
+
             base.Update();
 
             _netDevice.Update();

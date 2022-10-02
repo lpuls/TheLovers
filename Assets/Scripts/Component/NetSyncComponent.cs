@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
@@ -15,6 +16,16 @@ namespace Hamster.SpaceWar {
         Bullet = 2
     }
 
+    public class EUpdateActorTypeComparer : System.Collections.Generic.IEqualityComparer<EUpdateActorType> {
+        bool IEqualityComparer<EUpdateActorType>.Equals(EUpdateActorType x, EUpdateActorType y) {
+            return x == y;
+        }
+
+        int IEqualityComparer<EUpdateActorType>.GetHashCode(EUpdateActorType obj) {
+            return (int)obj;
+        }
+    }
+
     public class NetSyncComponent : MonoBehaviour {
         public int NetID = 0;
         public int OwnerID = 0;
@@ -24,6 +35,18 @@ namespace Hamster.SpaceWar {
 
         protected ENetRole _role = ENetRole.ROLE_None;
         protected int _childCreateIndex = 0;
+
+        public HashSet<EUpdateActorType> UpdateTypes = new HashSet<EUpdateActorType>(new EUpdateActorTypeComparer());
+
+        public bool IsNewObject {
+            get;
+            set;
+        }
+
+        public EDestroyActorReason DestroyReason {
+            get;
+            private set;
+        }
 
         public int GetUniqueID() {
             return OwnerID << 16 | NetID;
@@ -53,8 +76,9 @@ namespace Hamster.SpaceWar {
             return ENetRole.ROLE_Authority == _role;
         }
 
-        public void Kill() {
+        public void Kill(EDestroyActorReason reason) {
             PendingKill = true;
+            DestroyReason = reason;
         }
 
         public bool IsPendingKill() {
@@ -63,6 +87,14 @@ namespace Hamster.SpaceWar {
 
         public int GetSpawnIndex() {
             return OwnerID << 16 | ++_childCreateIndex;
+        }
+
+        public void AddNewUpdate(EUpdateActorType updateType) {
+            UpdateTypes.Add(updateType);
+        }
+
+        public void CleanUpdate() {
+            UpdateTypes.Clear();
         }
 
     }

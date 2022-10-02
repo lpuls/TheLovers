@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
@@ -120,21 +121,157 @@ namespace Hamster.SpaceWar {
         }
     }
 
+    public interface IFrameInfo {
+        void Read(BinaryReader binaryReader);
+
+        void Write(Packet packet);
+    }
+
+    public enum EDestroyActorReason {
+        None,
+        OutOfWorld,
+        BeHit,
+        HitOther,
+    }
+
+    public enum EUpdateActorType {
+        None,
+        Position,
+        Angle
+    }
+
+    public class SpawnInfo : IFrameInfo, IPool {
+        public int NetID = 0;
+        public int OwnerID = 0;
+        public int ConfigID = 0;
+        public ENetType NetType = ENetType.None;
+        public Vector3 Position = Vector3.zero;
+
+        public void Read(BinaryReader binaryReader) {
+            NetID = binaryReader.ReadInt32();
+            OwnerID = binaryReader.ReadInt32();
+            ConfigID = binaryReader.ReadInt32();
+            NetType = (ENetType)binaryReader.ReadInt16();
+            Position.x = binaryReader.ReadSingle();
+            Position.z = binaryReader.ReadSingle();
+        }
+
+        public void Write(Packet packet) {
+            packet.WriteInt32(NetID);
+            packet.WriteInt32(OwnerID);
+            packet.WriteInt32(ConfigID);
+            packet.WriteInt16((short)NetType);
+            packet.WriteFloat(Position.x);
+            packet.WriteFloat(Position.z);
+        }
+
+        public void Reset() {
+            NetID = 0;
+            OwnerID = 0;
+            ConfigID = 0;
+            NetType = ENetType.None;
+            Position = Vector3.zero;
+        }
+    }
+
+    public class DestroyInfo : IFrameInfo, IPool {
+        public int NetID = 0;
+        public EDestroyActorReason Reason = EDestroyActorReason.None;
+
+        public void Read(BinaryReader binaryReader) {
+            NetID = binaryReader.ReadInt32();
+            Reason = (EDestroyActorReason)binaryReader.ReadInt16();
+        }
+
+        public void Write(Packet packet) {
+            packet.WriteInt32(NetID);
+            packet.WriteInt16((short)Reason);
+        }
+
+        public void Reset() {
+            NetID = 0;
+            Reason = EDestroyActorReason.None;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct UpdateData {
+        [FieldOffset(0)] public byte Int8;
+        [FieldOffset(0)] public short Int16;
+        [FieldOffset(0)] public int Int32;
+        [FieldOffset(0)] public bool Boolean;
+        [FieldOffset(0)] public float Float;
+        [FieldOffset(0)] public Vector3 Vec3;
+
+        public void Clean() {
+            Int8 = 0;
+            Int16 = 0;
+            Int32 = 0;
+            Boolean = false;
+            Float = 0;
+            Vec3 = Vector3.zero;
+        }
+
+    }
+
+    public class UpdateInfo : IFrameInfo, IPool {
+        public EUpdateActorType UpdateType = EUpdateActorType.None;
+        public UpdateData Data = new UpdateData();
+
+        public void SetFloat(float value) {
+            Data.Float = value;
+        }
+
+        public void SetVec3(float x, float z) {
+            Data.Vec3.x = x;
+            Data.Vec3.z = z;
+        }
+
+        public virtual void Read(BinaryReader binaryReader) {
+            UpdateType = (EUpdateActorType)binaryReader.ReadInt16();
+            switch (UpdateType) {
+                case EUpdateActorType.Position:
+                    Data.Vec3.x = binaryReader.ReadSingle();
+                    Data.Vec3.z = binaryReader.ReadSingle();
+                    break;
+                case EUpdateActorType.Angle:
+                    Data.Float = binaryReader.ReadSingle();
+                    break;
+            }
+        }
+
+        public virtual void Write(Packet packet) {
+            packet.WriteInt16((short)UpdateType);
+            switch (UpdateType) {
+                case EUpdateActorType.Position:
+                    packet.WriteFloat(Data.Vec3.x);
+                    packet.WriteFloat(Data.Vec3.z);
+                    break;
+                case EUpdateActorType.Angle:
+                    packet.WriteFloat(Data.Float);
+                    break;
+            }
+        }
+
+        public void Reset() {
+            UpdateType = EUpdateActorType.None;
+            Data.Clean();
+        }
+    }
+
     public class FrameData : IPool {
         public int FrameIndex;
         public List<PlayerInfo> PlayerInfos = new List<PlayerInfo>();
         public List<SpawnActorInfo> SpawnActorInfos = new List<SpawnActorInfo>();
         public Dictionary<int, INetInfo> NetInfoDict = new Dictionary<int, INetInfo>(new Int32Comparer());
 
+        public List<SpawnInfo> SpawnInfos = new List<SpawnInfo>(32); 
+        public List<DestroyInfo> DestroyInfos = new List<DestroyInfo>(32);
+        public Dictionary<int, List<UpdateInfo>> UpdateInfos = new Dictionary<int, List<UpdateInfo>>(new Int32Comparer());
+
         public void Reset() {
             FrameIndex = 0;
             {
-                //foreach (var it in PlayerInfos) {
-                //    ObjectPool<PlayerInfo>.Free(it);
-                //}
-                //foreach (var it in SpawnActorInfos) {
-                //    ObjectPool<SpawnActorInfo>.Free(it);
-                //}
                 PlayerInfos.Clear();
                 SpawnActorInfos.Clear();
             }
@@ -147,6 +284,49 @@ namespace Hamster.SpaceWar {
                 }
                 NetInfoDict.Clear();
             }
+
+            // 新的格式
+            foreach (var it in SpawnInfos) {
+                ObjectPool<SpawnInfo>.Free(it);
+            }
+            foreach (var it in DestroyInfos) {
+                ObjectPool<DestroyInfo>.Free(it);
+            }
+            foreach (var it in UpdateInfos) {
+                for (int i = 0; i < it.Value.Count; i++) {
+                    UpdateInfo info = it.Value[i];
+                    ObjectPool<UpdateInfo>.Free(info);
+                }
+                ListPool<UpdateInfo>.Free(it.Value);
+            }
+            SpawnInfos.Clear();
+            DestroyInfos.Clear();
+            UpdateInfos.Clear();
+        }
+
+        public void AddUpdateInfo(int id, UpdateInfo info) {
+            if (UpdateInfos.TryGetValue(id, out List<UpdateInfo> infos)) {
+                infos.Add(info);
+            }
+            else
+            {
+                infos = ListPool<UpdateInfo>.Malloc();
+                UpdateInfos[id] = infos;
+                infos.Add(info);
+            }
+        }
+
+        public bool TryGetUpdateInfo(int id, EUpdateActorType updateType, out UpdateInfo info) {
+            info = null;
+            if (UpdateInfos.TryGetValue(id, out List<UpdateInfo> infos)) {
+                foreach (var item in infos) {
+                    if (item.UpdateType == updateType) {
+                        info = item;
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public static FrameData Malloc(int frameIndex) {
@@ -224,6 +404,7 @@ namespace Hamster.SpaceWar {
             netSyncComponent.ConfigID = configID;
             netSyncComponent.PendingKill = false;
             netSyncComponent.NetType = type;
+            netSyncComponent.IsNewObject = true;
 
             newNetActor.transform.position = pos;
 

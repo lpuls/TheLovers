@@ -62,22 +62,22 @@ namespace Hamster.SpaceWar {
             return transform.position + SpawnOffset;
         }
 
-        private void OnDestroyTrajectory(GameObject gameObject) {
+        private void OnDestroyTrajectory(GameObject gameObject, EDestroyActorReason reason) {
             if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                netSyncComponent.Kill();
+                netSyncComponent.Kill(reason);
             }
         }
 
         public void OnHitDestroy(GameObject trajectory) {
-            OnDestroyTrajectory(trajectory);
+            OnDestroyTrajectory(trajectory, EDestroyActorReason.BeHit);
         }
 
         public void OnHitObject(GameObject hitObject, GameObject trajectory) {
-            OnDestroyTrajectory(trajectory);
+            OnDestroyTrajectory(trajectory, EDestroyActorReason.HitOther);
         }
 
         public void OnOutOfWold(GameObject trajectory) {
-            OnDestroyTrajectory(trajectory);
+            OnDestroyTrajectory(trajectory, EDestroyActorReason.OutOfWorld);
         }
 
 

@@ -51,7 +51,7 @@ namespace Hamster.SpaceWar {
             _moveDelay = 0;
             Move();
 
-            if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position)) {
+            if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position) && null != Parent) {
                 Parent.OnOutOfWold(gameObject);
             }
         }
@@ -74,12 +74,13 @@ namespace Hamster.SpaceWar {
                 IDamage damage = collider.GetComponent<IDamage>();
                 if (null != damage) {
                     damage.OnHit(Parent.GetGameObject(), gameObject);
-                    Parent.OnHitObject(collider, gameObject);
+                    if (null != Parent)
+                        Parent.OnHitObject(collider, gameObject);
                 }
             }
 
             // 命中后是否销毁
-            if (HitOnDestroy) {
+            if (HitOnDestroy && null != Parent) {
                 Parent.OnHitDestroy(gameObject);
             }
         }

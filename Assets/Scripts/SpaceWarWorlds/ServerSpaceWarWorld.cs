@@ -45,6 +45,9 @@ namespace Hamster.SpaceWar {
         }
 
         protected override void Update() {
+            ActiveWorld();
+
+            // ÍøÂçÄ£¿é¸üĞÂ
             base.Update();
             if (null != _netDevice)
                 _netDevice.Update();
