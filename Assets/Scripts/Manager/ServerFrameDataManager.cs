@@ -5,7 +5,6 @@ namespace Hamster.SpaceWar {
     public class ServerFrameDataManager : BaseFrameDataManager {
 
         private int _shipCreateIndex = 0;
-        private int _spawnCreateIndex = 0;
         private ServerNetDevice _netDevice = null;
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
 
@@ -27,7 +26,7 @@ namespace Hamster.SpaceWar {
 
             NetSyncComponent netSyncComponent = newNetActor.TryGetOrAdd<NetSyncComponent>();
             if (TryGetNetActor(ownerID, out NetSyncComponent parentNetSync)) {
-                netSyncComponent.NetID = --_spawnCreateIndex;
+                netSyncComponent.NetID = parentNetSync.GetSpawnIndex();  // --_spawnCreateIndex;
             }
             else {
                 netSyncComponent.NetID = ++_shipCreateIndex;
@@ -89,10 +88,11 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            updateInfo.SetVec3(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
+                            updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
+                            updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                             break;
                         case EUpdateActorType.Angle:
-                            updateInfo.SetFloat(netSyncComponent.transform.rotation.eulerAngles.y);
+                            updateInfo.SetFloatForData1(netSyncComponent.transform.rotation.eulerAngles.y);
                             break;
                     }
                     frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);

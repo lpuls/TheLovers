@@ -29,7 +29,7 @@ namespace Hamster.SpaceWar {
 
         public const int NET_PING_MODULE_ID = 1;
         private const float Max_INTERVAL = .3f;
-        private const float CONNECT_TIME_OUT = 5.0f;
+        private const float CONNECT_TIME_OUT = 15.0f;
 
         private float _interval = 0;
         private bool _sendEnable = false;

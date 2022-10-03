@@ -216,26 +216,32 @@ namespace Hamster.SpaceWar {
 
     public class UpdateInfo : IFrameInfo, IPool {
         public EUpdateActorType UpdateType = EUpdateActorType.None;
-        public UpdateData Data = new UpdateData();
+        public UpdateData Data1 = new UpdateData();
+        public UpdateData Data2 = new UpdateData();
 
-        public void SetFloat(float value) {
-            Data.Float = value;
+        public void SetFloatForData1(float value) {
+            Data1.Float = value;
         }
 
-        public void SetVec3(float x, float z) {
-            Data.Vec3.x = x;
-            Data.Vec3.z = z;
+        public void SetVec3ForData2(float x, float z) {
+            Data1.Vec3.x = x;
+            Data1.Vec3.z = z;
+        }
+
+        public void SetInt32ForData2(int value) {
+            Data2.Int32 = value;
         }
 
         public virtual void Read(BinaryReader binaryReader) {
             UpdateType = (EUpdateActorType)binaryReader.ReadInt16();
             switch (UpdateType) {
                 case EUpdateActorType.Position:
-                    Data.Vec3.x = binaryReader.ReadSingle();
-                    Data.Vec3.z = binaryReader.ReadSingle();
+                    Data1.Vec3.x = binaryReader.ReadSingle();
+                    Data1.Vec3.z = binaryReader.ReadSingle();
+                    Data2.Int32 = binaryReader.ReadInt32();
                     break;
                 case EUpdateActorType.Angle:
-                    Data.Float = binaryReader.ReadSingle();
+                    Data1.Float = binaryReader.ReadSingle();
                     break;
             }
         }
@@ -244,18 +250,20 @@ namespace Hamster.SpaceWar {
             packet.WriteInt16((short)UpdateType);
             switch (UpdateType) {
                 case EUpdateActorType.Position:
-                    packet.WriteFloat(Data.Vec3.x);
-                    packet.WriteFloat(Data.Vec3.z);
+                    packet.WriteFloat(Data1.Vec3.x);
+                    packet.WriteFloat(Data1.Vec3.z);
+                    packet.WriteInt32(Data2.Int32);
                     break;
                 case EUpdateActorType.Angle:
-                    packet.WriteFloat(Data.Float);
+                    packet.WriteFloat(Data1.Float);
                     break;
             }
         }
 
         public void Reset() {
             UpdateType = EUpdateActorType.None;
-            Data.Clean();
+            Data1.Clean();
+            Data2.Clean();
         }
     }
 

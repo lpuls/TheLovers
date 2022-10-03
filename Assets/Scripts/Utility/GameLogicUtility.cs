@@ -52,7 +52,7 @@ namespace Hamster.SpaceWar {
             return ship;
         }
 
-        public static void SetPlayerOperator(int userData, int playerOperator) {
+        public static void SetPlayerOperator(int userData, int playerOperator, int index) {
             BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
@@ -60,6 +60,7 @@ namespace Hamster.SpaceWar {
                 if (netSyncComponent.gameObject.TryGetComponent<LocalPlayerController>(out LocalPlayerController netPlayerController)) {
                     netPlayerController.SetOperator(playerOperator);
                 }
+                netSyncComponent.PredictionIndex = index;
             }
         }
 
@@ -76,6 +77,20 @@ namespace Hamster.SpaceWar {
                 trajectoryComponent.Init(spanwer);
                 
                 CD = abilityConfig.CD / 1000.0f;
+            }
+            return bullet;
+        }
+
+        public static GameObject CreateClientBullet(int config, int ownerID, Vector3 position) {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            GameObject bullet = null;
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+                if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    frameDataManager.AddPredictionActor(netSyncComponent);
+                }
             }
             return bullet;
         }

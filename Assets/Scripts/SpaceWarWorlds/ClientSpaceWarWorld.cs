@@ -23,6 +23,10 @@ namespace Hamster.SpaceWar {
 
         }
 
+        public int GetFrameIndex() {
+            return _frameDataManager.GameLogicFrame;
+        }
+
         public FrameData GetCurrentFrameData() {
             return _frameDataManager.GetCurrentFrameData();
         }

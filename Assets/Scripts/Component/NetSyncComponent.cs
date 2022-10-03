@@ -43,6 +43,11 @@ namespace Hamster.SpaceWar {
             set;
         }
 
+        public int PredictionIndex {
+            get;
+            set;
+        }
+
         public EDestroyActorReason DestroyReason {
             get;
             private set;

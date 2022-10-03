@@ -35,6 +35,7 @@ namespace Hamster.SpaceWar {
                             moveDirection += transform.right;
                             break;
                         case EInputValue.Ability1:
+                            if (null != _localAbilityComponent)
                             _localAbilityComponent.CastAbility((int)EAbilityIndex.Fire);
                             break;
                         case EInputValue.Ability2:
@@ -61,10 +62,9 @@ namespace Hamster.SpaceWar {
         }
 
         public void SetOperator(int input) {
-            // if (!_readByInputDevice)
             _operator = input;
         }
-        
+
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
             if (_readByInputDevice) {
                 _operator = 0;

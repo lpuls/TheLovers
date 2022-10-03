@@ -8,7 +8,6 @@ namespace Hamster.SpaceWar {
         public const int MAX_SERVER_FRAME_COUNT = 1;
 
         private List<FrameData> _frameDatas = new List<FrameData>();
-        private HashSet<int> _newActorIDs = new HashSet<int>(new Int32Comparer());
 
         private bool _simulate = false;
         private FrameData _currentFrameData = null;
@@ -16,6 +15,7 @@ namespace Hamster.SpaceWar {
 
         private byte[] _analyzeBytes = new byte[1024];
         private BinaryReader _binaryReader = null;
+        private HashSet<NetSyncComponent> _predictionActors = new HashSet<NetSyncComponent>(32);
 
         public int GameLogicFrame {
             get;
@@ -178,6 +178,10 @@ namespace Hamster.SpaceWar {
                 NextFrame();
                 LogicTime -= LOGIC_FRAME;
             }
+        }
+
+        public void AddPredictionActor(NetSyncComponent netSyncComponent) {
+            _predictionActors.Add(netSyncComponent);
         }
     }
 }

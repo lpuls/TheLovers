@@ -1,16 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public class NetMovementComponent : MonoBehaviour {
 
-        public float MaxDistanceWithServer = 1.0f;
+        public float MaxDistanceWithServer = 0.3f;
 
         private Vector3 _prePosition = Vector3.zero;
         private Vector3 _currentPosition = Vector3.zero;
         private NetSyncComponent _netSyncComponent;
+        private NetPlayerController _playerController;
 
         private void Awake() {
             _netSyncComponent = GetComponent<NetSyncComponent>();
+            _playerController = GetComponent<NetPlayerController>();
         }
 
         public void Update() {
@@ -28,35 +31,43 @@ namespace Hamster.SpaceWar {
                 return;
             }
 
-            bool isAutonomous = _netSyncComponent.IsAutonomousProxy();
             FrameData preData = spaceWarWorld.GetPreFrameData();
             FrameData currentData = spaceWarWorld.GetCurrentFrameData();
             if (null != preData && null != currentData) {
 
                 int netID = _netSyncComponent.NetID;
-                if (!preData.TryGetUpdateInfo(netID, EUpdateActorType.Position, out UpdateInfo preUpdateInfo)) {
+                if (!preData.TryGetUpdateInfo(netID, EUpdateActorType.Position, out UpdateInfo preUpdateInfo))
                     return;
-                }
                 if (!currentData.TryGetUpdateInfo(netID, EUpdateActorType.Position, out UpdateInfo currentUpdateInfo))
                     return;
 
-                _prePosition = preUpdateInfo.Data.Vec3;
-                _currentPosition = currentUpdateInfo.Data.Vec3;
+                _prePosition = preUpdateInfo.Data1.Vec3;
+                _currentPosition = currentUpdateInfo.Data1.Vec3;
 
                 float t = spaceWarWorld.GetLogicFramepercentage();
                 if (_netSyncComponent.IsAutonomousProxy()) {
-                    if (Vector3.Distance(transform.position, _currentPosition) >= MaxDistanceWithServer)
-                        transform.position = Vector3.Lerp(transform.position, _currentPosition, Time.deltaTime);
+                    // 根据服务端下发的帧号获取当时預測的结果
+                    int currentFrameIndex = currentUpdateInfo.Data1.Int32;
+                    if (_playerController.TryGetPredictionLocation(currentFrameIndex, out Vector3 predicationLocation)) {
+                        // 如果逻辑结果与实际结果相关过大，则需要清理所有預測结果，然后拉到逻辑位置上
+                        if (Vector3.Distance(predicationLocation, _currentPosition) > MaxDistanceWithServer) {
+                            _playerController.CleanPredicationLocations();
+                            transform.position = Vector3.Lerp(preUpdateInfo.Data1.Vec3, currentUpdateInfo.Data1.Vec3, t);
+                        }
+                        else {
+                            _playerController.RemovePredictionLocation(currentFrameIndex);
+                        }
+                    }
                 }
                 else {
-                    transform.position = Vector3.Lerp(preUpdateInfo.Data.Vec3, currentUpdateInfo.Data.Vec3, t);
+                    transform.position = Vector3.Lerp(preUpdateInfo.Data1.Vec3, currentUpdateInfo.Data1.Vec3, t);
                 }
             }
 
-            // 主端修正
-            if (_netSyncComponent.IsAutonomousProxy() && !_prePosition.Equals(Vector3.zero) && !_currentPosition.Equals(Vector3.zero)) {
-                transform.position = Vector3.Lerp(transform.position, _currentPosition, Time.deltaTime);
-            }
+            // 偷偷修正位置
+            //if (_netSyncComponent.IsAutonomousProxy()) {
+            //    transform.position = Vector3.Lerp(_prePosition, _currentPosition, Time.deltaTime);
+            //}
         }
 
 #if UNITY_EDITOR

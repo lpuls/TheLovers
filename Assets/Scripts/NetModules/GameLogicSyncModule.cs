@@ -9,6 +9,9 @@ namespace Hamster.SpaceWar
         public const int NET_GAME_LOGIC_SYNC_ID = 2;
 
         public int Operator = 0;
+        public int Index = 0;
+        public float X = 0;
+        public float Z = 0;
 
         public override int NetMessageID
         {
@@ -20,9 +23,12 @@ namespace Hamster.SpaceWar
 
         public override Packet ToPacket(IPacketMallocer mallocer)
         {
-            Packet packet = mallocer.Malloc(24);
+            Packet packet = mallocer.Malloc(sizeof(int) * 3 + sizeof(float) * 2);
             packet.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
             packet.WriteInt32(Operator);
+            packet.WriteInt32(Index);
+            packet.WriteFloat(X);
+            packet.WriteFloat(Z);
             return packet;
         }
     }
@@ -62,15 +68,6 @@ namespace Hamster.SpaceWar
                     }
                 }
 
-                //_sendPacket.WriteInt32(SendFrameData.PlayerInfos.Count);
-                //foreach (var it in SendFrameData.PlayerInfos) {
-                //    it.Write(_sendPacket);
-                //}
-                //_sendPacket.WriteInt32(SendFrameData.SpawnActorInfos.Count);
-                //foreach (var it in SendFrameData.SpawnActorInfos) {
-                //    it.Write(_sendPacket);
-                //}
-
                 // 往头部写入长度
                 int size = _sendPacket.Size;
                 _sendPacket.Peek(sizeof(int));
@@ -102,8 +99,9 @@ namespace Hamster.SpaceWar
 
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {
             int playerInput = p.ReadInt32();
+            int commandIndex = p.ReadInt32();
             UnityEngine.Debug.Log("Receive Player Input " + inst.UserData + ", " + playerInput);
-            GameLogicUtility.SetPlayerOperator(inst.UserData, playerInput);
+            GameLogicUtility.SetPlayerOperator(inst.UserData, playerInput, commandIndex);
         }
 
         public override void OnSendMessageFaile(Packet p, SocketError error)
@@ -111,9 +109,10 @@ namespace Hamster.SpaceWar
             UnityEngine.Debug.Log("error " + error);
         }
 
-        public void SendOperator(int op)
+        public void SendOperator(int op, int index)
         {
             _gameLogicSyncMessage.Operator = op;
+            _gameLogicSyncMessage.Index = index;
 
             _device.SendMessage(_gameLogicSyncMessage);
         }
