@@ -98,31 +98,6 @@ namespace Hamster.SpaceWar {
                     frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);
                 }
                 netSyncComponent.CleanUpdate();
-
-                //// 记录数据
-                //switch (netSyncComponent.NetType) {
-                //    case ENetType.Player:
-                //        PlayerInfo playerInfo = ObjectPool<PlayerInfo>.Malloc();
-                //        playerInfo.ID = netSyncComponent.NetID;
-                //        playerInfo.Angle = 0;
-                //        playerInfo.OwnerID = 0;
-                //        playerInfo.Tags = 0;
-                //        playerInfo.Health = 100;
-                //        playerInfo.X = netSyncComponent.transform.position.x;
-                //        playerInfo.Y = netSyncComponent.transform.position.z;
-                //        frameData.PlayerInfos.Add(playerInfo);
-                //        break;
-                //    case ENetType.Bullet:
-                //        SpawnActorInfo spawnActorInfo = ObjectPool<SpawnActorInfo>.Malloc();
-                //        spawnActorInfo.ID = netSyncComponent.NetID;
-                //        spawnActorInfo.OwnerID = netSyncComponent.OwnerID;
-                //        spawnActorInfo.Angle = 0;
-                //        spawnActorInfo.X = netSyncComponent.transform.position.x;
-                //        spawnActorInfo.Y = netSyncComponent.transform.position.z;
-                //        frameData.SpawnActorInfos.Add(spawnActorInfo);
-                //        break;
-                //}
-
             }
             Debug.Log("======>Send\n " + frameData.ToString());
 

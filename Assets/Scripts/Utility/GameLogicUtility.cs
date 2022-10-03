@@ -80,15 +80,17 @@ namespace Hamster.SpaceWar {
             return bullet;
         }
 
-        public static void SetPositionUpdate(GameObject gameObject) {
-            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                netSyncComponent.AddNewUpdate(EUpdateActorType.Position);
-            }
+        public static void SetPositionDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.Position);
         }
 
-        public static void SetAngleUpdate(GameObject gameObject) {
-            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                netSyncComponent.AddNewUpdate(EUpdateActorType.Angle);
+        public static void SetAngleDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.Angle);
+        }
+
+        private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {
+            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent) && netSyncComponent.IsAuthority()) {
+                netSyncComponent.AddNewUpdate(updateType);
             }
         }
 

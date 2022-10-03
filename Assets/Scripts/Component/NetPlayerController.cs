@@ -5,14 +5,12 @@ namespace Hamster.SpaceWar {
 
     public class NetPlayerController : LocalPlayerController {
 
-        private NetSyncComponent _netSyncComponent = null;
         private GameLogicSyncModule _gameLogicSyncModule = null;
 
         public override void Init() {
-            _netSyncComponent = gameObject.TryGetOrAdd<NetSyncComponent>();
+            _localMovementComponent = gameObject.TryGetOrAdd<LocalMovementComponent>();
 
             // 主控端需要通过该网络模块转发数据
-            // if (_netSyncComponent.IsAutonomousProxy()) {
             ClientNetDevice netDeivce = World.GetWorld().GetManager<ClientNetDevice>();
             if (null == netDeivce || !netDeivce.IsValid) {
                 Debug.LogError("=====>Local LocalPlayerController Has not NetDevice ");
@@ -24,10 +22,11 @@ namespace Hamster.SpaceWar {
                 Debug.LogError("=====>Local LocalPlayerController Has not GameLogicSyncModule ");
                 return;
             }
-            //}
         }
 
         public override void ProcessorInput(int input) {
+            base.ProcessorInput(input);
+
             if (null != _gameLogicSyncModule) {
                 _gameLogicSyncModule.SendOperator(input);
             }

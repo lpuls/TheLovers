@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public class ClientFrameDataManager : BaseFrameDataManager {
-        public const int MAX_SERVER_FRAME_COUNT = 3;
+        public const int MAX_SERVER_FRAME_COUNT = 1;
 
         private List<FrameData> _frameDatas = new List<FrameData>();
         private HashSet<int> _newActorIDs = new HashSet<int>(new Int32Comparer());
@@ -93,42 +93,6 @@ namespace Hamster.SpaceWar {
                     netSyncComponent.Kill(item.Reason);
                 }
             }
-
-            //List<PlayerInfo> players = frameData.PlayerInfos;
-            //List<SpawnActorInfo> spawnActors = frameData.SpawnActorInfos;
-
-            //// 记录下本次所有的网络同步物的ID
-            //_newActorIDs.Clear();
-            //for (int i = 0; i < players.Count; i++) {
-            //    _newActorIDs.Add(players[i].ID);
-            //}
-            //for (int i = 0; i < spawnActors.Count; i++) {
-            //    _newActorIDs.Add(spawnActors[i].ID);
-            //}
-
-            //// 找出本地有但网络没有的物体，设置为移除
-            //var it = _netActors.GetEnumerator();
-            //while (it.MoveNext()) {
-            //    NetSyncComponent netSyncComponent = it.Current.Value;
-            //    if (!_newActorIDs.Contains(netSyncComponent.NetID)) {
-            //        netSyncComponent.Kill(EDestroyActorReason.None);
-            //    }
-            //}
-
-            //// 遍历所有的网络生成物，创建不存在的物体
-            //for (int i = 0; i < players.Count; i++) {
-            //    PlayerInfo playerInfo = players[i];
-            //    if (!_netActors.ContainsKey(playerInfo.ID)) {
-            //        SpawnNetObject(playerInfo.ID, 0, "Res/Ships/GreyShip", 0, new Vector3(playerInfo.X, 0, playerInfo.Y));
-            //    }
-            //}
-
-            //for (int i = 0; i < spawnActors.Count; i++) {
-            //    SpawnActorInfo spawnActorInfo = spawnActors[i];
-            //    if (!_netActors.ContainsKey(spawnActorInfo.ID)) {
-            //        SpawnNetObject(spawnActorInfo.ID, spawnActorInfo.OwnerID, "Res/Bullet/Bullet", 0, new Vector3(spawnActorInfo.X, 0, spawnActorInfo.Y));
-            //    }
-            //}
         }
 
         public void AnalyzeBinary(byte[] binary) {
@@ -159,22 +123,6 @@ namespace Hamster.SpaceWar {
                     frameData.AddUpdateInfo(netID, updateInfo);
                 }
             }
-
-            //int playerSize = _binaryReader.ReadInt32();
-            //for (int i = 0; i < playerSize; i++) {
-            //    PlayerInfo playerInfo = PlayerInfo.Malloc();
-            //    playerInfo.Read(_binaryReader);
-            //    frameData.PlayerInfos.Add(playerInfo);
-            //    frameData.NetInfoDict.Add(playerInfo.ID, playerInfo);
-            //}
-
-            //int spawnActorSize = _binaryReader.ReadInt32();
-            //for (int i = 0; i < spawnActorSize; i++) {
-            //    SpawnActorInfo spawnActorInfo = SpawnActorInfo.Malloc();
-            //    spawnActorInfo.Read(_binaryReader);
-            //    frameData.SpawnActorInfos.Add(spawnActorInfo);
-            //    frameData.NetInfoDict.Add(spawnActorInfo.ID, spawnActorInfo);
-            //}
             Debug.Log("=====>Analyze Binary: \n" + frameData.ToString());
 
             _frameDatas.Add(frameData);

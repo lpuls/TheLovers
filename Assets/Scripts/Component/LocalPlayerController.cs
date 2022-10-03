@@ -78,11 +78,6 @@ namespace Hamster.SpaceWar {
             return _operator;
         }
 
-        public override void Update() {
-            base.Update();
-            _operator = 0;
-        }
-
         public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
         }
     }
