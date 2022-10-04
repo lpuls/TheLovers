@@ -16,35 +16,37 @@ namespace Hamster.SpaceWar {
         protected LocalAbilityComponent _localAbilityComponent = null;
         protected LocalMovementComponent _localMovementComponent = null;
 
-        public override void ProcessorInput(int operate) {
-            Vector3 moveDirection = Vector3.zero;
+        protected void GetOperateFromInput(int operate, out Vector3 direction, out bool castAbility1) {
+            direction = Vector3.zero;
+            castAbility1 = false;
             for (int i = 0; i < (int)EInputValue.Max; i++) {
                 EInputValue value = (EInputValue)i;
                 if (1 == ((operate >> i) & 1)) {
                     switch (value) {
                         case EInputValue.MoveUp:
-                            moveDirection += transform.forward;
+                            direction += transform.forward;
                             break;
                         case EInputValue.MoveDown:
-                            moveDirection -= transform.forward;
+                            direction -= transform.forward;
                             break;
                         case EInputValue.MoveLeft:
-                            moveDirection -= transform.right;
+                            direction -= transform.right;
                             break;
                         case EInputValue.MoveRight:
-                            moveDirection += transform.right;
+                            direction += transform.right;
                             break;
                         case EInputValue.Ability1:
-                            if (null != _localAbilityComponent)
-                            _localAbilityComponent.CastAbility((int)EAbilityIndex.Fire);
-                            break;
-                        case EInputValue.Ability2:
+                            castAbility1 = true;
                             break;
                         default:
                             break;
                     }
                 }
             }
+        }
+
+        public override void ProcessorInput(int operate) {
+            GetOperateFromInput(operate, out Vector3 moveDirection, out bool cast1);
 
             if (!moveDirection.Equals(Vector3.zero))
                 _localMovementComponent.Move(moveDirection);

@@ -4,8 +4,9 @@ using UnityEngine;
 namespace Hamster.SpaceWar                                                                                                                                                                                                                                                                                                   {
     public class NetMovementComponent : MonoBehaviour {
 
-        public float MaxDistanceWithServer = 0.1f;
+        public float MaxDistanceWithServer = 1.0f;
 
+        private int _lastFrameIndex = -1;
         private Vector3 _prePosition = Vector3.zero;
         private Vector3 _currentPosition = Vector3.zero;
         private NetSyncComponent _netSyncComponent;
@@ -35,36 +36,50 @@ namespace Hamster.SpaceWar                                                      
             FrameData currentData = spaceWarWorld.GetCurrentFrameData();
             if (null != preData && null != currentData) {
 
+                // 判断是否需要更新
+                bool isNewFrame = false;
+                if (_lastFrameIndex != preData.FrameIndex) {
+                    _lastFrameIndex = preData.FrameIndex;
+                    isNewFrame = true;
+                }
+
                 int netID = _netSyncComponent.NetID;
                 preData.TryGetUpdateInfo(netID, EUpdateActorType.Position, out UpdateInfo preUpdateInfo);
                 currentData.TryGetUpdateInfo(netID, EUpdateActorType.Position, out UpdateInfo currentUpdateInfo);
 
-                int currentFrameIndex = -1;
                 if (null != preUpdateInfo)
                     _prePosition = preUpdateInfo.Data1.Vec3;
                 if (null != currentUpdateInfo) {
                     _currentPosition = currentUpdateInfo.Data1.Vec3;
-                    currentFrameIndex = currentUpdateInfo.Data1.Int32;
                 }
 
                 float t = spaceWarWorld.GetLogicFramepercentage();
                 if (_netSyncComponent.IsAutonomousProxy()) {
                     // 根据服务端下发的帧号获取当时預測的结果
-                    // int currentFrameIndex = currentUpdateInfo.Data1.Int32;
-                    if (_playerController.TryGetPredictionLocation(currentFrameIndex, out Vector3 predicationLocation)) {
+                    if (isNewFrame && _playerController.TryGetTopPredictionCommand(out NetPlayerCommand command)) {
+
+                        Vector3 oldPosition = transform.position;
+
                         // 如果逻辑结果与实际结果相关过大，则需要清理所有預測结果，然后拉到逻辑位置上
-                        if (Vector3.Distance(predicationLocation, _currentPosition) > MaxDistanceWithServer) {
-                            _playerController.CleanPredicationLocations();
-                            transform.position = Vector3.Lerp(_prePosition, _currentPosition, t);
-                        }
-                        else {
-                            _playerController.RemovePredictionLocation(currentFrameIndex);
-                        }
+                        transform.position = _currentPosition;
+                        _playerController.RemoveTopPredictionCommand();
+                        _playerController.SimulateAfter();
+
+                        Debug.Log(string.Format("===>Server: {0}, Prediction: {1}, Transform: [{2}, {5}], ServerFrame: {3} ClientFrame: {4}",
+                                _currentPosition, command.Location, transform.position, currentData.FrameIndex, command.FrameIndex, oldPosition));
+
+                        //if (Vector3.Distance(command.Location, _currentPosition) > MaxDistanceWithServer) {
+                        //    // _playerController.CleanPredicationLocations();
+                        //    // transform.position = Vector3.Lerp(_prePosition, _currentPosition, t);
+                        //}
+                        //else {
+                        //    _playerController.RemovePredictionLocation();
+                        //}
                     }
                 }
                 else if (!_prePosition.Equals(Vector3.zero) && !_currentPosition.Equals(Vector3.zero)) {
                     transform.position = Vector3.Lerp(_prePosition, _currentPosition, t);
-                    Debug.Log(string.Format("===>Pre: {0}, Cur: {1}, Position: {2}, T: {3}, Frame: {4}", _prePosition, _currentPosition, transform.position, t, currentData.FrameIndex));
+                    // Debug.Log(string.Format("===>Pre: {0}, Cur: {1}, Position: {2}, T: {3}, Frame: {4}", _prePosition, _currentPosition, transform.position, t, currentData.FrameIndex));
                 }
             }
         }

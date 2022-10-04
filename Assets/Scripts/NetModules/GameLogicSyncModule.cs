@@ -90,7 +90,7 @@ namespace Hamster.SpaceWar
 
         public override void OnReceiveServerMessage(Packet p)
         {
-            UnityEngine.Debug.Log(string.Format("Receive Logic Mirror Data: {0}", p.GetLength()));
+            // UnityEngine.Debug.Log(string.Format("Receive Logic Mirror Data: {0}", p.GetLength()));
             ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ClientFrameDataManager;
             int dataSize = p.ReadInt32();
             byte[] byteArray = p.ReadBytes(dataSize);
@@ -100,7 +100,7 @@ namespace Hamster.SpaceWar
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {
             int playerInput = p.ReadInt32();
             int commandIndex = p.ReadInt32();
-            UnityEngine.Debug.Log("Receive Player Input " + inst.UserData + ", " + playerInput);
+            // UnityEngine.Debug.Log("Receive Player Input " + inst.UserData + ", " + playerInput);
             GameLogicUtility.SetPlayerOperator(inst.UserData, playerInput, commandIndex);
         }
 

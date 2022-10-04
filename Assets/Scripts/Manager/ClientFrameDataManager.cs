@@ -123,7 +123,7 @@ namespace Hamster.SpaceWar {
                     frameData.AddUpdateInfo(netID, updateInfo);
                 }
             }
-            Debug.Log("=====>Analyze Binary: \n" + frameData.ToString());
+            // Debug.Log("=====>Analyze Binary: \n" + frameData.ToString());
 
             _frameDatas.Add(frameData);
 
@@ -160,6 +160,9 @@ namespace Hamster.SpaceWar {
             base.Update();
 
             if (!_simulate) {
+                return;
+            }
+            if (_frameDatas.Count <= 0) {
                 return;
             }
 

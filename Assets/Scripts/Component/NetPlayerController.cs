@@ -3,10 +3,22 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
+    public class NetPlayerCommand : IPool {
+        public int FrameIndex = 0;
+        public Vector3 Location = Vector3.zero;
+        public int operate = 0;
+
+        public void Reset() {
+            FrameIndex = 0;
+            Location = Vector3.zero;
+            operate = 0;
+        }
+    }
+
     public class NetPlayerController : LocalPlayerController {
 
         private GameLogicSyncModule _gameLogicSyncModule = null;
-        private Dictionary<int, Vector3> _predictionLocations = new Dictionary<int, Vector3>(new Int32Comparer());
+        private List<NetPlayerCommand> _predicationCommands = new List<NetPlayerCommand>();
 
         public override void Init() {
             _localMovementComponent = gameObject.TryGetOrAdd<LocalMovementComponent>();
@@ -32,7 +44,11 @@ namespace Hamster.SpaceWar {
             // 将每一帧的預測的结果及当时的客户端帧号都记录下来
             ClientSpaceWarWorld world = World.GetWorld<ClientSpaceWarWorld>();
             int frameIndex = world.GetFrameIndex();
-            _predictionLocations.TryAdd(frameIndex, transform.position);
+            NetPlayerCommand command = ObjectPool<NetPlayerCommand>.Malloc();
+            command.FrameIndex = frameIndex;
+            command.Location = transform.position;
+            command.operate = input;
+            _predicationCommands.Add(command);
 
             // 将记录帧及操作发给服务端
             if (null != _gameLogicSyncModule) {
@@ -40,16 +56,31 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public bool TryGetPredictionLocation(int frameIndex, out Vector3 location) {
-            return _predictionLocations.TryGetValue(frameIndex, out location);
+        public bool TryGetTopPredictionCommand(out NetPlayerCommand command) {
+            command = null;
+            if (_predicationCommands.Count > 0) {
+                command = _predicationCommands[0];
+                return true;
+            }
+            return false;
         }
 
-        public void RemovePredictionLocation(int frameIndex) {
-            _predictionLocations.Remove(frameIndex);
+        public void RemoveTopPredictionCommand() {
+            NetPlayerCommand command = _predicationCommands[0];
+            _predicationCommands.RemoveAt(0);
+            ObjectPool<NetPlayerCommand>.Free(command);
         }
 
         public void CleanPredicationLocations() {
-            _predictionLocations.Clear();
+            _predicationCommands.Clear();
+        }
+
+        public void SimulateAfter() {
+            foreach (var item in _predicationCommands) {
+                GetOperateFromInput(item.operate, out Vector3 moveDirection, out bool _);
+                _localMovementComponent.MoveTick(moveDirection);
+                item.Location = transform.position;
+            }
         }
 
     }

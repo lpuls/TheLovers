@@ -68,7 +68,7 @@ namespace Hamster.SpaceWar {
             float time = Time.realtimeSinceStartup;
             Ping = time - sendTime;
             _sendEnable = true;
-            Debug.Log("[Client] Ping " + Ping + " RTT " + (Ping / 2) + " Frame " + frame);
+            //Debug.Log("[Client] Ping " + Ping + " RTT " + (Ping / 2) + " Frame " + frame);
         }
 
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {
@@ -78,7 +78,7 @@ namespace Hamster.SpaceWar {
             // 服务端收到客户端信息之后，只要将当前时间减去发送时间就能得到ping
             float time = Time.realtimeSinceStartup;
             Ping = time - sendTime;
-            Debug.Log("[Server] Ping " + Ping + " RTT " + Ping + " Frame " + frame + " Client " + inst.CreateIndex);
+            //Debug.Log("[Server] Ping " + Ping + " RTT " + Ping + " Frame " + frame + " Client " + inst.CreateIndex);
 
             // 更新该客户端收到消息的时间
             _clientLastPingTime[inst.CreateIndex] = time;
@@ -89,7 +89,7 @@ namespace Hamster.SpaceWar {
         public void SendClientPingMessage() {
             _netPingMessage.Time = Time.realtimeSinceStartup;
             _netPingMessage.Frame = _frame;
-            UnityEngine.Debug.Log(string.Format("[Client] =========> SendPingMessage {0}, {1}", _netPingMessage.Time, _netPingMessage.Frame));
+            //UnityEngine.Debug.Log(string.Format("[Client] =========> SendPingMessage {0}, {1}", _netPingMessage.Time, _netPingMessage.Frame));
             _frame++;
             _device.SendMessage(_netPingMessage);
         }
@@ -97,7 +97,7 @@ namespace Hamster.SpaceWar {
         public void SendServerPingMessage(ClientInstance inst, float receiveTime) {
             _netPingMessage.Time = receiveTime;
             _netPingMessage.Frame = _frame;
-            UnityEngine.Debug.Log(string.Format("[Server] =========> SendPingMessage {0}, {1}", _netPingMessage.Time, _netPingMessage.Frame));
+            //UnityEngine.Debug.Log(string.Format("[Server] =========> SendPingMessage {0}, {1}", _netPingMessage.Time, _netPingMessage.Frame));
 
             inst.SendMessage(_netPingMessage);
         }

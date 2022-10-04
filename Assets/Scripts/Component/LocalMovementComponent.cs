@@ -32,26 +32,16 @@ namespace Hamster.SpaceWar {
             if (!_needMove)
                 return;
 
-            //// 用于加减速
-            //if (_beginStop)
-            //    _moveSpeed = Mathf.MoveTowards(_moveSpeed, Speed * Time.deltaTime, 3f);
-            //else
-            //    _moveSpeed = Mathf.MoveTowards(_moveSpeed, 0, 3f);
+            MoveTick(_moveDirection);
+        }
 
-            //// 如果是减速，则速度为0是停止
-            //if (_beginStop && _moveSpeed <= 0) {
-            //    _beginStop = false;
-            //    _needMove = false;
-            //    _moveDirection = Vector3.zero;
-            //    _moveSpeed = 0;
-            //}
+        public void MoveTick(Vector3 direction) {
             _moveSpeed = Speed * Time.deltaTime;
 
             // 更新角色位置
-            transform.position += _moveDirection * _moveSpeed;
+            transform.position += direction * _moveSpeed;
             transform.position = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
             GameLogicUtility.SetPositionDirty(gameObject);
-
         }
 
 #if UNITY_EDITOR
