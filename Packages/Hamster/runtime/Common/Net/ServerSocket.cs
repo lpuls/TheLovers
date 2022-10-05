@@ -26,7 +26,6 @@ namespace Hamster {
             int readSize = Handle.EndReceive(asyncResult);
             int count = _packetManager.Analyze(data);
             if (readSize > 0 && count > 0) {
-                UnityEngine.Debug.Log("=======>Receive Buff " + count);
                 Array.Clear(_receiveBuff, 0, BUFFER_LENGTH);
                 OnReceiveMessage?.Invoke(this); 
             }

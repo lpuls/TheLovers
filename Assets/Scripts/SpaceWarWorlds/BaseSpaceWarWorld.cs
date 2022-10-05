@@ -1,8 +1,13 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 
 namespace Hamster.SpaceWar {
+
+    public interface IServerTicker {
+        void Tick(float dt);
+    }
 
     public class BaseSpaceWarWorld : World {
         public Vector3 WorldSize = Vector3.one;
@@ -43,6 +48,12 @@ namespace Hamster.SpaceWar {
                 position.z = bounds.min.z + size;
             }
             return position;
+        }
+
+        public virtual void AddTicker(IServerTicker serverTicker) {
+        }
+
+        public virtual void RemoveTicker(IServerTicker serverTicker) {
         }
 
 #if UNITY_EDITOR

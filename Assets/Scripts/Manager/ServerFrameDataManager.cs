@@ -13,6 +13,11 @@ namespace Hamster.SpaceWar {
             private set;
         }
 
+        public float LogicTime {
+            get;
+            private set;
+        }
+
         private ServerNetDevice GetNetDevice() {
             if (null == _netDevice) {
                 ServerSpaceWarWorld netSpaceWarWorld = World.GetWorld<ServerSpaceWarWorld>();
@@ -45,6 +50,15 @@ namespace Hamster.SpaceWar {
         }
 
         public override void Update() {
+            LogicTime += Time.deltaTime;
+            while (LogicTime >= LOGIC_FRAME_TIME) {
+                UpdateTickers();
+                Tick();
+                LogicTime -= LOGIC_FRAME_TIME;
+            }
+        }
+
+        public void Tick() {
             if (!IsGameStart)
                 return;
 
@@ -88,8 +102,10 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
-                            updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
+                            if (netSyncComponent.TryGetComponent<BasePlayerController>(out BasePlayerController playerController)) {
+                                updateInfo.SetVec3ForData2(playerController.CurrentLocation.x, playerController.CurrentLocation.z);
+                                updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
+                            }
                             break;
                         case EUpdateActorType.Angle:
                             updateInfo.SetFloatForData1(netSyncComponent.transform.rotation.eulerAngles.y);
@@ -99,7 +115,7 @@ namespace Hamster.SpaceWar {
                 }
                 netSyncComponent.CleanUpdate();
             }
-            Debug.Log("======>Send\n " + frameData.ToString());
+            // Debug.Log("======>Send\n " + frameData.ToString());
 
             // 将死亡的actor从列表中移除
             foreach (var deadActor in pendingKillActors) {

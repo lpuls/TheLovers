@@ -10,39 +10,46 @@ namespace Hamster.SpaceWar {
         private float _moveSpeed = 0;
         private Vector3 _moveDirection = Vector3.zero;
 
-        private bool _needMove = false;
-        private bool _beginStop = false;
+        public bool NeedMove {
+            get;
+            private set;
+        }
 
         public void Move(Vector3 direction) {
             _moveDirection = direction;
-            _needMove = true;
-            _beginStop = false;
+            NeedMove = true;
         }
 
         public void Stop() {
-            _beginStop = true;
-
-            _beginStop = false;
-            _needMove = false;
+            NeedMove = false;
             _moveDirection = Vector3.zero;
             _moveSpeed = 0;
         }
 
-        public void Update() {
-            if (!_needMove)
-                return;
+        //public void Update() {
+        //    if (!NeedMove)
+        //        return;
 
-            MoveTick(_moveDirection);
+        //    // MoveTick(_moveDirection, Time.deltaTime);
+        //}
+
+        public Vector3 MoveTick(Vector3 location, float dt) {
+            _moveSpeed = Speed * dt;
+
+            location += _moveDirection * _moveSpeed;
+            location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, HalfSize);
+            return location;
         }
 
-        public void MoveTick(Vector3 direction) {
-            _moveSpeed = Speed * Time.deltaTime;
+        public void MoveTick(float dt) {
+            _moveSpeed = Speed * dt;
 
             // 更新角色位置
-            transform.position += direction * _moveSpeed;
+            transform.position += _moveDirection * _moveSpeed;
             transform.position = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
             GameLogicUtility.SetPositionDirty(gameObject);
         }
+
 
 #if UNITY_EDITOR
         public void OnDrawGizmos() {

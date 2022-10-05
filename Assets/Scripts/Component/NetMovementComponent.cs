@@ -65,21 +65,12 @@ namespace Hamster.SpaceWar                                                      
                         _playerController.RemoveTopPredictionCommand();
                         _playerController.SimulateAfter();
 
-                        Debug.Log(string.Format("===>Server: {0}, Prediction: {1}, Transform: [{2}, {5}], ServerFrame: {3} ClientFrame: {4}",
-                                _currentPosition, command.Location, transform.position, currentData.FrameIndex, command.FrameIndex, oldPosition));
-
-                        //if (Vector3.Distance(command.Location, _currentPosition) > MaxDistanceWithServer) {
-                        //    // _playerController.CleanPredicationLocations();
-                        //    // transform.position = Vector3.Lerp(_prePosition, _currentPosition, t);
-                        //}
-                        //else {
-                        //    _playerController.RemovePredictionLocation();
-                        //}
+                        // Debug.Log(string.Format("===>Server: {0}, Prediction: {1}, Transform: [{2}, {5}], ServerFrame: {3} ClientFrame: {4}",
+                        //        _currentPosition, command.Location, transform.position, currentData.FrameIndex, command.FrameIndex, oldPosition));
                     }
                 }
                 else if (!_prePosition.Equals(Vector3.zero) && !_currentPosition.Equals(Vector3.zero)) {
                     transform.position = Vector3.Lerp(_prePosition, _currentPosition, t);
-                    // Debug.Log(string.Format("===>Pre: {0}, Cur: {1}, Position: {2}, T: {3}, Frame: {4}", _prePosition, _currentPosition, transform.position, t, currentData.FrameIndex));
                 }
             }
         }

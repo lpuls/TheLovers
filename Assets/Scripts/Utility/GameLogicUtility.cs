@@ -49,6 +49,11 @@ namespace Hamster.SpaceWar {
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
             frameDataManager.CurrentPlayerCount++;
 
+            // 单人测试，直接开服
+            //if (frameDataManager.CurrentPlayerCount >= 1) {
+            //    frameDataManager.IsGameStart = true;
+            //}
+
             return ship;
         }
 
@@ -107,6 +112,46 @@ namespace Hamster.SpaceWar {
             if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent) && netSyncComponent.IsAuthority()) {
                 netSyncComponent.AddNewUpdate(updateType);
             }
+        }
+
+        public static void GetOperateFromInput(Transform transform, int operate, out Vector3 direction, out bool castAbility1) {
+            direction = Vector3.zero;
+            castAbility1 = false;
+            for (int i = 0; i < (int)EInputValue.Max; i++) {
+                EInputValue value = (EInputValue)i;
+                if (1 == ((operate >> i) & 1)) {
+                    switch (value) {
+                        case EInputValue.MoveUp:
+                            direction += transform.forward;
+                            break;
+                        case EInputValue.MoveDown:
+                            direction -= transform.forward;
+                            break;
+                        case EInputValue.MoveLeft:
+                            direction -= transform.right;
+                            break;
+                        case EInputValue.MoveRight:
+                            direction += transform.right;
+                            break;
+                        case EInputValue.Ability1:
+                            castAbility1 = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        public static int ReadKeyboardInput(InputKeyMapValue inputKeyMapValue) {
+            int operate = 0;
+            for (int i = 0; i < inputKeyMapValue.InputKeys.Count; i++) {
+                KeyCode keyCode = inputKeyMapValue.InputKeys[i];
+                if (Input.GetKey(keyCode)) {
+                    operate |= (1 << (int)inputKeyMapValue.InputValues[i]);
+                }
+            }
+            return operate;
         }
 
     }

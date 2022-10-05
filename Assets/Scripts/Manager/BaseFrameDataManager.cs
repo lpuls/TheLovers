@@ -363,9 +363,10 @@ namespace Hamster.SpaceWar {
 
 
     public class BaseFrameDataManager {
-        public const float LOGIC_FRAME = 1 / 15.0f;
+        public const float LOGIC_FRAME_TIME = 1 / 15.0f;
 
         protected Dictionary<int, NetSyncComponent> _netActors = new Dictionary<int, NetSyncComponent>(new Int32Comparer());
+        protected HashSet<IServerTicker> _tickers = new HashSet<IServerTicker>();
 
         public bool IsGameStart {
             get;
@@ -447,6 +448,21 @@ namespace Hamster.SpaceWar {
             }
 
             ListPool<int>.Free(pendingKillActors);
+        }
+
+        public void UpdateTickers() {
+            var it = _tickers.GetEnumerator();
+            while (it.MoveNext()) {
+                it.Current.Tick(LOGIC_FRAME_TIME);
+            }
+        }
+
+        public void AddTicker(IServerTicker serverTicker) {
+            _tickers.Add(serverTicker);
+        }
+
+        public void RemoveTicker(IServerTicker serverTicker) {
+            _tickers.Remove(serverTicker);
         }
     }
 }

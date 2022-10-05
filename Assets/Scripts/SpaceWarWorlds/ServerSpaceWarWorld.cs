@@ -8,17 +8,6 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = new ServerNetDevice();
         private ServerFrameDataManager _frameDataManager = new ServerFrameDataManager();
 
-        public float LogicTime {
-            get;
-            private set;
-        }
-
-        public float LogicFrameTime {
-            get {
-                return 1 / 15.0f;
-            }
-        }
-
         public ServerNetDevice NetDevice {
             get {
                 return _netDevice;
@@ -44,6 +33,14 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.ServerInitShip(1, true);
         }
 
+        public override void AddTicker(IServerTicker serverTicker) {
+            _frameDataManager.AddTicker(serverTicker);
+        }
+
+        public override void RemoveTicker(IServerTicker serverTicker) {
+            _frameDataManager.RemoveTicker(serverTicker);
+        }
+
         protected override void Update() {
             ActiveWorld();
 
@@ -51,15 +48,8 @@ namespace Hamster.SpaceWar {
             base.Update();
             if (null != _netDevice)
                 _netDevice.Update();
-
-            // 罗辑固定帧率更新
-            LogicTime += Time.deltaTime;
-            if (LogicTime >= LogicFrameTime) {
-                LogicTime -= LogicFrameTime;
-
-                _frameDataManager.Update();
-            }
-
+            
+            _frameDataManager.Update();
         }
 
         public void OnDestroy() {
@@ -70,6 +60,8 @@ namespace Hamster.SpaceWar {
         public void OnGUI() {
             GUILayout.Label("Frame " + _frameDataManager.ServerLogicFrame);
         }
+
+        
 
         #region GM
         //[GM]

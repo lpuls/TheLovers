@@ -57,5 +57,13 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public override void AddTicker(IServerTicker serverTicker) {
+            _frameDataManager.AddTicker(serverTicker);
+        }
+
+        public override void RemoveTicker(IServerTicker serverTicker) {
+            _frameDataManager.RemoveTicker(serverTicker);
+        }
+
     }
 }

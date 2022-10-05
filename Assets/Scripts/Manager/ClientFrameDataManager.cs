@@ -17,6 +17,8 @@ namespace Hamster.SpaceWar {
         private BinaryReader _binaryReader = null;
         private HashSet<NetSyncComponent> _predictionActors = new HashSet<NetSyncComponent>(32);
 
+        public System.Action<FrameData, FrameData> OnFrameUpdate;
+
         public int GameLogicFrame {
             get;
             private set;
@@ -69,7 +71,6 @@ namespace Hamster.SpaceWar {
 
             List<SpawnInfo> spawnInfos = frameData.SpawnInfos;
             List<DestroyInfo> destroyInfos = frameData.DestroyInfos;
-            Dictionary<int, List<UpdateInfo>> updateInfos = frameData.UpdateInfos;
 
             foreach (var item in spawnInfos) {
                 if (!_netActors.ContainsKey(item.NetID)) {
@@ -93,6 +94,8 @@ namespace Hamster.SpaceWar {
                     netSyncComponent.Kill(item.Reason);
                 }
             }
+
+            OnFrameUpdate?.Invoke(_preFrameData, _currentFrameData);
         }
 
         public void AnalyzeBinary(byte[] binary) {
@@ -123,7 +126,6 @@ namespace Hamster.SpaceWar {
                     frameData.AddUpdateInfo(netID, updateInfo);
                 }
             }
-            // Debug.Log("=====>Analyze Binary: \n" + frameData.ToString());
 
             _frameDatas.Add(frameData);
 
@@ -153,7 +155,7 @@ namespace Hamster.SpaceWar {
         }
 
         public float GetLogicFramepercentage() {
-            return LogicTime / LOGIC_FRAME;
+            return LogicTime / LOGIC_FRAME_TIME;
         }
 
         public override void Update() {
@@ -168,7 +170,7 @@ namespace Hamster.SpaceWar {
 
             // 如果服务端存放的帧数较多了，直接一路追上去
             if (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
-                LogicTime = LOGIC_FRAME;
+                LogicTime = LOGIC_FRAME_TIME;
                 while (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
                     NextFrame();
                 }
@@ -177,9 +179,10 @@ namespace Hamster.SpaceWar {
 
             // 更新逻辑时间
             LogicTime += Time.deltaTime;
-            while (LogicTime >= LOGIC_FRAME) {
+            while (LogicTime >= LOGIC_FRAME_TIME) {
+                UpdateTickers();
                 NextFrame();
-                LogicTime -= LOGIC_FRAME;
+                LogicTime -= LOGIC_FRAME_TIME;
             }
         }
 
