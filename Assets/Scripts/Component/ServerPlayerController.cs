@@ -8,26 +8,27 @@ namespace Hamster.SpaceWar {
         void OnHit(GameObject hitObject, GameObject hitTrajectory);
     }
 
-    public class LocalPlayerController : BasePlayerController, IDamage {
+    public class ServerPlayerController : BasePlayerController, IDamage {
 
         private bool _readByInputDevice = true;
         protected int _operator = 0;
+        protected int _operatorIndex = 0;
 
         protected LocalAbilityComponent _localAbilityComponent = null;
-        protected LocalMovementComponent _localMovementComponent = null;
+        protected MovementComponent _movementComponent = null;
 
         public override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
 
             if (!moveDirection.Equals(Vector3.zero))
-                _localMovementComponent.Move(moveDirection);
+                _movementComponent.Move(moveDirection);
             else
-                _localMovementComponent.Stop();
+                _movementComponent.Stop();
         }
 
         public override void Init() {
             base.Init();
-            _localMovementComponent = GetComponent<LocalMovementComponent>();
+            _movementComponent = GetComponent<MovementComponent>();
             _localAbilityComponent = GetComponent<LocalAbilityComponent>();
         }
 
@@ -35,8 +36,11 @@ namespace Hamster.SpaceWar {
             _readByInputDevice = readByInputDevice;
         }
 
-        public void SetOperator(int input) {
+        public void SetOperator(int input, int index) {
             _operator = input;
+            _operatorIndex = index;
+            if (0 != input)
+                Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
         }
 
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
@@ -51,12 +55,13 @@ namespace Hamster.SpaceWar {
 
         public override void Tick(float dt) {
             base.Tick(dt);
+            _operator = 0;
 
             // 逻辑执行移动操作
-            if (_localMovementComponent.NeedMove) {
-                PreLocation = CurrentLocation;
-                CurrentLocation = _localMovementComponent.MoveTick(CurrentLocation, dt);
-                _simulateTime = 0;
+            if (_movementComponent.NeedMove) {
+                Vector3 preLocation = _simulateComponent.CurrentLocation;
+                Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
+                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
                 GameLogicUtility.SetPositionDirty(gameObject);
             }
         }

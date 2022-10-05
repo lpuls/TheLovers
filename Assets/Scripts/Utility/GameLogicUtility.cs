@@ -16,12 +16,23 @@ namespace Hamster.SpaceWar {
             return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/GreyShip", configID, spawnLocation, ENetType.Player);
         }
 
-        public static GameObject ClientCreateShip(int configID, int netID, Vector3 position) {
+        public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, bool userShip) {
             GameObject ship = null;
             BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
             if (!frameDataManager.HasNetObject(netID, 0)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
                     ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);
+                    ship.AddComponent<SimulateComponent>();
+                    if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                        if (userShip)
+                            netSyncComponent.SetAutonomousProxy();
+                        else
+                            netSyncComponent.SetSimulatedProxy();
+                    }
+                    if (userShip) {
+                        ship.AddComponent<MovementComponent>();
+                        ship.AddComponent<ClientPlayerController>();
+                    }
                 }
             }
             return ship;
@@ -37,10 +48,11 @@ namespace Hamster.SpaceWar {
             }
 
             // 需要直接添加控制器
-            ship.AddComponent<LocalMovementComponent>();
+            ship.AddComponent<SimulateComponent>();
+            ship.AddComponent<MovementComponent>();
             LocalAbilityComponent localAbilityComponent = ship.AddComponent<LocalAbilityComponent>();
             localAbilityComponent.Init(configID);
-            LocalPlayerController localPlayerController = ship.AddComponent<LocalPlayerController>();
+            ServerPlayerController localPlayerController = ship.AddComponent<ServerPlayerController>();
             localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
 
@@ -62,8 +74,8 @@ namespace Hamster.SpaceWar {
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             if (frameDataManager.TryGetNetActor(userData, out NetSyncComponent netSyncComponent)) {
-                if (netSyncComponent.gameObject.TryGetComponent<LocalPlayerController>(out LocalPlayerController netPlayerController)) {
-                    netPlayerController.SetOperator(playerOperator);
+                if (netSyncComponent.gameObject.TryGetComponent<ServerPlayerController>(out ServerPlayerController netPlayerController)) {
+                    netPlayerController.SetOperator(playerOperator, index);
                 }
                 netSyncComponent.PredictionIndex = index;
             }

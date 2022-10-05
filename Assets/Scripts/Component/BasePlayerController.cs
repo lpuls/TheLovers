@@ -7,18 +7,7 @@ namespace Hamster.SpaceWar {
     public class BasePlayerController : MonoBehaviour, IServerTicker {
         
         public InputKeyMapValue InputKeyToValue = null;
-
-        public Vector3 PreLocation {
-            get;
-            protected set;
-        }
-
-        public Vector3 CurrentLocation {
-            get;
-            protected set;
-        }
-
-        protected float _simulateTime = 0;
+        protected SimulateComponent _simulateComponent = null;
 
         public virtual void Awake() {
             CheckInputKeyToValue();
@@ -39,6 +28,7 @@ namespace Hamster.SpaceWar {
 
         public virtual void Init() {
             World.GetWorld<BaseSpaceWarWorld>().AddTicker(this);
+            _simulateComponent = GetComponent<SimulateComponent>();
         }
 
         public virtual void OnDestroy() {
@@ -52,20 +42,9 @@ namespace Hamster.SpaceWar {
         public virtual void ProcessorInput(int input) {
         }
 
-        public virtual void Update() {
-            Simulate();
-        }
-
         public virtual void Tick(float dt) {
             int input = GetOperator(InputKeyToValue);
             ProcessorInput(input);
-        }
-
-        public virtual void Simulate() {
-            _simulateTime += Time.deltaTime;
-            if (!CurrentLocation.Equals(Vector3.zero)) {
-                transform.position = Vector3.Lerp(PreLocation, CurrentLocation, _simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
-            }
         }
     }
 }

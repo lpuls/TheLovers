@@ -181,17 +181,17 @@ namespace Hamster.SpaceWar {
                 bool userShip = packet.ReadBool();
 
                 // 创建角色
-                GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0));
-                if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                    if (userShip)
-                        netSyncComponent.SetAutonomousProxy();
-                    else
-                        netSyncComponent.SetSimulatedProxy();
-                }
-                if (userShip) {
-                    ship.AddComponent<NetPlayerController>();
-                }
-                ship.AddComponent<NetMovementComponent>();
+                GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0), userShip);
+                //if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                //    if (userShip)
+                //        netSyncComponent.SetAutonomousProxy();
+                //    else
+                //        netSyncComponent.SetSimulatedProxy();
+                //}
+                //ship.AddComponent<SimulateComponent>();
+                //if (userShip) {
+                //    ship.AddComponent<ClientPlayerController>();
+                //}
             }
 
             RequestReadyToServer();

@@ -102,7 +102,7 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            if (netSyncComponent.TryGetComponent<BasePlayerController>(out BasePlayerController playerController)) {
+                            if (netSyncComponent.TryGetComponent<SimulateComponent>(out SimulateComponent playerController)) {
                                 updateInfo.SetVec3ForData2(playerController.CurrentLocation.x, playerController.CurrentLocation.z);
                                 updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                             }

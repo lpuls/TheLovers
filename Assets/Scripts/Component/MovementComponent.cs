@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class LocalMovementComponent : MonoBehaviour {
+    public class MovementComponent : MonoBehaviour {
 
         public float Speed = 30.0f;  // 之后读配置表
         public float HalfSize = 1.0f;
@@ -25,19 +25,14 @@ namespace Hamster.SpaceWar {
             _moveDirection = Vector3.zero;
             _moveSpeed = 0;
         }
-
-        //public void Update() {
-        //    if (!NeedMove)
-        //        return;
-
-        //    // MoveTick(_moveDirection, Time.deltaTime);
-        //}
-
-        public Vector3 MoveTick(Vector3 location, float dt) {
+        public Vector3 MoveTick(Vector3 location, float dt, int index) {
             _moveSpeed = Speed * dt;
 
+            Vector3 oldLocation = location;
             location += _moveDirection * _moveSpeed;
             location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, HalfSize);
+            if (!_moveDirection.Equals(Vector3.zero))
+                Debug.Log(string.Format("=====>MoveTick Old: {0}, New: {1} Speed: {2}, Direction: {3}, InputIndex: {4}", oldLocation, location, _moveSpeed, _moveDirection, index));
             return location;
         }
 
