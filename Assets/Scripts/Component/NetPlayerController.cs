@@ -125,11 +125,14 @@ namespace Hamster.SpaceWar {
         }
 
         public void SimulateAfter() {
+            Vector3 lastLocation = CurrentLocation;
             foreach (var item in _predicationCommands) {
                 NetPlayerCommand command = item.Value;
                 GameLogicUtility.GetOperateFromInput(transform, command.operate, out Vector3 moveDirection, out bool _);
-                command.Location = transform.position;
+                command.Location = _localMovementComponent.MoveTick(lastLocation, BaseFrameDataManager.LOGIC_FRAME_TIME);
+                lastLocation = command.Location;
             }
+            CurrentLocation = lastLocation;
         }
 
         public override void Simulate() {
@@ -147,6 +150,11 @@ namespace Hamster.SpaceWar {
                 return;
             }
 
+            if (_netSyncComponent.IsAutonomousProxy()) {
+                RemoveTopPredictionCommand(_predictionIndex);
+                SimulateAfter();
+            }
+            
             base.Simulate();
         }
 
