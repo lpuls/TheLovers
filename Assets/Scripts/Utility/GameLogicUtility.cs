@@ -77,7 +77,6 @@ namespace Hamster.SpaceWar {
                 if (netSyncComponent.gameObject.TryGetComponent<ServerPlayerController>(out ServerPlayerController netPlayerController)) {
                     netPlayerController.SetOperator(playerOperator, index);
                 }
-                netSyncComponent.PredictionIndex = index;
             }
         }
 

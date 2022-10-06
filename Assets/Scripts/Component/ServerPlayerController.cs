@@ -8,14 +8,21 @@ namespace Hamster.SpaceWar {
         void OnHit(GameObject hitObject, GameObject hitTrajectory);
     }
 
+    public struct ServerOperate {
+        public int Index;
+        public int Operate;
+    }
+
     public class ServerPlayerController : BasePlayerController, IDamage {
 
         private bool _readByInputDevice = true;
-        protected int _operator = 0;
+        protected int _operate = 0;
         protected int _operatorIndex = 0;
+        protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
-        protected LocalAbilityComponent _localAbilityComponent = null;
+        protected NetSyncComponent _netSyncComponent = null;
         protected MovementComponent _movementComponent = null;
+        protected LocalAbilityComponent _localAbilityComponent = null;
 
         public override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
@@ -30,6 +37,7 @@ namespace Hamster.SpaceWar {
             base.Init();
             _movementComponent = GetComponent<MovementComponent>();
             _localAbilityComponent = GetComponent<LocalAbilityComponent>();
+            _netSyncComponent = GetComponent<NetSyncComponent>();
         }
 
         public void SetIsReadByInputDevice(bool readByInputDevice) {
@@ -37,33 +45,54 @@ namespace Hamster.SpaceWar {
         }
 
         public void SetOperator(int input, int index) {
-            _operator = input;
-            _operatorIndex = index;
+            if (_readByInputDevice) {
+                _operate = input;
+                _operatorIndex = index;
+            }
+            else {
+                _operates.Add(new ServerOperate { 
+                    Operate = input,
+                    Index = index
+                });
+            }
+
             if (0 != input)
                 Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
         }
 
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
             if (_readByInputDevice) {
-                _operator = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
+                _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
             }
-            return _operator;
+            else if (_operates.Count > 0) {
+                ServerOperate serverOperate = _operates[0];
+                _operates.RemoveAt(0);
+                _operate = serverOperate.Operate;
+                _operatorIndex = serverOperate.Index;
+
+                _netSyncComponent.PredictionIndex = _operatorIndex;
+            }
+            else {
+                _operate = 0;
+                _operatorIndex = -1;
+            }
+            return _operate;
         }
 
         public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
         }
 
         public override void Tick(float dt) {
-            base.Tick(dt);
-            _operator = 0;
+                base.Tick(dt);
+                _operate = 0;
 
-            // 逻辑执行移动操作
-            if (_movementComponent.NeedMove) {
-                Vector3 preLocation = _simulateComponent.CurrentLocation;
-                Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
-                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
-                GameLogicUtility.SetPositionDirty(gameObject);
-            }
+                // 逻辑执行移动操作
+                if (_movementComponent.NeedMove) {
+                    Vector3 preLocation = _simulateComponent.CurrentLocation;
+                    Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
+                    _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
+                    GameLogicUtility.SetPositionDirty(gameObject);
+                }
         }
 
     }
