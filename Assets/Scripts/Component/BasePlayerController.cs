@@ -46,5 +46,6 @@ namespace Hamster.SpaceWar {
             int input = GetOperator(InputKeyToValue);
             ProcessorInput(input);
         }
+
     }
 }
