@@ -70,8 +70,8 @@ namespace Hamster.SpaceWar {
 
                         // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
                         if (command.Location != _serverCurrentLocation) {
-                            Debug.Log(string.Format("=====>{3} Predict: {0}, Server: {1}, FrameIndex: {2}-{3}",
-                                command.Location, _serverCurrentLocation, command.FrameIndex, _predictionIndex));
+                            //Debug.Log(string.Format("=====>{3} Predict: {0}, Server: {1}, FrameIndex: {2}-{3}",
+                            //    command.Location, _serverCurrentLocation, command.FrameIndex, _predictionIndex));
 
                             PreLocation = _serverPreLocation;
                             CurrentLocation = _serverCurrentLocation;
@@ -144,7 +144,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void SimulateAfter() {
-            Debug.Log(string.Format("=====>SimulateAfter {0}", _predicationCommands.Count));
+            // Debug.Log(string.Format("=====>SimulateAfter {0}", _predicationCommands.Count));
             Vector3 lastLocation = CurrentLocation;
             foreach (var item in _predicationCommands) {
                 NetPlayerCommand command = item;

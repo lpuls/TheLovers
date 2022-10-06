@@ -2,6 +2,38 @@
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
+
+    public class ClientSimulatePlayerController : BasePlayerController {
+
+        private NetSyncComponent _netSyncComponent = null;
+
+        public override void Init() {
+            base.Init();
+
+            _netSyncComponent = gameObject.GetComponent<NetSyncComponent>();
+
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ClientFrameDataManager;
+            if (null != frameDataManager) {
+                frameDataManager.OnFrameUpdate += OnFrameUpdate;
+            }
+        }
+
+        private void OnFrameUpdate(FrameData pre, FrameData current) {
+            int netID = _netSyncComponent.NetID;
+            UpdateInfo preUpdateInfo;
+            UpdateInfo currentUpdateInfo;
+            Vector3 preLocation = _simulateComponent.PreLocation;
+            Vector3 currentLocation = _simulateComponent.CurrentLocation;
+            if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.Position, out preUpdateInfo)) {
+                preLocation = preUpdateInfo.Data1.Vec3;
+            }
+            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
+                currentLocation = currentUpdateInfo.Data1.Vec3;
+                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+            }
+        }
+    }
+
     public class ClientPlayerController : BasePlayerController {
 
         private GameLogicSyncModule _gameLogicSyncModule = null;

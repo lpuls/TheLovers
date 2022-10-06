@@ -68,6 +68,7 @@ namespace Hamster.SpaceWar {
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
             if (_readByInputDevice) {
                 _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
+                _netSyncComponent.PredictionIndex = -1;
             }
             else if (_operates.Count > 0) {
                 ServerOperate serverOperate = _operates[0];
