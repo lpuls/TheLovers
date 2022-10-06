@@ -56,8 +56,8 @@ namespace Hamster.SpaceWar {
                 });
             }
 
-            if (0 != input)
-                Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
+            //if (0 != input)
+            //    Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
         }
 
         public override int GetOperator(InputKeyMapValue inputKeyMapValue) {

@@ -86,8 +86,8 @@ namespace Hamster.SpaceWar {
             ClientSpaceWarWorld world = World.GetWorld<ClientSpaceWarWorld>();
             int frameIndex = world.GetFrameIndex();
 
-            if (0 != input)
-                Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, frameIndex));
+            //if (0 != input)
+            //    Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, frameIndex));
 
             // 逻辑执行移动操作
             if (_movementComponent.NeedMove) {

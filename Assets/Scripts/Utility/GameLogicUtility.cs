@@ -62,9 +62,9 @@ namespace Hamster.SpaceWar {
             frameDataManager.CurrentPlayerCount++;
 
             // 单人测试，直接开服
-            //if (frameDataManager.CurrentPlayerCount >= 1) {
-            //    frameDataManager.IsGameStart = true;
-            //}
+            if (frameDataManager.CurrentPlayerCount >= 1) {
+                frameDataManager.IsGameStart = true;
+            }
 
             return ship;
         }
