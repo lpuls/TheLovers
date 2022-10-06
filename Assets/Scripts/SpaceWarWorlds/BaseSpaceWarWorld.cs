@@ -20,6 +20,13 @@ namespace Hamster.SpaceWar {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
+
+            // 根据视口大小计算可行动区域
+            Camera mainCamera = Camera.main;
+            Vector3 min = mainCamera.ViewportToWorldPoint(new Vector3(0, 0));
+            Vector3 max = mainCamera.ViewportToWorldPoint(new Vector3(1, 1));
+            WorldSize.x = max.x - min.x;
+            WorldSize.z = max.z - min.z;
         }
 
         public bool InWorld(Vector3 position) {
