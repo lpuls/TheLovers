@@ -91,7 +91,7 @@ namespace Hamster.SpaceWar {
         }
 
         public int GetSpawnIndex() {
-            return OwnerID << 16 | ++_childCreateIndex;
+            return NetID << 16 | ++_childCreateIndex;
         }
 
         public void AddNewUpdate(EUpdateActorType updateType) {

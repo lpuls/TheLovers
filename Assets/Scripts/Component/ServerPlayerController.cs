@@ -27,6 +27,11 @@ namespace Hamster.SpaceWar {
         public override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
 
+            // 玩家发送射子弹
+            if (null != _localAbilityComponent && cast1)
+                _localAbilityComponent.CastAbility((int)EAbilityIndex.Fire);
+
+            // 玩家进行移动
             if (!moveDirection.Equals(Vector3.zero))
                 _movementComponent.Move(moveDirection);
             else
