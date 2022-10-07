@@ -55,7 +55,7 @@ namespace Hamster.SpaceWar {
 
         public void Update() {
             // 主端需要对預測结果进么比对并根据逻辑结果模拟后面的操作
-            if (_netSyncComponent.IsAutonomousProxy()) {
+            if (null != _netSyncComponent && _netSyncComponent.IsAutonomousProxy()) {
                 if (_predictionIndex > 0 && TryGetTopPredictionCommand(out NetPlayerCommand command)) {
                     // 如果逻辑已经超过預測帧了，说明前面的帧都已经没用了，直接移除
                     if (command.FrameIndex < _predictionIndex) {
@@ -149,13 +149,13 @@ namespace Hamster.SpaceWar {
             foreach (var item in _predicationCommands) {
                 NetPlayerCommand command = item;
                 GameLogicUtility.GetOperateFromInput(transform, command.Operate, out Vector3 moveDirection, out bool _);
-                command.Location = GetSimulateComponent().MoveTick(lastLocation, BaseFrameDataManager.LOGIC_FRAME_TIME, command.FrameIndex);
+                command.Location = GetMovementComponent().MoveTick(lastLocation, BaseFrameDataManager.LOGIC_FRAME_TIME, command.FrameIndex);
                 lastLocation = command.Location;
             }
             CurrentLocation = lastLocation;
         }
 
-        private MovementComponent GetSimulateComponent() {
+        private MovementComponent GetMovementComponent() {
             if (null == _movementComponent)
                 _movementComponent = GetComponent<MovementComponent>();
             return _movementComponent;

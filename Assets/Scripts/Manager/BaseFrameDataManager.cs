@@ -367,6 +367,7 @@ namespace Hamster.SpaceWar {
 
         protected Dictionary<int, NetSyncComponent> _netActors = new Dictionary<int, NetSyncComponent>(new Int32Comparer());
         protected HashSet<IServerTicker> _tickers = new HashSet<IServerTicker>();
+        protected List<IServerTicker> _pendingAddTickers = new List<IServerTicker>(128);
 
         public bool IsGameStart {
             get;
@@ -451,6 +452,12 @@ namespace Hamster.SpaceWar {
         }
 
         public void UpdateTickers() {
+            var pendingIt = _pendingAddTickers.GetEnumerator();
+            while (pendingIt.MoveNext()) {
+                _tickers.Add(pendingIt.Current);
+            }
+            _pendingAddTickers.Clear();
+
             var it = _tickers.GetEnumerator();
             while (it.MoveNext()) {
                 it.Current.Tick(LOGIC_FRAME_TIME);
@@ -458,7 +465,8 @@ namespace Hamster.SpaceWar {
         }
 
         public void AddTicker(IServerTicker serverTicker) {
-            _tickers.Add(serverTicker);
+            //_tickers.Add(serverTicker);
+            _pendingAddTickers.Add(serverTicker);
         }
 
         public void RemoveTicker(IServerTicker serverTicker) {

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5370500923335278764
 Transform:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6967497049879014942
 Transform:
   m_ObjectHideFlags: 0
@@ -4963,6 +4963,8 @@ GameObject:
   - component: {fileID: 5026261044615636801}
   - component: {fileID: 7578313647131098893}
   - component: {fileID: 6603846772168704425}
+  - component: {fileID: 2163756253430112812}
+  - component: {fileID: 428729545878532215}
   m_Layer: 0
   m_Name: OriginBullet
   m_TagString: Untagged
@@ -4999,11 +5001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc44b41fb0eb214f81a679f8958467b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnOffset: {x: 0, y: 0, z: 0}
-  MoveDirection: {x: 0, y: 0, z: 1}
-  MoveSpeed: 30
-  MoveDelay: 0
-  HitOnDestroy: 1
+  _hitOnDestroy: 1
   BoxHalfSize: {x: 0.4, y: 0.3, z: 0.5}
 --- !u!114 &6603846772168704425
 MonoBehaviour:
@@ -5018,4 +5016,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tail: {fileID: 2874254788760606227}
+  Particle: {fileID: 5921338744352023194}
   WaitTime: 0.1
+--- !u!114 &2163756253430112812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016890776604500883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec78fddf5212d24fab3910f79482f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxDistanceWithServer: 1
+--- !u!114 &428729545878532215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016890776604500883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c628509f14ea1cc418c9542f600fbb46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetID: 0
+  OwnerID: 0
+  ConfigID: 0
+  PendingKill: 0
+  NetType: 0

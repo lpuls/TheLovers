@@ -82,7 +82,10 @@ namespace Hamster.SpaceWar {
                             break;
                         case ENetType.Bullet:
                             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(item.ConfigID, out Config.Abilitys abilityConfig)) {
-                                SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position);
+                                GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position);
+                                bullet.TryGetOrAdd<SimulateComponent>();
+                                TailManager tailManager = bullet.TryGetOrAdd<TailManager>();
+                                tailManager.ShowEffect();
                             }
                             break;
                     }

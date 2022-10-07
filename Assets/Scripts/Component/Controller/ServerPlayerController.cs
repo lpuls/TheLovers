@@ -13,18 +13,17 @@ namespace Hamster.SpaceWar {
         public int Operate;
     }
 
-    public class ServerPlayerController : BasePlayerController, IDamage {
+    public class ServerPlayerController : PlayerController, IDamage {
 
         private bool _readByInputDevice = true;
         protected int _operate = 0;
         protected int _operatorIndex = 0;
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
-        protected NetSyncComponent _netSyncComponent = null;
         protected MovementComponent _movementComponent = null;
         protected LocalAbilityComponent _localAbilityComponent = null;
 
-        public override void ProcessorInput(int operate) {
+        protected override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
 
             // 玩家发送射子弹
@@ -55,7 +54,7 @@ namespace Hamster.SpaceWar {
                 _operatorIndex = index;
             }
             else {
-                _operates.Add(new ServerOperate { 
+                _operates.Add(new ServerOperate {
                     Operate = input,
                     Index = index
                 });
@@ -65,7 +64,7 @@ namespace Hamster.SpaceWar {
             //    Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
         }
 
-        public override int GetOperator(InputKeyMapValue inputKeyMapValue) {
+        protected override int GetOperator(InputKeyMapValue inputKeyMapValue) {
             if (_readByInputDevice) {
                 _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
                 _netSyncComponent.PredictionIndex = -1;
@@ -89,16 +88,19 @@ namespace Hamster.SpaceWar {
         }
 
         public override void Tick(float dt) {
-                base.Tick(dt);
-                _operate = 0;
+            base.Tick(dt);
+            _operate = 0;
 
-                // 逻辑执行移动操作
-                if (_movementComponent.NeedMove) {
-                    Vector3 preLocation = _simulateComponent.CurrentLocation;
-                    Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
-                    _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
-                    GameLogicUtility.SetPositionDirty(gameObject);
-                }
+            // 对武器进行更新
+            _localAbilityComponent.Tick(dt);
+
+            // 逻辑执行移动操作
+            if (_movementComponent.NeedMove) {
+                Vector3 preLocation = _simulateComponent.CurrentLocation;
+                Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
+                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
+                GameLogicUtility.SetPositionDirty(gameObject);
+            }
         }
 
     }

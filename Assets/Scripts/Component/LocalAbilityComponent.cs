@@ -32,5 +32,15 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public void Tick(float dt) {
+            var it = _weapons.GetEnumerator();
+            while (it.MoveNext()) {
+                List<WeaponComponent> weapons = it.Current.Value;
+                foreach (var item in weapons) {
+                    item.Tick(dt);
+                }
+            }
+        }
+
     }
 }

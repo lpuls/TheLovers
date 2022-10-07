@@ -53,8 +53,8 @@ namespace Hamster.SpaceWar {
             private set;
         }
 
-        public int GetUniqueID() {
-            return OwnerID << 16 | NetID;
+        public void Awake() {
+            PredictionIndex = -1;
         }
 
         public void SetSimulatedProxy() {
@@ -101,6 +101,5 @@ namespace Hamster.SpaceWar {
         public void CleanUpdate() {
             UpdateTypes.Clear();
         }
-
     }
 }

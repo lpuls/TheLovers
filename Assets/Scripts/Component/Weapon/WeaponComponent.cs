@@ -8,13 +8,19 @@ namespace Hamster.SpaceWar {
         public BulletSpawner Spawner = null;
 
         private int _ownerID = 0;
-        private int _cd = 0;
+        private float _cd = 0;
         private WaitForSeconds _waitSecond = null;
 
         public void Awake() {
             if (null != _waitSecond) {
                 _waitSecond = new WaitForSeconds(Spawner.DelayTime);
             }
+        }
+
+        public void Tick(float dt) {
+            _cd -= dt;
+            if (_cd <= 0)
+                _cd = 0;
         }
 
         public void Spawn(float cdGain) {
@@ -41,6 +47,7 @@ namespace Hamster.SpaceWar {
                 Vector3 direction = Spawner.SpawnDirections[i];
                 GameLogicUtility.CreateServerBullet(id, _ownerID, transform.position + offset, direction, this);
             }
+            _cd = Spawner.CD;
         }
 
         public void Equip(int ownerID) {

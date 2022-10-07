@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawner: {fileID: 11400000, guid: d1cafcac1d6f96141846c6265f17fe93, type: 2}
-  CD: 300
+  CD: 0.5
   Delay: 0
   Reset: 0
   WriteToSpawner: 0

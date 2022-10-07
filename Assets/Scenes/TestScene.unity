@@ -342,10 +342,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
-    - target: {fileID: 5278189581907202253, guid: 7b539cc3572da7644960d14bed79f635, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b539cc3572da7644960d14bed79f635, type: 3}
 --- !u!1001 &4173539629900403542
@@ -402,10 +398,6 @@ PrefabInstance:
     - target: {fileID: 4173539629296875160, guid: 68dcfe4350f394044a05c78c141550bc, type: 3}
       propertyPath: m_Name
       value: Gatling
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173539629296875160, guid: 68dcfe4350f394044a05c78c141550bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68dcfe4350f394044a05c78c141550bc, type: 3}

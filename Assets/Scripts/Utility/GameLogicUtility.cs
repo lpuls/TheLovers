@@ -34,7 +34,7 @@ namespace Hamster.SpaceWar {
                         ship.AddComponent<ClientPlayerController>();
                     }
                     else {
-                        ship.AddComponent<ClientSimulatePlayerController>();
+                        ship.AddComponent<ClientSimulateController>();
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace Hamster.SpaceWar {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.Init(spanwer, Vector3.zero, 0);
+                trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
                 
                 // CD = abilityConfig.CD / 1000.0f;
             }
@@ -107,8 +107,14 @@ namespace Hamster.SpaceWar {
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
 
+                if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    netSyncComponent.SetAuthority();
+                }
+
+                bullet.TryGetOrAdd<SimulateComponent>();
+
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.Init(spanwer, direction, abilityConfig.Speed);
+                trajectoryComponent.InitProperty(spanwer, direction, abilityConfig.Speed);
             }
             return bullet;
         }

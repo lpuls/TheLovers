@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GatlingSpawner
   m_EditorClassIdentifier: 
   DelayTime: 0
-  CD: 100
+  CD: 0.1
   SpawnIDs: 01000000
   SpawnOffsets:
   - {x: 0, y: 0, z: 0.5}

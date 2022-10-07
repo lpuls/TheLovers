@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
         GameObject GetGameObject();
     }
 
-    public class TrajectoryComponent : MonoBehaviour {
+    public class TrajectoryComponent : BaseController {
         protected ITrajectorySpanwer _parent = null;
         protected bool _isPlayer = false;
         protected bool _pendingKill = false;
@@ -32,28 +32,35 @@ namespace Hamster.SpaceWar {
 
         [SerializeField] protected bool _hitOnDestroy = true;
 
-        public virtual void Init(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
+        public virtual void InitProperty(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
             _parent = parent;
             _moveDirection = moveDirection;
             _moveSpeed = moveSpeed;
 
             // 修改朝向
             transform.rotation = Quaternion.Euler(moveDirection);
-
+            GetSimulateComponent().UpdateSimulateInfo(transform.position, transform.position, -1);
+           
             // 确定是玩家还是敌人的子弹
             _isPlayer = CheckLayerValue(parent.GetLayer(), ESpaceWarLayers.PLAYER);
         }
 
-        public virtual void Update() {
-            Move();
-
+        public override void Tick(float dt) {
+            Move(dt);
             if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position) && null != _parent) {
                 _parent.OnOutOfWold(gameObject);
             }
         }
 
-        public virtual void Move() {
-            transform.position += _moveDirection * Time.deltaTime * _moveSpeed;
+        public virtual void Move(float dt) {
+            MoveBulletByDelta(_moveDirection * dt * _moveSpeed);
+        }
+
+        protected void MoveBulletByDelta(Vector3 delta) {
+            Vector3 preLocation = _simulateComponent.CurrentLocation;
+            Vector3 newLocation = _simulateComponent.CurrentLocation + delta;
+            _simulateComponent.UpdateSimulateInfo(preLocation, newLocation, -1);
+            GameLogicUtility.SetPositionDirty(gameObject);
         }
 
         private void OnTriggerEnter(Collider collider) {
@@ -88,6 +95,8 @@ namespace Hamster.SpaceWar {
         protected int GetLayerValue(int layer, ESpaceWarLayers value) {
             return (int)((layer >> (int)value) & 1);
         }
+
+
 
 #if UNITY_EDITOR
         public virtual void OnDrawGizmosSelected() {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunSpawner
   m_EditorClassIdentifier: 
   DelayTime: 0
-  CD: 100
+  CD: 0.5
   SpawnIDs: 010000000100000001000000
   SpawnOffsets:
   - {x: -1, y: 0, z: 0.19999999}
