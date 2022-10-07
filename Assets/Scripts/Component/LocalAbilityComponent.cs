@@ -7,85 +7,30 @@ namespace Hamster.SpaceWar {
         Ultimate = 1
     }
 
-    public class LocalAbilityComponent : MonoBehaviour, ITrajectorySpanwer {
-        // todo 之后改成配置表
-        public Vector3 SpawnOffset = Vector3.zero;
+    [ExecuteInEditMode]
+    public class LocalAbilityComponent : MonoBehaviour {
 
-        private int _ownerID = 0;
-        private List<int> _abilitys = new List<int>(4);
-        private List<float> _abilityCD = new List<float>(4);
+        private Dictionary<int, List<WeaponComponent>> _weapons = new Dictionary<int, List<WeaponComponent>>(new Int32Comparer());
 
-        public void Init(int configID) {
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
-                foreach (var it in shipConfig.AbilityID) {
-                    _abilitys.Add(it);
-                    _abilityCD.Add(0);
+        public void Awake() {
+            WeaponComponent[] weaponComponents = GetComponentsInChildren<WeaponComponent>();
+            foreach (var item in weaponComponents) {
+                int type = (int)item.Type;
+                if (!_weapons.TryGetValue(type, out List<WeaponComponent> weapons)) {
+                    weapons = new List<WeaponComponent>();
+                    _weapons[type] = weapons;
+                }
+                weapons.Add(item);
+            }
+        }
+
+        public void Cast(EAbilityIndex abilityIndex, float cdGain) {
+            if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
+                foreach (var item in weapons) {
+                    item.Spawn(cdGain);
                 }
             }
-
-            NetSyncComponent netSyncComponent = GetComponent<NetSyncComponent>();
-            _ownerID = netSyncComponent.NetID;
         }
 
-        public void CastAbility(int index) {
-            if (null == _abilitys || index < 0 || index >= _abilitys.Count) {
-                Debug.LogError("Cast Ability Filed " + index);
-                return;
-            }
-
-            // 检查CD情况
-            if (_abilityCD[index] > 0)
-                return;
-
-
-            GameLogicUtility.CreateServerBullet(_abilitys[index], _ownerID, transform.position + SpawnOffset, this, out float cd);
-            _abilityCD[index] = cd;
-        }
-
-        private void Update() {
-            for (int i = 0; i < _abilityCD.Count; i++) {
-                _abilityCD[i] -= Time.deltaTime;
-                if (_abilityCD[i] <= 0)
-                    _abilityCD[i] = 0;
-            }
-        }
-
-        public GameObject GetGameObject() {
-            return gameObject;
-        }
-
-        public int GetLayer() {
-            return gameObject.layer;
-        }
-
-        public Vector3 GetPosition() {
-            return transform.position + SpawnOffset;
-        }
-
-        private void OnDestroyTrajectory(GameObject gameObject, EDestroyActorReason reason) {
-            if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                netSyncComponent.Kill(reason);
-            }
-        }
-
-        public void OnHitDestroy(GameObject trajectory) {
-            OnDestroyTrajectory(trajectory, EDestroyActorReason.BeHit);
-        }
-
-        public void OnHitObject(GameObject hitObject, GameObject trajectory) {
-            OnDestroyTrajectory(trajectory, EDestroyActorReason.HitOther);
-        }
-
-        public void OnOutOfWold(GameObject trajectory) {
-            OnDestroyTrajectory(trajectory, EDestroyActorReason.OutOfWorld);
-        }
-
-
-#if UNITY_EDITOR
-        public virtual void OnDrawGizmosSelected() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position + SpawnOffset, 0.3f);
-        }
-#endif
     }
 }

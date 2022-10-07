@@ -24,18 +24,18 @@ namespace Config {
     static ConfigReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFUZW1wL0NvbmZpZy5wcm90byIwCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
-            "CgRQYXRoGAIgASgJEgoKAkNEGAMgASgFIjkKClNoaXBDb25maWcSCgoCSUQY",
-            "ASABKAUSDAoEUGF0aBgCIAEoCRIRCglBYmlsaXR5SUQYAyADKAUiKwoIVmVj",
-            "dG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIieAoLR2Ft",
-            "ZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNl",
-            "cnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAY",
-            "BSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBSobCgdFeGFtcGxlEhAKDEV4YW1w",
-            "bGVfTk9ORRAAQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "ChFUZW1wL0NvbmZpZy5wcm90byIzCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
+            "CgRQYXRoGAIgASgJEg0KBVNwZWVkGAMgASgCIjkKClNoaXBDb25maWcSCgoC",
+            "SUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglBYmlsaXR5SUQYAyADKAUiKwoI",
+            "VmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIieAoL",
+            "R2FtZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAK",
+            "CFNlcnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50",
+            "SVAYBSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBSobCgdFeGFtcGxlEhAKDEV4",
+            "YW1wbGVfTk9ORRAAQgmqAgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "CD" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "Speed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "AbilityID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort" }, null, null, null)
@@ -79,7 +79,7 @@ namespace Config {
     public Abilitys(Abilitys other) : this() {
       iD_ = other.iD_;
       path_ = other.path_;
-      cD_ = other.cD_;
+      speed_ = other.speed_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -110,14 +110,14 @@ namespace Config {
       }
     }
 
-    /// <summary>Field number for the "CD" field.</summary>
-    public const int CDFieldNumber = 3;
-    private int cD_;
+    /// <summary>Field number for the "Speed" field.</summary>
+    public const int SpeedFieldNumber = 3;
+    private float speed_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CD {
-      get { return cD_; }
+    public float Speed {
+      get { return speed_; }
       set {
-        cD_ = value;
+        speed_ = value;
       }
     }
 
@@ -136,7 +136,7 @@ namespace Config {
       }
       if (ID != other.ID) return false;
       if (Path != other.Path) return false;
-      if (CD != other.CD) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -145,7 +145,7 @@ namespace Config {
       int hash = 1;
       if (ID != 0) hash ^= ID.GetHashCode();
       if (Path.Length != 0) hash ^= Path.GetHashCode();
-      if (CD != 0) hash ^= CD.GetHashCode();
+      if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,9 +167,9 @@ namespace Config {
         output.WriteRawTag(18);
         output.WriteString(Path);
       }
-      if (CD != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(CD);
+      if (Speed != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Speed);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -185,8 +185,8 @@ namespace Config {
       if (Path.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
       }
-      if (CD != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CD);
+      if (Speed != 0F) {
+        size += 1 + 4;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -205,8 +205,8 @@ namespace Config {
       if (other.Path.Length != 0) {
         Path = other.Path;
       }
-      if (other.CD != 0) {
-        CD = other.CD;
+      if (other.Speed != 0F) {
+        Speed = other.Speed;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -227,8 +227,8 @@ namespace Config {
             Path = input.ReadString();
             break;
           }
-          case 24: {
-            CD = input.ReadInt32();
+          case 29: {
+            Speed = input.ReadFloat();
             break;
           }
         }

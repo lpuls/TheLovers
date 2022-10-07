@@ -53,8 +53,7 @@ namespace Hamster.SpaceWar {
             // 需要直接添加控制器
             ship.AddComponent<SimulateComponent>();
             ship.AddComponent<MovementComponent>();
-            LocalAbilityComponent localAbilityComponent = ship.AddComponent<LocalAbilityComponent>();
-            localAbilityComponent.Init(configID);
+            ship.TryGetOrAdd<LocalAbilityComponent>();
             ServerPlayerController localPlayerController = ship.AddComponent<ServerPlayerController>();
             localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
@@ -93,9 +92,23 @@ namespace Hamster.SpaceWar {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.Init(spanwer);
+                trajectoryComponent.Init(spanwer, Vector3.zero, 0);
                 
-                CD = abilityConfig.CD / 1000.0f;
+                // CD = abilityConfig.CD / 1000.0f;
+            }
+            return bullet;
+        }
+
+        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Vector3 direction, ITrajectorySpanwer spanwer) {
+            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            GameObject bullet = null;
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+
+                TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
+                trajectoryComponent.Init(spanwer, direction, abilityConfig.Speed);
             }
             return bullet;
         }

@@ -18,46 +18,42 @@ namespace Hamster.SpaceWar {
         void OnHitDestroy(GameObject trajectory);
         void OnOutOfWold(GameObject trajectory);
 
-        Vector3 GetPosition();
         int GetLayer();
 
         GameObject GetGameObject();
     }
 
     public class TrajectoryComponent : MonoBehaviour {
-        public ITrajectorySpanwer Parent = null;
-        public Vector3 SpawnOffset = Vector3.zero;
-        public Vector3 MoveDirection = Vector3.zero;
-        public float MoveSpeed = 100.0f;
-        public float MoveDelay = 0.0f;
-        public bool HitOnDestroy = true;
-
+        protected ITrajectorySpanwer _parent = null;
         protected bool _isPlayer = false;
-        protected float _moveDelay = 0.0f;
         protected bool _pendingKill = false;
+        protected Vector3 _moveDirection = Vector3.zero;
+        protected float _moveSpeed = 100.0f;
 
-        public virtual void Init(ITrajectorySpanwer parent) {
-            Parent = parent;
-            transform.position = parent.GetPosition() + SpawnOffset;
-            _moveDelay = MoveDelay;
+        [SerializeField] protected bool _hitOnDestroy = true;
 
+        public virtual void Init(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
+            _parent = parent;
+            _moveDirection = moveDirection;
+            _moveSpeed = moveSpeed;
+
+            // 修改朝向
+            transform.rotation = Quaternion.Euler(moveDirection);
+
+            // 确定是玩家还是敌人的子弹
             _isPlayer = CheckLayerValue(parent.GetLayer(), ESpaceWarLayers.PLAYER);
         }
 
         public virtual void Update() {
-            _moveDelay -= Time.deltaTime;
-            if (_moveDelay >= 0)
-                return;
-            _moveDelay = 0;
             Move();
 
-            if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position) && null != Parent) {
-                Parent.OnOutOfWold(gameObject);
+            if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position) && null != _parent) {
+                _parent.OnOutOfWold(gameObject);
             }
         }
 
         public virtual void Move() {
-            transform.position += MoveDirection * Time.deltaTime * MoveSpeed;
+            transform.position += _moveDirection * Time.deltaTime * _moveSpeed;
         }
 
         private void OnTriggerEnter(Collider collider) {
@@ -73,15 +69,15 @@ namespace Hamster.SpaceWar {
             if (isPlane && isPlayer != _isPlayer) {
                 IDamage damage = collider.GetComponent<IDamage>();
                 if (null != damage) {
-                    damage.OnHit(Parent.GetGameObject(), gameObject);
-                    if (null != Parent)
-                        Parent.OnHitObject(collider, gameObject);
+                    damage.OnHit(_parent.GetGameObject(), gameObject);
+                    if (null != _parent)
+                        _parent.OnHitObject(collider, gameObject);
                 }
             }
 
             // 命中后是否销毁
-            if (HitOnDestroy && null != Parent) {
-                Parent.OnHitDestroy(gameObject);
+            if (_hitOnDestroy && null != _parent) {
+                _parent.OnHitDestroy(gameObject);
             }
         }
 
@@ -96,7 +92,7 @@ namespace Hamster.SpaceWar {
 #if UNITY_EDITOR
         public virtual void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + MoveDirection * MoveSpeed);
+            Gizmos.DrawLine(transform.position, transform.position + _moveDirection * _moveSpeed);
         }
 #endif
     }

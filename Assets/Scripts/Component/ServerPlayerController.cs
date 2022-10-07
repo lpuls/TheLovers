@@ -29,7 +29,7 @@ namespace Hamster.SpaceWar {
 
             // 玩家发送射子弹
             if (null != _localAbilityComponent && cast1)
-                _localAbilityComponent.CastAbility((int)EAbilityIndex.Fire);
+                _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
 
             // 玩家进行移动
             if (!moveDirection.Equals(Vector3.zero))
