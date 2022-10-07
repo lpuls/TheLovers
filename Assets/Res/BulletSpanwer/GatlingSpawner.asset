@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 231176944778eb744ac6255f4da4d4d1, type: 3}
-  m_Name: BaseBulletSpawner
+  m_Name: GatlingSpawner
   m_EditorClassIdentifier: 
   DelayTime: 0
   CD: 100
   SpawnIDs: 01000000
   SpawnOffsets:
-  - {x: -1, y: 0, z: 0.5}
+  - {x: 0, y: 0, z: 0.5}
   SpawnDirections:
-  - {x: -0.5877855, y: 0, z: 0.8090169}
+  - {x: 0, y: 0, z: 1}

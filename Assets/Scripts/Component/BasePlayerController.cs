@@ -18,7 +18,7 @@ namespace Hamster.SpaceWar {
             if (null == InputKeyToValue) {
                 Debug.LogError("=====>Local LocalPlayerController Input Key To Value ");
 
-                InputKeyToValue = Asset.Load<InputKeyMapValue>("Res/ScriptObject/LocalInputKeyMapValue");
+                InputKeyToValue = Asset.Load<InputKeyMapValue>("Res/KeyMap/LocalInputKeyMapValue");
                 if (null == InputKeyToValue) {
                     Debug.LogError("=====>Local LocalPlayerController Input Key To Value is null");
                     return;
