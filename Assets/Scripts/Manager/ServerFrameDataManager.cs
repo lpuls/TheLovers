@@ -59,7 +59,8 @@ namespace Hamster.SpaceWar {
         }
 
         public void Tick() {
-            if (!IsGameStart)
+            ServerNetDevice device = GetNetDevice();
+            if (!IsGameStart || null == device)
                 return;
 
             FrameData frameData = ObjectPool<FrameData>.Malloc();
@@ -128,7 +129,7 @@ namespace Hamster.SpaceWar {
             // 更新消息包之后发送
             _syncMessage.SendFrameData = frameData;
             _syncMessage.UpdateData();
-            GetNetDevice().SendMessage(_syncMessage);
+            device.SendMessage(_syncMessage);
 
             ObjectPool<FrameData>.Free(frameData);
         }

@@ -5,7 +5,7 @@ namespace Hamster.SpaceWar {
 
     public class ServerSpaceWarWorld : BaseSpaceWarWorld {
 
-        private ServerNetDevice _netDevice = new ServerNetDevice();
+        private ServerNetDevice _netDevice = null;  // new ServerNetDevice();
         private ServerFrameDataManager _frameDataManager = new ServerFrameDataManager();
 
         public ServerNetDevice NetDevice {
@@ -21,6 +21,7 @@ namespace Hamster.SpaceWar {
 
             // ∆Ù”√Õ¯¬Á
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
+                _netDevice = new ServerNetDevice();
                 _netDevice.RegistModule(new NetPingModule());
                 _netDevice.RegistModule(new GameLogicSyncModule());
                 _netDevice.RegistModule(new ServerGameLogicEventModule());
