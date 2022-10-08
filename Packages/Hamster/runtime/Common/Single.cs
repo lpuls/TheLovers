@@ -18,7 +18,15 @@ namespace Hamster {
                 GameObject instances = GameObject.Find(name);
                 if (null == instances)
                     instances = new GameObject(name);
-                _instance = instances.AddComponent<T>();
+                _instance = instances.TryGetOrAdd<T>();
+            }
+            return _instance;
+        }
+
+        public static T GetInstance() {
+            if (null == _instance) {
+                GameObject instances = new GameObject(typeof(T).Name);
+                _instance = instances.TryGetOrAdd<T>();
             }
             return _instance;
         }

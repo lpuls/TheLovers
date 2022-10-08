@@ -20,14 +20,16 @@ namespace Hamster.SpaceWar {
             base.InitWorld();
 
             // 启用网络
-            _netDevice.RegistModule(new NetPingModule());
-            _netDevice.RegistModule(new GameLogicSyncModule());
-            _netDevice.RegistModule(new ServerGameLogicEventModule());
-            _netDevice.Listen("127.0.0.1", 8888);
+            if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
+                _netDevice.RegistModule(new NetPingModule());
+                _netDevice.RegistModule(new GameLogicSyncModule());
+                _netDevice.RegistModule(new ServerGameLogicEventModule());
+                _netDevice.Listen("127.0.0.1", 8888);
+                RegisterManager<ServerNetDevice>(_netDevice);
+            }
 
             // 注册管理器
             RegisterManager<BaseFrameDataManager>(_frameDataManager);
-            RegisterManager<ServerNetDevice>(_netDevice);
 
             // 服务端一起就创建服务器自己的飞机
             GameLogicUtility.ServerInitShip(1, true);

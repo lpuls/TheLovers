@@ -43,8 +43,13 @@ namespace Hamster {
         private static Dictionary<string, List<string>> _dependencies = new Dictionary<string, List<string>>();
         private static Dictionary<string, UnityObjectPool> _pools = new Dictionary<string, UnityObjectPool>();
         private static Dictionary<string, SyncLoadOperation> _syncOperation = new Dictionary<string, SyncLoadOperation>();
+        private static bool _isInit = false;
 
         public static void Initialize(string path, string[] manifast) {
+            if (_isInit)
+                return;
+            _isInit = true;
+
             // 加载名称: 资源配置表
             TextAsset textAsset = null;
             if (UseAssetBundle) {

@@ -6,9 +6,14 @@ using System.Reflection;
 
 namespace Hamster {
     public class ConfigHelper {
+        private bool _isInit = false;
         private Dictionary<Type, Dictionary<int, Google.Protobuf.IMessage>> _configs = new Dictionary<Type, Dictionary<int, Google.Protobuf.IMessage>>();
 
         public void Initialize(string path) {
+            if (_isInit)
+                return;
+            
+            _isInit = true;
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read)) {
                 BinaryReader binaryReader = new BinaryReader(fs);
                 int configCount = binaryReader.ReadInt32();
@@ -42,6 +47,10 @@ namespace Hamster {
         }
 
         public void Initialize(byte[] binarys, Assembly assembly) {
+            if (_isInit)
+                return;
+
+            _isInit = true;
             using (BinaryReader binaryReader = new BinaryReader(new MemoryStream(binarys))) {
                 int configCount = binaryReader.ReadInt32();
                 for (int i = 0; i < configCount; i++) {

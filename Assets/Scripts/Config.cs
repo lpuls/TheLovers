@@ -27,18 +27,23 @@ namespace Config {
             "ChFUZW1wL0NvbmZpZy5wcm90byIzCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
             "CgRQYXRoGAIgASgJEg0KBVNwZWVkGAMgASgCIjkKClNoaXBDb25maWcSCgoC",
             "SUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglBYmlsaXR5SUQYAyADKAUiKwoI",
-            "VmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIieAoL",
-            "R2FtZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAK",
-            "CFNlcnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50",
-            "SVAYBSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBSobCgdFeGFtcGxlEhAKDEV4",
-            "YW1wbGVfTk9ORRAAQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "VmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIiKwoG",
+            "RGVwZW5kEhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAkikgEK",
+            "C0dhbWVTZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEoBRIQ",
+            "CghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENsaWVu",
+            "dElQGAUgASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgHIAEo",
+            "CzIHLkRlcGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0KCUdh",
+            "bWVNb2RlbBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9TSU5H",
+            "TEUQARIWChJHYW1lTW9kZWxfTVVMVElQTEUQAkIJqgIGQ29uZmlnYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "Speed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "AbilityID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort", "Depends" }, null, null, null)
           }));
     }
     #endregion
@@ -47,6 +52,12 @@ namespace Config {
   #region Enums
   public enum Example {
     [pbr::OriginalName("Example_NONE")] None = 0,
+  }
+
+  public enum GameModel {
+    [pbr::OriginalName("GameModel_NONE")] None = 0,
+    [pbr::OriginalName("GameModel_SINGLE")] Single = 1,
+    [pbr::OriginalName("GameModel_MULTIPLE")] Multiple = 2,
   }
 
   #endregion
@@ -600,6 +611,163 @@ namespace Config {
 
   }
 
+  public sealed partial class Depend : pb::IMessage<Depend> {
+    private static readonly pb::MessageParser<Depend> _parser = new pb::MessageParser<Depend>(() => new Depend());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Depend> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Depend() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Depend(Depend other) : this() {
+      reloadCount_ = other.reloadCount_;
+      path_ = other.path_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Depend Clone() {
+      return new Depend(this);
+    }
+
+    /// <summary>Field number for the "ReloadCount" field.</summary>
+    public const int ReloadCountFieldNumber = 1;
+    private int reloadCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ReloadCount {
+      get { return reloadCount_; }
+      set {
+        reloadCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 2;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Depend);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Depend other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ReloadCount != other.ReloadCount) return false;
+      if (Path != other.Path) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ReloadCount != 0) hash ^= ReloadCount.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ReloadCount != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ReloadCount);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Path);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ReloadCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ReloadCount);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Depend other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ReloadCount != 0) {
+        ReloadCount = other.ReloadCount;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ReloadCount = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Path = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class GameSetting : pb::IMessage<GameSetting> {
     private static readonly pb::MessageParser<GameSetting> _parser = new pb::MessageParser<GameSetting>(() => new GameSetting());
     private pb::UnknownFieldSet _unknownFields;
@@ -608,7 +776,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -631,6 +799,7 @@ namespace Config {
       serverPort_ = other.serverPort_;
       clientIP_ = other.clientIP_;
       clientPort_ = other.clientPort_;
+      depends_ = other.depends_ != null ? other.depends_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -705,6 +874,17 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "Depends" field.</summary>
+    public const int DependsFieldNumber = 7;
+    private global::Config.Depend depends_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Config.Depend Depends {
+      get { return depends_; }
+      set {
+        depends_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameSetting);
@@ -724,6 +904,7 @@ namespace Config {
       if (ServerPort != other.ServerPort) return false;
       if (ClientIP != other.ClientIP) return false;
       if (ClientPort != other.ClientPort) return false;
+      if (!object.Equals(Depends, other.Depends)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -736,6 +917,7 @@ namespace Config {
       if (ServerPort != 0) hash ^= ServerPort.GetHashCode();
       if (ClientIP.Length != 0) hash ^= ClientIP.GetHashCode();
       if (ClientPort != 0) hash ^= ClientPort.GetHashCode();
+      if (depends_ != null) hash ^= Depends.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -773,6 +955,10 @@ namespace Config {
         output.WriteRawTag(48);
         output.WriteInt32(ClientPort);
       }
+      if (depends_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Depends);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -798,6 +984,9 @@ namespace Config {
       }
       if (ClientPort != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ClientPort);
+      }
+      if (depends_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Depends);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -827,6 +1016,12 @@ namespace Config {
       }
       if (other.ClientPort != 0) {
         ClientPort = other.ClientPort;
+      }
+      if (other.depends_ != null) {
+        if (depends_ == null) {
+          depends_ = new global::Config.Depend();
+        }
+        Depends.MergeFrom(other.Depends);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -861,6 +1056,13 @@ namespace Config {
           }
           case 48: {
             ClientPort = input.ReadInt32();
+            break;
+          }
+          case 58: {
+            if (depends_ == null) {
+              depends_ = new global::Config.Depend();
+            }
+            input.ReadMessage(depends_);
             break;
           }
         }

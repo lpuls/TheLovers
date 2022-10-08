@@ -14,8 +14,16 @@ namespace Hamster {
     }
 
     public static class GMAttributeProcessor {
+
+#if UNITY_EDITOR
+        private static bool _isInit = false;
+#endif
+
         public static void Processor(Assembly assembly) {
 #if UNITY_EDITOR
+            if (_isInit)
+                return;
+            _isInit = true;
             Type[] types = assembly.GetTypes();
             for (int i = 0; i < types.Length; i++) {
                 Type classType = types[i];

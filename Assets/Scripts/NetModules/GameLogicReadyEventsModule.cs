@@ -234,8 +234,10 @@ namespace Hamster.SpaceWar {
 
             UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
 
-            frameDataManager.CurrentPlayerCount++;
-            if (frameDataManager.CurrentPlayerCount >= frameDataManager.MaxPlayerCount) {
+            int maxPlayerCount = 1;
+            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
+                maxPlayerCount = swapData.Setting.MaxPlayer;
+            if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
                 frameDataManager.IsGameStart = true;
                 BroadcastGameStart();
             }

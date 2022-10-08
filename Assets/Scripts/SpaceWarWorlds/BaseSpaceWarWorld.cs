@@ -27,6 +27,10 @@ namespace Hamster.SpaceWar {
             Vector3 max = mainCamera.ViewportToWorldPoint(new Vector3(1, 1));
             WorldSize.x = max.x - min.x;
             WorldSize.z = max.z - min.z;
+
+            // 预先加载
+            Asset.Cache("Res/Ships/GreyShip", 2);
+            Asset.Cache("Res/Bullet/OriginBullet", 100);
         }
 
         public bool InWorld(Vector3 position) {

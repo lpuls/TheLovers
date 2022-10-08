@@ -33,6 +33,11 @@ namespace Hamster {
             protected set;
         }
 
+        public bool TryGetWorldSwapData<T>(out T swapData) where T : WorldSwapData {
+            swapData = SingleMonobehaviour<WorldSwapData>.GetInstance() as T;
+            return null != swapData;
+        } 
+
         protected void RegisterManager<T>(T manager) {
             _managers.Add(typeof(T), manager);
         }
