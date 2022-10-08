@@ -49,27 +49,25 @@ namespace Hamster.SpaceWar {
         }
 
         public void SetOperator(int input, int index) {
-            if (_readByInputDevice) {
-                _operate = input;
-                _operatorIndex = index;
-            }
-            else {
+            //if (_readByInputDevice) {
+            //    _operate = input;
+            //    _operatorIndex = index;
+            //}
+            //else {
                 _operates.Add(new ServerOperate {
                     Operate = input,
                     Index = index
                 });
-            }
-
-            //if (0 != input)
-            //    Debug.Log(string.Format("=====>SetOperator {0} {1} ", input, index));
+            //}
         }
 
         protected override int GetOperator(InputKeyMapValue inputKeyMapValue) {
-            if (_readByInputDevice) {
-                _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
-                _netSyncComponent.PredictionIndex = -1;
-            }
-            else if (_operates.Count > 0) {
+            //if (_readByInputDevice) {
+            //    _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
+            //    _netSyncComponent.PredictionIndex = -1;
+            //}
+            //else 
+            if (_operates.Count > 0) {
                 ServerOperate serverOperate = _operates[0];
                 _operates.RemoveAt(0);
                 _operate = serverOperate.Operate;

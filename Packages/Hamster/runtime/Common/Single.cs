@@ -30,5 +30,9 @@ namespace Hamster {
             }
             return _instance;
         }
+
+        public static V GetInstance<V>() where V : T {
+            return GetInstance() as V;
+        }
     }
 }

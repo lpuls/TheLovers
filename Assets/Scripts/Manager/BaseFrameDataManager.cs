@@ -173,6 +173,16 @@ namespace Hamster.SpaceWar {
             NetType = ENetType.None;
             Position = Vector3.zero;
         }
+
+        public SpawnInfo CopyToNew() {
+            SpawnInfo info = ObjectPool<SpawnInfo>.Malloc();
+            info.NetID = NetID;
+            info.OwnerID = OwnerID;
+            info.ConfigID = ConfigID;
+            info.NetType = NetType;
+            info.Position = Position;
+            return info;
+        }
     }
 
     public class DestroyInfo : IFrameInfo, IPool {
@@ -192,6 +202,13 @@ namespace Hamster.SpaceWar {
         public void Reset() {
             NetID = 0;
             Reason = EDestroyActorReason.None;
+        }
+
+        public DestroyInfo CopyToNew() {
+            DestroyInfo info = ObjectPool<DestroyInfo>.Malloc();
+            info.NetID = NetID;
+            info.Reason = Reason;
+            return info;
         }
     }
 
@@ -265,6 +282,14 @@ namespace Hamster.SpaceWar {
             UpdateType = EUpdateActorType.None;
             Data1.Clean();
             Data2.Clean();
+        }
+
+        public UpdateInfo CopyToNew() {
+            UpdateInfo updateInfo = ObjectPool<UpdateInfo>.Malloc();
+            updateInfo.Data1 = Data1;
+            updateInfo.Data2 = Data2;
+            updateInfo.UpdateType = UpdateType;
+            return updateInfo;
         }
     }
 
@@ -359,6 +384,22 @@ namespace Hamster.SpaceWar {
                 log += "\n";
             }
             return log;
+        }
+
+        public FrameData CopyToNew() {
+            FrameData frameData = Malloc(FrameIndex);
+            foreach (var it in SpawnInfos) {
+                frameData.SpawnInfos.Add(it.CopyToNew());
+            }
+            foreach (var it in DestroyInfos) {
+                frameData.DestroyInfos.Add(it.CopyToNew());
+            }
+            foreach (var it in UpdateInfos) {
+                foreach (var item in it.Value) {
+                    frameData.AddUpdateInfo(it.Key, item.CopyToNew());
+                }
+            }
+            return frameData;
         }
     }
 

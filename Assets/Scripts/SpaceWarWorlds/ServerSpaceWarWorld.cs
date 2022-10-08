@@ -6,7 +6,8 @@ namespace Hamster.SpaceWar {
     public class ServerSpaceWarWorld : BaseSpaceWarWorld {
 
         private ServerNetDevice _netDevice = null;  // new ServerNetDevice();
-        private ServerFrameDataManager _frameDataManager = new ServerFrameDataManager();
+        private ServerFrameDataManager _serveFrameDataManager = new ServerFrameDataManager();
+        private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
 
         public ServerNetDevice NetDevice {
             get {
@@ -30,19 +31,21 @@ namespace Hamster.SpaceWar {
             }
 
             // 注册管理器
-            RegisterManager<BaseFrameDataManager>(_frameDataManager);
-            _frameDataManager.OnGameStart += OnGameStart;
+            RegisterManager<ServerFrameDataManager>(_serveFrameDataManager);
+            RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
+            _serveFrameDataManager.OnGameStart += OnGameStart;
+            _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
 
             // 服务端一起就创建服务器自己的飞机
             GameLogicUtility.ServerInitShip(1, true);
         }
 
         public override void AddTicker(IServerTicker serverTicker) {
-            _frameDataManager.AddTicker(serverTicker);
+            _serveFrameDataManager.AddTicker(serverTicker);
         }
 
         public override void RemoveTicker(IServerTicker serverTicker) {
-            _frameDataManager.RemoveTicker(serverTicker);
+            _serveFrameDataManager.RemoveTicker(serverTicker);
         }
 
         private void OnGameStart() {
@@ -57,7 +60,8 @@ namespace Hamster.SpaceWar {
             if (null != _netDevice)
                 _netDevice.Update();
             
-            _frameDataManager.Update();
+            _serveFrameDataManager.Update();
+            _clientFrameDataManager.Update();
         }
 
         public void OnDestroy() {
@@ -67,7 +71,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void OnGUI() {
-            GUILayout.Label("Frame " + _frameDataManager.ServerLogicFrame);
+            GUILayout.Label("Frame " + _serveFrameDataManager.ServerLogicFrame);
         }
 
         

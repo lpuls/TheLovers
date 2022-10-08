@@ -30,6 +30,7 @@ namespace Hamster.SpaceWar {
 
             // 预先加载
             Asset.Cache("Res/Ships/GreyShip", 2);
+            Asset.Cache("Res/Ships/GreyShipLogic", 2);
             Asset.Cache("Res/Bullet/OriginBullet", 100);
         }
 

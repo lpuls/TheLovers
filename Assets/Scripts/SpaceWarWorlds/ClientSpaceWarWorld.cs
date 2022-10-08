@@ -19,7 +19,7 @@ namespace Hamster.SpaceWar {
 
             _netDevice.Connect("127.0.0.1", 8888);
             RegisterManager<ClientNetDevice>(_netDevice);
-            RegisterManager<BaseFrameDataManager>(_frameDataManager);
+            RegisterManager<ClientFrameDataManager>(_frameDataManager);
 
         }
 

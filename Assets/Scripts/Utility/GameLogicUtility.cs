@@ -5,20 +5,20 @@ namespace Hamster.SpaceWar {
     public static class GameLogicUtility {
 
         public static GameObject CreateShip(int configID) {
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-5, 0, 0) : new Vector3(5, 0, 0);
 
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
-                return frameDataManager.SpawnNetObject(0, 0, shipConfig.Path, configID, spawnLocation, ENetType.Player);
+                return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, ENetType.Player);
 
-            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/GreyShip", configID, spawnLocation, ENetType.Player);
+            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/GreyShipLogic", configID, spawnLocation, ENetType.Player);
         }
 
         public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, bool userShip) {
             GameObject ship = null;
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
             if (!frameDataManager.HasNetObject(netID, 0)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
                     ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);
@@ -42,6 +42,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static GameObject ServerInitShip(int configID, bool isCreateForSelf) {
+            // 为逻辑层生成
             GameObject ship = CreateShip(configID);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
 
@@ -56,12 +57,13 @@ namespace Hamster.SpaceWar {
             ship.TryGetOrAdd<SimulateComponent>();
             ship.TryGetOrAdd<MovementComponent>();
             ship.TryGetOrAdd<LocalAbilityComponent>();
-            ServerPlayerController localPlayerController = ship.TryGetOrAdd<ServerPlayerController>();
-            localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
+            ship.TryGetOrAdd<ServerPlayerController>();
+            //ServerPlayerController localPlayerController = ship.TryGetOrAdd<ServerPlayerController>();
+            // localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
 
             // 需要直接接收准备完成数据
-            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ServerFrameDataManager;
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
             frameDataManager.CurrentPlayerCount++;
 
@@ -73,6 +75,9 @@ namespace Hamster.SpaceWar {
                 frameDataManager.IsGameStart = true;
                 frameDataManager.OnGameStart?.Invoke();
             }
+
+            // 为表现层生成
+            ClientCreateShip(configID, netSyncComponent.NetID, ship.transform.position, isCreateForSelf);
 
             return ship;
         }
@@ -95,7 +100,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static void SetPlayerOperator(int userData, int playerOperator, int index) {
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             if (frameDataManager.TryGetNetActor(userData, out NetSyncComponent netSyncComponent)) {
@@ -106,7 +111,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, ITrajectorySpanwer spanwer, out float CD) {
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             CD = 0;
@@ -123,7 +128,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Vector3 direction, ITrajectorySpanwer spanwer) {
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             GameObject bullet = null;

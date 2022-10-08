@@ -51,7 +51,6 @@ namespace Hamster.SpaceWar {
         private NetSyncComponent _netSyncComponent = null;
         private MovementComponent _movementComponent = null;
 
-
         private void Awake() {
             _netSyncComponent = GetComponent<NetSyncComponent>();
             _movementComponent = GetComponent<MovementComponent>();
@@ -61,6 +60,35 @@ namespace Hamster.SpaceWar {
 
             _serverPreLocation = transform.position;
             _serverCurrentLocation = transform.position;
+        }
+
+        private void OnEnable() {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            if (null != frameDataManager) {
+                frameDataManager.OnFrameUpdate += OnFrameUpdate;
+            }
+        }
+
+        private void OnDisable() {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            if (null != frameDataManager) {
+                frameDataManager.OnFrameUpdate -= OnFrameUpdate;
+            }
+        }
+
+        protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
+            int netID = _netSyncComponent.NetID;
+            UpdateInfo preUpdateInfo;
+            UpdateInfo currentUpdateInfo;
+            Vector3 preLocation = PreLocation;
+            Vector3 currentLocation = CurrentLocation;
+            if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.Position, out preUpdateInfo)) {
+                preLocation = preUpdateInfo.Data1.Vec3;
+            }
+            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
+                currentLocation = currentUpdateInfo.Data1.Vec3;
+                UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+            }
         }
 
         public void Update() {
@@ -105,7 +133,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void UpdateServerToPredictPosition(Vector3 preLocation, Vector3 currentLocation, int predictionIndex) {
-            UnityEngine.Debug.Assert(predictionIndex < -1, "Invalid prediction data");
+            UnityEngine.Debug.Assert(predictionIndex > -1, "Invalid prediction data " + predictionIndex);
             _predictionIndex = predictionIndex;
             _serverPreLocation = preLocation;
             _serverCurrentLocation = currentLocation;

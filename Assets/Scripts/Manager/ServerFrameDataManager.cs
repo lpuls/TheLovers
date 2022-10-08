@@ -10,6 +10,7 @@ namespace Hamster.SpaceWar {
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
 
         public Action OnGameStart;
+        public Action<FrameData> OnNewFrameData;
 
         public int ServerLogicFrame {
             get;
@@ -34,7 +35,7 @@ namespace Hamster.SpaceWar {
 
             NetSyncComponent netSyncComponent = newNetActor.TryGetOrAdd<NetSyncComponent>();
             if (TryGetNetActor(ownerID, out NetSyncComponent parentNetSync)) {
-                netSyncComponent.NetID = parentNetSync.GetSpawnIndex();  // --_spawnCreateIndex;
+                netSyncComponent.NetID = parentNetSync.GetSpawnIndex();
             }
             else {
                 netSyncComponent.NetID = ++_shipCreateIndex;
@@ -64,8 +65,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void Tick() {
-            ServerNetDevice device = GetNetDevice();
-            if (!IsGameStart || null == device)
+            if (!IsGameStart)
                 return;
 
             FrameData frameData = ObjectPool<FrameData>.Malloc();
@@ -132,10 +132,15 @@ namespace Hamster.SpaceWar {
             ListPool<int>.Free(pendingKillActors);
 
             // 更新消息包之后发送
-            _syncMessage.SendFrameData = frameData;
-            _syncMessage.UpdateData();
-            device.SendMessage(_syncMessage);
+            ServerNetDevice device = GetNetDevice();
+            if (null != device) {
+                _syncMessage.SendFrameData = frameData;
+                _syncMessage.UpdateData();
+                device.SendMessage(_syncMessage);
+            }
 
+            if (null != OnNewFrameData)
+                OnNewFrameData?.Invoke(frameData);
             ObjectPool<FrameData>.Free(frameData);
         }
     }

@@ -99,6 +99,15 @@ namespace Hamster.SpaceWar {
             OnFrameUpdate?.Invoke(_preFrameData, _currentFrameData);
         }
 
+        public void AddNewFrameData(FrameData data) {
+            _frameDatas.Add(data.CopyToNew());
+
+            // 还未开始模拟便已有三个逻辑帧了，开始进行模拟
+            if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
+                _simulate = true;
+            }
+        }
+
         public void AnalyzeBinary(byte[] binary) {
             binary.CopyTo(_analyzeBytes, 0);
             _binaryReader.BaseStream.Position = 0;
