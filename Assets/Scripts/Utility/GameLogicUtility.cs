@@ -45,21 +45,23 @@ namespace Hamster.SpaceWar {
             GameObject ship = CreateShip(configID);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
 
+            ship.layer = (int)ESpaceWarLayers.PLAYER;
+
             // 服务端即是客户端也是服务端
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                 netSyncComponent.SetAuthority();
             }
 
             // 需要直接添加控制器
-            ship.AddComponent<SimulateComponent>();
-            ship.AddComponent<MovementComponent>();
+            ship.TryGetOrAdd<SimulateComponent>();
+            ship.TryGetOrAdd<MovementComponent>();
             ship.TryGetOrAdd<LocalAbilityComponent>();
-            ServerPlayerController localPlayerController = ship.AddComponent<ServerPlayerController>();
+            ServerPlayerController localPlayerController = ship.TryGetOrAdd<ServerPlayerController>();
             localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
 
             // 需要直接接收准备完成数据
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ServerFrameDataManager;
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
             frameDataManager.CurrentPlayerCount++;
 
@@ -69,7 +71,25 @@ namespace Hamster.SpaceWar {
                 maxPlayerCount = swapData.Setting.MaxPlayer;
             if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
                 frameDataManager.IsGameStart = true;
+                frameDataManager.OnGameStart?.Invoke();
             }
+
+            return ship;
+        }
+
+        public static GameObject ServerCreateEnemy(int configID) {
+            GameObject ship = CreateShip(configID);
+            UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
+
+            ship.transform.forward = Vector3.back;
+            ship.layer = (int)ESpaceWarLayers.ENEMY;
+
+            // 服务端即是客户端也是服务端
+            if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                netSyncComponent.SetAuthority();
+            }
+
+            ship.TryGetOrAdd<ServerEnemy>();
 
             return ship;
         }
