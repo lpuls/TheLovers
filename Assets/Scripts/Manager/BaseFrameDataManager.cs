@@ -132,6 +132,7 @@ namespace Hamster.SpaceWar {
         OutOfWorld,
         BeHit,
         HitOther,
+        TimeOut,
     }
 
     public enum EUpdateActorType {

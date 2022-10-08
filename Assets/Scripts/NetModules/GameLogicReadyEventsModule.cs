@@ -229,7 +229,7 @@ namespace Hamster.SpaceWar {
 
         // 收到客户端准备完成的消息
         private void OnReceiveAllReadyRequestMessage(Packet packet, ClientInstance clientInstance) {
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ServerFrameDataManager;
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
@@ -239,6 +239,7 @@ namespace Hamster.SpaceWar {
                 maxPlayerCount = swapData.Setting.MaxPlayer;
             if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
                 frameDataManager.IsGameStart = true;
+                frameDataManager.OnGameStart?.Invoke();
                 BroadcastGameStart();
             }
         }

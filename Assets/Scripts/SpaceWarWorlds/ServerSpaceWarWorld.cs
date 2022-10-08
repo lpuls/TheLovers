@@ -31,6 +31,7 @@ namespace Hamster.SpaceWar {
 
             // 注册管理器
             RegisterManager<BaseFrameDataManager>(_frameDataManager);
+            _frameDataManager.OnGameStart += OnGameStart;
 
             // 服务端一起就创建服务器自己的飞机
             GameLogicUtility.ServerInitShip(1, true);
@@ -42,6 +43,10 @@ namespace Hamster.SpaceWar {
 
         public override void RemoveTicker(IServerTicker serverTicker) {
             _frameDataManager.RemoveTicker(serverTicker);
+        }
+
+        private void OnGameStart() {
+             GameLogicUtility.ServerCreateEnemy(3);
         }
 
         protected override void Update() {
@@ -63,6 +68,7 @@ namespace Hamster.SpaceWar {
         public void OnGUI() {
             GUILayout.Label("Frame " + _frameDataManager.ServerLogicFrame);
         }
+
 
         
 

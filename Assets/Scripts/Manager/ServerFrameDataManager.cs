@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
@@ -7,6 +8,8 @@ namespace Hamster.SpaceWar {
         private int _shipCreateIndex = 0;
         private ServerNetDevice _netDevice = null;
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
+
+        public Action OnGameStart;
 
         public int ServerLogicFrame {
             get;
