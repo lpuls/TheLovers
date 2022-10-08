@@ -65,7 +65,7 @@ namespace Hamster.SpaceWar {
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
-                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+                _simulateComponent.UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
             }
         }
     }

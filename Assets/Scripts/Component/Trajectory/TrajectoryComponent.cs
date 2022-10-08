@@ -39,7 +39,7 @@ namespace Hamster.SpaceWar {
 
             // 修改朝向
             transform.rotation = Quaternion.Euler(moveDirection);
-            GetSimulateComponent().UpdateSimulateInfo(transform.position, transform.position, -1);
+            GetSimulateComponent().UpdatePosition(transform.position, transform.position);
            
             // 确定是玩家还是敌人的子弹
             _isPlayer = CheckLayerValue(parent.GetLayer(), ESpaceWarLayers.PLAYER);
@@ -59,7 +59,7 @@ namespace Hamster.SpaceWar {
         protected void MoveBulletByDelta(Vector3 delta) {
             Vector3 preLocation = _simulateComponent.CurrentLocation;
             Vector3 newLocation = _simulateComponent.CurrentLocation + delta;
-            _simulateComponent.UpdateSimulateInfo(preLocation, newLocation, -1);
+            _simulateComponent.UpdatePosition(preLocation, newLocation);
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 

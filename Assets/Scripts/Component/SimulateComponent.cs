@@ -30,7 +30,17 @@ namespace Hamster.SpaceWar {
             get;
             private set;
         }
+        public float PreAngle {
+            get;
+            private set;
+        }
+        public float CurrentAngle {
+            get;
+            private set;
+        }
 
+        private float _serverPreAngle = 0;
+        private float _serverCurrentAngle = 0;
         private Vector3 _serverPreLocation = Vector3.zero;
         private Vector3 _serverCurrentLocation = Vector3.zero;
 
@@ -94,18 +104,30 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public void UpdateSimulateInfo(Vector3 preLocation, Vector3 currentLocation, int predictionIndex) {
-            if (predictionIndex >= 0) {
-                _predictionIndex = predictionIndex;
-                _serverPreLocation = preLocation;
-                _serverCurrentLocation = currentLocation;
-            }
-            else {
-                PreLocation = preLocation;
-                CurrentLocation = currentLocation;
-                _simulateTime = 0;
-            }
+        public void UpdateServerToPredictPosition(Vector3 preLocation, Vector3 currentLocation, int predictionIndex) {
+            UnityEngine.Debug.Assert(predictionIndex < -1, "Invalid prediction data");
+            _predictionIndex = predictionIndex;
+            _serverPreLocation = preLocation;
+            _serverCurrentLocation = currentLocation;
+        }
 
+        public void UpdateServerToPredictAngle(float preAngle, float currentAngle, int predictionIndex) {
+            UnityEngine.Debug.Assert(predictionIndex < -1, "Invalid prediction data");
+            _predictionIndex = predictionIndex;
+            _serverPreAngle = preAngle;
+            _serverCurrentAngle = currentAngle;
+        }
+
+        public void UpdatePosition(Vector3 preLocation, Vector3 currentLocation) {
+            PreLocation = preLocation;
+            CurrentLocation = currentLocation;
+            _simulateTime = 0;
+        }
+
+        public void UpdateAngle(float preAngle, float currentAngle) {
+            PreAngle = preAngle;
+            CurrentAngle = currentAngle;
+            _simulateTime = 0;
         }
 
         public void AddPredictionCommand(int index, Vector3 location, int input) {

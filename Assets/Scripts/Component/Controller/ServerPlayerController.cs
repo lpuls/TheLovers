@@ -98,7 +98,7 @@ namespace Hamster.SpaceWar {
             if (_movementComponent.NeedMove) {
                 Vector3 preLocation = _simulateComponent.CurrentLocation;
                 Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
-                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
+                _simulateComponent.UpdatePosition(preLocation, currentLocation);
                 GameLogicUtility.SetPositionDirty(gameObject);
             }
         }

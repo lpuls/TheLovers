@@ -64,7 +64,7 @@ namespace Hamster.SpaceWar {
             if (_movementComponent.NeedMove) {
                 Vector3 preLocation = _simulateComponent.CurrentLocation;
                 Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, frameIndex);
-                _simulateComponent.UpdateSimulateInfo(preLocation, currentLocation, -1);
+                _simulateComponent.UpdatePosition(preLocation, currentLocation);
 
                 // 将每一帧的預測的结果及当时的客户端帧号都记录下来
                 // Debug.Log(string.Format("=====>Index: {0}, Location: {1}, NeedMove: {2}, Input: {3}", frameIndex, currentLocation, _movementComponent.NeedMove, input));
