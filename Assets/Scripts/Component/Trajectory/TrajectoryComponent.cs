@@ -69,11 +69,10 @@ namespace Hamster.SpaceWar {
         }
 
         protected virtual void OnHitSomething(GameObject collider) {
-            bool isPlane = CheckLayerValue(collider.layer, ESpaceWarLayers.PLANE);
             bool isPlayer = CheckLayerValue(collider.layer, ESpaceWarLayers.PLAYER);
 
-            // 命中时，命中物为飞机且阵营不同
-            if (isPlane && isPlayer != _isPlayer) {
+            // 阵营不同，创成伤害
+            if (isPlayer != _isPlayer) {
                 IDamage damage = collider.GetComponent<IDamage>();
                 if (null != damage) {
                     damage.OnHit(_parent.GetGameObject(), gameObject);
@@ -89,11 +88,7 @@ namespace Hamster.SpaceWar {
         }
 
         protected bool CheckLayerValue(int layer, ESpaceWarLayers value) {
-            return 1 == (int)((layer >> (int)value) & 1);
-        }
-
-        protected int GetLayerValue(int layer, ESpaceWarLayers value) {
-            return (int)((layer >> (int)value) & 1);
+            return layer == (int)value;
         }
 
 

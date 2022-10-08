@@ -20,6 +20,7 @@ namespace Hamster.SpaceWar {
                     weapons = new List<WeaponComponent>();
                     _weapons[type] = weapons;
                 }
+                item.Parent = gameObject;
                 weapons.Add(item);
             }
         }

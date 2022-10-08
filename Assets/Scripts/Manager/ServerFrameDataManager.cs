@@ -53,6 +53,8 @@ namespace Hamster.SpaceWar {
         }
 
         public override void Update() {
+            base.Update();
+
             LogicTime += Time.deltaTime;
             while (LogicTime >= LOGIC_FRAME_TIME) {
                 UpdateTickers();

@@ -6,6 +6,7 @@ namespace Hamster.SpaceWar {
 
         public EAbilityIndex Type = EAbilityIndex.Fire;
         public BulletSpawner Spawner = null;
+        public GameObject Parent = null;
 
         private int _ownerID = 0;
         private float _cd = 0;
@@ -59,7 +60,7 @@ namespace Hamster.SpaceWar {
         }
 
         public int GetLayer() {
-            return gameObject.layer;
+            return null != Parent ? Parent.layer : gameObject.layer;
         }
 
         private void OnDestroyTrajectory(GameObject gameObject, EDestroyActorReason reason) {
