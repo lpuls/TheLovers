@@ -507,7 +507,9 @@ namespace Hamster.SpaceWar {
 
             var it = _tickers.GetEnumerator();
             while (it.MoveNext()) {
-                it.Current.Tick(LOGIC_FRAME_TIME);
+                IServerTicker ticker = it.Current;
+                if (ticker.IsEnable())
+                    ticker.Tick(LOGIC_FRAME_TIME);
             }
         }
 

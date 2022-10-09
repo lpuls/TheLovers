@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
 
     public interface IServerTicker {
         void Tick(float dt);
+        bool IsEnable();
     }
 
     public class BaseSpaceWarWorld : World {
