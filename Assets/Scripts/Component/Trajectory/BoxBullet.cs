@@ -5,18 +5,22 @@ namespace Hamster.SpaceWar {
         public Vector3 BoxHalfSize = Vector3.one;
 
         public override void Move(float dt) {
-            float MoveDistance = dt * _moveSpeed;
+            float moveDistance = dt * _moveSpeed;
 
+            bool hasHit = false;
+            float originDistance = moveDistance;
             Vector3 currentLocation = transform.position;
 
             Quaternion quaternion = Quaternion.Euler(_moveDirection);
             if (Physics.BoxCast(currentLocation, BoxHalfSize, _moveDirection, out RaycastHit hitResult,
-                quaternion, _moveSpeed, _isPlayer ? 1 << (int)ESpaceWarLayers.ENEMY : 1 << (int)ESpaceWarLayers.PLAYER)) {
+                quaternion, moveDistance, _isPlayer ? 1 << (int)ESpaceWarLayers.ENEMY : 1 << (int)ESpaceWarLayers.PLAYER)) {
                 OnHitSomething(hitResult.collider.gameObject);
-                MoveDistance = hitResult.distance;
+                hasHit = true;
+                moveDistance = hitResult.distance;
             }
 
-            MoveBulletByDelta(_moveDirection * MoveDistance);
+            MoveBulletByDelta(_moveDirection * moveDistance);
+            // Debug.Log(string.Format("UpdateMove Not Hit {0}, {1}, {2}, {3}, {4}, {5}", gameObject.name, moveDistance, originDistance, hasHit, currentLocation, transform.position));
         }
 
     }

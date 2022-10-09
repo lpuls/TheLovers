@@ -71,8 +71,6 @@ namespace Hamster.SpaceWar {
                 foreach (var item in destroyInfos) {
                     if (_netActors.TryGetValue(item.NetID, out NetSyncComponent netSyncComponent)) {
                         netSyncComponent.Kill(item.Reason);
-                        Debug.Log(string.Format("Destroy {2} ClienTick: {0}, {1}", item.NetID, item.Reason, _preFrameData.FrameIndex));
-
                     }
                 }
 
