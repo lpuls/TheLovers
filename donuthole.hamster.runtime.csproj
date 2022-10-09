@@ -102,6 +102,7 @@
     <Compile Include="Packages\Hamster\runtime\Common\Blackboard.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Net\NetModule.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\UI\UIViewScroll.cs" />
+    <Compile Include="Packages\Hamster\runtime\Common\DataStruct\ModityValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\Hamster\runtime\donuthole.hamster.runtime.asmdef" />

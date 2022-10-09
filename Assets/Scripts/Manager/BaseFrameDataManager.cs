@@ -138,7 +138,8 @@ namespace Hamster.SpaceWar {
     public enum EUpdateActorType {
         None,
         Position,
-        Angle
+        Angle,
+        DeadingOrDead
     }
 
     public class SpawnInfo : IFrameInfo, IPool {
@@ -241,6 +242,10 @@ namespace Hamster.SpaceWar {
         public EUpdateActorType UpdateType = EUpdateActorType.None;
         public UpdateData Data1 = new UpdateData();
         public UpdateData Data2 = new UpdateData();
+
+        public void SetInt32ForData1(int value) {
+            Data1.Int32 = value;
+        }
 
         public void SetFloatForData1(float value) {
             Data1.Float = value;

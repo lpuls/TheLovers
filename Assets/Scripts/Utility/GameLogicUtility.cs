@@ -168,6 +168,10 @@ namespace Hamster.SpaceWar {
             SetPropertyDirty(gameObject, EUpdateActorType.Angle);
         }
 
+        public static void SetDeadingOrDeadDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.DeadingOrDead);
+        }
+
         private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {
             if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent) && netSyncComponent.IsAuthority()) {
                 netSyncComponent.AddNewUpdate(updateType);

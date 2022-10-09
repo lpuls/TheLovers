@@ -20,9 +20,12 @@ namespace Hamster.SpaceWar {
 
         private Animator _animator = null;
         private SimulateComponent _simulateComponent = null;
+        private NetSyncComponent _netSyncComponent = null;
 
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
+
+        private bool _isDeading = false;
 
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
@@ -30,6 +33,17 @@ namespace Hamster.SpaceWar {
 
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
+        }
+
+        protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
+            int netID = _netSyncComponent.NetID;
+            UpdateInfo updateInfo;
+            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.DeadingOrDead, out updateInfo)) {
+                _isDeading = EPlayerState.Deading == (EPlayerState)updateInfo.Data1.Int32;
+                if (_isDeading) {
+                    _animator.SetTrigger("Dead");
+                }
+            }
         }
 
         public void Update() {

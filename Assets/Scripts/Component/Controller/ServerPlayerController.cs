@@ -4,24 +4,22 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public interface IDamage {
-        void OnHit(GameObject hitObject, GameObject hitTrajectory);
-    }
-
     public struct ServerOperate {
         public int Index;
         public int Operate;
     }
 
-    public class ServerPlayerController : PlayerController, IDamage {
+    public class ServerPlayerController : ServerBaseController {
 
-        private bool _readByInputDevice = true;
+        // 输入
         protected int _operate = 0;
         protected int _operatorIndex = 0;
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
-        protected MovementComponent _movementComponent = null;
-        protected LocalAbilityComponent _localAbilityComponent = null;
+        // 其它
+        protected float _deadTime = 0;
+        protected const float MAX_DEAD_TIME = 0.5f;
+
 
         protected override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
@@ -37,36 +35,14 @@ namespace Hamster.SpaceWar {
                 _movementComponent.Stop();
         }
 
-        public override void Init() {
-            base.Init();
-            _movementComponent = GetComponent<MovementComponent>();
-            _localAbilityComponent = GetComponent<LocalAbilityComponent>();
-            _netSyncComponent = GetComponent<NetSyncComponent>();
-        }
-
-        public void SetIsReadByInputDevice(bool readByInputDevice) {
-            _readByInputDevice = readByInputDevice;
-        }
-
         public void SetOperator(int input, int index) {
-            //if (_readByInputDevice) {
-            //    _operate = input;
-            //    _operatorIndex = index;
-            //}
-            //else {
-                _operates.Add(new ServerOperate {
-                    Operate = input,
-                    Index = index
-                });
-            //}
+            _operates.Add(new ServerOperate {
+                Operate = input,
+                Index = index
+            });
         }
 
         protected override int GetOperator(InputKeyMapValue inputKeyMapValue) {
-            //if (_readByInputDevice) {
-            //    _operate = GameLogicUtility.ReadKeyboardInput(inputKeyMapValue);
-            //    _netSyncComponent.PredictionIndex = -1;
-            //}
-            //else 
             if (_operates.Count > 0) {
                 ServerOperate serverOperate = _operates[0];
                 _operates.RemoveAt(0);
@@ -82,23 +58,28 @@ namespace Hamster.SpaceWar {
             return _operate;
         }
 
-        public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
-        }
 
         public override void Tick(float dt) {
-            base.Tick(dt);
-            _operate = 0;
+            // 角色死亡
+            if (_propertyComponent.IsDeading) {
+                _deadTime += dt;
+                if (_deadTime >= MAX_DEAD_TIME) {
+                    _netSyncComponent.Kill(EDestroyActorReason.BeHit);
+                    _propertyComponent.SetDead();
+                }
+            }
+            else if (!_propertyComponent.IsDead && !_propertyComponent.IsDeading) {
+                base.Tick(dt);
+                _operate = 0;
 
-            // 对武器进行更新
-            _localAbilityComponent.Tick(dt);
+                // 对武器进行更新
+                _localAbilityComponent.Tick(dt);
 
-            // 逻辑执行移动操作
-            if (_movementComponent.NeedMove) {
-                // Vector3 preLocation = _simulateComponent.CurrentLocation;
-                // Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, _operatorIndex);
-                // _simulateComponent.UpdatePosition(preLocation, currentLocation);
-                transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
-                GameLogicUtility.SetPositionDirty(gameObject);
+                // 逻辑执行移动操作
+                if (_movementComponent.NeedMove) {
+                    transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
+                    GameLogicUtility.SetPositionDirty(gameObject);
+                }
             }
         }
 
