@@ -85,8 +85,7 @@ namespace Hamster.SpaceWar {
                     destroyInfo.NetID = netSyncComponent.NetID;
                     destroyInfo.Reason = netSyncComponent.DestroyReason;
                     frameData.DestroyInfos.Add(destroyInfo);
-
-                    continue;
+                    Debug.Log(string.Format("Destroy {2} ServerTick: {0}, {1}", destroyInfo.NetID, destroyInfo.Reason, frameData.FrameIndex));
                 }
                 else if (netSyncComponent.IsNewObject) {
                     netSyncComponent.IsNewObject = false;
@@ -96,6 +95,7 @@ namespace Hamster.SpaceWar {
                     spawnInfo.ConfigID = netSyncComponent.ConfigID;
                     spawnInfo.OwnerID = netSyncComponent.OwnerID;
                     spawnInfo.Position = netSyncComponent.transform.position;
+                    spawnInfo.Angle = netSyncComponent.transform.rotation.eulerAngles.y;
                     spawnInfo.NetType = netSyncComponent.NetType;
                     frameData.SpawnInfos.Add(spawnInfo);
                 }
@@ -108,10 +108,8 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            if (netSyncComponent.TryGetComponent<SimulateComponent>(out SimulateComponent playerController)) {
-                                updateInfo.SetVec3ForData2(playerController.CurrentLocation.x, playerController.CurrentLocation.z);
-                                updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
-                            }
+                            updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
+                            updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                             break;
                         case EUpdateActorType.Angle:
                             updateInfo.SetFloatForData1(netSyncComponent.transform.rotation.eulerAngles.y);

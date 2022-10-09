@@ -44,16 +44,20 @@ namespace Hamster.SpaceWar {
             IsGameStart = false;
         }
 
-        public GameObject SpawnNetObject(int id, int ownerID, string path, int configID, Vector3 pos) {
+        public override GameObject SpawnNetObject(int id, int ownerID, string path, int configID, Vector3 pos, ENetType netType) {
             GameObject newNetActor = Asset.Load(path);
 
             NetSyncComponent netSyncComponent = newNetActor.TryGetOrAdd<NetSyncComponent>();
             netSyncComponent.NetID = id;
             netSyncComponent.OwnerID = ownerID;
             netSyncComponent.ConfigID = configID;
+            netSyncComponent.NetType = netType;
             netSyncComponent.PendingKill = false;
 
             newNetActor.transform.position = pos;
+            if (newNetActor.TryGetComponent<SimulateComponent>(out SimulateComponent simulateComponent)) {
+                simulateComponent.UpdatePosition(pos, pos);
+            }
 
             _netActors.Add(id, netSyncComponent);
 
@@ -61,8 +65,21 @@ namespace Hamster.SpaceWar {
         }
 
         public void ReceiveNewFrame(FrameData frameData) {
-            if (null != _preFrameData)
+            // 上一帧结束时，才回收要被销毁的资源，不然会丢失状态
+            if (null != _preFrameData) {
+                List<DestroyInfo> destroyInfos = _preFrameData.DestroyInfos;
+                foreach (var item in destroyInfos) {
+                    if (_netActors.TryGetValue(item.NetID, out NetSyncComponent netSyncComponent)) {
+                        netSyncComponent.Kill(item.Reason);
+                        Debug.Log(string.Format("Destroy {2} ClienTick: {0}, {1}", item.NetID, item.Reason, _preFrameData.FrameIndex));
+
+                    }
+                }
+
                 _preFrameData.Free();
+            }
+
+            // 交换前后帧
             _preFrameData = _currentFrameData;
             _currentFrameData = frameData;
 
@@ -70,29 +87,24 @@ namespace Hamster.SpaceWar {
             GameLogicFrame = frameData.FrameIndex;
 
             List<SpawnInfo> spawnInfos = frameData.SpawnInfos;
-            List<DestroyInfo> destroyInfos = frameData.DestroyInfos;
-
             foreach (var item in spawnInfos) {
                 if (!_netActors.ContainsKey(item.NetID)) {
                     switch (item.NetType) {
                         case ENetType.Player:
                             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(item.ConfigID, out Config.ShipConfig shipConfig)) {
-                                SpawnNetObject(item.NetID, item.OwnerID, shipConfig.Path, 0, item.Position);
+                                GameObject ship = SpawnNetObject(item.NetID, item.OwnerID, shipConfig.Path, 0, item.Position, item.NetType);
+                                ship.transform.rotation = Quaternion.Euler(0, item.Angle, 0);
                             }
                             break;
                         case ENetType.Bullet:
                             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(item.ConfigID, out Config.Abilitys abilityConfig)) {
-                                GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position);
-                                bullet.TryGetOrAdd<SimulateComponent>();
+                                GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position, item.NetType);
+                                if (bullet.TryGetComponent<TailManager>(out TailManager tailManager)) {
+                                    tailManager.ShowTail();
+                                }
                             }
                             break;
                     }
-                }
-            }
-
-            foreach (var item in destroyInfos) {
-                if (_netActors.TryGetValue(item.NetID, out NetSyncComponent netSyncComponent)) {
-                    netSyncComponent.Kill(item.Reason);
                 }
             }
 

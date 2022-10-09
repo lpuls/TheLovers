@@ -6,13 +6,21 @@ namespace Hamster.SpaceWar {
         public TrailRenderer Tail = null;
 
         public void OnEnable() {
-            if (null != Tail)
-                Tail.Clear();
+            OnDisable();
         }
 
         public void OnDisable() {
-            if (null != Tail)
+            if (null != Tail) {
                 Tail.Clear();
+                Tail.enabled = false;
+            }
+        }
+
+        public void ShowTail() {
+            if (null != Tail) {
+                Tail.Clear();
+                Tail.enabled = true;
+            }
         }
 
     }

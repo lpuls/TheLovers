@@ -6,7 +6,7 @@ namespace Hamster.SpaceWar {
 
     public class BaseController : MonoBehaviour, IServerTicker {
         
-        protected SimulateComponent _simulateComponent = null;
+        // protected SimulateComponent _simulateComponent = null;
         protected NetSyncComponent _netSyncComponent = null;
 
         public virtual void OnEnable() {
@@ -15,7 +15,7 @@ namespace Hamster.SpaceWar {
 
         public virtual void Init() {
             World.GetWorld<BaseSpaceWarWorld>().AddTicker(this);
-            _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
+            // _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
             _netSyncComponent = gameObject.TryGetOrAdd<NetSyncComponent>();
 
             //ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ClientFrameDataManager;
@@ -40,12 +40,12 @@ namespace Hamster.SpaceWar {
         public virtual void Tick(float dt) {
         }
 
-        protected SimulateComponent GetSimulateComponent() {
-            if (null != _simulateComponent)
-                return _simulateComponent;
-            _simulateComponent = GetComponent<SimulateComponent>();
-            return _simulateComponent;
-        }
+        //protected SimulateComponent GetSimulateComponent() {
+        //    if (null != _simulateComponent)
+        //        return _simulateComponent;
+        //    _simulateComponent = GetComponent<SimulateComponent>();
+        //    return _simulateComponent;
+        //}
 
         protected NetSyncComponent GetNetSyncComponent() {
             if (null != _netSyncComponent)

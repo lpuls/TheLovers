@@ -7,7 +7,7 @@ namespace Hamster.SpaceWar {
         public override void Move(float dt) {
             float MoveDistance = dt * _moveSpeed;
 
-            Vector3 currentLocation = GetSimulateComponent().CurrentLocation;
+            Vector3 currentLocation = transform.position;
 
             Quaternion quaternion = Quaternion.Euler(_moveDirection);
             if (Physics.BoxCast(currentLocation, BoxHalfSize, _moveDirection, out RaycastHit hitResult,
@@ -16,17 +16,8 @@ namespace Hamster.SpaceWar {
                 MoveDistance = hitResult.distance;
             }
 
-            // transform.position += _moveDirection * MoveDistance;
             MoveBulletByDelta(_moveDirection * MoveDistance);
         }
 
-#if UNITY_EDITOR
-        public override void OnDrawGizmosSelected() {
-            base.OnDrawGizmosSelected();
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position, BoxHalfSize);
-        }
-#endif
     }
 }

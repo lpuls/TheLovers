@@ -57,6 +57,7 @@ namespace Hamster.SpaceWar {
 
             PreLocation = transform.position;
             CurrentLocation = transform.position;
+            Debug.Log(string.Format("SetCurrent: {0}, {1}", gameObject.name, CurrentLocation));
 
             _serverPreLocation = transform.position;
             _serverCurrentLocation = transform.position;
@@ -87,7 +88,11 @@ namespace Hamster.SpaceWar {
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
-                UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+                if (currentUpdateInfo.Data2.Int32 > -1)
+                    UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+                else
+                    UpdatePosition(preLocation, currentLocation);
+
             }
         }
 
@@ -103,9 +108,6 @@ namespace Hamster.SpaceWar {
 
                     // 检查預測值是否与逻辑值相同
                     if (null != command && command.FrameIndex == _predictionIndex) {
-                       
-
-
                         // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
                         if (command.Location != _serverCurrentLocation) {
                             //Debug.Log(string.Format("=====>{3} Predict: {0}, Server: {1}, FrameIndex: {2}-{3}",
@@ -113,6 +115,7 @@ namespace Hamster.SpaceWar {
 
                             PreLocation = _serverPreLocation;
                             CurrentLocation = _serverCurrentLocation;
+                            Debug.Log(string.Format("SetCurrent: {0}, {1}", gameObject.name, CurrentLocation));
                             _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
 
                             // 移除最顶上的操作并重新模拟
@@ -129,6 +132,11 @@ namespace Hamster.SpaceWar {
             _simulateTime += Time.deltaTime;
             if (!CurrentLocation.Equals(Vector3.zero)) {
                 transform.position = Vector3.Lerp(PreLocation, CurrentLocation, _simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
+                if (ENetType.Bullet == _netSyncComponent.NetType) {
+                    ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+                    Debug.Log(string.Format("Destroy {4} {6} ID: {0}, {1} {2} {3} {5}", _netSyncComponent.NetID, PreLocation, CurrentLocation, transform.position, 
+                        frameDataManager.GameLogicFrame, _netSyncComponent.IsPendingKill(), gameObject.name));
+                }
             }
         }
 
@@ -137,6 +145,9 @@ namespace Hamster.SpaceWar {
             _predictionIndex = predictionIndex;
             _serverPreLocation = preLocation;
             _serverCurrentLocation = currentLocation;
+            if (ENetType.Bullet == _netSyncComponent.NetType) {
+                Debug.Log(string.Format("Destroy {4} Prediction UpdatePosition: {0}, {1} {2} {3}", _netSyncComponent.NetID, _serverPreLocation, _serverCurrentLocation, transform.position, _netSyncComponent.IsPendingKill()));
+            }
         }
 
         public void UpdateServerToPredictAngle(float preAngle, float currentAngle, int predictionIndex) {
@@ -149,7 +160,11 @@ namespace Hamster.SpaceWar {
         public void UpdatePosition(Vector3 preLocation, Vector3 currentLocation) {
             PreLocation = preLocation;
             CurrentLocation = currentLocation;
+            Debug.Log(string.Format("SetCurrent: {0}, {1}", gameObject.name, CurrentLocation));
             _simulateTime = 0;
+            if (ENetType.Bullet == _netSyncComponent.NetType) {
+                Debug.Log(string.Format("Destroy {4} UpdatePosition: {0}, {1} {2} {3}", _netSyncComponent.NetID, PreLocation, CurrentLocation, transform.position, _netSyncComponent.IsPendingKill()));
+            }
         }
 
         public void UpdateAngle(float preAngle, float currentAngle) {
@@ -203,6 +218,7 @@ namespace Hamster.SpaceWar {
                 lastLocation = command.Location;
             }
             CurrentLocation = lastLocation;
+            Debug.Log(string.Format("SetCurrent: {0}, {1}", gameObject.name, CurrentLocation));
         }
 
         private MovementComponent GetMovementComponent() {

@@ -28,10 +28,12 @@ namespace Hamster.SpaceWar {
             WorldSize.x = max.x - min.x;
             WorldSize.z = max.z - min.z;
 
-            // 预先加载
-            Asset.Cache("Res/Ships/GreyShip", 2);
-            Asset.Cache("Res/Ships/GreyShipLogic", 2);
-            Asset.Cache("Res/Bullet/OriginBullet", 100);
+            // 预加载
+            PreloadAssets();
+        }
+
+        protected virtual void PreloadAssets() {
+            
         }
 
         public bool InWorld(Vector3 position) {

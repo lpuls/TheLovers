@@ -54,12 +54,9 @@ namespace Hamster.SpaceWar {
             }
 
             // 需要直接添加控制器
-            ship.TryGetOrAdd<SimulateComponent>();
             ship.TryGetOrAdd<MovementComponent>();
             ship.TryGetOrAdd<LocalAbilityComponent>();
             ship.TryGetOrAdd<ServerPlayerController>();
-            //ServerPlayerController localPlayerController = ship.TryGetOrAdd<ServerPlayerController>();
-            // localPlayerController.SetIsReadByInputDevice(isCreateForSelf);
 
 
             // 需要直接接收准备完成数据
@@ -82,12 +79,14 @@ namespace Hamster.SpaceWar {
             return ship;
         }
 
-        public static GameObject ServerCreateEnemy(int configID) {
+        public static GameObject ServerCreateEnemy(int configID, Vector3 position, float angle) {
             GameObject ship = CreateShip(configID);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
 
             ship.transform.forward = Vector3.back;
             ship.layer = (int)ESpaceWarLayers.ENEMY;
+            ship.transform.position = position;
+            ship.transform.rotation = Quaternion.Euler(0, angle, 0);
 
             // 服务端即是客户端也是服务端
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
@@ -117,7 +116,7 @@ namespace Hamster.SpaceWar {
             CD = 0;
             GameObject bullet = null;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
-                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
                 trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
@@ -133,13 +132,13 @@ namespace Hamster.SpaceWar {
 
             GameObject bullet = null;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
-                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
 
                 if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
                 }
 
-                bullet.TryGetOrAdd<SimulateComponent>();
+                //bullet.TryGetOrAdd<SimulateComponent>();
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
                 trajectoryComponent.InitProperty(spanwer, direction, abilityConfig.Speed);

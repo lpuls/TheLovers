@@ -24,22 +24,22 @@ namespace Config {
     static ConfigReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFUZW1wL0NvbmZpZy5wcm90byIzCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
-            "CgRQYXRoGAIgASgJEg0KBVNwZWVkGAMgASgCIjkKClNoaXBDb25maWcSCgoC",
-            "SUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglMb2dpY1BhdGgYAyABKAkiKwoI",
-            "VmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIiKwoG",
-            "RGVwZW5kEhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAkikgEK",
-            "C0dhbWVTZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEoBRIQ",
-            "CghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENsaWVu",
-            "dElQGAUgASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgHIAEo",
-            "CzIHLkRlcGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0KCUdh",
-            "bWVNb2RlbBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9TSU5H",
-            "TEUQARIWChJHYW1lTW9kZWxfTVVMVElQTEUQAkIJqgIGQ29uZmlnYgZwcm90",
-            "bzM="));
+            "ChFUZW1wL0NvbmZpZy5wcm90byJGCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
+            "CgRQYXRoGAIgASgJEhEKCUxvZ2ljUGF0aBgDIAEoCRINCgVTcGVlZBgEIAEo",
+            "AiI5CgpTaGlwQ29uZmlnEgoKAklEGAEgASgFEgwKBFBhdGgYAiABKAkSEQoJ",
+            "TG9naWNQYXRoGAMgASgJIisKCFZlY3RvcjNEEgkKAVgYASABKAISCQoBWRgC",
+            "IAEoAhIJCgFaGAMgASgCIisKBkRlcGVuZBITCgtSZWxvYWRDb3VudBgBIAEo",
+            "BRIMCgRQYXRoGAIgASgJIpIBCgtHYW1lU2V0dGluZxIKCgJJRBgBIAEoBRIR",
+            "CglNYXhQbGF5ZXIYAiABKAUSEAoIU2VydmVySVAYAyABKAkSEgoKU2VydmVy",
+            "UG9ydBgEIAEoBRIQCghDbGllbnRJUBgFIAEoCRISCgpDbGllbnRQb3J0GAYg",
+            "ASgFEhgKB0RlcGVuZHMYByABKAsyBy5EZXBlbmQqGwoHRXhhbXBsZRIQCgxF",
+            "eGFtcGxlX05PTkUQACpNCglHYW1lTW9kZWwSEgoOR2FtZU1vZGVsX05PTkUQ",
+            "ABIUChBHYW1lTW9kZWxfU0lOR0xFEAESFgoSR2FtZU1vZGVsX01VTFRJUExF",
+            "EAJCCaoCBkNvbmZpZ2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "Speed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Path", "LogicPath", "Speed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
@@ -90,6 +90,7 @@ namespace Config {
     public Abilitys(Abilitys other) : this() {
       iD_ = other.iD_;
       path_ = other.path_;
+      logicPath_ = other.logicPath_;
       speed_ = other.speed_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -121,8 +122,19 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "LogicPath" field.</summary>
+    public const int LogicPathFieldNumber = 3;
+    private string logicPath_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LogicPath {
+      get { return logicPath_; }
+      set {
+        logicPath_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "Speed" field.</summary>
-    public const int SpeedFieldNumber = 3;
+    public const int SpeedFieldNumber = 4;
     private float speed_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public float Speed {
@@ -147,6 +159,7 @@ namespace Config {
       }
       if (ID != other.ID) return false;
       if (Path != other.Path) return false;
+      if (LogicPath != other.LogicPath) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -156,6 +169,7 @@ namespace Config {
       int hash = 1;
       if (ID != 0) hash ^= ID.GetHashCode();
       if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (LogicPath.Length != 0) hash ^= LogicPath.GetHashCode();
       if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -178,8 +192,12 @@ namespace Config {
         output.WriteRawTag(18);
         output.WriteString(Path);
       }
+      if (LogicPath.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(LogicPath);
+      }
       if (Speed != 0F) {
-        output.WriteRawTag(29);
+        output.WriteRawTag(37);
         output.WriteFloat(Speed);
       }
       if (_unknownFields != null) {
@@ -195,6 +213,9 @@ namespace Config {
       }
       if (Path.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (LogicPath.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LogicPath);
       }
       if (Speed != 0F) {
         size += 1 + 4;
@@ -215,6 +236,9 @@ namespace Config {
       }
       if (other.Path.Length != 0) {
         Path = other.Path;
+      }
+      if (other.LogicPath.Length != 0) {
+        LogicPath = other.LogicPath;
       }
       if (other.Speed != 0F) {
         Speed = other.Speed;
@@ -238,7 +262,11 @@ namespace Config {
             Path = input.ReadString();
             break;
           }
-          case 29: {
+          case 26: {
+            LogicPath = input.ReadString();
+            break;
+          }
+          case 37: {
             Speed = input.ReadFloat();
             break;
           }

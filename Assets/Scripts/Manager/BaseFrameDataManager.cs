@@ -145,6 +145,7 @@ namespace Hamster.SpaceWar {
         public int NetID = 0;
         public int OwnerID = 0;
         public int ConfigID = 0;
+        public float Angle = 0;
         public ENetType NetType = ENetType.None;
         public Vector3 Position = Vector3.zero;
 
@@ -155,6 +156,7 @@ namespace Hamster.SpaceWar {
             NetType = (ENetType)binaryReader.ReadInt16();
             Position.x = binaryReader.ReadSingle();
             Position.z = binaryReader.ReadSingle();
+            Angle = binaryReader.ReadSingle();
         }
 
         public void Write(Packet packet) {
@@ -164,12 +166,14 @@ namespace Hamster.SpaceWar {
             packet.WriteInt16((short)NetType);
             packet.WriteFloat(Position.x);
             packet.WriteFloat(Position.z);
+            packet.WriteFloat(Angle);
         }
 
         public void Reset() {
             NetID = 0;
             OwnerID = 0;
             ConfigID = 0;
+            Angle = 0;
             NetType = ENetType.None;
             Position = Vector3.zero;
         }
@@ -181,6 +185,7 @@ namespace Hamster.SpaceWar {
             info.ConfigID = ConfigID;
             info.NetType = NetType;
             info.Position = Position;
+            info.Angle = Angle;
             return info;
         }
     }

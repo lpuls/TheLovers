@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
             CurrentTime = 0;
             _beginMove = false;
 
-            GetSimulateComponent().UpdatePosition(transform.position, transform.position);
+            // GetSimulateComponent().UpdatePosition(transform.position, transform.position);
         }
 
         public override void Tick(float dt) {
@@ -46,16 +46,18 @@ namespace Hamster.SpaceWar {
         }
 
         protected void MoveByDelta(Vector3 delta) {
-            Vector3 preLocation = _simulateComponent.CurrentLocation;
-            Vector3 newLocation = _simulateComponent.CurrentLocation + delta;
-            _simulateComponent.UpdatePosition(preLocation, newLocation);
+            // Vector3 preLocation = _simulateComponent.CurrentLocation;
+            // Vector3 newLocation = _simulateComponent.CurrentLocation + delta;
+            // _simulateComponent.UpdatePosition(preLocation, newLocation);
+            transform.position += delta;
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
         protected void RotationByDelta(float angle) {
-            Vector3 rotation = transform.rotation.eulerAngles;
-            Vector3 newRotation = new Vector3(0, rotation.y + Mathf.Clamp(angle, -360, 360), 0);
-            _simulateComponent.UpdateAngle(rotation.y, newRotation.y);
+            // Vector3 rotation = transform.rotation.eulerAngles;
+            // Vector3 newRotation = new Vector3(0, rotation.y + Mathf.Clamp(angle, -360, 360), 0);
+            // _simulateComponent.UpdateAngle(rotation.y, newRotation.y);
+            transform.rotation = Quaternion.AngleAxis(transform.rotation.eulerAngles.y + angle, new Vector3(0, 1, 0));
             GameLogicUtility.SetAngleDirty(gameObject);
         }
 

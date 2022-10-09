@@ -16,8 +16,6 @@ namespace Hamster.SpaceWar {
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
-            // ConfigHelper = Single<ConfigHelper>.GetInstance();
-            // base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
             base.InitWorld();
 
             // ∆Ù”√Õ¯¬Á
@@ -40,6 +38,15 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.ServerInitShip(1, true);
         }
 
+
+        protected override void PreloadAssets() {
+            // ‘§œ»º”‘ÿ
+            Asset.Cache("Res/Ships/GreyShip", 2);
+            Asset.Cache("Res/Ships/GreyShipLogic", 2);
+            Asset.Cache("Res/Bullet/OriginBullet", 100);
+            Asset.Cache("Res/Bullet/OriginBulletLogic", 100);
+        }
+
         public override void AddTicker(IServerTicker serverTicker) {
             _serveFrameDataManager.AddTicker(serverTicker);
         }
@@ -49,7 +56,7 @@ namespace Hamster.SpaceWar {
         }
 
         private void OnGameStart() {
-             GameLogicUtility.ServerCreateEnemy(3);
+            GameLogicUtility.ServerCreateEnemy(3, new Vector3(0, 0, 10), 180);
         }
 
         protected override void Update() {

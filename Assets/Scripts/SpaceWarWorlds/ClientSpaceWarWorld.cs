@@ -23,6 +23,12 @@ namespace Hamster.SpaceWar {
 
         }
 
+        protected override void PreloadAssets() {
+            // 预先加载
+            Asset.Cache("Res/Ships/GreyShip", 2);
+            Asset.Cache("Res/Bullet/OriginBullet", 100);
+        }
+
         public int GetFrameIndex() {
             return _frameDataManager.GameLogicFrame;
         }
