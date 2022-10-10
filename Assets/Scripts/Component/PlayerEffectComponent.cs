@@ -25,11 +25,10 @@ namespace Hamster.SpaceWar {
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
 
-        private bool _isDeading = false;
-
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
             _animator = GetComponentInChildren<Animator>();
+            _netSyncComponent = GetComponent<NetSyncComponent>();
 
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
@@ -38,10 +37,17 @@ namespace Hamster.SpaceWar {
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
             int netID = _netSyncComponent.NetID;
             UpdateInfo updateInfo;
-            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.DeadingOrDead, out updateInfo)) {
-                _isDeading = EPlayerState.Deading == (EPlayerState)updateInfo.Data1.Int32;
-                if (_isDeading) {
-                    _animator.SetTrigger("Dead");
+            if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
+                switch ((EPlayerState)updateInfo.Data1.Int32) {
+                    case EPlayerState.Alive:
+                        break;
+                    case EPlayerState.Deading:
+                        // _animator.SetTrigger("Dead");
+                        break;
+                    case EPlayerState.Dead:
+                        GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
+                        deadEffect.transform.position = transform.position;
+                        break;
                 }
             }
         }
@@ -86,6 +92,20 @@ namespace Hamster.SpaceWar {
                 _simulateComponent = GetComponent<SimulateComponent>();
             }
             return _simulateComponent;
+        }
+
+        private void OnEnable() {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            if (null != frameDataManager) {
+                frameDataManager.OnFrameUpdate += OnFrameUpdate;
+            }
+        }
+
+        private void OnDisable() {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            if (null != frameDataManager) {
+                frameDataManager.OnFrameUpdate -= OnFrameUpdate;
+            }
         }
     }
 }

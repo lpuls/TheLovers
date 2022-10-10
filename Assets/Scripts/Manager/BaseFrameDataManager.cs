@@ -139,7 +139,7 @@ namespace Hamster.SpaceWar {
         None,
         Position,
         Angle,
-        DeadingOrDead
+        RoleState
     }
 
     public class SpawnInfo : IFrameInfo, IPool {

@@ -60,7 +60,6 @@ namespace Hamster.SpaceWar {
             // 判断是否死亡
             if (_propertyComponent.IsDeading) {
                 EnableColliders(false);
-                GameLogicUtility.SetDeadingOrDeadDirty(gameObject);
             }
         }
 

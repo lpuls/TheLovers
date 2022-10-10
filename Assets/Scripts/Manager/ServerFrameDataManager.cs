@@ -113,7 +113,7 @@ namespace Hamster.SpaceWar {
                         case EUpdateActorType.Angle:
                             updateInfo.SetFloatForData1(netSyncComponent.transform.rotation.eulerAngles.y);
                             break;
-                        case EUpdateActorType.DeadingOrDead: {
+                        case EUpdateActorType.RoleState: {
                                 if (netSyncComponent.gameObject.TryGetComponent<PropertyComponent>(out PropertyComponent propertyComponent)) {
                                     updateInfo.SetInt32ForData1((int)propertyComponent.State);
                                 }

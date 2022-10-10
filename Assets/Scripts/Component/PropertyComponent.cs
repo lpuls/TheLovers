@@ -39,30 +39,43 @@ namespace Hamster.SpaceWar {
                 _health.Init(1, 1);
                 _speed.Init(1, 1);
             }
-            State = EPlayerState.Alive;
+            _health.OnValueChange = OnHealthChange;
+            SetAlive();
         }
 
         public void ModifyHealth(int delta) {
             int health = _health.GetValue() + delta;
             health = Mathf.Clamp(health, 0, _health.GetMaxValue());
             _health.SetValue(health);
-
-            // 死亡回调
-            if (health <= 0) {
-                State = EPlayerState.Deading;
-            }
         }
 
         public int GetHealth() {
             return (int)(_health.GetValue() * _health.GetMagnification());
         }
 
+        public void SetAlive() {
+            State = EPlayerState.Alive;
+            GameLogicUtility.SetRoleState(gameObject);
+        }
+
         public void SetDead() {
             State = EPlayerState.Dead;
+            GameLogicUtility.SetRoleState(gameObject);
+        }
+
+        public void SetDeading() {
+            State = EPlayerState.Deading;
+            GameLogicUtility.SetRoleState(gameObject);
         }
 
         public float GetSpeed() {
             return _speed.GetValue();
+        }
+
+        private void OnHealthChange(int oldValue, int newValue) {
+            if (oldValue > 0 && newValue <= 0) {
+                SetDeading();
+            }
         }
 
     }
