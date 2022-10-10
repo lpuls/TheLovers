@@ -16,10 +16,6 @@ namespace Hamster.SpaceWar {
         protected int _operatorIndex = 0;
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
-        // 其它
-        protected float _deadTime = 0;
-        protected const float MAX_DEAD_TIME = 0.5f;
-
 
         protected override void ProcessorInput(int operate) {
             GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
@@ -58,30 +54,43 @@ namespace Hamster.SpaceWar {
             return _operate;
         }
 
+        public override void OnAlive(float dt) {
+            _operate = 0;
 
-        public override void Tick(float dt) {
-            // 角色死亡
-            if (_propertyComponent.IsDeading) {
-                _deadTime += dt;
-                if (_deadTime >= MAX_DEAD_TIME) {
-                    _netSyncComponent.Kill(EDestroyActorReason.BeHit);
-                    _propertyComponent.SetDead();
-                }
-            }
-            else if (!_propertyComponent.IsDead && !_propertyComponent.IsDeading) {
-                base.Tick(dt);
-                _operate = 0;
+            // 对武器进行更新
+            _localAbilityComponent.Tick(dt);
 
-                // 对武器进行更新
-                _localAbilityComponent.Tick(dt);
-
-                // 逻辑执行移动操作
-                if (_movementComponent.NeedMove) {
-                    transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
-                    GameLogicUtility.SetPositionDirty(gameObject);
-                }
+            // 逻辑执行移动操作
+            if (_movementComponent.NeedMove) {
+                Vector3 oldPosition = transform.position;
+                transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
+                GameLogicUtility.SetPositionDirty(gameObject);
             }
         }
+
+        //public override void Tick(float dt) {
+        //    // 角色死亡
+        //    if (_propertyComponent.IsDeading) {
+        //        _deadTime += dt;
+        //        if (_deadTime >= MAX_DEAD_TIME) {
+        //            _netSyncComponent.Kill(EDestroyActorReason.BeHit);
+        //            _propertyComponent.SetDead();
+        //        }
+        //    }
+        //    else if (_propertyComponent.IsAlive) {
+        //        base.Tick(dt);
+        //        _operate = 0;
+
+        //        // 对武器进行更新
+        //        _localAbilityComponent.Tick(dt);
+
+        //        // 逻辑执行移动操作
+        //        if (_movementComponent.NeedMove) {
+        //            transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
+        //            GameLogicUtility.SetPositionDirty(gameObject);
+        //        }
+        //    }
+        //}
 
     }
 }

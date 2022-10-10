@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4369222755601570750}
   - component: {fileID: 4713172232722802347}
   - component: {fileID: 9208511929154961984}
+  - component: {fileID: 6728029874140454087}
+  - component: {fileID: -4012478367286504076}
   m_Layer: 0
   m_Name: GreyShipLogic
   m_TagString: Untagged
@@ -92,6 +94,33 @@ MonoBehaviour:
   ConfigID: 0
   PendingKill: 0
   NetType: 0
+--- !u!114 &6728029874140454087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369222755601570720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f9eba32ba5985449e5539b1296c3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 30
+  HalfSize: 1
+  _moveSpeed: 0
+--- !u!114 &-4012478367286504076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369222755601570720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273bfec4176c43440bf7a238d4a33a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5906673227095538560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175925048512297339, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5685879178270266555, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: Parent

@@ -7,15 +7,15 @@ namespace Hamster.SpaceWar {
         public override void Move(float dt) {
             float moveDistance = dt * _moveSpeed;
 
-            bool hasHit = false;
-            float originDistance = moveDistance;
+            // bool hasHit = false;
+            // float originDistance = moveDistance;
             Vector3 currentLocation = transform.position;
 
             Quaternion quaternion = Quaternion.Euler(_moveDirection);
             if (Physics.BoxCast(currentLocation, BoxHalfSize, _moveDirection, out RaycastHit hitResult,
                 quaternion, moveDistance, _isPlayer ? 1 << (int)ESpaceWarLayers.ENEMY : 1 << (int)ESpaceWarLayers.PLAYER)) {
                 OnHitSomething(hitResult.collider.gameObject);
-                hasHit = true;
+                // hasHit = true;
                 moveDistance = hitResult.distance;
             }
 

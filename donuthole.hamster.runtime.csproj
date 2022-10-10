@@ -80,6 +80,7 @@
     <Compile Include="Packages\Hamster\runtime\Common\Net\ServerSocket.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Core\ConfigHelper.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Net\MutileMessageModule.cs" />
+    <Compile Include="Packages\Hamster\runtime\Common\DataStruct\ModityValue.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\UI\UIViewExtend.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Core\WorldSwapData.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Core\World.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="Packages\Hamster\runtime\Common\Blackboard.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\Net\NetModule.cs" />
     <Compile Include="Packages\Hamster\runtime\Common\UI\UIViewScroll.cs" />
-    <Compile Include="Packages\Hamster\runtime\Common\DataStruct\ModityValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\Hamster\runtime\donuthole.hamster.runtime.asmdef" />

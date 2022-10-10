@@ -31,6 +31,7 @@ namespace Hamster.SpaceWar {
             Vector3 oldLocation = location;
             location += _moveDirection * _moveSpeed;
             location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, HalfSize);
+            // Debug.Log(string.Format("MoveTick {0} {1} {2} {3} {4} {5}", gameObject.name, oldLocation, location, _moveDirection, _moveSpeed, index));
             return location;
         }
 

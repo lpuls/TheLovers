@@ -200,7 +200,6 @@ namespace Hamster.SpaceWar {
                 lastLocation = command.Location;
             }
             CurrentLocation = lastLocation;
-            Debug.Log(string.Format("SetCurrent: {0}, {1}", gameObject.name, CurrentLocation));
         }
 
         private MovementComponent GetMovementComponent() {

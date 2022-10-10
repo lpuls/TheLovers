@@ -85,7 +85,6 @@ namespace Hamster.SpaceWar {
                     destroyInfo.NetID = netSyncComponent.NetID;
                     destroyInfo.Reason = netSyncComponent.DestroyReason;
                     frameData.DestroyInfos.Add(destroyInfo);
-                    Debug.Log(string.Format("Destroy {2} ServerTick: {0}, {1}", destroyInfo.NetID, destroyInfo.Reason, frameData.FrameIndex));
                 }
                 else if (netSyncComponent.IsNewObject) {
                     netSyncComponent.IsNewObject = false;

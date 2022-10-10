@@ -8,12 +8,17 @@ namespace Hamster.SpaceWar {
         private GameLogicSyncModule _gameLogicSyncModule = null;
         private MovementComponent _movementComponent = null;
         private SimulateComponent _simulateComponent = null;
+        private PropertyComponent _propertyComponent = null;
 
         public override void Init() {
             base.Init();
 
             _movementComponent = gameObject.TryGetOrAdd<MovementComponent>();
             _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
+            _propertyComponent = gameObject.TryGetOrAdd<PropertyComponent>();
+
+            _propertyComponent.InitProperty(_netSyncComponent.ConfigID);
+            _movementComponent.Speed = _propertyComponent.GetSpeed();
 
             // 主控端需要通过该网络模块转发数据
             ClientNetDevice netDeivce = World.GetWorld().GetManager<ClientNetDevice>();

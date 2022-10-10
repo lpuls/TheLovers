@@ -3,21 +3,19 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public class BaseEnemy : BaseController, IDamage {
+    public class BaseEnemy : ServerBaseController, IDamage {
 
-        protected MovementComponent _movementComponent = null;
-        protected LocalAbilityComponent _localAbilityComponent = null;
 
         public float CurrentTime = 0;
         public MovePath MovePath = null;
 
         private bool _beginMove = false;
 
-        public override void Init() {
-            base.Init();
-            _movementComponent = GetComponent<MovementComponent>();
-            _localAbilityComponent = GetComponent<LocalAbilityComponent>();
-        }
+        //public override void Init() {
+        //    base.Init();
+        //    _movementComponent = GetComponent<MovementComponent>();
+        //    _localAbilityComponent = GetComponent<LocalAbilityComponent>();
+        //}
 
         public void BeginMove(MovePath movePath) {
             MovePath = movePath;
@@ -46,24 +44,14 @@ namespace Hamster.SpaceWar {
         }
 
         protected void MoveByDelta(Vector3 delta) {
-            // Vector3 preLocation = _simulateComponent.CurrentLocation;
-            // Vector3 newLocation = _simulateComponent.CurrentLocation + delta;
-            // _simulateComponent.UpdatePosition(preLocation, newLocation);
             transform.position += delta;
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
         protected void RotationByDelta(float angle) {
-            // Vector3 rotation = transform.rotation.eulerAngles;
-            // Vector3 newRotation = new Vector3(0, rotation.y + Mathf.Clamp(angle, -360, 360), 0);
-            // _simulateComponent.UpdateAngle(rotation.y, newRotation.y);
             transform.rotation = Quaternion.AngleAxis(transform.rotation.eulerAngles.y + angle, new Vector3(0, 1, 0));
             GameLogicUtility.SetAngleDirty(gameObject);
         }
 
-        public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
-            //_netSyncComponent.Kill(EDestroyActorReason.BeHit);
-            Debug.Log("I Be Kill!!");
-        }
     }
 }
