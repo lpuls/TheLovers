@@ -32,6 +32,7 @@ namespace Hamster.SpaceWar {
 
         [SerializeField] protected bool _hitOnDestroy = true;
 
+
         public virtual void InitProperty(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
             _parent = parent;
             _moveDirection = moveDirection;

@@ -97,8 +97,8 @@ namespace Hamster.SpaceWar {
                         case ENetType.Bullet:
                             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(item.ConfigID, out Config.Abilitys abilityConfig)) {
                                 GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position, item.NetType);
-                                if (bullet.TryGetComponent<TailManager>(out TailManager tailManager)) {
-                                    tailManager.ShowTail();
+                                if (bullet.TryGetComponent<TrajectoryEffectComponent>(out TrajectoryEffectComponent trajectoryEffectComponent)) {
+                                    trajectoryEffectComponent.EnableTrail(true);
                                 }
                             }
                             break;
