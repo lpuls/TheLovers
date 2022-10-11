@@ -229,19 +229,23 @@ namespace Hamster.SpaceWar {
 
         // 收到客户端准备完成的消息
         private void OnReceiveAllReadyRequestMessage(Packet packet, ClientInstance clientInstance) {
-            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ServerFrameDataManager;
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
-            UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
-
-            int maxPlayerCount = 1;
-            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
-                maxPlayerCount = swapData.Setting.MaxPlayer;
-            if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
-                frameDataManager.IsGameStart = true;
-                frameDataManager.OnGameStart?.Invoke();
+            if (frameDataManager.IsGameStart) {
                 BroadcastGameStart();
             }
+
+            //UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
+
+            //int maxPlayerCount = 1;
+            //if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
+            //    maxPlayerCount = swapData.Setting.MaxPlayer;
+            //if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
+            //    frameDataManager.IsGameStart = true;
+            //    frameDataManager.OnGameStart?.Invoke();
+            //    BroadcastGameStart();
+            //}
         }
 
         // 收到客户端请求的创建战机事件
@@ -269,7 +273,7 @@ namespace Hamster.SpaceWar {
         public void ResponSpawnShipToClients(int configID, int netID, Vector3 location) {
             S2CSpawnShipMessage message = ObjectPool<S2CSpawnShipMessage>.Malloc();
 
-            BaseFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>();
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             var netActors = frameDataManager.GetAllNetActor();

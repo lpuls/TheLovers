@@ -10,8 +10,6 @@ namespace Hamster.SpaceWar
 
         public int Operator = 0;
         public int Index = 0;
-        public float X = 0;
-        public float Z = 0;
 
         public override int NetMessageID
         {
@@ -23,12 +21,10 @@ namespace Hamster.SpaceWar
 
         public override Packet ToPacket(IPacketMallocer mallocer)
         {
-            Packet packet = mallocer.Malloc(sizeof(int) * 3 + sizeof(float) * 2);
+            Packet packet = mallocer.Malloc(sizeof(int) * 3);
             packet.WriteInt32(GameLogicSyncMessage.NET_GAME_LOGIC_SYNC_ID);
             packet.WriteInt32(Operator);
             packet.WriteInt32(Index);
-            packet.WriteFloat(X);
-            packet.WriteFloat(Z);
             return packet;
         }
     }
@@ -90,8 +86,7 @@ namespace Hamster.SpaceWar
 
         public override void OnReceiveServerMessage(Packet p)
         {
-            // UnityEngine.Debug.Log(string.Format("Receive Logic Mirror Data: {0}", p.GetLength()));
-            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<BaseFrameDataManager>() as ClientFrameDataManager;
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
             int dataSize = p.ReadInt32();
             byte[] byteArray = p.ReadBytes(dataSize);
             frameDataManager.AnalyzeBinary(byteArray);

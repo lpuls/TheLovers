@@ -31,15 +31,6 @@ namespace Hamster.SpaceWar {
 
         public ClientFrameDataManager() {
             _binaryReader = new BinaryReader(new MemoryStream(_analyzeBytes));
-
-            // todo 之后这个值需要读表
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>(0, out Config.GameSetting gameSetting)) {
-                MaxPlayerCount = gameSetting.MaxPlayer;
-            }
-            else {
-                MaxPlayerCount = 1;
-            }
-
             CurrentPlayerCount = 0;
             IsGameStart = false;
         }

@@ -426,25 +426,12 @@ namespace Hamster.SpaceWar {
             set;
         }
 
-        public int MaxPlayerCount {
-            get;
-            set;
-        }
-
         public int CurrentPlayerCount {
             get;
             set;
         }
 
         public BaseFrameDataManager() {
-            // todo 之后这个值需要读表
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>(0, out Config.GameSetting gameSetting)) {
-                MaxPlayerCount = gameSetting.MaxPlayer;
-            }
-            else {
-                MaxPlayerCount = 1;
-            }
-
             CurrentPlayerCount = 0;
             IsGameStart = false;
         }
