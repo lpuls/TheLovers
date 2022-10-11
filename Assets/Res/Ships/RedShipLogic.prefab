@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 664642698064463598}
   - component: {fileID: 8427181435692170235}
   - component: {fileID: 5355032014810865424}
+  - component: {fileID: -5078827154864291638}
   m_Layer: 0
   m_Name: RedShipLogic
   m_TagString: Untagged
@@ -92,6 +93,18 @@ MonoBehaviour:
   ConfigID: 0
   PendingKill: 0
   NetType: 0
+--- !u!114 &-5078827154864291638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664642698064463600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273bfec4176c43440bf7a238d4a33a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3322913876426890808
 PrefabInstance:
   m_ObjectHideFlags: 0
