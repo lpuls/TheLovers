@@ -236,16 +236,16 @@ namespace Hamster.SpaceWar {
                 BroadcastGameStart();
             }
 
-            //UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
+            UnityEngine.Debug.Assert(!frameDataManager.IsGameStart, "Game Is Started");
 
-            //int maxPlayerCount = 1;
-            //if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
-            //    maxPlayerCount = swapData.Setting.MaxPlayer;
-            //if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
-            //    frameDataManager.IsGameStart = true;
-            //    frameDataManager.OnGameStart?.Invoke();
-            //    BroadcastGameStart();
-            //}
+            int maxPlayerCount = 1;
+            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
+                maxPlayerCount = swapData.Setting.MaxPlayer;
+            if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
+                frameDataManager.IsGameStart = true;
+                frameDataManager.OnGameStart?.Invoke();
+                BroadcastGameStart();
+            }
         }
 
         // 收到客户端请求的创建战机事件

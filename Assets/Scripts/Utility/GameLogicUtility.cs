@@ -65,12 +65,11 @@ namespace Hamster.SpaceWar {
             frameDataManager.CurrentPlayerCount++;
 
             // 单人测试，直接开服
-            int maxPlayerCount = 1;
-            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData))
-                maxPlayerCount = swapData.Setting.MaxPlayer;
-            if (frameDataManager.CurrentPlayerCount >= maxPlayerCount) {
-                frameDataManager.IsGameStart = true;
-                frameDataManager.OnGameStart?.Invoke();
+            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData)) {
+                if (Config.GameModel.Single == swapData.GameModel) {
+                    frameDataManager.IsGameStart = true;
+                    frameDataManager.OnGameStart?.Invoke();
+                }
             }
 
             // 为表现层生成

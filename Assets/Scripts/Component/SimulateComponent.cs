@@ -94,14 +94,6 @@ namespace Hamster.SpaceWar {
                 else {
                     UpdatePosition(preLocation, currentLocation);
                 }
-                //if (currentUpdateInfo.Data2.Int32 > -1) {
-                //    Debug.Log(string.Format("Update Frame {0} {1} {2} {3}", gameObject.name, preLocation, currentLocation, currentUpdateInfo.Data2.Int32));
-                //    UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
-                //}
-                //else {
-                //    UpdatePosition(preLocation, currentLocation);
-                //}
-
             }
         }
 
@@ -116,18 +108,23 @@ namespace Hamster.SpaceWar {
                     }
 
                     // 检查預測值是否与逻辑值相同
-                    if (null != command && command.FrameIndex == _predictionIndex) {
-                        // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
-                        if (command.Location != _serverCurrentLocation) {
-                            PreLocation = _serverPreLocation;
-                            CurrentLocation = _serverCurrentLocation;
-                            _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
+                    if (null != command) {
+                        if (command.FrameIndex == _predictionIndex) {
+                            // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
+                            if (command.Location != _serverCurrentLocation) {
+                                PreLocation = _serverPreLocation;
+                                CurrentLocation = _serverCurrentLocation;
+                                _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
 
-                            // 移除最顶上的操作并重新模拟
-                            RemoveTopPredictionCommand();
-                            SimulateAfter();
+                                // 移除最顶上的操作并重新模拟
+                                RemoveTopPredictionCommand();
+                                SimulateAfter();
+                            }
+                            else {
+                                RemoveTopPredictionCommand();
+                            }
                         }
-                        else {
+                        else if (command.FrameIndex > _predictionIndex) {
                             RemoveTopPredictionCommand();
                         }
                     }
