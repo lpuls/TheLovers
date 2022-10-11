@@ -87,10 +87,20 @@ namespace Hamster.SpaceWar {
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
-                if (currentUpdateInfo.Data2.Int32 > -1)
+                if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data1.Int32 > -1) {
+                    Debug.Log(string.Format("Update Frame {0} {1} {2} {3}", gameObject.name, preLocation, currentLocation, currentUpdateInfo.Data2.Int32));
                     UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
-                else
+                }
+                else {
                     UpdatePosition(preLocation, currentLocation);
+                }
+                //if (currentUpdateInfo.Data2.Int32 > -1) {
+                //    Debug.Log(string.Format("Update Frame {0} {1} {2} {3}", gameObject.name, preLocation, currentLocation, currentUpdateInfo.Data2.Int32));
+                //    UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+                //}
+                //else {
+                //    UpdatePosition(preLocation, currentLocation);
+                //}
 
             }
         }
