@@ -51,14 +51,6 @@ namespace Hamster {
             _socket.EndReceive(asyncResult);
             byte[] data = (byte[])asyncResult.AsyncState;
             if (0 < _packetManager.Analyze(data)) {
-                // UnityEngine.Debug.Log("=========> Receive Message");
-                //Queue<Packet> packets = _packetManager.GetPackets();
-                //var it = packets.GetEnumerator();
-                //while (it.MoveNext()) {
-                //    Packet p = it.Current;
-                //    OnReceiveMessageCompleted?.Invoke(p);
-                //}
-                // _packetManager.CleanPackets();
             }
             Array.Clear(data, 0, data.Length);
             StartReceive();
