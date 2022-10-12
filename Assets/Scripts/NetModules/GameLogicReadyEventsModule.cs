@@ -71,6 +71,8 @@ namespace Hamster.SpaceWar {
 
         private List<SpawnShipInfo> _shipInfos = new List<SpawnShipInfo>();
 
+        public int ClientShipNetID = 0;
+
         public override int MessageType {
             get {
                 return (int)EGameLogicEventID.S2C_SpawnShip;
@@ -83,7 +85,8 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        protected override int PacketSize => base.PacketSize + sizeof(int) + (sizeof(int) * 2 + sizeof(float) * 2 + sizeof(bool)) * _shipInfos.Count;
+        // protected override int PacketSize => base.PacketSize + sizeof(int) + (sizeof(int) * 2 + sizeof(float) * 2 + sizeof(bool)) * _shipInfos.Count;
+        protected override int PacketSize => base.PacketSize + sizeof(int);
 
         public void AddShipInfo(int configID, int netID, float x, float y, bool userShip) {
             _shipInfos.Add(new SpawnShipInfo { 
@@ -97,16 +100,17 @@ namespace Hamster.SpaceWar {
 
         public override Packet ToPacket(IPacketMallocer mallocer) {
             Packet packet = base.ToPacket(mallocer);
-            packet.WriteInt32(_shipInfos.Count);
-            var it = _shipInfos.GetEnumerator();
-            while (it.MoveNext()) {
-                SpawnShipInfo info = it.Current;
-                packet.WriteInt32(info.ConfigID);
-                packet.WriteInt32(info.NetID);
-                packet.WriteFloat(info.X);
-                packet.WriteFloat(info.Y);
-                packet.WriteBool(info.UserShip);
-            }
+            //packet.WriteInt32(_shipInfos.Count);
+            //var it = _shipInfos.GetEnumerator();
+            //while (it.MoveNext()) {
+            //    SpawnShipInfo info = it.Current;
+            //    packet.WriteInt32(info.ConfigID);
+            //    packet.WriteInt32(info.NetID);
+            //    packet.WriteFloat(info.X);
+            //    packet.WriteFloat(info.Y);
+            //    packet.WriteBool(info.UserShip);
+            //}
+            packet.WriteInt32(ClientShipNetID);
             return packet;
         }
 
@@ -172,28 +176,28 @@ namespace Hamster.SpaceWar {
 
         // 收到服务端回应的创建战机事件
         private void OnReceiveSpawnShipResponMessage(Packet packet) {
-            int shipCount = packet.ReadInt32();
-            for (int i = 0; i < shipCount; i++) {
-                int configID = packet.ReadInt32();  // todo 该值是用于创建对应的角色的，现在先写死
-                int netID = packet.ReadInt32();
-                float x = packet.ReadFloat();
-                float y = packet.ReadFloat();
-                bool userShip = packet.ReadBool();
+            //int shipCount = packet.ReadInt32();
+            //for (int i = 0; i < shipCount; i++) {
+            //    int configID = packet.ReadInt32();  // todo 该值是用于创建对应的角色的，现在先写死
+            //    int netID = packet.ReadInt32();
+            //    float x = packet.ReadFloat();
+            //    float y = packet.ReadFloat();
+            //    bool userShip = packet.ReadBool();
 
-                // 创建角色
-                GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0), userShip);
-                //if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                //    if (userShip)
-                //        netSyncComponent.SetAutonomousProxy();
-                //    else
-                //        netSyncComponent.SetSimulatedProxy();
-                //}
-                //ship.AddComponent<SimulateComponent>();
-                //if (userShip) {
-                //    ship.AddComponent<ClientPlayerController>();
-                //}
-            }
-
+            //    // 创建角色
+            //    GameObject ship = GameLogicUtility.ClientCreateShip(configID, netID, new Vector3(x, y, 0), userShip);
+            //    //if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+            //    //    if (userShip)
+            //    //        netSyncComponent.SetAutonomousProxy();
+            //    //    else
+            //    //        netSyncComponent.SetSimulatedProxy();
+            //    //}
+            //    //ship.AddComponent<SimulateComponent>();
+            //    //if (userShip) {
+            //    //    ship.AddComponent<ClientPlayerController>();
+            //    //}
+            //}
+            World.GetWorld<BaseSpaceWarWorld>().PlayerNetID = packet.ReadInt32();
             RequestReadyToServer();
         }
 
@@ -272,20 +276,20 @@ namespace Hamster.SpaceWar {
 
         public void ResponSpawnShipToClients(int configID, int netID, Vector3 location) {
             S2CSpawnShipMessage message = ObjectPool<S2CSpawnShipMessage>.Malloc();
+            message.ClientShipNetID = netID;
+            //ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
+            //UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
-            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
-            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
-
-            var netActors = frameDataManager.GetAllNetActor();
-            var it = netActors.GetEnumerator();
-            while (it.MoveNext()) {
-                NetSyncComponent netSyncComponent = it.Current.Value;
-                GameObject ship = netSyncComponent.gameObject;
-                message.AddShipInfo(netSyncComponent.ConfigID, netSyncComponent.NetID,
-                    ship.transform.position.x,
-                    ship.transform.position.y,
-                    netSyncComponent.NetID == netID);
-            }
+            //var netActors = frameDataManager.GetAllNetActor();
+            //var it = netActors.GetEnumerator();
+            //while (it.MoveNext()) {
+            //    NetSyncComponent netSyncComponent = it.Current.Value;
+            //    GameObject ship = netSyncComponent.gameObject;
+            //    message.AddShipInfo(netSyncComponent.ConfigID, netSyncComponent.NetID,
+            //        ship.transform.position.x,
+            //        ship.transform.position.y,
+            //        netSyncComponent.NetID == netID);
+            //}
             _device.SendMessage(message);
             ObjectPool<S2CSpawnShipMessage>.Free(message);
         }

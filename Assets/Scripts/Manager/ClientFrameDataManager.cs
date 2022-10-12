@@ -81,18 +81,20 @@ namespace Hamster.SpaceWar {
                     switch (item.NetType) {
                         case ENetType.Player:
                         case ENetType.Enemy:
-                            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(item.ConfigID, out Config.ShipConfig shipConfig)) {
-                                GameObject ship = SpawnNetObject(item.NetID, item.OwnerID, shipConfig.Path, 0, item.Position, item.NetType);
-                                ship.transform.rotation = Quaternion.Euler(0, item.Angle, 0);
-                            }
+                            //if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(item.ConfigID, out Config.ShipConfig shipConfig)) {
+                            //    GameObject ship = SpawnNetObject(item.NetID, item.OwnerID, shipConfig.Path, 0, item.Position, item.NetType);
+                            //    ship.transform.rotation = Quaternion.Euler(0, item.Angle, 0);
+                            //}
+                            GameLogicUtility.ClientCreateShip(item.ConfigID, item.NetID, item.Position, item.Angle, item.NetType);
                             break;
                         case ENetType.Bullet:
-                            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(item.ConfigID, out Config.Abilitys abilityConfig)) {
-                                GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position, item.NetType);
-                                if (bullet.TryGetComponent<TrajectoryEffectComponent>(out TrajectoryEffectComponent trajectoryEffectComponent)) {
-                                    trajectoryEffectComponent.EnableTrail(true);
-                                }
-                            }
+                            //if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(item.ConfigID, out Config.Abilitys abilityConfig)) {
+                            //    GameObject bullet = SpawnNetObject(item.NetID, item.OwnerID, abilityConfig.Path, 0, item.Position, item.NetType);
+                            //    if (bullet.TryGetComponent<TrajectoryEffectComponent>(out TrajectoryEffectComponent trajectoryEffectComponent)) {
+                            //        trajectoryEffectComponent.EnableTrail(true);
+                            //    }
+                            //}
+                            GameLogicUtility.CreateClientBullet(item.ConfigID, item.NetID, item.OwnerID, item.Position, item.Angle);
                             break;
                     }
                 }

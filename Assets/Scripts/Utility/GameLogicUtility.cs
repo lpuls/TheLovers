@@ -4,6 +4,7 @@ namespace Hamster.SpaceWar {
 
     public static class GameLogicUtility {
 
+        #region Server
         public static GameObject CreateShip(int configID, ENetType netType) {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
@@ -16,30 +17,6 @@ namespace Hamster.SpaceWar {
             return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/Player/GreyPlayerShipLogic", configID, spawnLocation, ENetType.None);
         }
 
-        public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, bool userShip) {
-            GameObject ship = null;
-            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
-            if (!frameDataManager.HasNetObject(netID, 0)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
-                    ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, ENetType.Player);
-                    ship.AddComponent<SimulateComponent>();
-                    if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                        if (userShip)
-                            netSyncComponent.SetAutonomousProxy();
-                        else
-                            netSyncComponent.SetSimulatedProxy();
-                    }
-                    if (userShip) {
-                        ship.AddComponent<MovementComponent>();
-                        ship.AddComponent<ClientPlayerController>();
-                    }
-                    else {
-                        ship.AddComponent<ClientSimulateController>();
-                    }
-                }
-            }
-            return ship;
-        }
 
         public static GameObject ServerInitShip(int configID, bool isCreateForSelf) {
             // 为逻辑层生成
@@ -48,9 +25,16 @@ namespace Hamster.SpaceWar {
 
             ship.layer = (int)ESpaceWarLayers.PLAYER;
 
-            // 服务端即是客户端也是服务端
+            // 设置为服务端飞机，如果是为自己创建的飞机则需要记录下netid，方便之后创建表现用的飞机
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                 netSyncComponent.SetAuthority();
+
+                if (isCreateForSelf) {
+                    BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
+                    Debug.Assert(null != world, "Client World Is Invalid");
+
+                    world.PlayerNetID = netSyncComponent.NetID;
+                }
             }
 
             // 需要直接添加控制器
@@ -72,8 +56,9 @@ namespace Hamster.SpaceWar {
                 }
             }
 
+
             // 为表现层生成
-            ClientCreateShip(configID, netSyncComponent.NetID, ship.transform.position, isCreateForSelf);
+            // ClientCreateShip(configID, netSyncComponent.NetID, ship.transform.position, isCreateForSelf);
 
             return ship;
         }
@@ -145,19 +130,6 @@ namespace Hamster.SpaceWar {
             return bullet;
         }
 
-        public static GameObject CreateClientBullet(int config, int ownerID, Vector3 position) {
-            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
-            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
-
-            GameObject bullet = null;
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
-                bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
-                if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                    frameDataManager.AddPredictionActor(netSyncComponent);
-                }
-            }
-            return bullet;
-        }
 
         public static void SetPositionDirty(GameObject gameObject) {
             SetPropertyDirty(gameObject, EUpdateActorType.Position);
@@ -177,6 +149,58 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        #endregion
+
+        #region Client
+        public static GameObject CreateClientBullet(int config, int netID, int ownerID, Vector3 position, float angle) {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            GameObject bullet = null;
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+                bullet = frameDataManager.SpawnNetObject(netID, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
+                bullet.transform.rotation = Quaternion.Euler(0, angle, 0);
+                if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    //frameDataManager.AddPredictionActor(netSyncComponent);
+                    netSyncComponent.SetSimulatedProxy();
+                }
+                if (bullet.TryGetComponent<TrajectoryEffectComponent>(out TrajectoryEffectComponent trajectoryEffectComponent)) {
+                    trajectoryEffectComponent.EnableTrail(true);
+                }
+            }
+            return bullet;
+        }
+
+        public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, float angle, ENetType netType /*, bool userShip*/) {
+            BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
+            Debug.Assert(null != world, "Client World Is Invalid");
+
+            GameObject ship = null;
+            bool userShip = netID == world.PlayerNetID;
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            if (!frameDataManager.HasNetObject(netID, 0)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
+                    ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, netType);
+                    ship.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                    if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                        if (userShip)
+                            netSyncComponent.SetAutonomousProxy();
+                        else
+                            netSyncComponent.SetSimulatedProxy();
+                    }
+                    if (userShip) {
+                        ship.AddComponent<MovementComponent>();
+                        ship.AddComponent<ClientPlayerController>();
+                    }
+                }
+            }
+            return ship;
+        }
+
+        #endregion
+
+        #region Common
         public static void GetOperateFromInput(Transform transform, int operate, out Vector3 direction, out bool castAbility1) {
             direction = Vector3.zero;
             castAbility1 = false;
@@ -216,6 +240,8 @@ namespace Hamster.SpaceWar {
             }
             return operate;
         }
+
+        #endregion
 
     }
 }

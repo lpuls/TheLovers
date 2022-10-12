@@ -13,6 +13,11 @@ namespace Hamster.SpaceWar {
     public class BaseSpaceWarWorld : World {
         public Vector3 WorldSize = Vector3.one;
 
+        public int PlayerNetID {
+            get;
+            set;
+        }
+
         public void Awake() {
             ActiveWorld();
             InitWorld();
