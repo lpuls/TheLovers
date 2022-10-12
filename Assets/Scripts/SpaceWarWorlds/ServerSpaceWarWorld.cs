@@ -8,6 +8,7 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = null;  // new ServerNetDevice();
         private ServerFrameDataManager _serveFrameDataManager = new ServerFrameDataManager();
         private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
+        private EnemyManager _enemyManager = new EnemyManager();
 
         public ServerNetDevice NetDevice {
             get {
@@ -42,6 +43,11 @@ namespace Hamster.SpaceWar {
         protected override void PreloadAssets() {
             // т╓ох╪сть
             Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            Asset.Cache("Res/Ships/Player/RedPlayerShip", 2);
+            Asset.Cache("Res/Ships/Enemy/PurpleShip", 2);
+            Asset.Cache("Res/Ships/Enemy/PurpleShipLogic", 2);
+            Asset.Cache("Res/Ships/Enemy/RedShip", 2);
+            Asset.Cache("Res/Ships/Enemy/RedShipLogic", 2);
             Asset.Cache("Res/Ships/Player/GreyPlayerShipLogic", 2);
             Asset.Cache("Res/Bullet/OriginBullet", 100);
             Asset.Cache("Res/Bullet/OriginBulletLogic", 100);
@@ -57,6 +63,7 @@ namespace Hamster.SpaceWar {
 
         private void OnGameStart() {
             GameLogicUtility.ServerCreateEnemy(10, new Vector3(0, 0, 10), 180);
+            GameLogicUtility.ServerCreateEnemy(11, new Vector3(0, 0, 10), 180);
         }
 
         protected override void Update() {
@@ -69,6 +76,7 @@ namespace Hamster.SpaceWar {
             
             _serveFrameDataManager.Update();
             _clientFrameDataManager.Update();
+            _enemyManager.Update();
         }
 
         public void OnDestroy() {

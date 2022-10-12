@@ -21,7 +21,6 @@ namespace Hamster.SpaceWar {
         protected float _spawnTime = 0;
         protected const float MAX_SPAWNING_TIME = 0.5f;
 
-
         public void Awake() {
             Collider[] colliders = GetComponents<Collider>();
             for (int i = 0; i < colliders.Length; i++) {
@@ -65,6 +64,7 @@ namespace Hamster.SpaceWar {
             // 判断是否死亡
             if (_propertyComponent.IsDeading) {
                 EnableColliders(false);
+                OnDie?.Invoke(gameObject, hitObject);
             }
         }
 

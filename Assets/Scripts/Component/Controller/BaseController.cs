@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -8,6 +9,8 @@ namespace Hamster.SpaceWar {
         
         // protected SimulateComponent _simulateComponent = null;
         protected NetSyncComponent _netSyncComponent = null;
+
+        public Action<GameObject, GameObject> OnDie = delegate { };
 
         public virtual void OnEnable() {
             Init();
