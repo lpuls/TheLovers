@@ -39,14 +39,22 @@ namespace Hamster.SpaceWar {
             UpdateInfo updateInfo;
             if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
                 switch ((EPlayerState)updateInfo.Data1.Int32) {
+                    case EPlayerState.Spawning: {
+                            GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
+                            spawnEffect.transform.position = transform.position;
+                            spawnEffect.transform.forward = transform.forward;
+                        }
+                        break;
                     case EPlayerState.Alive:
                         break;
-                    case EPlayerState.Deading:
-                        // _animator.SetTrigger("Dead");
+                    case EPlayerState.Deading: {
+                            GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
+                            deadEffect.transform.position = transform.position;
+                        }
                         break;
-                    case EPlayerState.Dead:
-                        GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
-                        deadEffect.transform.position = transform.position;
+                    case EPlayerState.Dead: {
+                            _animator.SetTrigger("Dead");
+                        }
                         break;
                 }
             }

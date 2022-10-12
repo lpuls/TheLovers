@@ -16,7 +16,7 @@ namespace Hamster.SpaceWar {
 
         // 其它
         protected float _deadTime = 0;
-        protected const float MAX_DEAD_TIME = 0.5f;
+        protected const float MAX_DEAD_TIME = 0.0f;  // 0.5f;
 
         protected float _spawnTime = 0;
         protected const float MAX_SPAWNING_TIME = 0.5f;

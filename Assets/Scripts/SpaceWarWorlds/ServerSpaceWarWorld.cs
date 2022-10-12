@@ -81,13 +81,13 @@ namespace Hamster.SpaceWar {
             GUILayout.Label("Frame " + _serveFrameDataManager.ServerLogicFrame);
         }
 
-        
+
 
         #region GM
-        //[GM]
-        //public static void GM_Ping(string[] gmParams) {
-        //    GetWorld<NetSpaceWarWorld>()._netPingModule.SendClientPingMessage();
-        //}
+        [GM]
+        public static void GM_SpawnEnemy(string[] gmParams) {
+            GameLogicUtility.ServerCreateEnemy(10, new Vector3(0, 0, 10), 180);
+        }
         #endregion
 
     }
