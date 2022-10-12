@@ -41,8 +41,8 @@ namespace Hamster.SpaceWar {
 
         protected override void PreloadAssets() {
             // т╓ох╪сть
-            Asset.Cache("Res/Ships/GreyShip", 2);
-            Asset.Cache("Res/Ships/GreyShipLogic", 2);
+            Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            Asset.Cache("Res/Ships/Player/GreyPlayerShipLogic", 2);
             Asset.Cache("Res/Bullet/OriginBullet", 100);
             Asset.Cache("Res/Bullet/OriginBulletLogic", 100);
         }
