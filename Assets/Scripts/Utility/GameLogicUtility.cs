@@ -190,7 +190,7 @@ namespace Hamster.SpaceWar {
                             netSyncComponent.SetSimulatedProxy();
                     }
                     if (userShip) {
-                        ship.AddComponent<MovementComponent>();
+                        ship.TryGetOrAdd<MovementComponent>();
                         ship.AddComponent<ClientPlayerController>();
                     }
                 }

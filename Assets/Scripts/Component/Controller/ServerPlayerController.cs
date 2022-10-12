@@ -14,6 +14,7 @@ namespace Hamster.SpaceWar {
         // 输入
         protected int _operate = 0;
         protected int _operatorIndex = 0;
+        protected bool _isFired = false;
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
 
@@ -22,7 +23,8 @@ namespace Hamster.SpaceWar {
 
             // 玩家发送射子弹
             if (null != _localAbilityComponent && cast1)
-                _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
+                _isFired = true;
+                //_localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
 
             // 玩家进行移动
             if (!moveDirection.Equals(Vector3.zero))
@@ -67,6 +69,11 @@ namespace Hamster.SpaceWar {
                 if (_movementComponent.NeedMove) {
                     transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
                     GameLogicUtility.SetPositionDirty(gameObject);
+                }
+
+                if (_isFired) {
+                    _isFired = false;
+                    _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
                 }
 
                 _operate = 0;

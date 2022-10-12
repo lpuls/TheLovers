@@ -103,7 +103,7 @@ namespace Hamster.SpaceWar {
                     while (TryGetTopPredictionCommand(out NetPlayerCommand command)) {
                         // 如果逻辑已经超过預測帧了，说明前面的帧都已经没用了，直接移除
                         if (command.FrameIndex < _predictionIndex) {
-                            TryGetTopPredictionCommand(out command);
+                            RemoveTopPredictionCommand();
                             continue;
                         }
                         else if (command.FrameIndex > _predictionIndex) {
