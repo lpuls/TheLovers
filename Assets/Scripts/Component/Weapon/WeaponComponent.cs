@@ -45,7 +45,7 @@ namespace Hamster.SpaceWar {
             for (int i = 0; i < Spawner.SpawnIDs.Count; i++) {
                 int id = Spawner.SpawnIDs[i];
                 Vector3 offset = Spawner.SpawnOffsets[i];
-                Vector3 direction = Spawner.SpawnDirections[i];
+                Vector3 direction = transform.rotation * Spawner.SpawnDirections[i];
                 GameLogicUtility.CreateServerBullet(id, _ownerID, transform.position + offset, direction, this);
             }
             _cd = Spawner.CD;
