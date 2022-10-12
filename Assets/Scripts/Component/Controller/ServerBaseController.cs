@@ -7,7 +7,7 @@ namespace Hamster.SpaceWar {
         void OnHit(GameObject hitObject, GameObject hitTrajectory);
     }
 
-    public class ServerBaseController : PlayerController {
+    public class ServerBaseController : PlayerController, IDamage {
         // 功能
         protected MovementComponent _movementComponent = null;
         protected LocalAbilityComponent _localAbilityComponent = null;

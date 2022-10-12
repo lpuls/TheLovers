@@ -70,6 +70,20 @@ namespace Hamster.SpaceWar {
             return position;
         }
 
+        public Vector3 GetRandomEnemtyMoveTarget(float size) {
+            float minY = size;
+            float maxY = WorldSize.z / 2 - size;
+            float minX = -WorldSize.x / 2 + size;
+            float maxX = WorldSize.x / 2 - size;
+            return new Vector3(
+                UnityEngine.Random.Range(minX, maxX),
+                0,
+                UnityEngine.Random.Range(minY, maxY)
+                );
+            ;
+
+        }
+
         public virtual void AddTicker(IServerTicker serverTicker) {
         }
 

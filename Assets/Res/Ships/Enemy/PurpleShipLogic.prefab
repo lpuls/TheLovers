@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6779512758657445607}
   - component: {fileID: -8143049985391103821}
   - component: {fileID: 4601989128353010769}
+  - component: {fileID: 2905548445516535958}
   m_Layer: 0
   m_Name: PurpleShipLogic
   m_TagString: Untagged
@@ -121,6 +122,21 @@ MonoBehaviour:
   Speed: 30
   HalfSize: 1
   _moveSpeed: 0
+--- !u!114 &2905548445516535958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124580626330072839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03820b275a1b7c4ba47a5716cbd2412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputKeyToValue: {fileID: 0}
+  _fireInterval: 0.5
+  _closeDistance: 0.5
 --- !u!1001 &211482990866762889
 PrefabInstance:
   m_ObjectHideFlags: 0

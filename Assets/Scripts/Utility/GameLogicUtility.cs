@@ -77,7 +77,7 @@ namespace Hamster.SpaceWar {
                 netSyncComponent.SetAuthority();
             }
 
-            ship.TryGetOrAdd<ServerEnemy>();
+            ship.TryGetOrAdd<PathEnemy>();
 
             return ship;
         }
