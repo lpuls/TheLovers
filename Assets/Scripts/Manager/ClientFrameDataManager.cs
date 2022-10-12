@@ -80,6 +80,7 @@ namespace Hamster.SpaceWar {
                 if (!_netActors.ContainsKey(item.NetID)) {
                     switch (item.NetType) {
                         case ENetType.Player:
+                        case ENetType.Enemy:
                             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(item.ConfigID, out Config.ShipConfig shipConfig)) {
                                 GameObject ship = SpawnNetObject(item.NetID, item.OwnerID, shipConfig.Path, 0, item.Position, item.NetType);
                                 ship.transform.rotation = Quaternion.Euler(0, item.Angle, 0);

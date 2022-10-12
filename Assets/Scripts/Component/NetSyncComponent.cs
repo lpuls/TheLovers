@@ -13,7 +13,8 @@ namespace Hamster.SpaceWar {
     public enum ENetType {
         None = 0,
         Player = 1,
-        Bullet = 2
+        Bullet = 2,
+        Enemy = 3,
     }
 
     public class EUpdateActorTypeComparer : System.Collections.Generic.IEqualityComparer<EUpdateActorType> {

@@ -56,7 +56,7 @@ namespace Hamster.SpaceWar {
         }
 
         private void OnGameStart() {
-            GameLogicUtility.ServerCreateEnemy(3, new Vector3(0, 0, 10), 180);
+            GameLogicUtility.ServerCreateEnemy(10, new Vector3(0, 0, 10), 180);
         }
 
         protected override void Update() {

@@ -4,16 +4,16 @@ namespace Hamster.SpaceWar {
 
     public static class GameLogicUtility {
 
-        public static GameObject CreateShip(int configID) {
+        public static GameObject CreateShip(int configID, ENetType netType) {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-5, 0, 0) : new Vector3(5, 0, 0);
 
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
-                return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, ENetType.Player);
+                return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, netType);
 
-            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/Player/GreyPlayerShipLogic", configID, spawnLocation, ENetType.Player);
+            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/Player/GreyPlayerShipLogic", configID, spawnLocation, ENetType.None);
         }
 
         public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, bool userShip) {
@@ -43,7 +43,7 @@ namespace Hamster.SpaceWar {
 
         public static GameObject ServerInitShip(int configID, bool isCreateForSelf) {
             // 为逻辑层生成
-            GameObject ship = CreateShip(configID);
+            GameObject ship = CreateShip(configID, ENetType.Player);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
 
             ship.layer = (int)ESpaceWarLayers.PLAYER;
@@ -79,7 +79,7 @@ namespace Hamster.SpaceWar {
         }
 
         public static GameObject ServerCreateEnemy(int configID, Vector3 position, float angle) {
-            GameObject ship = CreateShip(configID);
+            GameObject ship = CreateShip(configID, ENetType.Enemy);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
 
             ship.transform.forward = Vector3.back;
