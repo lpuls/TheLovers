@@ -18,6 +18,7 @@ namespace Hamster.SpaceWar {
                 SpaceWarSwapData worldSwapData = SingleMonobehaviour<WorldSwapData>.GetInstance() as SpaceWarSwapData;
                 if (null != worldSwapData && Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>((int)Config.GameModel.Multiple, out Config.GameSetting gameSetting)) {
                     worldSwapData.Setting = gameSetting;
+                    worldSwapData.GameModel = Config.GameModel.Multiple;
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("ServerScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
                 }
             }
@@ -25,6 +26,7 @@ namespace Hamster.SpaceWar {
                 SpaceWarSwapData worldSwapData = SingleMonobehaviour<WorldSwapData>.GetInstance() as SpaceWarSwapData;
                 if (null != worldSwapData && Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>((int)Config.GameModel.Multiple, out Config.GameSetting gameSetting)) {
                     worldSwapData.Setting = gameSetting;
+                    worldSwapData.GameModel = Config.GameModel.Multiple;
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("ClientScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
                 }
             }
@@ -32,6 +34,7 @@ namespace Hamster.SpaceWar {
                 SpaceWarSwapData worldSwapData = SingleMonobehaviour<WorldSwapData>.GetInstance() as SpaceWarSwapData;
                 if (null != worldSwapData && Single<ConfigHelper>.GetInstance().TryGetConfig<Config.GameSetting>((int)Config.GameModel.Single, out Config.GameSetting gameSetting)) {
                     worldSwapData.Setting = gameSetting;
+                    worldSwapData.GameModel = Config.GameModel.Single;
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("ServerScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
                 }
             }

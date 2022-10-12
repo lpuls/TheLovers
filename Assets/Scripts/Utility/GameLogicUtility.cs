@@ -13,7 +13,7 @@ namespace Hamster.SpaceWar {
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
                 return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, ENetType.Player);
 
-            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/GreyShipLogic", configID, spawnLocation, ENetType.Player);
+            return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/Player/GreyPlayerShipLogic", configID, spawnLocation, ENetType.Player);
         }
 
         public static GameObject ClientCreateShip(int configID, int netID, Vector3 position, bool userShip) {
