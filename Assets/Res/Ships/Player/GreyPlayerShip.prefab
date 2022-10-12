@@ -1863,6 +1863,7 @@ GameObject:
   - component: {fileID: 3700720830828457292}
   - component: {fileID: -8216782206614582873}
   - component: {fileID: 8232273730224937156}
+  - component: {fileID: -4066114339329619721}
   m_Layer: 0
   m_Name: GreyPlayerShip
   m_TagString: Untagged
@@ -1948,6 +1949,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273bfec4176c43440bf7a238d4a33a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4066114339329619721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661460292474310727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec78fddf5212d24fab3910f79482f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxDistanceWithServer: 1
 --- !u!1001 &2311738506703342903
 PrefabInstance:
   m_ObjectHideFlags: 0

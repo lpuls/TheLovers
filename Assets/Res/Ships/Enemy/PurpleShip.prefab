@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1389107686236419443}
   - component: {fileID: 2313869349483859180}
   - component: {fileID: 2215553360326666247}
+  - component: {fileID: 7083337246621290127}
   m_Layer: 0
   m_Name: PurpleShip
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MonoBehaviour:
   ConfigID: 0
   PendingKill: 0
   NetType: 0
+--- !u!114 &7083337246621290127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6761757053848678887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec78fddf5212d24fab3910f79482f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxDistanceWithServer: 1
 --- !u!1001 &4350251146936986958
 PrefabInstance:
   m_ObjectHideFlags: 0
