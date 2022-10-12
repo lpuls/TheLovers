@@ -134,9 +134,15 @@ namespace Hamster.SpaceWar {
             _frameDatas.Add(frameData);
 
             // 还未开始模拟便已有三个逻辑帧了，开始进行模拟
-            if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
-                _simulate = true;
+            if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData)) {
+                if (Config.GameModel.Single == swapData.GameModel) {
+                    _simulate = true;
+                }
+                else if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
+                    _simulate = true;
+                }
             }
+            
         }
 
         public void NextFrame() {
