@@ -87,8 +87,7 @@ namespace Hamster.SpaceWar {
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
-                if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data1.Int32 > -1) {
-                    Debug.Log(string.Format("Update Frame {0} {1} {2} {3}", gameObject.name, preLocation, currentLocation, currentUpdateInfo.Data2.Int32));
+                if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data2.Int32 > -1) {
                     UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
                 }
                 else {
@@ -112,6 +111,7 @@ namespace Hamster.SpaceWar {
                         if (command.FrameIndex == _predictionIndex) {
                             // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
                             if (command.Location != _serverCurrentLocation) {
+                                // Debug.Log(string.Format("Update Frame {0} {1} {2} {3} {4}", gameObject.name, _serverCurrentLocation, command.Location, transform.position, command.FrameIndex));
                                 PreLocation = _serverPreLocation;
                                 CurrentLocation = _serverCurrentLocation;
                                 _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
@@ -124,9 +124,9 @@ namespace Hamster.SpaceWar {
                                 RemoveTopPredictionCommand();
                             }
                         }
-                        else if (command.FrameIndex > _predictionIndex) {
-                            RemoveTopPredictionCommand();
-                        }
+                        //else if (command.FrameIndex > _predictionIndex) {
+                        //    RemoveTopPredictionCommand();
+                        //}
                     }
                 }
             }
