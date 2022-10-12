@@ -18,6 +18,10 @@ namespace Hamster.SpaceWar {
         protected float _deadTime = 0;
         protected const float MAX_DEAD_TIME = 0.5f;
 
+        protected float _spawnTime = 0;
+        protected const float MAX_SPAWNING_TIME = 0.5f;
+
+
         public void Awake() {
             Collider[] colliders = GetComponents<Collider>();
             for (int i = 0; i < colliders.Length; i++) {
@@ -72,6 +76,13 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public virtual void OnSpawning(float dt) {
+            _spawnTime += dt;
+            if (_spawnTime >= MAX_SPAWNING_TIME) {
+                _propertyComponent.SetAlive();
+            }
+        } 
+
         public virtual void OnAlive(float dt) {
         }
 
@@ -80,9 +91,11 @@ namespace Hamster.SpaceWar {
             if (_propertyComponent.IsDeading) {
                 OnDeading(dt);
             }
+            else if (_propertyComponent.IsSpawning) {
+                OnSpawning(dt);
+            }
             else if (_propertyComponent.IsAlive) {
                 base.Tick(dt);
-
                 OnAlive(dt);
             }
         }

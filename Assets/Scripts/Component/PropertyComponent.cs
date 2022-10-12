@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public enum EPlayerState {
+        Spawning,
         Alive,
         Deading,
         Dead
@@ -25,6 +26,12 @@ namespace Hamster.SpaceWar {
             get { return State == EPlayerState.Alive; }
         }
 
+        public bool IsSpawning {
+            get {
+                return State == EPlayerState.Spawning;
+            }
+        }
+
         public EPlayerState State {
             get;
             private set;
@@ -40,7 +47,7 @@ namespace Hamster.SpaceWar {
                 _speed.Init(1, 1);
             }
             _health.OnValueChange = OnHealthChange;
-            SetAlive();
+            SetSpawning();
         }
 
         public void ModifyHealth(int delta) {
@@ -65,6 +72,11 @@ namespace Hamster.SpaceWar {
 
         public void SetDeading() {
             State = EPlayerState.Deading;
+            GameLogicUtility.SetRoleState(gameObject);
+        }
+
+        public void SetSpawning() {
+            State = EPlayerState.Spawning;
             GameLogicUtility.SetRoleState(gameObject);
         }
 
