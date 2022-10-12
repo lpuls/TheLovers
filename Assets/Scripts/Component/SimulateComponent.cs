@@ -99,16 +99,17 @@ namespace Hamster.SpaceWar {
         public void Update() {
             // 主端需要对預測结果进么比对并根据逻辑结果模拟后面的操作
             if (null != _netSyncComponent && _netSyncComponent.IsAutonomousProxy()) {
-                if (_predictionIndex > 0 && TryGetTopPredictionCommand(out NetPlayerCommand command)) {
-                    // 如果逻辑已经超过預測帧了，说明前面的帧都已经没用了，直接移除
-                    if (command.FrameIndex < _predictionIndex) {
-                        CleanPredicationLocations(_predictionIndex);
-                        TryGetTopPredictionCommand(out command);
-                    }
-
-                    // 检查預測值是否与逻辑值相同
-                    if (null != command) {
-                        if (command.FrameIndex == _predictionIndex) {
+                if (_predictionIndex > 0) {
+                    while (TryGetTopPredictionCommand(out NetPlayerCommand command)) {
+                        // 如果逻辑已经超过預測帧了，说明前面的帧都已经没用了，直接移除
+                        if (command.FrameIndex < _predictionIndex) {
+                            TryGetTopPredictionCommand(out command);
+                            continue;
+                        }
+                        else if (command.FrameIndex > _predictionIndex) {
+                            break;
+                        }
+                        else {
                             // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
                             if (command.Location != _serverCurrentLocation) {
                                 // Debug.Log(string.Format("Update Frame {0} {1} {2} {3} {4}", gameObject.name, _serverCurrentLocation, command.Location, transform.position, command.FrameIndex));
@@ -123,12 +124,40 @@ namespace Hamster.SpaceWar {
                             else {
                                 RemoveTopPredictionCommand();
                             }
+                            break;
                         }
-                        //else if (command.FrameIndex > _predictionIndex) {
-                        //    RemoveTopPredictionCommand();
-                        //}
                     }
                 }
+                //if (_predictionIndex > 0 && TryGetTopPredictionCommand(out NetPlayerCommand command)) {
+                //    // 如果逻辑已经超过預測帧了，说明前面的帧都已经没用了，直接移除
+                //    if (command.FrameIndex < _predictionIndex) {
+                //        CleanPredicationLocations(_predictionIndex);
+                //        TryGetTopPredictionCommand(out command);
+                //    }
+
+                //    // 检查預測值是否与逻辑值相同
+                //    if (null != command) {
+                //        if (command.FrameIndex == _predictionIndex) {
+                //            // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
+                //            if (command.Location != _serverCurrentLocation) {
+                //                // Debug.Log(string.Format("Update Frame {0} {1} {2} {3} {4}", gameObject.name, _serverCurrentLocation, command.Location, transform.position, command.FrameIndex));
+                //                PreLocation = _serverPreLocation;
+                //                CurrentLocation = _serverCurrentLocation;
+                //                _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
+
+                //                // 移除最顶上的操作并重新模拟
+                //                RemoveTopPredictionCommand();
+                //                SimulateAfter();
+                //            }
+                //            else {
+                //                RemoveTopPredictionCommand();
+                //            }
+                //        }
+                //        //else if (command.FrameIndex > _predictionIndex) {
+                //        //    RemoveTopPredictionCommand();
+                //        //}
+                //    }
+                //}
             }
 
             _simulateTime += Time.deltaTime;

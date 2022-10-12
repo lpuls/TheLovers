@@ -55,42 +55,24 @@ namespace Hamster.SpaceWar {
         }
 
         public override void OnAlive(float dt) {
-            _operate = 0;
+            while (_operates.Count > 0) {
+                int input = GetOperator(InputKeyToValue);
+                ProcessorInput(input);
+                
 
-            // 对武器进行更新
-            _localAbilityComponent.Tick(dt);
+                // 对武器进行更新
+                _localAbilityComponent.Tick(dt);
 
-            // 逻辑执行移动操作
-            if (_movementComponent.NeedMove) {
-                Vector3 oldPosition = transform.position;
-                transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
-                GameLogicUtility.SetPositionDirty(gameObject);
+                // 逻辑执行移动操作
+                if (_movementComponent.NeedMove) {
+                    transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
+                    GameLogicUtility.SetPositionDirty(gameObject);
+                }
+
+                _operate = 0;
+                _operatorIndex = -1;
             }
         }
-
-        //public override void Tick(float dt) {
-        //    // 角色死亡
-        //    if (_propertyComponent.IsDeading) {
-        //        _deadTime += dt;
-        //        if (_deadTime >= MAX_DEAD_TIME) {
-        //            _netSyncComponent.Kill(EDestroyActorReason.BeHit);
-        //            _propertyComponent.SetDead();
-        //        }
-        //    }
-        //    else if (_propertyComponent.IsAlive) {
-        //        base.Tick(dt);
-        //        _operate = 0;
-
-        //        // 对武器进行更新
-        //        _localAbilityComponent.Tick(dt);
-
-        //        // 逻辑执行移动操作
-        //        if (_movementComponent.NeedMove) {
-        //            transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
-        //            GameLogicUtility.SetPositionDirty(gameObject);
-        //        }
-        //    }
-        //}
 
     }
 }
