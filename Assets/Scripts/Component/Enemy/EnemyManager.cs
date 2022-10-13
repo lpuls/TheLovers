@@ -25,6 +25,8 @@ namespace Hamster.SpaceWar {
                 if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                     baseEnemy.OnDie += OnEnemyDie;
                     _aliveEnemys.Add(baseEnemy);
+                    ship.transform.position = baseEnemy.GetRandomLocation();
+                    GameLogicUtility.SetPositionDirty(ship);
                 }
                 else {
                     AssetPool.Free(ship);

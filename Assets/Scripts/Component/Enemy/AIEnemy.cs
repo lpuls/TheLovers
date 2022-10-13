@@ -44,10 +44,7 @@ namespace Hamster.SpaceWar {
         }
 
         private void RandomMoveTarget() {
-            BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
-            Debug.Assert(null != world, "AIEnemey World is invalid");
-            if (null != _movementComponent)
-                _moveTarget = world.GetRandomEnemtyMoveTarget(_movementComponent.HalfSize);
+            _moveTarget = GetRandomLocation();
         }
     }
 }
