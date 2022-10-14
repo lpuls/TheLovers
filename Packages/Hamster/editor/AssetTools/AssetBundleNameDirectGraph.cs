@@ -158,7 +158,7 @@ namespace Hamster.Editor {
             foreach (string path in Directory.GetFiles(dirPath)) {
                 //获取所有文件夹中包含指定后缀的路径
                 string extension = System.IO.Path.GetExtension(path);
-                if (".prefab" == extension || ".json" == extension || ".bytes" == extension || ".asset" == extension || ".spriteatlas" == extension) {
+                if (".prefab" == extension || ".json" == extension || ".bytes" == extension || ".asset" == extension || ".spriteatlas" == extension || ".unity" == extension) {
                     string temp = path.Substring(path.IndexOf("Assets")).Replace('\\', '/');
                     dirs.Add(temp);
                 }
