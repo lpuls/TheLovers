@@ -115,7 +115,7 @@ namespace Hamster.SpaceWar {
                             break;
                         case EUpdateActorType.RoleState: {
                                 if (netSyncComponent.gameObject.TryGetComponent<PropertyComponent>(out PropertyComponent propertyComponent)) {
-                                    updateInfo.SetInt32ForData1((int)propertyComponent.State);
+                                    updateInfo.SetInt8ForData1((byte)propertyComponent.State);
                                 }
                             }
                             break;

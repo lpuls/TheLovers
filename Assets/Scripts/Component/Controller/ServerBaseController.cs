@@ -59,7 +59,7 @@ namespace Hamster.SpaceWar {
 
             // 进行伤害
             _propertyComponent.ModifyHealth(-damage);
-            Debug.Log("Damage " + gameObject.name + " HP " + _propertyComponent.GetHealth());
+            // Debug.Log("Damage " + gameObject.name + " HP " + _propertyComponent.GetHealth());
 
             // 判断是否死亡
             if (_propertyComponent.IsDeading) {

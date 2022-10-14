@@ -37,8 +37,8 @@ namespace Hamster.SpaceWar {
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
             int netID = _netSyncComponent.NetID;
             UpdateInfo updateInfo;
-            if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
-                switch ((EPlayerState)updateInfo.Data1.Int32) {
+            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
+                switch ((EPlayerState)updateInfo.Data1.Int8) {
                     case EPlayerState.Spawning: {
                             GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
                             spawnEffect.transform.position = transform.position;

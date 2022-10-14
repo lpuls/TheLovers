@@ -4,123 +4,6 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-
-    public class INetInfo : IPool {
-        private int _id = 0;
-
-        public int ID {
-            get {
-                return _id;
-            }
-            set {
-                _id = value;
-            }
-        }
-        public int OwnerID;
-        public float X;
-        public float Y;
-        public float Angle;
-
-        public virtual void Read(BinaryReader binaryReader) {
-        }
-
-        public virtual void Write(Packet packet) {
-        }
-
-        public virtual void Reset() {
-            ID = 0;
-            OwnerID = 0;
-            X = 0;
-            Y = 0;
-            Angle = 0;
-        }
-
-        public virtual void Free() {
-        }
-    }
-
-    public class PlayerInfo : INetInfo {
-        public int Health;
-        public int Tags;
-
-        public override void Read(BinaryReader binaryReader) {
-            int temp = binaryReader.ReadInt32();
-            Tags = temp & 0x3FFFFF;
-            Health = (temp >> 22) & 0x7F;
-            ID = (temp >> 29) & 0x7;
-            X = binaryReader.ReadSingle();
-            Y = binaryReader.ReadSingle();
-            Angle = binaryReader.ReadSingle();
-        }
-
-        public override void Write(Packet packet) {
-            int temp = 0;
-            temp |= ID;
-            temp = (temp << 7) | Health;
-            temp = (temp << 22) | Tags;
-            packet.WriteInt32(temp);
-            packet.WriteFloat(X);
-            packet.WriteFloat(Y);
-            packet.WriteFloat(Angle);
-        }
-
-
-        public override string ToString() {
-            return string.Format("ID: {0}, Position: ({1}, {2}), Angle: {3}", ID, X, Y, Angle);
-        }
-
-        public override void Reset() {
-            base.Reset();
-            Health = 0;
-            Tags = 0;
-        }
-
-        public static PlayerInfo Malloc() {
-            return ObjectPool<PlayerInfo>.Malloc();
-        }
-
-        public override void Free() {
-            ObjectPool<PlayerInfo>.Free(this);
-        }
-    }
-
-    public class SpawnActorInfo : INetInfo {
-        public override void Read(BinaryReader binaryReader) {
-            int temp = binaryReader.ReadInt32();
-            ID = temp & 0xFFFF;
-            OwnerID = temp >> 16;
-            X = binaryReader.ReadSingle();
-            Y = binaryReader.ReadSingle();
-            Angle = binaryReader.ReadSingle();
-        }
-
-        public override void Write(Packet packet) {
-            int temp = 0;
-            temp |= OwnerID;
-            temp = (temp << 16) | ID;
-            packet.WriteInt32(temp);
-            packet.WriteFloat(X);
-            packet.WriteFloat(Y);
-            packet.WriteFloat(Angle);
-        }
-
-        public override string ToString() {
-            return string.Format("ID: {0}: {4}, Position: ({1}, {2}), Angle: {3}", ID, X, Y, Angle, OwnerID);
-        }
-
-        public override void Reset() {
-            base.Reset();
-        }
-
-        public static SpawnActorInfo Malloc() {
-            return ObjectPool<SpawnActorInfo>.Malloc();
-        }
-
-        public override void Free() {
-            ObjectPool<SpawnActorInfo>.Free(this);
-        }
-    }
-
     public interface IFrameInfo {
         void Read(BinaryReader binaryReader);
 
@@ -243,6 +126,10 @@ namespace Hamster.SpaceWar {
         public UpdateData Data1 = new UpdateData();
         public UpdateData Data2 = new UpdateData();
 
+        public void SetInt8ForData1(byte value) {
+            Data1.Int8 = value;
+        }
+
         public void SetInt32ForData1(int value) {
             Data1.Int32 = value;
         }
@@ -261,7 +148,7 @@ namespace Hamster.SpaceWar {
         }
 
         public virtual void Read(BinaryReader binaryReader) {
-            UpdateType = (EUpdateActorType)binaryReader.ReadInt16();
+            UpdateType = (EUpdateActorType)binaryReader.ReadByte();
             switch (UpdateType) {
                 case EUpdateActorType.Position:
                     Data1.Vec3.x = binaryReader.ReadSingle();
@@ -271,11 +158,14 @@ namespace Hamster.SpaceWar {
                 case EUpdateActorType.Angle:
                     Data1.Float = binaryReader.ReadSingle();
                     break;
+                case EUpdateActorType.RoleState:
+                    Data1.Int8 = binaryReader.ReadByte();
+                    break;
             }
         }
 
         public virtual void Write(Packet packet) {
-            packet.WriteInt16((short)UpdateType);
+            packet.WriteByte((byte)UpdateType);
             switch (UpdateType) {
                 case EUpdateActorType.Position:
                     packet.WriteFloat(Data1.Vec3.x);
@@ -284,6 +174,9 @@ namespace Hamster.SpaceWar {
                     break;
                 case EUpdateActorType.Angle:
                     packet.WriteFloat(Data1.Float);
+                    break;
+                case EUpdateActorType.RoleState:
+                    packet.WriteByte(Data1.Int8);
                     break;
             }
         }
@@ -305,29 +198,12 @@ namespace Hamster.SpaceWar {
 
     public class FrameData : IPool {
         public int FrameIndex;
-        public List<PlayerInfo> PlayerInfos = new List<PlayerInfo>();
-        public List<SpawnActorInfo> SpawnActorInfos = new List<SpawnActorInfo>();
-        public Dictionary<int, INetInfo> NetInfoDict = new Dictionary<int, INetInfo>(new Int32Comparer());
-
         public List<SpawnInfo> SpawnInfos = new List<SpawnInfo>(32); 
         public List<DestroyInfo> DestroyInfos = new List<DestroyInfo>(32);
         public Dictionary<int, List<UpdateInfo>> UpdateInfos = new Dictionary<int, List<UpdateInfo>>(new Int32Comparer());
 
         public void Reset() {
             FrameIndex = 0;
-            {
-                PlayerInfos.Clear();
-                SpawnActorInfos.Clear();
-            }
-
-            {
-                var it = NetInfoDict.GetEnumerator();
-                while (it.MoveNext()) {
-                    INetInfo netInfo = it.Current.Value;
-                    netInfo.Free();
-                }
-                NetInfoDict.Clear();
-            }
 
             // 新的格式
             foreach (var it in SpawnInfos) {
@@ -385,14 +261,6 @@ namespace Hamster.SpaceWar {
 
         public override string ToString() {
             string log = "";
-            foreach (var it in PlayerInfos) {
-                log += it.ToString();
-                log += "\n";
-            }
-            foreach (var it in SpawnActorInfos) {
-                log += it.ToString();
-                log += "\n";
-            }
             return log;
         }
 
