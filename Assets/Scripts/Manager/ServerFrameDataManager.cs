@@ -56,6 +56,9 @@ namespace Hamster.SpaceWar {
         public override void Update() {
             base.Update();
 
+            if (!IsGameStart)
+                return;
+
             LogicTime += Time.deltaTime;
             while (LogicTime >= LOGIC_FRAME_TIME) {
                 UpdateTickers();
@@ -65,9 +68,6 @@ namespace Hamster.SpaceWar {
         }
 
         public void Tick() {
-            if (!IsGameStart)
-                return;
-
             FrameData frameData = ObjectPool<FrameData>.Malloc();
             frameData.FrameIndex = ServerLogicFrame++;
 
