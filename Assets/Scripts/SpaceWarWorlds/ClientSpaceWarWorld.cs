@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 
@@ -23,10 +25,37 @@ namespace Hamster.SpaceWar {
 
         }
 
-        protected override void PreloadAssets() {
+        protected override IEnumerator PreloadAssets() {
             // 预先加载
-            Asset.Cache("Res/Ships/GreyShip", 2);
+            Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            SetProgress(20);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/Ships/Player/RedPlayerShip", 2);
+            SetProgress(30);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/Ships/Enemy/PurpleShip", 2);
+            SetProgress(30);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/Ships/Enemy/RedShip", 2);
+            SetProgress(30);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Bullet/OriginBullet", 100);
+            SetProgress(50);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/VFX/DeadBoom", 4);
+            SetProgress(60);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/VFX/ShipSpawn", 8);
+            SetProgress(100);
+            yield return _waiForEendOfFrame;
+
+            HideLoading();
         }
 
         public int GetFrameIndex() {

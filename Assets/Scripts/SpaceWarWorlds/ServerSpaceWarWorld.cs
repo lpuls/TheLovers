@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -40,17 +42,53 @@ namespace Hamster.SpaceWar {
         }
 
 
-        protected override void PreloadAssets() {
+        protected override IEnumerator PreloadAssets() {
             // т╓ох╪сть
             Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            SetProgress(20);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Player/RedPlayerShip", 2);
+            SetProgress(30);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Enemy/PurpleShip", 2);
+            SetProgress(40);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Enemy/PurpleShipLogic", 2);
+            SetProgress(50);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Enemy/RedShip", 2);
+            SetProgress(60);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Enemy/RedShipLogic", 2);
+            SetProgress(70);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Ships/Player/GreyPlayerShipLogic", 2);
+            SetProgress(75);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Bullet/OriginBullet", 100);
+            SetProgress(80);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Bullet/OriginBulletLogic", 100);
+            SetProgress(90);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/VFX/DeadBoom", 4);
+            SetProgress(95);
+            yield return _waiForEendOfFrame;
+
+            Asset.Cache("Res/VFX/ShipSpawn", 8);
+            SetProgress(100);
+            yield return _waiForEendOfFrame;
+
+            HideLoading();
         }
 
         public override void AddTicker(IServerTicker serverTicker) {

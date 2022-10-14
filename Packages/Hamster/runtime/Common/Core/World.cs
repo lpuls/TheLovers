@@ -8,6 +8,7 @@ namespace Hamster {
 
         private static World _instance = null;
 
+        protected LoadingUI _loadingUI = null;
         private Dictionary<Type, object> _managers = new Dictionary<Type, object>();
 
         public static T GetWorld<T>() where T : World {
@@ -49,13 +50,22 @@ namespace Hamster {
         }
 
         protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
+            // 初始化加载界面
+            GameObject canvasGameObject = GameObject.Find("Canvas");
+            if (null != canvasGameObject) {
+                GameObject.DontDestroyOnLoad(canvasGameObject);
+                Transform loadingInstance = canvasGameObject.transform.Find("Loading");
+                if (null != loadingInstance)
+                    _loadingUI = loadingInstance.gameObject.TryGetOrAdd<LoadingUI>();
+            }
+
             // 初始化GM组件
             if (null != gmAssemlby)
                 GMAttributeProcessor.Processor(gmAssemlby);
 
             // 初始化资源
 #if UNITY_EDITOR
-            Asset.UseAssetBundle = false;
+            Asset.UseAssetBundle = true;
 #else
             Asset.UseAssetBundle = true;
 #endif
@@ -73,6 +83,19 @@ namespace Hamster {
                 UIManager.Initialize(uiAssembly);
             }
         }
+
+        public void SetProgress(int value) {
+            _loadingUI.SetProgress(value / 100.0f);
+        }
+
+        public void ShowLoading() {
+            _loadingUI.gameObject.SetActive(true);
+        }
+
+        public void HideLoading() {
+            _loadingUI.gameObject.SetActive(false);
+        }
+
 
         protected virtual void Update() {
             Asset.Update();

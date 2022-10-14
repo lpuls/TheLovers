@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace Hamster.SpaceWar {
     public class BaseSpaceWarWorld : World {
         public Vector3 WorldSize = Vector3.one;
 
+        protected WaitForEndOfFrame _waiForEendOfFrame = new WaitForEndOfFrame();
+        
         public int PlayerNetID {
             get;
             set;
@@ -28,18 +31,22 @@ namespace Hamster.SpaceWar {
             base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
 
             // 根据视口大小计算可行动区域
+            CalWorldSize();
+
+            // 预加载
+            StartCoroutine(PreloadAssets());
+        }
+
+        public void CalWorldSize() {
             Camera mainCamera = Camera.main;
             Vector3 min = mainCamera.ViewportToWorldPoint(new Vector3(0, 0));
             Vector3 max = mainCamera.ViewportToWorldPoint(new Vector3(1, 1));
             WorldSize.x = max.x - min.x;
             WorldSize.z = max.z - min.z;
-
-            // 预加载
-            PreloadAssets();
         }
 
-        protected virtual void PreloadAssets() {
-            
+        protected virtual IEnumerator PreloadAssets() {
+            yield break;
         }
 
         public bool InWorld(Vector3 position) {
@@ -89,6 +96,7 @@ namespace Hamster.SpaceWar {
 
         public virtual void RemoveTicker(IServerTicker serverTicker) {
         }
+
 
 #if UNITY_EDITOR
         public virtual void OnDrawGizmos() {
