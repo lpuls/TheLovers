@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Hamster {
     public class PacketManager : IPacketMallocer {
-        private const int PACKET_MANAGER_PACKET_SIZE = 10;
+        private const int PACKET_MANAGER_PACKET_SIZE = 13;
 
         private List<Packet>[] _packetPool = null;
 
