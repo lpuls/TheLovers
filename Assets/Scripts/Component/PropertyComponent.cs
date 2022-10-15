@@ -86,7 +86,8 @@ namespace Hamster.SpaceWar {
 
         private void OnHealthChange(int oldValue, int newValue) {
             if (oldValue > 0 && newValue <= 0) {
-                SetDeading();
+                // SetDeading();
+                SetDead();
             }
         }
 

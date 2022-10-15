@@ -40,6 +40,9 @@ namespace Hamster.SpaceWar {
             _propertyComponent.InitProperty(_netSyncComponent.ConfigID);
             _movementComponent.Speed = _propertyComponent.GetSpeed();
             EnableColliders(true);
+
+            _deadTime = 0;
+            _spawnTime = 0;
         }
 
 
@@ -64,6 +67,11 @@ namespace Hamster.SpaceWar {
             // 判断是否死亡
             if (_propertyComponent.IsDeading) {
                 EnableColliders(false);
+                OnDie?.Invoke(gameObject, hitObject);
+            }
+            if (_propertyComponent.IsDead) {
+                EnableColliders(false);
+                _netSyncComponent.Kill(EDestroyActorReason.BeHit);
                 OnDie?.Invoke(gameObject, hitObject);
             }
         }

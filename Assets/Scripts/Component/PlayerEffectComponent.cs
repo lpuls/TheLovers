@@ -43,7 +43,6 @@ namespace Hamster.SpaceWar {
                             GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
                             spawnEffect.transform.position = transform.position;
                             spawnEffect.transform.forward = transform.forward;
-                            Debug.Log("====>Spawning Effect " + gameObject.name);
                         }
                         break;
                     case EPlayerState.Alive:
@@ -51,11 +50,12 @@ namespace Hamster.SpaceWar {
                     case EPlayerState.Deading: {
                             GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
                             deadEffect.transform.position = transform.position;
-                            Debug.Log("====>Deading Effect " + gameObject.name);
                         }
                         break;
                     case EPlayerState.Dead: {
                             _animator.SetTrigger("Dead");
+                            GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
+                            deadEffect.transform.position = transform.position;
                         }
                         break;
                 }
