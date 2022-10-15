@@ -76,12 +76,13 @@ namespace Hamster.SpaceWar {
                 _animator.SetFloat("VelocityX", _velocityX);
 
                 // 前后加速时对尾焰大小进行修改
-                if (delta.z > 0)
-                    _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _accelerateTailFlame, 0.1f);
-                else if (delta.z < 0)
-                    _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _slowDownTailFlame, 0.1f);
-                else
+                float dotValue = Vector3.Dot(delta.normalized, transform.forward);
+                if (0 == delta.z)
                     _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _normalTailFlame, 0.1f);
+                else if (dotValue > 0)
+                    _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _accelerateTailFlame, 0.1f);
+                else if (dotValue < 0)
+                    _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _slowDownTailFlame, 0.1f);
                 SetTailFlameSize(_tailFlameSize);
             }
         }
