@@ -67,12 +67,14 @@ namespace Hamster.SpaceWar {
                 Vector3 delta = _simulateComponent.CurrentLocation - transform.position;
 
                 // 左右移动时对机体进行左右旋转
-                if (delta.x > 0)
-                    _velocityX = Mathf.MoveTowards(_velocityX, _moverightVelocity, 0.1f);
-                else if (delta.x < 0)
-                    _velocityX = Mathf.MoveTowards(_velocityX, _moveLeftVelocity, 0.1f);
-                else
+                float signOfX = Mathf.Sign(delta.x);
+                float rightDotValue = Vector3.Dot(delta.normalized, transform.right);
+                if (0 == delta.x)
                     _velocityX = Mathf.MoveTowards(_velocityX, _normalVelocity, 0.1f);
+                else if (rightDotValue > 0)
+                    _velocityX = Mathf.MoveTowards(_velocityX, _moverightVelocity, 0.1f);
+                else if (rightDotValue < 0)
+                    _velocityX = Mathf.MoveTowards(_velocityX, _moveLeftVelocity, 0.1f);
                 _animator.SetFloat("VelocityX", _velocityX);
 
                 // 前后加速时对尾焰大小进行修改
