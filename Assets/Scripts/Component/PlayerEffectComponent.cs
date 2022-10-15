@@ -43,6 +43,7 @@ namespace Hamster.SpaceWar {
                             GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
                             spawnEffect.transform.position = transform.position;
                             spawnEffect.transform.forward = transform.forward;
+                            Debug.Log("====>Spawning Effect " + gameObject.name);
                         }
                         break;
                     case EPlayerState.Alive:
@@ -50,6 +51,7 @@ namespace Hamster.SpaceWar {
                     case EPlayerState.Deading: {
                             GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
                             deadEffect.transform.position = transform.position;
+                            Debug.Log("====>Deading Effect " + gameObject.name);
                         }
                         break;
                     case EPlayerState.Dead: {
@@ -67,7 +69,6 @@ namespace Hamster.SpaceWar {
                 Vector3 delta = _simulateComponent.CurrentLocation - transform.position;
 
                 // 左右移动时对机体进行左右旋转
-                float signOfX = Mathf.Sign(delta.x);
                 float rightDotValue = Vector3.Dot(delta.normalized, transform.right);
                 if (0 == delta.x)
                     _velocityX = Mathf.MoveTowards(_velocityX, _normalVelocity, 0.1f);
