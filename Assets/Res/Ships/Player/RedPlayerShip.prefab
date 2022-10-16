@@ -1907,6 +1907,32 @@ MonoBehaviour:
   _moveLeftVelocity: -1
   _normalVelocity: 0
   _moverightVelocity: 1
+  HitAdditionColor: {r: 1, g: 0, b: 0, a: 1}
+  HitColorUpdateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.777465
+      outSlope: 2.777465
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.036513545
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -5.054735
+      outSlope: -5.054735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0965842
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  UpdateColorMaxTime: 0.1
 --- !u!114 &7415767463390842035
 MonoBehaviour:
   m_ObjectHideFlags: 0
