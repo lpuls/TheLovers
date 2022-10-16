@@ -80,9 +80,9 @@ namespace Hamster.SpaceWar {
             }
 
             // 命中后是否销毁
-            if (_hitOnDestroy && null != _parent) {
-                _parent.OnHitDestroy(gameObject);
-            }
+            //if (_hitOnDestroy && null != _parent) {
+            //    _parent.OnHitDestroy(gameObject);
+            //}
         }
 
         protected bool CheckLayerValue(int layer, ESpaceWarLayers value) {

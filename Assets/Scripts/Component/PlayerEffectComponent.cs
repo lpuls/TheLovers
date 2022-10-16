@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public class PlayerEffectComponent : MonoBehaviour {
@@ -21,6 +22,11 @@ namespace Hamster.SpaceWar {
         private Animator _animator = null;
         private SimulateComponent _simulateComponent = null;
         private NetSyncComponent _netSyncComponent = null;
+
+        public bool GetMaterials = false;
+        public bool UpdateMaterials = false;
+        public Color AdditionColor = Color.white;
+        public List<Material> ShipMaterials = new List<Material>();
 
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
@@ -63,6 +69,22 @@ namespace Hamster.SpaceWar {
         }
 
         public void Update() {
+
+            if (GetMaterials) {
+                Renderer[] renderers = GetComponentsInChildren<Renderer>();
+                for (int i = 0; i < renderers.Length; i++) {
+                    Renderer renderer = renderers[i];
+                    Material[] materials = renderer.materials;
+                    for (int j = 0; j < materials.Length; j++) {
+                        ShipMaterials.Add(materials[j]);
+                    }
+                }
+                GetMaterials = false;
+            }
+            if (UpdateMaterials) {
+                
+            }
+
             // 根据前后帧的位置来计算动画表现
             SimulateComponent simulateComponent = GetSimulate();
             if (null != simulateComponent && null != _animator) {

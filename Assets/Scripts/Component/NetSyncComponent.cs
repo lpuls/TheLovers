@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
@@ -37,6 +38,7 @@ namespace Hamster.SpaceWar {
         protected ENetRole _role = ENetRole.ROLE_None;
         protected int _childCreateIndex = 0;
 
+        public Action<EDestroyActorReason> OnKill = delegate { };
         public HashSet<EUpdateActorType> UpdateTypes = new HashSet<EUpdateActorType>(new EUpdateActorTypeComparer());
 
         public bool IsNewObject {
@@ -56,6 +58,15 @@ namespace Hamster.SpaceWar {
 
         public void Awake() {
             PredictionIndex = -1;
+        }
+
+        public void OnEnable() {
+            NetID = 0;
+            OwnerID = 0;
+            ConfigID = 0;
+            DestroyReason = EDestroyActorReason.None;
+            _role = ENetRole.ROLE_None;
+            _childCreateIndex = 0;
         }
 
         public void SetSimulatedProxy() {
@@ -85,6 +96,7 @@ namespace Hamster.SpaceWar {
         public void Kill(EDestroyActorReason reason) {
             PendingKill = true;
             DestroyReason = reason;
+            OnKill?.Invoke(DestroyReason);
         }
 
         public bool IsPendingKill() {

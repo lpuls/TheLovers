@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 150aee38b5d848b42b75593618992bb7
-NativeFormatImporter:
+guid: e43c8711e36def3499a98490bf2c26f4
+PrefabImporter:
   externalObjects: {}
-  mainObjectFileID: 0
   userData: 
   assetBundleName: res/vfx/hitsparkexplosion
   assetBundleVariant: 
