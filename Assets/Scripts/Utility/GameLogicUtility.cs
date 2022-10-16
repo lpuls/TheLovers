@@ -139,8 +139,12 @@ namespace Hamster.SpaceWar {
             SetPropertyDirty(gameObject, EUpdateActorType.Angle);
         }
 
-        public static void SetRoleState(GameObject gameObject) {
+        public static void SetRoleStateDirty(GameObject gameObject) {
             SetPropertyDirty(gameObject, EUpdateActorType.RoleState);
+        }
+
+        public static void SetHealthDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.Health);
         }
 
         private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {

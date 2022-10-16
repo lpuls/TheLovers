@@ -119,6 +119,12 @@ namespace Hamster.SpaceWar {
                                 }
                             }
                             break;
+                        case EUpdateActorType.Health: {
+                                if (netSyncComponent.gameObject.TryGetComponent<PropertyComponent>(out PropertyComponent propertyComponent)) {
+                                    updateInfo.SetInt32ForData1((short)propertyComponent.GetHealth());
+                                }
+                            }
+                            break;
                     }
                     frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);
                 }

@@ -23,13 +23,18 @@ namespace Hamster.SpaceWar {
         private SimulateComponent _simulateComponent = null;
         private NetSyncComponent _netSyncComponent = null;
 
-        public bool GetMaterials = false;
-        public bool UpdateMaterials = false;
-        public Color AdditionColor = Color.white;
-        public List<Material> ShipMaterials = new List<Material>();
+        public Color HitAdditionColor = Color.red;
+        public AnimationCurve HitColorUpdateCurve = null;
+        public float UpdateColorMaxTime = 0.1f;
+        private bool _neeUpdateHitColor = false;
+        private float _hitColorUpdateTime = 0;
+        private List<Color> _originAdditionColor = new List<Color>();
+        private List<Material> _shipMaterials = new List<Material>();
 
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
+
+        private int _health = 0;
 
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
@@ -38,53 +43,67 @@ namespace Hamster.SpaceWar {
 
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
+
+            // 获取所有的材质
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            for (int i = 0; i < renderers.Length; i++) {
+                Renderer renderer = renderers[i];
+                Material[] materials = renderer.materials;
+                for (int j = 0; j < materials.Length; j++) {
+                    _shipMaterials.Add(materials[j]);
+                    _originAdditionColor.Add(materials[j].GetColor("_BaseColor"));
+                }
+            }
         }
 
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
             int netID = _netSyncComponent.NetID;
             UpdateInfo updateInfo;
-            if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
-                switch ((EPlayerState)updateInfo.Data1.Int8) {
-                    case EPlayerState.Spawning: {
-                            GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
-                            spawnEffect.transform.position = transform.position;
-                            spawnEffect.transform.forward = transform.forward;
+            if (null != current) {
+                // 检查角色状态变化
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
+                    switch ((EPlayerState)updateInfo.Data1.Int8) {
+                        case EPlayerState.Spawning: {
+                                GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
+                                spawnEffect.transform.position = transform.position;
+                                spawnEffect.transform.forward = transform.forward;
+                            }
+                            break;
+                        case EPlayerState.Alive:
+                            break;
+                        case EPlayerState.Deading: {
+                                GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
+                                deadEffect.transform.position = transform.position;
+                            }
+                            break;
+                        case EPlayerState.Dead: {
+                                _animator.SetTrigger("Dead");
+                                GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
+                                deadEffect.transform.position = transform.position;
+                            }
+                            break;
+                    }
+                }
+
+                // 检查角色生命值变化
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out updateInfo)) {
+                    int newHealth = updateInfo.Data1.Int16;
+                    if (_health > updateInfo.Data1.Int16) {
+
+                        // todo update health ui
+
+                        // 还活着，进行闪白
+                        if (newHealth > 0) {
+                            _neeUpdateHitColor = true;
+                            _hitColorUpdateTime = 0;
                         }
-                        break;
-                    case EPlayerState.Alive:
-                        break;
-                    case EPlayerState.Deading: {
-                            GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
-                            deadEffect.transform.position = transform.position;
-                        }
-                        break;
-                    case EPlayerState.Dead: {
-                            _animator.SetTrigger("Dead");
-                            GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
-                            deadEffect.transform.position = transform.position;
-                        }
-                        break;
+                    }
+                    _health = newHealth;
                 }
             }
         }
 
         public void Update() {
-
-            if (GetMaterials) {
-                Renderer[] renderers = GetComponentsInChildren<Renderer>();
-                for (int i = 0; i < renderers.Length; i++) {
-                    Renderer renderer = renderers[i];
-                    Material[] materials = renderer.materials;
-                    for (int j = 0; j < materials.Length; j++) {
-                        ShipMaterials.Add(materials[j]);
-                    }
-                }
-                GetMaterials = false;
-            }
-            if (UpdateMaterials) {
-                
-            }
-
             // 根据前后帧的位置来计算动画表现
             SimulateComponent simulateComponent = GetSimulate();
             if (null != simulateComponent && null != _animator) {
@@ -110,6 +129,27 @@ namespace Hamster.SpaceWar {
                     _tailFlameSize = Mathf.MoveTowards(_tailFlameSize, _slowDownTailFlame, 0.1f);
                 SetTailFlameSize(_tailFlameSize);
             }
+
+            // 闪白
+            if (_neeUpdateHitColor) {
+                _hitColorUpdateTime += Time.deltaTime;
+                
+                // 更新材质颜色
+                if (null != HitColorUpdateCurve) {
+                    float t = _hitColorUpdateTime / UpdateColorMaxTime;
+                    float value = HitColorUpdateCurve.Evaluate(t);
+                    for (int i = 0; i < _shipMaterials.Count; i++) {
+                        Material material = _shipMaterials[i];
+                        Color originColor = _originAdditionColor[i];
+                        material.SetColor("_BaseColor", Color.Lerp(originColor, HitAdditionColor, value));
+                    }
+                }
+
+                // 完成闪白
+                if (_hitColorUpdateTime > UpdateColorMaxTime) {
+                    _neeUpdateHitColor = false;
+                }
+            }
         }
 
         private void SetTailFlameSize(float size) {
@@ -133,6 +173,17 @@ namespace Hamster.SpaceWar {
             if (null != frameDataManager) {
                 frameDataManager.OnFrameUpdate += OnFrameUpdate;
             }
+
+            if (null == _netSyncComponent)
+                _netSyncComponent = GetComponent<NetSyncComponent>();
+
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                _health = config.Health;
+            }
+
+            _hitColorUpdateTime = 0;
+            _velocityX = _normalTailFlame;
+            _tailFlameSize = _normalTailFlame;
         }
 
         private void OnDisable() {

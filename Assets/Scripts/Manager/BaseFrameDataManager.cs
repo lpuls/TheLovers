@@ -22,7 +22,8 @@ namespace Hamster.SpaceWar {
         None,
         Position,
         Angle,
-        RoleState
+        RoleState,
+        Health
     }
 
     public class SpawnInfo : IFrameInfo, IPool {
@@ -134,6 +135,10 @@ namespace Hamster.SpaceWar {
             Data1.Int32 = value;
         }
 
+        public void SetInt16ForData1(short value) {
+            Data1.Int16 = value;
+        }
+
         public void SetFloatForData1(float value) {
             Data1.Float = value;
         }
@@ -161,6 +166,9 @@ namespace Hamster.SpaceWar {
                 case EUpdateActorType.RoleState:
                     Data1.Int8 = binaryReader.ReadByte();
                     break;
+                case EUpdateActorType.Health:
+                    Data1.Int16 = binaryReader.ReadInt16();
+                    break;
             }
         }
 
@@ -177,6 +185,9 @@ namespace Hamster.SpaceWar {
                     break;
                 case EUpdateActorType.RoleState:
                     packet.WriteByte(Data1.Int8);
+                    break;
+                case EUpdateActorType.Health:
+                    packet.WriteInt16(Data1.Int16);
                     break;
             }
         }

@@ -62,22 +62,22 @@ namespace Hamster.SpaceWar {
 
         public void SetAlive() {
             State = EPlayerState.Alive;
-            GameLogicUtility.SetRoleState(gameObject);
+            GameLogicUtility.SetRoleStateDirty(gameObject);
         }
 
         public void SetDead() {
             State = EPlayerState.Dead;
-            GameLogicUtility.SetRoleState(gameObject);
+            GameLogicUtility.SetRoleStateDirty(gameObject);
         }
 
         public void SetDeading() {
             State = EPlayerState.Deading;
-            GameLogicUtility.SetRoleState(gameObject);
+            GameLogicUtility.SetRoleStateDirty(gameObject);
         }
 
         public void SetSpawning() {
             State = EPlayerState.Spawning;
-            GameLogicUtility.SetRoleState(gameObject);
+            GameLogicUtility.SetRoleStateDirty(gameObject);
         }
 
         public float GetSpeed() {
@@ -86,9 +86,10 @@ namespace Hamster.SpaceWar {
 
         private void OnHealthChange(int oldValue, int newValue) {
             if (oldValue > 0 && newValue <= 0) {
-                // SetDeading();
                 SetDead();
             }
+            GameLogicUtility.SetHealthDirty(gameObject);
+
         }
 
     }
