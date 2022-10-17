@@ -107,7 +107,7 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.z);
+                            updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.y);
                             updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                             break;
                         case EUpdateActorType.Angle:

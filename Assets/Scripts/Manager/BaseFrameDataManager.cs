@@ -143,9 +143,9 @@ namespace Hamster.SpaceWar {
             Data1.Float = value;
         }
 
-        public void SetVec3ForData2(float x, float z) {
+        public void SetVec3ForData2(float x, float y) {
             Data1.Vec3.x = x;
-            Data1.Vec3.z = z;
+            Data1.Vec3.y = y;
         }
 
         public void SetInt32ForData2(int value) {
@@ -157,7 +157,7 @@ namespace Hamster.SpaceWar {
             switch (UpdateType) {
                 case EUpdateActorType.Position:
                     Data1.Vec3.x = binaryReader.ReadSingle();
-                    Data1.Vec3.z = binaryReader.ReadSingle();
+                    Data1.Vec3.y = binaryReader.ReadSingle();
                     Data2.Int32 = binaryReader.ReadInt32();
                     break;
                 case EUpdateActorType.Angle:
@@ -177,7 +177,7 @@ namespace Hamster.SpaceWar {
             switch (UpdateType) {
                 case EUpdateActorType.Position:
                     packet.WriteFloat(Data1.Vec3.x);
-                    packet.WriteFloat(Data1.Vec3.z);
+                    packet.WriteFloat(Data1.Vec3.y);
                     packet.WriteInt32(Data2.Int32);
                     break;
                 case EUpdateActorType.Angle:
