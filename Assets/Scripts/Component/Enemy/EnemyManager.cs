@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class EnemyManager {
+    public class EnemyManager : MonoBehaviour {
 
         public int SpawnMinCount = 3;
         public int SpawnMaxCount = 6;

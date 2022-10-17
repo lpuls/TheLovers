@@ -10,7 +10,7 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = null;  // new ServerNetDevice();
         private ServerFrameDataManager _serveFrameDataManager = new ServerFrameDataManager();
         private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
-        private EnemyManager _enemyManager = new EnemyManager();
+        private EnemyManager _enemyManager = null;
 
         public ServerNetDevice NetDevice {
             get {
@@ -20,6 +20,9 @@ namespace Hamster.SpaceWar {
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
+
+            // 敌人管理器
+            _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
@@ -34,6 +37,7 @@ namespace Hamster.SpaceWar {
             // 注册管理器
             RegisterManager<ServerFrameDataManager>(_serveFrameDataManager);
             RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
+            RegisterManager<EnemyManager>(_enemyManager);
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
 
