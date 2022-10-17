@@ -21,7 +21,7 @@ namespace Hamster.SpaceWar {
         protected float _spawnTime = 0;
         protected const float MAX_SPAWNING_TIME = 0.5f;
 
-        public void Awake() {
+        public virtual void Awake() {
             Collider[] colliders = GetComponents<Collider>();
             for (int i = 0; i < colliders.Length; i++) {
                 _colliders.Add(colliders[i]);

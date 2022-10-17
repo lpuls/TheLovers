@@ -9,6 +9,11 @@ namespace Hamster.SpaceWar {
         [SerializeField]
         private float _moveSpeed = 0;
         private Vector3 _moveDirection = Vector3.zero;
+        private BoxCollider2D _collider = null;
+
+        private void Awake() {
+            _collider = GetComponent<BoxCollider2D>();
+        }
 
         public bool NeedMove {
             get;
@@ -30,7 +35,7 @@ namespace Hamster.SpaceWar {
 
             Vector3 oldLocation = location;
             location += _moveDirection * _moveSpeed;
-            location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, HalfSize);
+            location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size / 2);
             // Debug.Log(string.Format("MoveTick {0} {1} {2} {3} {4} {5}", gameObject.name, oldLocation, location, _moveDirection, _moveSpeed, index));
             return location;
         }
@@ -40,7 +45,7 @@ namespace Hamster.SpaceWar {
 
             // 更新角色位置
             transform.position += _moveDirection * _moveSpeed;
-            transform.position = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(transform.position, HalfSize);
+            transform.position = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(transform.position, _collider.size / 2);
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 

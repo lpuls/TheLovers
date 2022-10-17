@@ -60,32 +60,32 @@ namespace Hamster.SpaceWar {
             return bounds.IntersectRay(ray, out distance);
         }
 
-        public Vector3 ClampInWorld(Vector3 position, float size) {
+        public Vector3 ClampInWorld(Vector3 position, Vector3 size) {
             Bounds bounds = new Bounds(Vector3.zero, WorldSize);
-            if (position.x + size >= bounds.max.x) {
-                position.x = bounds.max.x - size;
+            if (position.x + size.x >= bounds.max.x) {
+                position.x = bounds.max.x - size.x;
             }
-            if (position.x - size <= bounds.min.x) {
-                position.x = bounds.min.x + size;
+            if (position.x - size.x <= bounds.min.x) {
+                position.x = bounds.min.x + size.x;
             }
-            if (position.y + size >= bounds.max.z) {
-                position.y = bounds.max.y - size;
+            if (position.y + size.y >= bounds.max.y) {
+                position.y = bounds.max.y - size.y;
             }
-            if (position.y - size <= bounds.min.y) {
-                position.y = bounds.min.y + size;
+            if (position.y - size.y <= bounds.min.y) {
+                position.y = bounds.min.y + size.y;
             }
             return position;
         }
 
-        public Vector3 GetRandomEnemtyMoveTarget(float size) {
-            float minY = size;
-            float maxY = WorldSize.z / 2 - size;
-            float minX = -WorldSize.x / 2 + size;
-            float maxX = WorldSize.x / 2 - size;
+        public Vector3 GetRandomEnemtyMoveTarget(Vector3 size) {
+            float minY = -WorldSize.y / 2 + size.y;
+            float maxY = WorldSize.y / 2 - size.y;
+            float minX = size.x;
+            float maxX = WorldSize.x / 2 - size.x;
             return new Vector3(
                 UnityEngine.Random.Range(minX, maxX),
-                0,
-                UnityEngine.Random.Range(minY, maxY)
+                UnityEngine.Random.Range(minY, maxY),
+                0
                 );
             ;
 
