@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: Parent
       value: 
       objectReference: {fileID: 2124580626330072839}
+    - target: {fileID: 5685879178270266555, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
+      propertyPath: Spawner
+      value: 
+      objectReference: {fileID: 11400000, guid: 65c8f431761534b48af3f5326dbdac67, type: 2}
     - target: {fileID: 7545856162634404008, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: m_RootOrder
       value: 0

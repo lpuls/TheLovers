@@ -17,7 +17,7 @@ namespace Hamster.SpaceWar {
         public void Update() {
             if (Reset) {
                 Bullets.Clear();
-                TrajectoryComponent[] transforms = GetComponentsInChildren<TrajectoryComponent>();
+                TrajectoryEffectComponent[] transforms = GetComponentsInChildren<TrajectoryEffectComponent>();
                 foreach (var item in transforms) {
                     Bullets.Add(item.transform);
                 }
