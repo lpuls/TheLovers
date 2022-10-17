@@ -9,7 +9,7 @@ namespace Hamster.SpaceWar {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
-            Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-5, 0, 0) : new Vector3(5, 0, 0);
+            Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-25, 4, 0) : new Vector3(-25, -4, 0);
 
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
                 return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, netType);
@@ -213,10 +213,10 @@ namespace Hamster.SpaceWar {
                 if (1 == ((operate >> i) & 1)) {
                     switch (value) {
                         case EInputValue.MoveUp:
-                            direction += transform.forward;
+                            direction += transform.up;
                             break;
                         case EInputValue.MoveDown:
-                            direction -= transform.forward;
+                            direction -= transform.up;
                             break;
                         case EInputValue.MoveLeft:
                             direction -= transform.right;

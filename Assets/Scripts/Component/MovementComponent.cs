@@ -44,12 +44,5 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
-
-#if UNITY_EDITOR
-        public void OnDrawGizmos() {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(transform.position, new Vector3(HalfSize, HalfSize, HalfSize));
-        }
-#endif
     }
 }

@@ -42,7 +42,7 @@ namespace Hamster.SpaceWar {
             Vector3 min = mainCamera.ViewportToWorldPoint(new Vector3(0, 0));
             Vector3 max = mainCamera.ViewportToWorldPoint(new Vector3(1, 1));
             WorldSize.x = max.x - min.x;
-            WorldSize.z = max.z - min.z;
+            WorldSize.y = max.y - min.y;
         }
 
         protected virtual IEnumerator PreloadAssets() {
@@ -68,11 +68,11 @@ namespace Hamster.SpaceWar {
             if (position.x - size <= bounds.min.x) {
                 position.x = bounds.min.x + size;
             }
-            if (position.z + size >= bounds.max.z) {
-                position.z = bounds.max.z - size;
+            if (position.y + size >= bounds.max.z) {
+                position.y = bounds.max.y - size;
             }
-            if (position.z - size <= bounds.min.z) {
-                position.z = bounds.min.z + size;
+            if (position.y - size <= bounds.min.y) {
+                position.y = bounds.min.y + size;
             }
             return position;
         }
