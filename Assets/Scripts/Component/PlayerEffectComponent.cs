@@ -91,6 +91,15 @@ namespace Hamster.SpaceWar {
                     if (_health > updateInfo.Data1.Int16) {
 
                         // todo update health ui
+                        BaseSpaceWarWorld baseSpaceWarWorld = World.GetWorld<BaseSpaceWarWorld>();
+                        if (null != baseSpaceWarWorld && netID == baseSpaceWarWorld.PlayerNetID) {
+                            MainUIModule mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
+                            if (null != mainUIModule) {
+                                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig shipConfig))
+                                    mainUIModule.MaxHealth = shipConfig.Health;
+                                mainUIModule.Health.SetValue(newHealth);
+                            }
+                        }
 
                         // 还活着，进行闪白
                         if (newHealth > 0) {

@@ -23,6 +23,8 @@ namespace Hamster.SpaceWar {
             RegisterManager<ClientNetDevice>(_netDevice);
             RegisterManager<ClientFrameDataManager>(_frameDataManager);
 
+            _frameDataManager.OnBeginSimulate += OnBeginSimulate;
+
         }
 
         protected override IEnumerator PreloadAssets() {
@@ -90,6 +92,10 @@ namespace Hamster.SpaceWar {
                 ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
                 module.RequestSpawnShipToServer(2);
             }
+        }
+
+        public void OnBeginSimulate() {
+            Single<UIManager>.GetInstance().Open<MainUIController>();
         }
 
         public override void AddTicker(IServerTicker serverTicker) {

@@ -40,6 +40,8 @@ namespace Hamster.SpaceWar {
             RegisterManager<EnemyManager>(_enemyManager);
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
+            _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
+
 
             // 服务端一起就创建服务器自己的飞机
             GameLogicUtility.ServerInitShip(1, true);
@@ -104,6 +106,10 @@ namespace Hamster.SpaceWar {
         }
 
         private void OnGameStart() {
+        }
+
+        public void OnBeginSimulate() {
+            Single<UIManager>.GetInstance().Open<MainUIController>();
         }
 
         protected override void Update() {

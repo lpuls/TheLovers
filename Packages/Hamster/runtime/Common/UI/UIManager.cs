@@ -27,11 +27,16 @@ namespace Hamster {
             public Type ViewType = null;
         }
 
+        private bool _isInit = false;
         private RectTransform _canvas = null;
         private IUIController _current = null;
         private Dictionary<Type, UIInfo> _uiInfos = new Dictionary<Type, UIInfo>();
 
         public void Initialize(Assembly assembly) {
+            if (_isInit)
+                return;
+            _isInit = true;
+
             Type[] types = assembly.GetTypes();
             for (int i = 0; i < types.Length; i++) {
                 Type classType = types[i];

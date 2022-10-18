@@ -11,7 +11,8 @@ namespace Hamster.SpaceWar {
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
-            base.InitWorld(typeof(Config.GameSetting).Assembly, null, GetType().Assembly);
+            UIManager = Single<UIManager>.GetInstance();
+            base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
         }
 
         protected IEnumerator LoadScene(string path, string sceneName, Config.GameModel gameModel) {

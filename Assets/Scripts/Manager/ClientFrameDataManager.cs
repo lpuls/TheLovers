@@ -18,6 +18,7 @@ namespace Hamster.SpaceWar {
         private HashSet<NetSyncComponent> _predictionActors = new HashSet<NetSyncComponent>(32);
 
         public System.Action<FrameData, FrameData> OnFrameUpdate;
+        public System.Action OnBeginSimulate = delegate {};
 
         public int GameLogicFrame {
             get;
@@ -99,6 +100,7 @@ namespace Hamster.SpaceWar {
             // 还未开始模拟便已有三个逻辑帧了，开始进行模拟
             if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
                 _simulate = true;
+                OnBeginSimulate?.Invoke();
             }
         }
 
@@ -137,9 +139,11 @@ namespace Hamster.SpaceWar {
             if (World.GetWorld().TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData)) {
                 if (Config.GameModel.Single == swapData.GameModel) {
                     _simulate = true;
+                    OnBeginSimulate?.Invoke();
                 }
                 else if (!_simulate && _frameDatas.Count > MAX_SERVER_FRAME_COUNT) {
                     _simulate = true;
+                    OnBeginSimulate?.Invoke();
                 }
             }
             
