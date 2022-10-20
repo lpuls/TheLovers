@@ -34,7 +34,9 @@ namespace Hamster.SpaceWar {
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
 
-        private int _health = 0;
+        private int _health = 1;
+        private int _maxHealth = 1;
+        [SerializeField] private OverheadHealthUI _headHealthUI = null;
 
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
@@ -91,14 +93,8 @@ namespace Hamster.SpaceWar {
                     if (_health > updateInfo.Data1.Int16) {
 
                         // todo update health ui
-                        BaseSpaceWarWorld baseSpaceWarWorld = World.GetWorld<BaseSpaceWarWorld>();
-                        if (null != baseSpaceWarWorld && netID == baseSpaceWarWorld.PlayerNetID) {
-                            MainUIModule mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
-                            if (null != mainUIModule) {
-                                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig shipConfig))
-                                    mainUIModule.MaxHealth = shipConfig.Health;
-                                mainUIModule.Health.SetValue(newHealth);
-                            }
+                        if (null != _headHealthUI) {
+                            _headHealthUI.SetHealth(newHealth, _maxHealth);
                         }
 
                         // 还活着，进行闪白
@@ -193,6 +189,17 @@ namespace Hamster.SpaceWar {
             _hitColorUpdateTime = 0;
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
+
+            if (null != _headHealthUI) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.NetID, out Config.ShipConfig shipConfig)) {
+                    _health = shipConfig.Health;
+                    _maxHealth = shipConfig.Health;
+                    _headHealthUI.SetHealth(shipConfig.Health, shipConfig.Health);
+                }
+                else {
+                    _headHealthUI.SetHealth(1, 1);
+                }
+            }
         }
 
         private void OnDisable() {
