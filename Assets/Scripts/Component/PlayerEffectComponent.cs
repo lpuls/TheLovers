@@ -34,6 +34,7 @@ namespace Hamster.SpaceWar {
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
 
+        private bool _initHealth = false;
         private int _health = 1;
         private int _maxHealth = 1;
         [SerializeField] private OverheadHealthUI _headHealthUI = null;
@@ -89,6 +90,18 @@ namespace Hamster.SpaceWar {
 
                 // 检查角色生命值变化
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out updateInfo)) {
+                    if (!_initHealth) {
+                        if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                            _health = config.Health;
+                            _maxHealth = config.Health;
+                        }
+
+                        if (null != _headHealthUI) {
+                            _headHealthUI.SetHealth(_health, _maxHealth);
+                        }
+                        _initHealth = true;
+                    }
+
                     int newHealth = updateInfo.Data1.Int16;
                     if (_health > updateInfo.Data1.Int16) {
 
@@ -182,24 +195,9 @@ namespace Hamster.SpaceWar {
             if (null == _netSyncComponent)
                 _netSyncComponent = GetComponent<NetSyncComponent>();
 
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
-                _health = config.Health;
-            }
-
             _hitColorUpdateTime = 0;
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
-
-            if (null != _headHealthUI) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.NetID, out Config.ShipConfig shipConfig)) {
-                    _health = shipConfig.Health;
-                    _maxHealth = shipConfig.Health;
-                    _headHealthUI.SetHealth(shipConfig.Health, shipConfig.Health);
-                }
-                else {
-                    _headHealthUI.SetHealth(1, 1);
-                }
-            }
         }
 
         private void OnDisable() {
@@ -207,6 +205,7 @@ namespace Hamster.SpaceWar {
             if (null != frameDataManager) {
                 frameDataManager.OnFrameUpdate -= OnFrameUpdate;
             }
+            _initHealth = false;
         }
     }
 }
