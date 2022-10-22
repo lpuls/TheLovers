@@ -197,6 +197,9 @@ namespace Hamster.SpaceWar {
                         ship.TryGetOrAdd<MovementComponent>();
                         ship.AddComponent<ClientPlayerController>();
                     }
+                    if (ship.TryGetComponent<PlayerEffectComponent>(out PlayerEffectComponent playerEffectComponent)) {
+                        playerEffectComponent.Init();
+                    }
                 }
             }
             return ship;

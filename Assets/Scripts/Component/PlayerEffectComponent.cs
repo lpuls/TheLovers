@@ -34,9 +34,9 @@ namespace Hamster.SpaceWar {
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
 
-        private bool _initHealth = false;
         private int _health = 1;
         private int _maxHealth = 1;
+        private MainUIModule _mainUIModule = null;
         [SerializeField] private OverheadHealthUI _headHealthUI = null;
 
         private void Awake() {
@@ -60,6 +60,27 @@ namespace Hamster.SpaceWar {
                     }
                 }
             }
+        }
+
+        public void Init() {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                _health = config.Health;
+                _maxHealth = config.Health;
+            }
+
+            if (_netSyncComponent.IsAutonomousProxy()) {
+                _mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
+                _headHealthUI.gameObject.SetActive(false);
+
+                _mainUIModule.MaxHealth = _maxHealth;
+                _mainUIModule.Health.SetValue(_health);
+            }
+            else if (null != _headHealthUI) {
+                _headHealthUI.gameObject.SetActive(true);
+
+                _headHealthUI.SetHealth(_health, _maxHealth);
+            }
+
         }
 
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
@@ -93,16 +114,13 @@ namespace Hamster.SpaceWar {
 
                 // 检查角色生命值变化
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out updateInfo)) {
-                    if (!_initHealth) {
-                        if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
-                            _health = config.Health;
-                            _maxHealth = config.Health;
-                        }
-
-                        if (null != _headHealthUI) {
-                            _headHealthUI.SetHealth(_health, _maxHealth);
-                        }
-                        _initHealth = true;
+                    // 根据是否为主控角色
+                    if (null != _mainUIModule) {
+                        _mainUIModule.MaxHealth = _maxHealth;
+                        _mainUIModule.Health.SetValue(_health);
+                    }
+                    else if (null != _headHealthUI) {
+                        _headHealthUI.SetHealth(_health, _maxHealth);
                     }
 
                     int newHealth = updateInfo.Data1.Int16;
@@ -208,7 +226,8 @@ namespace Hamster.SpaceWar {
             if (null != frameDataManager) {
                 frameDataManager.OnFrameUpdate -= OnFrameUpdate;
             }
-            _initHealth = false;
+
+            _mainUIModule = null;
         }
     }
 }

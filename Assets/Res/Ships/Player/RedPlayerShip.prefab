@@ -1967,7 +1967,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   UpdateColorMaxTime: 0.1
-  _headHealthUI: {fileID: 0}
+  _headHealthUI: {fileID: 3780951794275741579}
 --- !u!114 &7415767463390842035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,6 +2101,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892fcddf32f87e1409fd39ff6782ae98, type: 3}
+--- !u!114 &3780951794275741579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8294789703327762660, guid: 892fcddf32f87e1409fd39ff6782ae98, type: 3}
+  m_PrefabInstance: {fileID: 5144694992400623471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b032d7b8086884f830e268f8e1e018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5095342641638736852 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 131708249878701243, guid: 892fcddf32f87e1409fd39ff6782ae98, type: 3}
