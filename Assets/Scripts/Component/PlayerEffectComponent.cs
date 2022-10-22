@@ -48,13 +48,16 @@ namespace Hamster.SpaceWar {
             _tailFlameSize = _normalTailFlame;
 
             // 获取所有的材质
-            Renderer[] renderers = GetComponentsInChildren<Renderer>();
-            for (int i = 0; i < renderers.Length; i++) {
-                Renderer renderer = renderers[i];
-                Material[] materials = renderer.materials;
-                for (int j = 0; j < materials.Length; j++) {
-                    _shipMaterials.Add(materials[j]);
-                    _originAdditionColor.Add(materials[j].GetColor("_BaseColor"));
+            Transform modleTransofmr = transform.Find("Model");
+            if (null != modleTransofmr) {
+                Renderer[] renderers = modleTransofmr.GetComponentsInChildren<Renderer>();
+                for (int i = 0; i < renderers.Length; i++) {
+                    Renderer renderer = renderers[i];
+                    Material[] materials = renderer.materials;
+                    for (int j = 0; j < materials.Length; j++) {
+                        _shipMaterials.Add(materials[j]);
+                        _originAdditionColor.Add(materials[j].GetColor("_BaseColor"));
+                    }
                 }
             }
         }
