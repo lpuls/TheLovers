@@ -42,11 +42,23 @@ namespace Hamster.SpaceWar {
         }
 
         private void SpawnBulletImpl(float cdGain) {
-            for (int i = 0; i < Spawner.SpawnIDs.Count; i++) {
-                int id = Spawner.SpawnIDs[i];
+            ESpaceWarUnitType unitType = GetUnitType();
+            int spawnID = Spawner.EnemeyID;
+            switch (unitType) {
+                case ESpaceWarUnitType.Player1:
+                    spawnID = Spawner.Player1ID;
+                    break;
+                case ESpaceWarUnitType.Player2:
+                    spawnID = Spawner.Player2ID;
+                    break;
+                case ESpaceWarUnitType.Enemy:
+                    spawnID = Spawner.EnemeyID;
+                    break;
+            }
+            for (int i = 0; i < Spawner.SpawnCount; i++) {
                 Vector3 offset = Spawner.SpawnOffsets[i];
                 Vector3 direction = transform.rotation * Spawner.SpawnDirections[i];
-                GameLogicUtility.CreateServerBullet(id, _ownerID, transform.position + offset, direction, this);
+                GameLogicUtility.CreateServerBullet(spawnID, _ownerID, transform.position + offset, direction, this);
             }
             _cd = Spawner.CD;
         }
@@ -61,6 +73,13 @@ namespace Hamster.SpaceWar {
 
         public int GetLayer() {
             return null != Parent ? Parent.layer : gameObject.layer;
+        }
+
+        public ESpaceWarUnitType GetUnitType() {
+            if (Parent.TryGetComponent<BaseController>(out BaseController baseController)) {
+                return baseController.UnitType;
+            }
+            return ESpaceWarUnitType.None;
         }
 
         private void OnDestroyTrajectory(GameObject gameObject, EDestroyActorReason reason) {

@@ -5,10 +5,23 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
+
+    public enum ESpaceWarUnitType {
+        None,
+        Player1,
+        Player2,
+        Enemy
+    }
+
     public class BaseController : MonoBehaviour, IServerTicker {
-        
+
         // protected SimulateComponent _simulateComponent = null;
         protected NetSyncComponent _netSyncComponent = null;
+
+        public ESpaceWarUnitType UnitType {
+            get;
+            set;
+        }
 
         public Action<GameObject, GameObject> OnDie = delegate { };
 

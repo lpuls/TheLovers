@@ -13,13 +13,13 @@ namespace Hamster.SpaceWar {
         END
     }
 
+
     public interface ITrajectorySpanwer {
         void OnHitObject(GameObject hitObject, GameObject trajectory);
         void OnHitDestroy(GameObject trajectory);
         void OnOutOfWold(GameObject trajectory);
-
         int GetLayer();
-
+        ESpaceWarUnitType GetUnitType();
         GameObject GetGameObject();
     }
 

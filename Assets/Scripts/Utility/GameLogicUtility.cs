@@ -18,7 +18,7 @@ namespace Hamster.SpaceWar {
         }
 
 
-        public static GameObject ServerInitShip(int configID, bool isCreateForSelf) {
+        public static GameObject ServerInitShip(int configID, bool isCreateForSelf, ESpaceWarUnitType unitType) {
             // 为逻辑层生成
             GameObject ship = CreateShip(configID, ENetType.Player);
             UnityEngine.Debug.Assert(null != ship, "ServerInitShip Ship Is Null");
@@ -40,7 +40,10 @@ namespace Hamster.SpaceWar {
             // 需要直接添加控制器
             ship.TryGetOrAdd<MovementComponent>();
             ship.TryGetOrAdd<LocalAbilityComponent>();
-            ship.TryGetOrAdd<ServerPlayerController>();
+            ServerPlayerController playerController = ship.TryGetOrAdd<ServerPlayerController>();
+            if (null != playerController) {
+                playerController.UnitType = unitType;
+            }
 
 
             // 需要直接接收准备完成数据
@@ -77,7 +80,7 @@ namespace Hamster.SpaceWar {
                 netSyncComponent.SetAuthority();
             }
 
-            ship.TryGetOrAdd<PathEnemy>();
+            // ship.TryGetOrAdd<PathEnemy>();
 
             return ship;
         }

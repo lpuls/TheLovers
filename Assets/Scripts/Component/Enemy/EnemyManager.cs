@@ -30,6 +30,7 @@ namespace Hamster.SpaceWar {
                 int id = enemyIDs[Random.Range(0, enemyIDs.Length)];
                 GameObject ship = GameLogicUtility.ServerCreateEnemy(id, Vector3.zero, 180);
                 if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
+                    baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
                     baseEnemy.OnDie += OnEnemyDie;
                     _aliveEnemys.Add(baseEnemy);
                     ship.transform.position = baseEnemy.GetRandomLocation();

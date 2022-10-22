@@ -46,13 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawner: {fileID: 11400000, guid: d491021279a34e94dbf13f382c202a1e, type: 2}
-  CD: 0.1
+  CD: 0.05
   Delay: 0
   Reset: 0
   WriteToSpawner: 0
   Bullets:
   - {fileID: 8947449474677757860}
   BulletIDs: 01000000
+  Player1ID: 1
+  Player2ID: 2
+  EnemeyID: 3
 --- !u!1001 &4173539628678033637
 PrefabInstance:
   m_ObjectHideFlags: 0

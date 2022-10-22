@@ -44,7 +44,7 @@ namespace Hamster.SpaceWar {
 
 
             // 服务端一起就创建服务器自己的飞机
-            GameLogicUtility.ServerInitShip(1, true);
+            GameLogicUtility.ServerInitShip(1, true, ESpaceWarUnitType.Player1);
         }
 
 

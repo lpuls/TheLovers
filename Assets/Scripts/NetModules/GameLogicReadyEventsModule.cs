@@ -256,7 +256,7 @@ namespace Hamster.SpaceWar {
         private void OnReceiveSpawnShipRequestMessage(Packet packet, ClientInstance clientInstance) {
             int shipID = packet.ReadInt32();
 
-            GameObject ship = GameLogicUtility.ServerInitShip(shipID, false);
+            GameObject ship = GameLogicUtility.ServerInitShip(shipID, false, ESpaceWarUnitType.Player2);
             if (null != ship && ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                 clientInstance.UserData = netSyncComponent.NetID;
                 ResponSpawnShipToClients(shipID, netSyncComponent.NetID, ship.transform.position);

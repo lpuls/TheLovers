@@ -13,6 +13,9 @@ namespace Hamster.SpaceWar {
         public bool WriteToSpawner = false;
         public List<Transform> Bullets = new List<Transform>();
         public List<int> BulletIDs = new List<int>();
+        public int Player1ID = 0;
+        public int Player2ID = 0;
+        public int EnemeyID = 0;
 
         public void Update() {
             if (Reset) {
@@ -29,6 +32,9 @@ namespace Hamster.SpaceWar {
                 Spawner.SpawnIDs.Clear();
                 Spawner.SpawnDirections.Clear();
                 Spawner.SpawnOffsets.Clear();
+                Spawner.Player1ID = Player1ID;
+                Spawner.Player2ID = Player2ID;
+                Spawner.EnemeyID = EnemeyID;
                 for (int i = 0; i < Bullets.Count; i++) {
                     var item = Bullets[i];
                     if (BulletIDs.Count > i) {

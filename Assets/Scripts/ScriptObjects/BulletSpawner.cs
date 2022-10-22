@@ -10,6 +10,10 @@ namespace Hamster.SpaceWar {
         public AudioClip LauncherAudio = null;
 
         public List<int> SpawnIDs = new List<int>(8);
+        public int SpawnCount = 1;
+        public int Player1ID = 0;
+        public int Player2ID = 0;
+        public int EnemeyID = 0;
         public List<Vector3> SpawnOffsets = new List<Vector3>(8);
         public List<Vector3> SpawnDirections = new List<Vector3>(8);
     }
