@@ -22,7 +22,7 @@ namespace Hamster.SpaceWar {
             base.InitWorld();
 
             // 敌人管理器
-            _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
+            // _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
@@ -37,7 +37,7 @@ namespace Hamster.SpaceWar {
             // 注册管理器
             RegisterManager<ServerFrameDataManager>(_serveFrameDataManager);
             RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
-            RegisterManager<EnemyManager>(_enemyManager);
+            // RegisterManager<EnemyManager>(_enemyManager);
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
@@ -122,7 +122,7 @@ namespace Hamster.SpaceWar {
             
             _serveFrameDataManager.Update();
             _clientFrameDataManager.Update();
-            _enemyManager.Update();
+            // _enemyManager.Update();
         }
 
         public void OnDestroy() {

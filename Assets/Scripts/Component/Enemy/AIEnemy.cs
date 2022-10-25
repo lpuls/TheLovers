@@ -32,7 +32,8 @@ namespace Hamster.SpaceWar {
 
             // 进行移动
             if (null != _movementComponent && _movementComponent.NeedMove) {
-                _movementComponent.MoveTick(dt);
+                transform.position = _movementComponent.MoveTick(transform.position, dt, 0);
+                // _movementComponent.MoveTick(dt);
             }
 
             // 尝试进行攻击

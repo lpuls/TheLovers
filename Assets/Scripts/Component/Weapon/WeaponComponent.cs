@@ -71,6 +71,10 @@ namespace Hamster.SpaceWar {
             return gameObject;
         }
 
+        public GameObject GetOwner() {
+            return null != Parent ? Parent : gameObject;
+        }
+
         public int GetLayer() {
             return null != Parent ? Parent.layer : gameObject.layer;
         }

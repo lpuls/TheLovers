@@ -5,8 +5,8 @@ namespace Hamster.SpaceWar {
 
     public enum ESpaceWarLayers {
         BEGIN = 6,
-        PLANE = 7,
-        PROPS = 8,
+        BULLET = 7,
+        PICKER = 8,
         PLAYER = 9,
         ENEMY = 10,
         NATURE = 11,
@@ -21,6 +21,7 @@ namespace Hamster.SpaceWar {
         int GetLayer();
         ESpaceWarUnitType GetUnitType();
         GameObject GetGameObject();
+        GameObject GetOwner();
     }
 
     public class TrajectoryComponent : BaseController {
@@ -87,6 +88,10 @@ namespace Hamster.SpaceWar {
 
         protected bool CheckLayerValue(int layer, ESpaceWarLayers value) {
             return layer == (int)value;
+        }
+
+        public GameObject GetOwner() {
+            return _parent.GetOwner();
         }
 
 #if UNITY_EDITOR

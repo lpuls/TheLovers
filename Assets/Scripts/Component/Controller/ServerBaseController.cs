@@ -7,11 +7,12 @@ namespace Hamster.SpaceWar {
         void OnHit(GameObject hitObject, GameObject hitTrajectory);
     }
 
-    public class ServerBaseController : PlayerController, IDamage {
+    public class ServerBaseController : PlayerController, IDamage, IMover {
         // 功能
         protected MovementComponent _movementComponent = null;
         protected LocalAbilityComponent _localAbilityComponent = null;
         protected PropertyComponent _propertyComponent = null;
+        protected Collider2D _collider2D = null;
         protected List<Collider> _colliders = new List<Collider>(4);
 
         // 其它
@@ -31,6 +32,8 @@ namespace Hamster.SpaceWar {
             _localAbilityComponent = GetComponent<LocalAbilityComponent>();
             _netSyncComponent = GetComponent<NetSyncComponent>();
             _propertyComponent = GetComponent<PropertyComponent>();
+
+            _movementComponent.Mover = this;
         }
 
         public override void Init() {
@@ -106,6 +109,71 @@ namespace Hamster.SpaceWar {
             else if (_propertyComponent.IsAlive) {
                 // base.Tick(dt);
                 OnAlive(dt);
+            }
+        }
+
+        protected virtual int GetMoveRayCastLayerMask() {
+            // todo 返回的layermask可以提前算好
+            if ((int)ESpaceWarLayers.PLAYER == gameObject.layer)
+                return (1 << (int)ESpaceWarLayers.ENEMY) | (1 << (int)ESpaceWarLayers.BULLET) | (1 << (int)ESpaceWarLayers.PICKER);
+            else if ((int)ESpaceWarLayers.ENEMY == gameObject.layer)
+                return (1 << (int)ESpaceWarLayers.PLAYER) | (1 << (int)ESpaceWarLayers.BULLET) | (1 << (int)ESpaceWarLayers.PICKER);
+            else
+                return 0;
+        }
+
+        public virtual RaycastHit2D MoveRayCast(float distance, Vector3 direction) {
+            return Physics2D.BoxCast(transform.position, GetSize(), 0, direction, distance, GetMoveRayCastLayerMask());
+        }
+
+        public virtual Vector3 GetSize() {
+            if (null == _collider2D) {
+                if (gameObject.TryGetComponent<BoxCollider2D>(out BoxCollider2D boxCollider2D)) {
+                    _collider2D = boxCollider2D;
+                    return boxCollider2D.size;
+                }
+            }
+            return (_collider2D as BoxCollider2D).size;
+        }
+
+        protected virtual void OnHitBullet(GameObject hitObject) {
+            if (hitObject.TryGetComponent<TrajectoryComponent>(out TrajectoryComponent trajectoryComponent)) {
+                GameObject attacker = trajectoryComponent.GetOwner();
+                OnHit(attacker, hitObject);
+            }
+        }
+
+        protected virtual void OnHitPicker(GameObject hitObject) {
+        }
+
+        protected virtual void OnHitPlayer(GameObject hitObject) {
+        }
+
+        protected virtual void OnHitNature(GameObject hitObject) {
+        }
+
+        protected virtual void OnHitEenemy(GameObject hitObject) {
+        }
+
+        public void OnHitSomething(RaycastHit2D raycastHit) {
+            GameObject hitObject = raycastHit.collider.gameObject;
+            ESpaceWarLayers layer = (ESpaceWarLayers)hitObject.layer;
+            switch (layer) {
+                case ESpaceWarLayers.BULLET:
+                    OnHitBullet(hitObject);
+                    break;
+                case ESpaceWarLayers.PICKER:
+                    OnHitPicker(hitObject);
+                    break;
+                case ESpaceWarLayers.PLAYER:
+                    OnHitPlayer(hitObject);
+                    break;
+                case ESpaceWarLayers.ENEMY:
+                    OnHitEenemy(hitObject);
+                    break;
+                case ESpaceWarLayers.NATURE:
+                    OnHitNature(hitObject);
+                    break;
             }
         }
 

@@ -12,8 +12,8 @@ TagManager:
   - Water
   - UI
   - 
-  - Plane
-  - Props
+  - Bullet
+  - Picker
   - Player
   - Enemy
   - Nature

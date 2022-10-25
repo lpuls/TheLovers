@@ -26,22 +26,27 @@ namespace Config {
           string.Concat(
             "ChFUZW1wL0NvbmZpZy5wcm90byJkCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
             "CgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJ",
-            "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJYCgpTaGlwQ29uZmln",
-            "EgoKAklEGAEgASgFEgwKBFBhdGgYAiABKAkSEQoJTG9naWNQYXRoGAMgASgJ",
-            "Eg4KBkhlYWx0aBgEIAEoBRINCgVTcGVlZBgFIAEoAiIrCghWZWN0b3IzRBIJ",
-            "CgFYGAEgASgCEgkKAVkYAiABKAISCQoBWhgDIAEoAiIrCgZEZXBlbmQSEwoL",
-            "UmVsb2FkQ291bnQYASABKAUSDAoEUGF0aBgCIAEoCSKSAQoLR2FtZVNldHRp",
-            "bmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNlcnZlcklQ",
-            "GAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAYBSABKAkS",
-            "EgoKQ2xpZW50UG9ydBgGIAEoBRIYCgdEZXBlbmRzGAcgASgLMgcuRGVwZW5k",
-            "KhsKB0V4YW1wbGUSEAoMRXhhbXBsZV9OT05FEAAqTQoJR2FtZU1vZGVsEhIK",
-            "DkdhbWVNb2RlbF9OT05FEAASFAoQR2FtZU1vZGVsX1NJTkdMRRABEhYKEkdh",
-            "bWVNb2RlbF9NVUxUSVBMRRACQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJHCgpQY2tlckl0ZW1z",
+            "EgoKAklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIRCglM",
+            "b2dpY1BhdGgYBCABKAkiWAoKU2hpcENvbmZpZxIKCgJJRBgBIAEoBRIMCgRQ",
+            "YXRoGAIgASgJEhEKCUxvZ2ljUGF0aBgDIAEoCRIOCgZIZWFsdGgYBCABKAUS",
+            "DQoFU3BlZWQYBSABKAIiMAoGV2VhcG9uEgoKAklEGAEgASgFEgwKBE5vdGUY",
+            "AiABKAkSDAoEUGF0aBgDIAEoCSIrCghWZWN0b3IzRBIJCgFYGAEgASgCEgkK",
+            "AVkYAiABKAISCQoBWhgDIAEoAiIrCgZEZXBlbmQSEwoLUmVsb2FkQ291bnQY",
+            "ASABKAUSDAoEUGF0aBgCIAEoCSKSAQoLR2FtZVNldHRpbmcSCgoCSUQYASAB",
+            "KAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNlcnZlcklQGAMgASgJEhIKClNl",
+            "cnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAYBSABKAkSEgoKQ2xpZW50UG9y",
+            "dBgGIAEoBRIYCgdEZXBlbmRzGAcgASgLMgcuRGVwZW5kKhsKB0V4YW1wbGUS",
+            "EAoMRXhhbXBsZV9OT05FEAAqTQoJR2FtZU1vZGVsEhIKDkdhbWVNb2RlbF9O",
+            "T05FEAASFAoQR2FtZU1vZGVsX1NJTkdMRRABEhYKEkdhbWVNb2RlbF9NVUxU",
+            "SVBMRRACQgmqAgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort", "Depends" }, null, null, null)
@@ -333,6 +338,219 @@ namespace Config {
 
   }
 
+  public sealed partial class PckerItems : pb::IMessage<PckerItems> {
+    private static readonly pb::MessageParser<PckerItems> _parser = new pb::MessageParser<PckerItems>(() => new PckerItems());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PckerItems> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PckerItems() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PckerItems(PckerItems other) : this() {
+      iD_ = other.iD_;
+      note_ = other.note_;
+      path_ = other.path_;
+      logicPath_ = other.logicPath_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PckerItems Clone() {
+      return new PckerItems(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private int iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Note" field.</summary>
+    public const int NoteFieldNumber = 2;
+    private string note_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Note {
+      get { return note_; }
+      set {
+        note_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 3;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "LogicPath" field.</summary>
+    public const int LogicPathFieldNumber = 4;
+    private string logicPath_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LogicPath {
+      get { return logicPath_; }
+      set {
+        logicPath_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PckerItems);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PckerItems other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (Note != other.Note) return false;
+      if (Path != other.Path) return false;
+      if (LogicPath != other.LogicPath) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0) hash ^= ID.GetHashCode();
+      if (Note.Length != 0) hash ^= Note.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (LogicPath.Length != 0) hash ^= LogicPath.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ID);
+      }
+      if (Note.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Note);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Path);
+      }
+      if (LogicPath.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(LogicPath);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ID);
+      }
+      if (Note.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Note);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (LogicPath.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LogicPath);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PckerItems other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0) {
+        ID = other.ID;
+      }
+      if (other.Note.Length != 0) {
+        Note = other.Note;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      if (other.LogicPath.Length != 0) {
+        LogicPath = other.LogicPath;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Note = input.ReadString();
+            break;
+          }
+          case 26: {
+            Path = input.ReadString();
+            break;
+          }
+          case 34: {
+            LogicPath = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ShipConfig : pb::IMessage<ShipConfig> {
     private static readonly pb::MessageParser<ShipConfig> _parser = new pb::MessageParser<ShipConfig>(() => new ShipConfig());
     private pb::UnknownFieldSet _unknownFields;
@@ -341,7 +559,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -574,6 +792,191 @@ namespace Config {
 
   }
 
+  public sealed partial class Weapon : pb::IMessage<Weapon> {
+    private static readonly pb::MessageParser<Weapon> _parser = new pb::MessageParser<Weapon>(() => new Weapon());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Weapon> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Weapon() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Weapon(Weapon other) : this() {
+      iD_ = other.iD_;
+      note_ = other.note_;
+      path_ = other.path_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Weapon Clone() {
+      return new Weapon(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private int iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Note" field.</summary>
+    public const int NoteFieldNumber = 2;
+    private string note_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Note {
+      get { return note_; }
+      set {
+        note_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 3;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Weapon);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Weapon other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (Note != other.Note) return false;
+      if (Path != other.Path) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0) hash ^= ID.GetHashCode();
+      if (Note.Length != 0) hash ^= Note.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ID);
+      }
+      if (Note.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Note);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Path);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ID);
+      }
+      if (Note.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Note);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Weapon other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0) {
+        ID = other.ID;
+      }
+      if (other.Note.Length != 0) {
+        Note = other.Note;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Note = input.ReadString();
+            break;
+          }
+          case 26: {
+            Path = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class Vector3D : pb::IMessage<Vector3D> {
     private static readonly pb::MessageParser<Vector3D> _parser = new pb::MessageParser<Vector3D>(() => new Vector3D());
     private pb::UnknownFieldSet _unknownFields;
@@ -582,7 +985,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -767,7 +1170,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -924,7 +1327,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
