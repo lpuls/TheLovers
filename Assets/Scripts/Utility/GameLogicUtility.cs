@@ -85,6 +85,19 @@ namespace Hamster.SpaceWar {
             return ship;
         }
 
+        public static GameObject ServerCreatePickerItem(int configID, Vector3 position) {
+            ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(1, out Config.PckerItems info)) {
+                GameObject gameObject = frameDataManager.SpawnNetObject(0, 0, info.LogicPath, configID, position, ENetType.PickerItem);
+                if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    netSyncComponent.SetAuthority();
+                }
+            }
+            return null;
+        }
+
         public static void SetPlayerOperator(int userData, int playerOperator, int index) {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
@@ -206,6 +219,19 @@ namespace Hamster.SpaceWar {
                 }
             }
             return ship;
+        }
+
+        public static GameObject ClientCreatePickerItem(int configID, int netID, Vector3 position) {
+            ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
+            UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
+
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(1, out Config.PckerItems info)) {
+                GameObject gameObject = frameDataManager.SpawnNetObject(netID, 0, info.LogicPath, configID, position, ENetType.PickerItem);
+                if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    netSyncComponent.SetSimulatedProxy();
+                }
+            }
+            return null;
         }
 
         #endregion

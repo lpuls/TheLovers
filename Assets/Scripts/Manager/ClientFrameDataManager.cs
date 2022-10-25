@@ -87,6 +87,9 @@ namespace Hamster.SpaceWar {
                         case ENetType.Bullet:
                             GameLogicUtility.CreateClientBullet(item.ConfigID, item.NetID, item.OwnerID, item.Position, item.Angle);
                             break;
+                        case ENetType.PickerItem:
+                            GameLogicUtility.ClientCreatePickerItem(item.ConfigID, item.NetID, item.Position);
+                            break;
                     }
                 }
             }

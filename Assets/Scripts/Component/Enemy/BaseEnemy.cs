@@ -11,6 +11,20 @@ namespace Hamster.SpaceWar {
             base.Awake();
 
             _collider = GetComponent<BoxCollider2D>();
+
+            OnDie += OnDieSpawnItem;
+        }
+
+        public override void OnDestroy() {
+            base.OnDestroy();
+
+            OnDie -= OnDieSpawnItem;
+        }
+
+        protected virtual void OnDieSpawnItem(GameObject deceased, GameObject killer) {
+            // if (Random.Range(0, 100.0f) > 50.0f) {
+                GameLogicUtility.ServerCreatePickerItem(1, transform.position);
+            // }
         }
 
         public override void Tick(float dt) {

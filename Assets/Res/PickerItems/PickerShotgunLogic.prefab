@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7818415772552745362}
   - component: {fileID: 7818415772552745363}
+  - component: {fileID: -8011492726950112157}
   m_Layer: 0
   m_Name: PickerShotgunLogic
   m_TagString: Untagged
@@ -48,3 +49,20 @@ MonoBehaviour:
   _itemSize: 0.5
   AbilityIndex: 0
   WeaponID: 2
+--- !u!114 &-8011492726950112157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818415772552745356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c628509f14ea1cc418c9542f600fbb46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetID: 0
+  OwnerID: 0
+  ConfigID: 0
+  PendingKill: 0
+  NetType: 0

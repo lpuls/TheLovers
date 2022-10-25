@@ -21,8 +21,9 @@ namespace Hamster.SpaceWar {
 
                 RaycastHit2D hitResult = Physics2D.BoxCast(transform.position, new Vector2(_itemSize, _itemSize), 0, _moveDirection, moveDistance, 1 << (int)ESpaceWarLayers.PLAYER);
                 if (null != hitResult.collider && hitResult.collider.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController)) {
-                    OnPicker(playerController);
-                    AssetPool.Free(gameObject);
+                    // OnPicker(playerController);
+                    // AssetPool.Free(gameObject);
+                    Debug.Log("========> On Touch Player");
                 }
 
                 if (moveDistance <= _itemSize) {

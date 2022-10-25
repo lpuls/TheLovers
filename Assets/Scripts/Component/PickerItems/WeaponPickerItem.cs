@@ -7,8 +7,6 @@ namespace Hamster.SpaceWar {
         public int WeaponID = 0;
 
         protected override void OnPicker(PlayerController playerController) {
-            base.OnPicker(playerController);
-
             ServerPlayerController serverPlayerController = playerController as ServerPlayerController;
             if (null != serverPlayerController) {
                 serverPlayerController.ChangeWeapon(AbilityIndex, WeaponID);

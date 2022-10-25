@@ -56,6 +56,11 @@ namespace Hamster.SpaceWar {
             return _operate;
         }
 
+        public void ChangeWeapon(EAbilityIndex abilityIndex, int id) {
+            if (null != _localAbilityComponent)
+                _localAbilityComponent.ChangeWeapon(abilityIndex, id);
+        }
+
         public override void OnAlive(float dt) {
             while (_operates.Count > 0) {
                 int input = GetOperator(InputKeyToValue);

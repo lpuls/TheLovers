@@ -25,6 +25,17 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public void ChangeWeapon(EAbilityIndex abilityIndex, int id) {
+            if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(id, out Config.Weapon info)) {
+                    BulletSpawner bulletSpawner = Asset.Load<BulletSpawner>(info.Path);
+                    foreach (var item in weapons) {
+                        item.Spawner = bulletSpawner;
+                    }
+                }
+            }
+        }
+
         public void Cast(EAbilityIndex abilityIndex, float cdGain) {
             if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
                 foreach (var item in weapons) {

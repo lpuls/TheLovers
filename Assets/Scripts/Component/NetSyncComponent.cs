@@ -16,6 +16,7 @@ namespace Hamster.SpaceWar {
         Player = 1,
         Bullet = 2,
         Enemy = 3,
+        PickerItem = 4
     }
 
     public class EUpdateActorTypeComparer : System.Collections.Generic.IEqualityComparer<EUpdateActorType> {
