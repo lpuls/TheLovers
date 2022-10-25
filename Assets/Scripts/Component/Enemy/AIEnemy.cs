@@ -33,6 +33,7 @@ namespace Hamster.SpaceWar {
             // 进行移动
             if (null != _movementComponent && _movementComponent.NeedMove) {
                 transform.position = _movementComponent.MoveTick(transform.position, dt, 0);
+                GameLogicUtility.SetPositionDirty(gameObject);
                 // _movementComponent.MoveTick(dt);
             }
 
