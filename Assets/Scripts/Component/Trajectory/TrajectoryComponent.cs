@@ -73,11 +73,6 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
-        //private void OnTriggerEnter(Collider collider) {
-        //    GameObject colliderObject = collider.gameObject;
-        //    OnHitSomething(colliderObject);
-        //}
-
         protected virtual void OnHitSomething(GameObject collider) {
             bool isPlayer = CheckLayerValue(collider.layer, ESpaceWarLayers.PLAYER);
 
@@ -90,11 +85,6 @@ namespace Hamster.SpaceWar {
                         _parent.OnHitObject(collider, gameObject);
                 }
             }
-
-            // 命中后是否销毁
-            //if (_hitOnDestroy && null != _parent) {
-            //    _parent.OnHitDestroy(gameObject);
-            //}
         }
 
         protected bool CheckLayerValue(int layer, ESpaceWarLayers value) {
