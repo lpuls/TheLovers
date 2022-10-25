@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5596082507764223173}
   - component: {fileID: -3169149571506683427}
   - component: {fileID: 1052922631}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RedShipLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -75,7 +75,6 @@ namespace Hamster.SpaceWar {
                 _simulateComponent.AddPredictionCommand(frameIndex, currentLocation, input);
             }
 
-
         }
 
     }

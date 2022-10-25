@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
         GameObject GetOwner();
     }
 
-    public class TrajectoryComponent : BaseController {
+    public class TrajectoryComponent : BaseController, IMover {
         protected ITrajectorySpanwer _parent = null;
         protected bool _isPlayer = false;
         protected bool _pendingKill = false;
@@ -33,11 +33,20 @@ namespace Hamster.SpaceWar {
 
         [SerializeField] protected bool _hitOnDestroy = true;
 
+        protected MovementComponent _movementComponent = null;
 
         public virtual void InitProperty(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
             _parent = parent;
             _moveDirection = moveDirection;
             _moveSpeed = moveSpeed;
+
+            // 初始化移动组件
+            if (null == _movementComponent) {
+                _movementComponent = GetComponent<MovementComponent>();
+                _movementComponent.Mover = this;
+            }
+            _movementComponent.Speed = _moveSpeed;
+            _movementComponent.Move(moveDirection);
 
             // 修改朝向
             transform.rotation = Quaternion.Euler(moveDirection);
@@ -54,7 +63,9 @@ namespace Hamster.SpaceWar {
         }
 
         public virtual void Move(float dt) {
-            MoveBulletByDelta(_moveDirection * dt * _moveSpeed);
+            transform.position = _movementComponent.MoveTick(transform.position, dt, -1, false);
+            GameLogicUtility.SetPositionDirty(gameObject);
+            //MoveBulletByDelta(_moveDirection * dt * _moveSpeed);
         }
 
         protected void MoveBulletByDelta(Vector3 delta) {
@@ -62,10 +73,10 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
-        private void OnTriggerEnter(Collider collider) {
-            GameObject colliderObject = collider.gameObject;
-            OnHitSomething(colliderObject);
-        }
+        //private void OnTriggerEnter(Collider collider) {
+        //    GameObject colliderObject = collider.gameObject;
+        //    OnHitSomething(colliderObject);
+        //}
 
         protected virtual void OnHitSomething(GameObject collider) {
             bool isPlayer = CheckLayerValue(collider.layer, ESpaceWarLayers.PLAYER);
@@ -94,12 +105,36 @@ namespace Hamster.SpaceWar {
             return _parent.GetOwner();
         }
 
+        public virtual RaycastHit2D MoveRayCast(float distance, Vector3 direction) {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnHitSomething(RaycastHit2D raycastHit) {
+            GameObject hitObject = raycastHit.collider.gameObject;
+            bool isPlayer = CheckLayerValue(hitObject.layer, ESpaceWarLayers.PLAYER);
+
+            // 阵营不同，创成伤害
+            if (isPlayer != _isPlayer) {
+                IDamage damage = hitObject.GetComponent<IDamage>();
+                if (null != damage) {
+                    damage.OnHit(_parent.GetGameObject(), gameObject);
+                    if (null != _parent)
+                        _parent.OnHitObject(hitObject, gameObject);
+                }
+            }
+        }
+
+        public virtual Vector3 GetSize() {
+            throw new System.NotImplementedException();
+        }
+
 #if UNITY_EDITOR
         public virtual void OnDrawGizmos() {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, 0.2f);
             Gizmos.DrawLine(transform.position, transform.position + _moveDirection * _moveSpeed);
         }
+
 #endif
     }
 }

@@ -40,7 +40,7 @@ namespace Hamster.SpaceWar {
             _moveSpeed = 0;
         }
 
-        public Vector3 MoveTick(Vector3 location, float dt, int index) {
+        public Vector3 MoveTick(Vector3 location, float dt, int index, bool checkBound = true) {
             _moveSpeed = Speed * dt;
 
             //Vector3 oldLocation = location;
@@ -55,7 +55,8 @@ namespace Hamster.SpaceWar {
             else {
                 location += _moveDirection * _moveSpeed;
             }
-            location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size);
+            if (checkBound)
+                location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size);
             // Debug.Log(string.Format("MoveTick {0} {1} {2} {3} {4} {5}", gameObject.name, oldLocation, location, _moveDirection, _moveSpeed, index));
             return location;
         }

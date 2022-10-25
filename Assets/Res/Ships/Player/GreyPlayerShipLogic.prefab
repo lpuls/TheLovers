@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6728029874140454087}
   - component: {fileID: -4012478367286504076}
   - component: {fileID: 8852608851623935388}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GreyPlayerShipLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

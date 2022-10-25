@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4601989128353010769}
   - component: {fileID: 2905548445516535958}
   - component: {fileID: 8899322176739395468}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PurpleShipLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
