@@ -10,6 +10,7 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = null;  // new ServerNetDevice();
         private ServerFrameDataManager _serveFrameDataManager = new ServerFrameDataManager();
         private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
+        private CollisionProcessManager _collisionResultManager = new CollisionProcessManager();
         private EnemyManager _enemyManager = null;
 
         public ServerNetDevice NetDevice {

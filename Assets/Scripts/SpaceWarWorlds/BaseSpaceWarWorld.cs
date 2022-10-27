@@ -7,6 +7,9 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public interface IServerTicker {
+
+        int GetPriority();
+
         void Tick(float dt);
         bool IsEnable();
     }

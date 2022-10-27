@@ -45,6 +45,10 @@ namespace Hamster.SpaceWar {
         public virtual void Tick(float dt) {
         }
 
+        public virtual int GetPriority() {
+            return (int)EServerTickLayers.Tick;
+        }
+
         protected NetSyncComponent GetNetSyncComponent() {
             if (null != _netSyncComponent)
                 return _netSyncComponent;
