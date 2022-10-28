@@ -321,6 +321,10 @@ namespace Hamster.SpaceWar {
         public BaseFrameDataManager() {
             CurrentPlayerCount = 0;
             IsGameStart = false;
+
+            for (int i = 0; i < _tickers.Length; i++) {
+                _tickers[i] = new HashSet<IServerTicker>();
+            }
         }
 
         public Dictionary<int, NetSyncComponent> GetAllNetActor() {
@@ -380,7 +384,9 @@ namespace Hamster.SpaceWar {
         public void UpdateTickers() {
             var pendingIt = _pendingAddTickers.GetEnumerator();
             while (pendingIt.MoveNext()) {
-                _tickers[pendingIt.Current.GetPriority()].Add(pendingIt.Current);
+                int index = pendingIt.Current.GetPriority();
+                Debug.Assert(index >= 0 && index < (int)EServerTickLayers.Max, "Server tick priority out of range");
+                _tickers[index].Add(pendingIt.Current);
             }
             _pendingAddTickers.Clear();
 

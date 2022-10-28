@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class EnemyManager : MonoBehaviour {
+    public class EnemyManager : MonoBehaviour, IServerTicker {
 
         public int SpawnMinCount = 3;
         public int SpawnMaxCount = 6;
@@ -12,16 +12,6 @@ namespace Hamster.SpaceWar {
 
         private float _delayTime = 0;
         private List<BaseEnemy> _aliveEnemys = new List<BaseEnemy>();
-
-        public void Update() {
-            if (_aliveEnemys.Count <= 0) {
-                _delayTime += Time.deltaTime;
-                if (_delayTime >= SpawnDelay) {
-                    SpawnEnemys();
-                    _delayTime = 0;
-                }
-            }
-        }
 
         private void SpawnEnemys() {
             int[] enemyIDs = { 10, 11 };
@@ -50,5 +40,22 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public int GetPriority() {
+            return (int)EServerTickLayers.PreTick;
+        }
+
+        public void Tick(float dt) {
+            if (_aliveEnemys.Count <= 0) {
+                _delayTime += dt;
+                if (_delayTime >= SpawnDelay) {
+                    SpawnEnemys();
+                    _delayTime = 0;
+                }
+            }
+        }
+
+        public bool IsEnable() {
+            return true;
+        }
     }
 }

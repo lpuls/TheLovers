@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
             base.InitWorld();
 
             // 敌人管理器
-            // _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
+            _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
@@ -38,10 +38,15 @@ namespace Hamster.SpaceWar {
             // 注册管理器
             RegisterManager<ServerFrameDataManager>(_serveFrameDataManager);
             RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
-            // RegisterManager<EnemyManager>(_enemyManager);
+            RegisterManager<CollisionProcessManager>(_collisionResultManager);
+            RegisterManager<EnemyManager>(_enemyManager);
+
+            // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
+            _clientFrameDataManager.AddTicker(_collisionResultManager);
+            _clientFrameDataManager.AddTicker(_enemyManager);
 
 
             // 服务端一起就创建服务器自己的飞机

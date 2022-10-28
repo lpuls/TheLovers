@@ -136,45 +136,10 @@ namespace Hamster.SpaceWar {
             return (_collider2D as BoxCollider2D).size;
         }
 
-        protected virtual void OnHitBullet(GameObject hitObject) {
-            if (hitObject.TryGetComponent<TrajectoryComponent>(out TrajectoryComponent trajectoryComponent)) {
-                GameObject attacker = trajectoryComponent.GetOwner();
-                OnHit(attacker, hitObject);
-            }
-        }
-
-        protected virtual void OnHitPicker(GameObject hitObject) {
-        }
-
-        protected virtual void OnHitPlayer(GameObject hitObject) {
-        }
-
-        protected virtual void OnHitNature(GameObject hitObject) {
-        }
-
-        protected virtual void OnHitEenemy(GameObject hitObject) {
-        }
-
         public void OnHitSomething(RaycastHit2D raycastHit) {
-            GameObject hitObject = raycastHit.collider.gameObject;
-            ESpaceWarLayers layer = (ESpaceWarLayers)hitObject.layer;
-            switch (layer) {
-                case ESpaceWarLayers.BULLET:
-                    OnHitBullet(hitObject);
-                    break;
-                case ESpaceWarLayers.PICKER:
-                    OnHitPicker(hitObject);
-                    break;
-                case ESpaceWarLayers.PLAYER:
-                    OnHitPlayer(hitObject);
-                    break;
-                case ESpaceWarLayers.ENEMY:
-                    OnHitEenemy(hitObject);
-                    break;
-                case ESpaceWarLayers.NATURE:
-                    OnHitNature(hitObject);
-                    break;
-            }
+            CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
+            Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
+            collisionProcessManager.AddCollisionResult(raycastHit, gameObject);
         }
 
     }
