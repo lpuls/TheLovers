@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
 
         protected virtual void OnDieSpawnItem(GameObject deceased, GameObject killer) {
             // if (Random.Range(0, 100.0f) > 50.0f) {
-                GameLogicUtility.ServerCreatePickerItem(1, transform.position);
+            //    GameLogicUtility.ServerCreatePickerItem(1, transform.position);
             // }
         }
 

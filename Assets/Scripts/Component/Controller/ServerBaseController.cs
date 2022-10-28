@@ -139,7 +139,7 @@ namespace Hamster.SpaceWar {
         public void OnHitSomething(RaycastHit2D raycastHit) {
             CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
             Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
-            collisionProcessManager.AddCollisionResult(raycastHit, gameObject);
+            collisionProcessManager.AddCollisionResult(raycastHit, gameObject, (ESpaceWarLayers)gameObject.layer);
         }
 
     }

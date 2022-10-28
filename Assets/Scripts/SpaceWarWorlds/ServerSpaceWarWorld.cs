@@ -45,8 +45,8 @@ namespace Hamster.SpaceWar {
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
-            _clientFrameDataManager.AddTicker(_collisionResultManager);
-            _clientFrameDataManager.AddTicker(_enemyManager);
+            _serveFrameDataManager.AddTicker(_collisionResultManager);
+            _serveFrameDataManager.AddTicker(_enemyManager);
 
 
             // 服务端一起就创建服务器自己的飞机

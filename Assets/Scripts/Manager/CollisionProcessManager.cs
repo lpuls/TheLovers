@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
 
         public RaycastHit2D RaycastHit;
         public GameObject Caster = null;
+        public ESpaceWarLayers CasterLayer = ESpaceWarLayers.BEGIN;
 
         public void Reset() {
             RaycastHit = default;
@@ -17,10 +18,11 @@ namespace Hamster.SpaceWar {
     public class CollisionProcessManager : IServerTicker {
         private List<CollisionResult> _collisionResults = new List<CollisionResult>(64);
 
-        public void AddCollisionResult(RaycastHit2D raycastHit, GameObject caster) {
+        public void AddCollisionResult(RaycastHit2D raycastHit, GameObject caster, ESpaceWarLayers casterLayer) {
             CollisionResult collisionResult = ObjectPool<CollisionResult>.Malloc();
             collisionResult.RaycastHit = raycastHit;
             collisionResult.Caster = caster;
+            collisionResult.CasterLayer = casterLayer;
             _collisionResults.Add(collisionResult);
         }
 
@@ -35,7 +37,7 @@ namespace Hamster.SpaceWar {
         public void Tick(float dt) {
             foreach (var item in _collisionResults) {
                 GameObject colliderObject = item.RaycastHit.collider.gameObject;
-                ESpaceWarLayers casterLayer = (ESpaceWarLayers)item.Caster.layer;
+                ESpaceWarLayers casterLayer = item.CasterLayer;
                 ESpaceWarLayers colliderLayer = (ESpaceWarLayers)colliderObject.layer;
                 
                 // 任一一方为子弹，则使用子弹的处理方式
@@ -66,9 +68,11 @@ namespace Hamster.SpaceWar {
                         playerController.OnHit(attacker, bullet);
                     }
                 }
+
+                trajectoryComponent.OnHitObject(collider);
             }
-            
-            
+
+
         }
 
     }

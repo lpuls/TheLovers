@@ -75,18 +75,23 @@ namespace Hamster.SpaceWar {
             GameLogicUtility.SetPositionDirty(gameObject);
         }
 
-        protected virtual void OnHitSomething(GameObject collider) {
-            bool isPlayer = CheckLayerValue(collider.layer, ESpaceWarLayers.PLAYER);
+        //protected virtual void OnHitSomething(GameObject collider) {
+        //    bool isPlayer = CheckLayerValue(collider.layer, ESpaceWarLayers.PLAYER);
 
-            // 阵营不同，创成伤害
-            if (isPlayer != _isPlayer) {
-                IDamage damage = collider.GetComponent<IDamage>();
-                if (null != damage) {
-                    damage.OnHit(_parent.GetGameObject(), gameObject);
-                    if (null != _parent)
-                        _parent.OnHitObject(collider, gameObject);
-                }
-            }
+        //    // 阵营不同，创成伤害
+        //    if (isPlayer != _isPlayer) {
+        //        IDamage damage = collider.GetComponent<IDamage>();
+        //        if (null != damage) {
+        //            damage.OnHit(_parent.GetGameObject(), gameObject);
+        //            if (null != _parent)
+        //                _parent.OnHitObject(collider, gameObject);
+        //        }
+        //    }
+        //}
+
+        public void OnHitObject(GameObject collider) {
+            if (null != _parent)
+                _parent.OnHitObject(collider, gameObject);
         }
 
         protected bool CheckLayerValue(int layer, ESpaceWarLayers value) {
@@ -102,6 +107,11 @@ namespace Hamster.SpaceWar {
         }
 
         public void OnHitSomething(RaycastHit2D raycastHit) {
+            CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
+            Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
+            collisionProcessManager.AddCollisionResult(raycastHit, gameObject, ESpaceWarLayers.BULLET);
+
+            /*
             GameObject hitObject = raycastHit.collider.gameObject;
             bool isPlayer = CheckLayerValue(hitObject.layer, ESpaceWarLayers.PLAYER);
 
@@ -114,6 +124,7 @@ namespace Hamster.SpaceWar {
                         _parent.OnHitObject(hitObject, gameObject);
                 }
             }
+            */
         }
 
         public virtual Vector3 GetSize() {
