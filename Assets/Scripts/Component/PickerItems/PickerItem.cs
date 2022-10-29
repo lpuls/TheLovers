@@ -26,7 +26,8 @@ namespace Hamster.SpaceWar {
         public override void Tick(float dt) {
             base.Tick(dt);
 
-            _movementComponent.MoveTick(transform.position, dt, 0, false);
+            transform.position = _movementComponent.MoveTick(transform.position, dt, 0, false);
+            GameLogicUtility.SetPositionDirty(gameObject);
             if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position)) {
                 _moveDirection = GetRandomDirection();
                 _movementComponent.Move(_moveDirection);

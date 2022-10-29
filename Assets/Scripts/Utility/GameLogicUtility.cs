@@ -226,7 +226,7 @@ namespace Hamster.SpaceWar {
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(1, out Config.PckerItems info)) {
-                GameObject gameObject = frameDataManager.SpawnNetObject(netID, 0, info.LogicPath, configID, position, ENetType.PickerItem);
+                GameObject gameObject = frameDataManager.SpawnNetObject(netID, 0, info.Path, configID, position, ENetType.PickerItem);
                 if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetSimulatedProxy();
                 }
