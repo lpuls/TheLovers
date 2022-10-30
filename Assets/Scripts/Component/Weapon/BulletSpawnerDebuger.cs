@@ -35,6 +35,7 @@ namespace Hamster.SpaceWar {
                 Spawner.Player1ID = Player1ID;
                 Spawner.Player2ID = Player2ID;
                 Spawner.EnemeyID = EnemeyID;
+                Spawner.SpawnCount = Bullets.Count;
                 for (int i = 0; i < Bullets.Count; i++) {
                     var item = Bullets[i];
                     if (BulletIDs.Count > i) {

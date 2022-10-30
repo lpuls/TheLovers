@@ -11,7 +11,7 @@ namespace Hamster.SpaceWar {
             ServerPlayerController serverPlayerController = playerController as ServerPlayerController;
             if (null != serverPlayerController) {
                 Debug.Log("<color=red>Change Weapon !!! </color>" + WeaponID);
-                //serverPlayerController.ChangeWeapon(AbilityIndex, WeaponID);
+                serverPlayerController.ChangeWeapon(AbilityIndex, WeaponID);
             }
         }
     }

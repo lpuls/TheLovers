@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DelayTime: 0
   CD: 0.5
+  LauncherAudio: {fileID: 0}
   SpawnIDs: 010000000100000001000000
+  SpawnCount: 3
+  Player1ID: 1
+  Player2ID: 2
+  EnemeyID: 3
   SpawnOffsets:
-  - {x: -1, y: 0, z: 0.19999999}
-  - {x: 0, y: 0, z: 0.3}
-  - {x: 1, y: 0, z: 0.19999999}
+  - {x: 0, y: 0.5, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -0.5, z: 0}
   SpawnDirections:
-  - {x: -0.5877855, y: 0, z: 0.8090169}
   - {x: 0, y: 0, z: 1}
-  - {x: 0.5877853, y: 0, z: 0.809017}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
