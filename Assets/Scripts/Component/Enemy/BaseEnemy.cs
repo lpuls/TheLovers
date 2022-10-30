@@ -22,9 +22,14 @@ namespace Hamster.SpaceWar {
         }
 
         protected virtual void OnDieSpawnItem(GameObject deceased, GameObject killer) {
-            // if (Random.Range(0, 100.0f) > 50.0f) {
-            //    GameLogicUtility.ServerCreatePickerItem(1, transform.position);
-            // }
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                for (int i = 0; i < config.Drops.Count; i++) {
+                    if (Random.Range(0, 100.0f) > config.DropProbability[i]) {
+                        GameLogicUtility.ServerCreatePickerItem(config.Drops[i], transform.position);
+                        break;
+                    }
+                }
+            }
         }
 
         public override void Tick(float dt) {

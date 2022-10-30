@@ -31,12 +31,6 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        protected static Vector3 GetRandomDirection() {
-            float x = Random.Range(0, 1.0f);
-            float y = Random.Range(0, 1.0f);
-            return (new Vector3(x, y)).normalized;
-        } 
-
         public virtual void OnPicker(PlayerController playerController) {
             _netSyncComponent.Kill(EDestroyActorReason.BePick);
             _movementComponent.Stop();
