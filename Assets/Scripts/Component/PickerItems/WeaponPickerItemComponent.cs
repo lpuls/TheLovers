@@ -2,14 +2,16 @@
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class WeaponPickerItem : PickerItem {
+    public class WeaponPickerItemComponent : PickerItemComponent {
         public EAbilityIndex AbilityIndex = EAbilityIndex.Fire;
         public int WeaponID = 0;
 
-        protected override void OnPicker(PlayerController playerController) {
+        public override void OnPicker(PlayerController playerController) {
+            base.OnPicker(playerController);
             ServerPlayerController serverPlayerController = playerController as ServerPlayerController;
             if (null != serverPlayerController) {
-                serverPlayerController.ChangeWeapon(AbilityIndex, WeaponID);
+                Debug.Log("<color=red>Change Weapon !!! </color>" + WeaponID);
+                //serverPlayerController.ChangeWeapon(AbilityIndex, WeaponID);
             }
         }
     }

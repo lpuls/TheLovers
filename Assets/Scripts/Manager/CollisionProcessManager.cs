@@ -47,6 +47,13 @@ namespace Hamster.SpaceWar {
                 else if (ESpaceWarLayers.BULLET == colliderLayer) {
                     OnBulletHitSomething(colliderObject, item.Caster);
                 }
+                // 任一一方为拾取物且另一方为玩家，按拾取物的方式处理
+                else if (ESpaceWarLayers.PICKER == casterLayer && ESpaceWarLayers.PLAYER == colliderLayer) {
+                    OnPickerHitSomething(item.Caster, colliderObject);
+                }
+                else if (ESpaceWarLayers.PICKER == colliderLayer && ESpaceWarLayers.PLAYER == casterLayer) {
+                    OnPickerHitSomething(colliderObject, item.Caster);
+                }
 
                 ObjectPool<CollisionResult>.Free(item);
             }
@@ -71,8 +78,14 @@ namespace Hamster.SpaceWar {
 
                 trajectoryComponent.OnHitObject(collider);
             }
+        }
 
-
+        private void OnPickerHitSomething(GameObject pickerItem, GameObject collider) {
+            if (pickerItem.TryGetComponent<PickerItemComponent>(out PickerItemComponent pickerItemComponent)) {
+                if (collider.TryGetComponent<PlayerController>(out PlayerController playerController)) {
+                    pickerItemComponent.OnPicker(playerController);
+                }
+            }
         }
 
     }

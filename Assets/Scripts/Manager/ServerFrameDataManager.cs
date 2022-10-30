@@ -9,6 +9,8 @@ namespace Hamster.SpaceWar {
         private ServerNetDevice _netDevice = null;
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
 
+        private List<NetSyncComponent> _players = new List<NetSyncComponent>(4);
+
         public Action OnGameStart;
         public Action<FrameData> OnNewFrameData;
 
@@ -46,11 +48,19 @@ namespace Hamster.SpaceWar {
             netSyncComponent.NetType = type;
             netSyncComponent.IsNewObject = true;
 
+            if (ENetType.Player == type) {
+                _players.Add(netSyncComponent);
+            }
+
             newNetActor.transform.position = pos;
 
             _netActors.Add(netSyncComponent.NetID, netSyncComponent);
 
             return newNetActor;
+        }
+
+        public List<NetSyncComponent> GetPlayers() {
+            return _players;
         }
 
         public override void Update() {

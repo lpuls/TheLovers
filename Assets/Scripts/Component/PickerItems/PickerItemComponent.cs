@@ -2,11 +2,10 @@
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class PickerItem : BaseController, IMover {
+    public class PickerItemComponent : BaseController, IMover {
 
         [SerializeField] private float _moveSpeed = 10;
         [SerializeField] private float _itemSize = 1.0f;
-        private Vector3 _moveDirection = Vector3.zero;
         protected MovementComponent _movementComponent = null;
 
         public override void Init() {
@@ -19,8 +18,7 @@ namespace Hamster.SpaceWar {
 
         public override void OnEnable() {
             base.OnEnable();
-            _moveDirection = GetRandomDirection();
-            _movementComponent.Move(_moveDirection);
+            _movementComponent.Move(Vector3.left);
         }
 
         public override void Tick(float dt) {
@@ -29,8 +27,7 @@ namespace Hamster.SpaceWar {
             transform.position = _movementComponent.MoveTick(transform.position, dt, 0, false);
             GameLogicUtility.SetPositionDirty(gameObject);
             if (!World.GetWorld<BaseSpaceWarWorld>().InWorld(transform.position)) {
-                _moveDirection = GetRandomDirection();
-                _movementComponent.Move(_moveDirection);
+                _netSyncComponent.Kill(EDestroyActorReason.OutOfWorld);
             }
         }
 
@@ -40,8 +37,9 @@ namespace Hamster.SpaceWar {
             return (new Vector3(x, y)).normalized;
         } 
 
-        protected virtual void OnPicker(PlayerController playerController) {
-            throw new System.NotImplementedException();
+        public virtual void OnPicker(PlayerController playerController) {
+            _netSyncComponent.Kill(EDestroyActorReason.BePick);
+            _movementComponent.Stop();
         }
 
         public RaycastHit2D MoveRayCast(float distance, Vector3 direction) {
@@ -51,7 +49,7 @@ namespace Hamster.SpaceWar {
         public void OnHitSomething(RaycastHit2D raycastHit) {
             CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
             Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
-            collisionProcessManager.AddCollisionResult(raycastHit, gameObject, ESpaceWarLayers.BULLET);
+            collisionProcessManager.AddCollisionResult(raycastHit, gameObject, ESpaceWarLayers.PICKER);
         }
 
         public Vector3 GetSize() {

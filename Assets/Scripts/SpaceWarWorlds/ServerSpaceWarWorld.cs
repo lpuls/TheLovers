@@ -118,6 +118,10 @@ namespace Hamster.SpaceWar {
             Single<UIManager>.GetInstance().Open<MainUIController>();
         }
 
+        public List<NetSyncComponent> GetPlayers() {
+            return _serveFrameDataManager.GetPlayers();
+        }
+
         protected override void Update() {
             ActiveWorld();
 
