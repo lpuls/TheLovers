@@ -3,8 +3,29 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
+    public enum EDamageReason {
+        None,
+        BulletDamage,
+        ImpactDamage
+    }
+
+    public class DamageInfo : IPool {
+        public int Damage = 0;
+        public EDamageReason DamageReason = EDamageReason.None;
+        public GameObject Caster = null;
+        public GameObject Murderer = null;
+
+        public void Reset() {
+            Damage = 0;
+            DamageReason = 0;
+            Caster = null;
+            Murderer = null;
+        }
+    }
+
+
     public interface IDamage {
-        void OnHit(GameObject hitObject, GameObject hitTrajectory);
+        void TakeDamage(DamageInfo damageInfo);
     }
 
     public class ServerBaseController : PlayerController, IDamage, IMover {
@@ -55,27 +76,19 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public void OnHit(GameObject hitObject, GameObject hitTrajectory) {
-            int damage = 1;
-            if (hitTrajectory.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(netSyncComponent.ConfigID, out Config.Abilitys abilitys)) {
-                    damage = abilitys.Damage;
-                }
-            }
-
+        public void TakeDamage(DamageInfo damageInfo) {
             // 进行伤害
-            _propertyComponent.ModifyHealth(-damage);
-            // Debug.Log("Damage " + gameObject.name + " HP " + _propertyComponent.GetHealth());
+            _propertyComponent.ModifyHealth(-damageInfo.Damage);
 
             // 判断是否死亡
             if (_propertyComponent.IsDeading) {
                 EnableColliders(false);
-                OnDie?.Invoke(gameObject, hitObject);
+                OnDie?.Invoke(gameObject, damageInfo.Murderer);
             }
             if (_propertyComponent.IsDead) {
                 EnableColliders(false);
                 _netSyncComponent.Kill(EDestroyActorReason.BeHit);
-                OnDie?.Invoke(gameObject, hitObject);
+                OnDie?.Invoke(gameObject, damageInfo.Murderer);
             }
         }
 

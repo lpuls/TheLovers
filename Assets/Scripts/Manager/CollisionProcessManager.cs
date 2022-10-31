@@ -54,6 +54,13 @@ namespace Hamster.SpaceWar {
                 else if (ESpaceWarLayers.PICKER == colliderLayer && ESpaceWarLayers.PLAYER == casterLayer) {
                     OnPickerHitSomething(colliderObject, item.Caster);
                 }
+                // 任一一方为玩家且另一方为敌人，各自扣除一定血量
+                else if (ESpaceWarLayers.PLAYER == casterLayer && ESpaceWarLayers.ENEMY == colliderLayer) {
+                    OnPlayerHitEnemey(item.Caster, colliderObject);
+                }
+                else if (ESpaceWarLayers.PLAYER == colliderLayer && ESpaceWarLayers.ENEMY == casterLayer) {
+                    OnPlayerHitEnemey(colliderObject, item.Caster);
+                }
 
                 ObjectPool<CollisionResult>.Free(item);
             }
@@ -64,17 +71,33 @@ namespace Hamster.SpaceWar {
             if (bullet.TryGetComponent<TrajectoryComponent>(out TrajectoryComponent trajectoryComponent)) {
                 GameObject attacker = trajectoryComponent.GetOwner();
 
+                int damage = 1;
+                if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                    if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(netSyncComponent.ConfigID, out Config.Abilitys abilitys)) {
+                        damage = abilitys.Damage;
+                    }
+                }
+
+                DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
+                damageInfo.Damage = damage;
+                damageInfo.Caster = bullet;
+                damageInfo.Murderer = attacker;
+                damageInfo.DamageReason = EDamageReason.BulletDamage;
+
                 ESpaceWarLayers layer = (ESpaceWarLayers)collider.layer;
                 if (trajectoryComponent.IsPlayer && ESpaceWarLayers.ENEMY == layer) {
                     if (collider.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
-                        playerController.OnHit(attacker, bullet);
+                        // playerController.OnHit(attacker, bullet);
+                        playerController.TakeDamage(damageInfo);
                     }
                 } 
                 else if (!trajectoryComponent.IsPlayer || ESpaceWarLayers.PLAYER == layer) {
                     if (collider.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
-                        playerController.OnHit(attacker, bullet);
+                        // playerController.OnHit(attacker, bullet);
+                        playerController.TakeDamage(damageInfo);
                     }
                 }
+                ObjectPool<DamageInfo>.Free(damageInfo);
 
                 trajectoryComponent.OnHitObject(collider);
             }
@@ -86,6 +109,10 @@ namespace Hamster.SpaceWar {
                     pickerItemComponent.OnPicker(playerController);
                 }
             }
+        }
+
+        private void OnPlayerHitEnemey(GameObject player, GameObject enemy) {
+            
         }
 
     }
