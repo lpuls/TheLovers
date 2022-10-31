@@ -55,11 +55,10 @@ namespace Hamster.SpaceWar {
                     OnPickerHitSomething(colliderObject, item.Caster);
                 }
                 // 任一一方为玩家且另一方为敌人，各自扣除一定血量
-                else if (ESpaceWarLayers.PLAYER == casterLayer && ESpaceWarLayers.ENEMY == colliderLayer) {
-                    OnPlayerHitEnemey(item.Caster, colliderObject);
-                }
-                else if (ESpaceWarLayers.PLAYER == colliderLayer && ESpaceWarLayers.ENEMY == casterLayer) {
-                    OnPlayerHitEnemey(colliderObject, item.Caster);
+                else if ((ESpaceWarLayers.PLAYER == casterLayer && ESpaceWarLayers.ENEMY == colliderLayer) 
+                    || (ESpaceWarLayers.PLAYER == colliderLayer && ESpaceWarLayers.ENEMY == casterLayer)) {
+                    OnPlayerImpactEnemey(item.Caster, colliderObject);
+                    OnPlayerImpactEnemey(colliderObject, item.Caster);
                 }
 
                 ObjectPool<CollisionResult>.Free(item);
@@ -87,13 +86,11 @@ namespace Hamster.SpaceWar {
                 ESpaceWarLayers layer = (ESpaceWarLayers)collider.layer;
                 if (trajectoryComponent.IsPlayer && ESpaceWarLayers.ENEMY == layer) {
                     if (collider.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
-                        // playerController.OnHit(attacker, bullet);
                         playerController.TakeDamage(damageInfo);
                     }
                 } 
                 else if (!trajectoryComponent.IsPlayer || ESpaceWarLayers.PLAYER == layer) {
                     if (collider.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
-                        // playerController.OnHit(attacker, bullet);
                         playerController.TakeDamage(damageInfo);
                     }
                 }
@@ -111,8 +108,23 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        private void OnPlayerHitEnemey(GameObject player, GameObject enemy) {
-            
+        private void OnPlayerImpactEnemey(GameObject player, GameObject enemy) {
+            // 玩家受到敌人的伤害
+            if (enemy.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                    if (player.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
+                        DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
+                        damageInfo.Damage = config.ImpactDamage;
+                        damageInfo.Caster = player;
+                        damageInfo.Murderer = player;
+                        damageInfo.DamageReason = EDamageReason.ImpactDamage;
+                        
+                        playerController.TakeDamage(damageInfo);
+                        
+                        ObjectPool<DamageInfo>.Free(damageInfo);
+                    }
+                }
+            }
         }
 
     }

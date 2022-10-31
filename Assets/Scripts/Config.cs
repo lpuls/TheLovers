@@ -28,25 +28,25 @@ namespace Config {
             "CgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJ",
             "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJHCgpQY2tlckl0ZW1z",
             "EgoKAklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIRCglM",
-            "b2dpY1BhdGgYBCABKAkigAEKClNoaXBDb25maWcSCgoCSUQYASABKAUSDAoE",
+            "b2dpY1BhdGgYBCABKAkilgEKClNoaXBDb25maWcSCgoCSUQYASABKAUSDAoE",
             "UGF0aBgCIAEoCRIRCglMb2dpY1BhdGgYAyABKAkSDgoGSGVhbHRoGAQgASgF",
             "Eg0KBVNwZWVkGAUgASgCEhcKD0Ryb3BQcm9iYWJpbGl0eRgGIAMoBRINCgVE",
-            "cm9wcxgHIAMoBSIwCgZXZWFwb24SCgoCSUQYASABKAUSDAoETm90ZRgCIAEo",
-            "CRIMCgRQYXRoGAMgASgJIisKCFZlY3RvcjNEEgkKAVgYASABKAISCQoBWRgC",
-            "IAEoAhIJCgFaGAMgASgCIisKBkRlcGVuZBITCgtSZWxvYWRDb3VudBgBIAEo",
-            "BRIMCgRQYXRoGAIgASgJIpIBCgtHYW1lU2V0dGluZxIKCgJJRBgBIAEoBRIR",
-            "CglNYXhQbGF5ZXIYAiABKAUSEAoIU2VydmVySVAYAyABKAkSEgoKU2VydmVy",
-            "UG9ydBgEIAEoBRIQCghDbGllbnRJUBgFIAEoCRISCgpDbGllbnRQb3J0GAYg",
-            "ASgFEhgKB0RlcGVuZHMYByABKAsyBy5EZXBlbmQqGwoHRXhhbXBsZRIQCgxF",
-            "eGFtcGxlX05PTkUQACpNCglHYW1lTW9kZWwSEgoOR2FtZU1vZGVsX05PTkUQ",
-            "ABIUChBHYW1lTW9kZWxfU0lOR0xFEAESFgoSR2FtZU1vZGVsX01VTFRJUExF",
-            "EAJCCaoCBkNvbmZpZ2IGcHJvdG8z"));
+            "cm9wcxgHIAMoBRIUCgxJbXBhY3REYW1hZ2UYCCABKAUiMAoGV2VhcG9uEgoK",
+            "AklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCSIrCghWZWN0",
+            "b3IzRBIJCgFYGAEgASgCEgkKAVkYAiABKAISCQoBWhgDIAEoAiIrCgZEZXBl",
+            "bmQSEwoLUmVsb2FkQ291bnQYASABKAUSDAoEUGF0aBgCIAEoCSKSAQoLR2Ft",
+            "ZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNl",
+            "cnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAY",
+            "BSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBRIYCgdEZXBlbmRzGAcgASgLMgcu",
+            "RGVwZW5kKhsKB0V4YW1wbGUSEAoMRXhhbXBsZV9OT05FEAAqTQoJR2FtZU1v",
+            "ZGVsEhIKDkdhbWVNb2RlbF9OT05FEAASFAoQR2FtZU1vZGVsX1NJTkdMRRAB",
+            "EhYKEkdhbWVNb2RlbF9NVUxUSVBMRRACQgmqAgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
@@ -584,6 +584,7 @@ namespace Config {
       speed_ = other.speed_;
       dropProbability_ = other.dropProbability_.Clone();
       drops_ = other.drops_.Clone();
+      impactDamage_ = other.impactDamage_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -667,6 +668,17 @@ namespace Config {
       get { return drops_; }
     }
 
+    /// <summary>Field number for the "ImpactDamage" field.</summary>
+    public const int ImpactDamageFieldNumber = 8;
+    private int impactDamage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ImpactDamage {
+      get { return impactDamage_; }
+      set {
+        impactDamage_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ShipConfig);
@@ -687,6 +699,7 @@ namespace Config {
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
       if(!dropProbability_.Equals(other.dropProbability_)) return false;
       if(!drops_.Equals(other.drops_)) return false;
+      if (ImpactDamage != other.ImpactDamage) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -700,6 +713,7 @@ namespace Config {
       if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
       hash ^= dropProbability_.GetHashCode();
       hash ^= drops_.GetHashCode();
+      if (ImpactDamage != 0) hash ^= ImpactDamage.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -735,6 +749,10 @@ namespace Config {
       }
       dropProbability_.WriteTo(output, _repeated_dropProbability_codec);
       drops_.WriteTo(output, _repeated_drops_codec);
+      if (ImpactDamage != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(ImpactDamage);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -760,6 +778,9 @@ namespace Config {
       }
       size += dropProbability_.CalculateSize(_repeated_dropProbability_codec);
       size += drops_.CalculateSize(_repeated_drops_codec);
+      if (ImpactDamage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ImpactDamage);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -788,6 +809,9 @@ namespace Config {
       }
       dropProbability_.Add(other.dropProbability_);
       drops_.Add(other.drops_);
+      if (other.ImpactDamage != 0) {
+        ImpactDamage = other.ImpactDamage;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -827,6 +851,10 @@ namespace Config {
           case 58:
           case 56: {
             drops_.AddEntriesFrom(input, _repeated_drops_codec);
+            break;
+          }
+          case 64: {
+            ImpactDamage = input.ReadInt32();
             break;
           }
         }
