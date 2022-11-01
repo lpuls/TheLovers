@@ -63,9 +63,10 @@ namespace Hamster.SpaceWar {
 
         public override void OnAlive(float dt) {
             while (_operates.Count > 0) {
+                Vector3 oldPosition = transform.position;
                 int input = GetOperator(InputKeyToValue);
                 ProcessorInput(input);
-                
+
 
                 // 对武器进行更新
                 _localAbilityComponent.Tick(dt);
@@ -73,6 +74,7 @@ namespace Hamster.SpaceWar {
                 // 逻辑执行移动操作
                 if (_movementComponent.NeedMove) {
                     transform.position = _movementComponent.MoveTick(transform.position, dt, _operatorIndex);
+                    // Debug.Log(string.Format("ServerPlayerController {0} {1} {2} {3} {4}", gameObject.name, oldPosition, transform.position, input, _operatorIndex));
                     GameLogicUtility.SetPositionDirty(gameObject);
                 }
 

@@ -132,12 +132,14 @@ namespace Hamster.SpaceWar {
         }
 
 #if UNITY_EDITOR
-        public virtual void OnDrawGizmos() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, 0.2f);
-            Gizmos.DrawLine(transform.position, transform.position + _moveDirection * _moveSpeed);
-        }
+        public bool EnableDebugDraw = true;
 
+        public void OnDrawGizmos() {
+            if (EnableDebugDraw) {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(transform.position, GetSize());
+            }
+        }
 #endif
     }
 }

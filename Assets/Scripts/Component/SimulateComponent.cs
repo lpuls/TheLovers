@@ -89,6 +89,7 @@ namespace Hamster.SpaceWar {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
                 if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data2.Int32 > -1) {
                     UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
+                    // Debug.Log(string.Format("Unpack {0} {1} {2} {3} {4}", gameObject.name, preLocation, currentLocation, transform.position, currentUpdateInfo.Data2.Int32));
                 }
                 else {
                     UpdatePosition(preLocation, currentLocation);
@@ -97,7 +98,19 @@ namespace Hamster.SpaceWar {
         }
 
         public void Update() {
-            // 主端需要对預測结果进么比对并根据逻辑结果模拟后面的操作
+            _simulateTime += Time.deltaTime;
+            if (!CurrentLocation.Equals(Vector3.zero)) {
+                transform.position = Vector3.Lerp(PreLocation, CurrentLocation, _simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
+            }
+        }
+
+        public void UpdateServerToPredictPosition(Vector3 preLocation, Vector3 currentLocation, int predictionIndex) {
+            UnityEngine.Debug.Assert(predictionIndex > -1, "Invalid prediction data " + predictionIndex);
+            _predictionIndex = predictionIndex;
+            _serverPreLocation = preLocation;
+            _serverCurrentLocation = currentLocation;
+
+            // 收到新的消息包之后，主端需要对預測结果进么比对并根据逻辑结果模拟后面的操作
             if (null != _netSyncComponent && _netSyncComponent.IsAutonomousProxy()) {
                 if (_predictionIndex > 0) {
                     while (TryGetTopPredictionCommand(out NetPlayerCommand command)) {
@@ -112,7 +125,6 @@ namespace Hamster.SpaceWar {
                         else {
                             // 逻辑值与預測值不一致时，以逻辑值为准，并重新模拟操作
                             if (command.Location != _serverCurrentLocation) {
-                                // Debug.Log(string.Format("Update Frame {0} {1} {2} {3} {4}", gameObject.name, _serverCurrentLocation, command.Location, transform.position, command.FrameIndex));
                                 PreLocation = _serverPreLocation;
                                 CurrentLocation = _serverCurrentLocation;
                                 _simulateTime = BaseFrameDataManager.LOGIC_FRAME_TIME;
@@ -120,6 +132,7 @@ namespace Hamster.SpaceWar {
                                 // 移除最顶上的操作并重新模拟
                                 RemoveTopPredictionCommand();
                                 SimulateAfter();
+                                // Debug.Log(string.Format("Simulate Frame {0} {1} {2} {3} {4}", gameObject.name, _serverCurrentLocation, CurrentLocation, transform.position, command.FrameIndex));
                             }
                             else {
                                 RemoveTopPredictionCommand();
@@ -129,18 +142,6 @@ namespace Hamster.SpaceWar {
                     }
                 }
             }
-
-            _simulateTime += Time.deltaTime;
-            if (!CurrentLocation.Equals(Vector3.zero)) {
-                transform.position = Vector3.Lerp(PreLocation, CurrentLocation, _simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
-            }
-        }
-
-        public void UpdateServerToPredictPosition(Vector3 preLocation, Vector3 currentLocation, int predictionIndex) {
-            UnityEngine.Debug.Assert(predictionIndex > -1, "Invalid prediction data " + predictionIndex);
-            _predictionIndex = predictionIndex;
-            _serverPreLocation = preLocation;
-            _serverCurrentLocation = currentLocation;
         }
 
         public void UpdateServerToPredictAngle(float preAngle, float currentAngle, int predictionIndex) {
@@ -216,23 +217,23 @@ namespace Hamster.SpaceWar {
 
 #if UNITY_EDITOR
         public void OnDrawGizmos() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(PreLocation, 1.0f);
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(CurrentLocation, 1.0f);
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireSphere(PreLocation, 1.0f);
+            //Gizmos.color = Color.green;
+            //Gizmos.DrawWireSphere(CurrentLocation, 1.0f);
 
-            UnityEditor.Handles.Label(_serverPreLocation, "Logic Pre " + _serverPreLocation);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(_serverPreLocation, 1.0f);
-            UnityEditor.Handles.Label(_serverPreLocation, "Logic Current " + CurrentLocation);
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(CurrentLocation, 1.0f);
+            //UnityEditor.Handles.Label(_serverPreLocation, "Logic Pre " + _serverPreLocation);
+            //Gizmos.color = Color.yellow;
+            //Gizmos.DrawWireSphere(_serverPreLocation, 1.0f);
+            //UnityEditor.Handles.Label(_serverPreLocation, "Logic Current " + CurrentLocation);
+            //Gizmos.color = Color.magenta;
+            //Gizmos.DrawWireSphere(CurrentLocation, 1.0f);
 
-            Gizmos.color = Color.blue;
-            foreach (var item in _predicationCommands) {
-                NetPlayerCommand command = item;
-                Gizmos.DrawWireSphere(command.Location, .5f);
-            }
+            //Gizmos.color = Color.blue;
+            //foreach (var item in _predicationCommands) {
+            //    NetPlayerCommand command = item;
+            //    Gizmos.DrawWireSphere(command.Location, .5f);
+            //}
         }
 #endif
 

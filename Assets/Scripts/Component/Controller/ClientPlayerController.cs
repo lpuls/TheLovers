@@ -70,6 +70,7 @@ namespace Hamster.SpaceWar {
                 Vector3 preLocation = _simulateComponent.CurrentLocation;
                 Vector3 currentLocation = _movementComponent.MoveTick(_simulateComponent.CurrentLocation, dt, frameIndex);
                 _simulateComponent.UpdatePosition(preLocation, currentLocation);
+                // Debug.Log(string.Format("ClientPlayerController {0} {1} {2} {3} {4} {5}", gameObject.name, preLocation, currentLocation, transform.position, input, frameIndex));
 
                 // 将每一帧的預測的结果及当时的客户端帧号都记录下来
                 _simulateComponent.AddPredictionCommand(frameIndex, currentLocation, input);

@@ -155,5 +155,18 @@ namespace Hamster.SpaceWar {
             collisionProcessManager.AddCollisionResult(raycastHit, gameObject, (ESpaceWarLayers)gameObject.layer);
         }
 
+#if UNITY_EDITOR
+
+        public bool EnableDebugDraw = true;
+
+        public void OnDrawGizmos() {
+            if (EnableDebugDraw) {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(transform.position, GetSize());
+            }
+        }
+
+#endif
+
     }
 }

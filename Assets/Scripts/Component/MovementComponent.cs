@@ -40,6 +40,10 @@ namespace Hamster.SpaceWar {
             _moveSpeed = 0;
         }
 
+#if UNITY_EDITOR
+        public bool EnableDebugDraw = true;
+#endif
+
         public Vector3 MoveTick(Vector3 location, float dt, int index, bool checkBound = true) {
             _moveSpeed = Speed * dt;
 
@@ -51,9 +55,21 @@ namespace Hamster.SpaceWar {
                     _moveSpeed = raycastHit.distance;
                 }
                 location += _moveSpeed * _moveDirection;
+
+#if UNITY_EDITOR
+                if (EnableDebugDraw) {
+                    Debug.DrawLine(transform.position, location, Color.red);
+                }
+#endif
             }
             else {
                 location += _moveDirection * _moveSpeed;
+
+#if UNITY_EDITOR
+                if (EnableDebugDraw) {
+                    Debug.DrawLine(transform.position, location, Color.red);
+                }
+#endif
             }
             if (checkBound)
                 location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size);

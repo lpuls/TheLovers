@@ -119,6 +119,8 @@ namespace Hamster.SpaceWar {
                         case EUpdateActorType.Position:
                             updateInfo.SetVec3ForData2(netSyncComponent.transform.position.x, netSyncComponent.transform.position.y);
                             updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
+                            // Debug.Log(string.Format("Pack {0} {1} {2}", netSyncComponent.gameObject.name,
+                            //    netSyncComponent.transform.position, netSyncComponent.PredictionIndex));
                             break;
                         case EUpdateActorType.Angle:
                             updateInfo.SetFloatForData1(netSyncComponent.transform.rotation.eulerAngles.y);
