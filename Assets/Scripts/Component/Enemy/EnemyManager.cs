@@ -7,8 +7,8 @@ namespace Hamster.SpaceWar {
 
         public int SpawnMinCount = 3;
         public int SpawnMaxCount = 6;
-
         public float SpawnDelay = 2.0f;
+        public bool EnableSpawn = true;
 
         private float _delayTime = 0;
         private List<BaseEnemy> _aliveEnemys = new List<BaseEnemy>();
@@ -45,6 +45,9 @@ namespace Hamster.SpaceWar {
         }
 
         public void Tick(float dt) {
+            if (!EnableSpawn)
+                return;
+
             if (_aliveEnemys.Count <= 0) {
                 _delayTime += dt;
                 if (_delayTime >= SpawnDelay) {

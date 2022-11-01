@@ -24,6 +24,7 @@ namespace Hamster.SpaceWar {
 
             // 敌人管理器
             _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
+            _enemyManager.EnableSpawn = false;
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
