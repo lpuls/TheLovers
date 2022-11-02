@@ -14,6 +14,10 @@ namespace Hamster.SpaceWar {
             HealthProgress.size = new Vector2(width, HealthProgress.size.y);
         }
 
+        private void OnEnable() {
+            HealthProgress.color = HealthColor;
+        }
+
         private void OnDisable() {
             HealthProgress.size = new Vector2(Size, HealthProgress.size.y);
         }
