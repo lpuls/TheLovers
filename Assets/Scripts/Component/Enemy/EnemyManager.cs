@@ -40,6 +40,23 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public void KillAllEnemys() {
+            DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
+            damageInfo.Caster = null;
+            damageInfo.Murderer = null;
+            damageInfo.Damage = 1000;
+            damageInfo.DamageReason = EDamageReason.SystemKill;
+
+            List<BaseEnemy> baseEnemies = ListPool<BaseEnemy>.Malloc();
+            baseEnemies.AddRange(_aliveEnemys);
+            foreach (var item in baseEnemies) {
+                item.TakeDamage(damageInfo);
+            }
+            ListPool<BaseEnemy>.Free(baseEnemies);
+
+            ObjectPool<DamageInfo>.Free(damageInfo);
+        }
+
         public int GetPriority() {
             return (int)EServerTickLayers.PreTick;
         }

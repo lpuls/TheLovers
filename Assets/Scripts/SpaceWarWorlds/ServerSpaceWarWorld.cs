@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
 
             // 敌人管理器
             _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
-            _enemyManager.EnableSpawn = false;
+            //_enemyManager.EnableSpawn = false;
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
@@ -153,6 +153,19 @@ namespace Hamster.SpaceWar {
         public static void GM_SpawnEnemy(string[] gmParams) {
             GameLogicUtility.ServerCreateEnemy(10, new Vector3(0, 0, 10), 180);
         }
+
+        [GM]
+        public static void GM_EnableEnemySpawn(string[] gmParams) {
+            EnemyManager enemyManager = World.GetWorld().GetManager<EnemyManager>();
+            enemyManager.EnableSpawn = !enemyManager.EnableSpawn;
+        }
+
+        [GM]
+        public static void GM_KillAllEnemy(string[] gmParams) {
+            EnemyManager enemyManager = World.GetWorld().GetManager<EnemyManager>();
+            enemyManager.KillAllEnemys();
+        }
+
         #endregion
 
     }

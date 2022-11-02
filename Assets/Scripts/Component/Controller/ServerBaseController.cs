@@ -6,7 +6,8 @@ namespace Hamster.SpaceWar {
     public enum EDamageReason {
         None,
         BulletDamage,
-        ImpactDamage
+        ImpactDamage,
+        SystemKill
     }
 
     public class DamageInfo : IPool {
