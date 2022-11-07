@@ -26,7 +26,7 @@ namespace Hamster.SpaceWar {
         public Action<GameObject, GameObject> OnDie = delegate { };
 
         public virtual void OnEnable() {
-            Init();
+            // Init();
         }
 
         public virtual void Init() {

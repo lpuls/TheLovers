@@ -42,6 +42,7 @@ namespace Hamster.SpaceWar {
             ship.TryGetOrAdd<LocalAbilityComponent>();
             ServerPlayerController playerController = ship.TryGetOrAdd<ServerPlayerController>();
             if (null != playerController) {
+                playerController.Init();
                 playerController.UnitType = unitType;
             }
 
@@ -78,6 +79,9 @@ namespace Hamster.SpaceWar {
             // 服务端即是客户端也是服务端
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                 netSyncComponent.SetAuthority();
+            }
+            if (ship.TryGetComponent<BaseController>(out BaseController baseController)) {
+                baseController.Init();
             }
 
             // ship.TryGetOrAdd<PathEnemy>();
@@ -211,7 +215,7 @@ namespace Hamster.SpaceWar {
                     }
                     if (userShip) {
                         ship.TryGetOrAdd<MovementComponent>();
-                        ship.AddComponent<ClientPlayerController>();
+                        ship.AddComponent<ClientPlayerController>().Init();
                     }
                     if (ship.TryGetComponent<PlayerEffectComponent>(out PlayerEffectComponent playerEffectComponent)) {
                         playerEffectComponent.Init();
