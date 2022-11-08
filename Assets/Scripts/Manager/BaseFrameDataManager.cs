@@ -144,7 +144,7 @@ namespace Hamster.SpaceWar {
             Data1.Float = value;
         }
 
-        public void SetVec3ForData2(float x, float y) {
+        public void SetVec3ForData1(float x, float y) {
             Data1.Vec3.x = x;
             Data1.Vec3.y = y;
         }
