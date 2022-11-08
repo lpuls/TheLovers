@@ -63,11 +63,13 @@ namespace Hamster.SpaceWar {
         }
 
         public void Init() {
+            // 读取配置
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
                 _health = config.Health;
                 _maxHealth = config.Health;
             }
 
+            // 确定UI
             if (_netSyncComponent.IsAutonomousProxy()) {
                 _mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
                 _headHealthUI.gameObject.SetActive(false);
@@ -80,6 +82,9 @@ namespace Hamster.SpaceWar {
 
                 _headHealthUI.SetHealth(_health, _maxHealth);
             }
+
+            // 播放出生动画
+            _animator.Play("Spawn", 0, 0.0f);
 
         }
 

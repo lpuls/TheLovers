@@ -80,16 +80,17 @@ namespace Hamster.SpaceWar {
             int netID = _netSyncComponent.NetID;
             UpdateInfo preUpdateInfo;
             UpdateInfo currentUpdateInfo;
-            Vector3 preLocation = PreLocation;
+            Vector3 preLocation = CurrentLocation;  // PreLocation;
             Vector3 currentLocation = CurrentLocation;
             if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.Position, out preUpdateInfo)) {
                 preLocation = preUpdateInfo.Data1.Vec3;
+                //if (ENetType.Enemy == _netSyncComponent.NetType)
+                //    Debug.Log(string.Format("Unpack Pre {0} {1} {2}", gameObject.name, preUpdateInfo.Data1.Vec3, pre.FrameIndex));
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
                 currentLocation = currentUpdateInfo.Data1.Vec3;
                 if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data2.Int32 > -1) {
                     UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
-                    // Debug.Log(string.Format("Unpack {0} {1} {2} {3} {4}", gameObject.name, preLocation, currentLocation, transform.position, currentUpdateInfo.Data2.Int32));
                 }
                 else {
                     UpdatePosition(preLocation, currentLocation);
@@ -100,7 +101,8 @@ namespace Hamster.SpaceWar {
         public void Update() {
             _simulateTime += Time.deltaTime;
             if (!CurrentLocation.Equals(Vector3.zero)) {
-                transform.position = Vector3.Lerp(PreLocation, CurrentLocation, _simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
+                float t = Mathf.Clamp01(_simulateTime / BaseFrameDataManager.LOGIC_FRAME_TIME);
+                transform.position = Vector3.Lerp(PreLocation, CurrentLocation, t);
             }
         }
 
@@ -155,6 +157,7 @@ namespace Hamster.SpaceWar {
             PreLocation = preLocation;
             CurrentLocation = currentLocation;
             _simulateTime = 0;
+            transform.position = preLocation;
         }
 
         public void UpdateAngle(float preAngle, float currentAngle) {
