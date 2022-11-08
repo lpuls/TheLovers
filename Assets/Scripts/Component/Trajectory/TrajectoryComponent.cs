@@ -38,6 +38,8 @@ namespace Hamster.SpaceWar {
         public bool IsPlayer => _isPlayer;
 
         public virtual void InitProperty(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
+            Init();
+
             _parent = parent;
             _moveDirection = moveDirection;
             _moveSpeed = moveSpeed;
