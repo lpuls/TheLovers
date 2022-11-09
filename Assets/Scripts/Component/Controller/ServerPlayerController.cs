@@ -9,26 +9,30 @@ namespace Hamster.SpaceWar {
         public int Operate;
     }
 
+
     public class ServerPlayerController : ServerBaseController {
 
         // 输入
         protected int _operate = 0;
         protected int _operatorIndex = 0;
-        protected bool _isFired = false;
+        protected InputCommand _inputCommand = new InputCommand();
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
+
+        // 无敌
+        public bool Invincible { get; protected set; }
+
+        // 闪避处理
+        public bool IsDodge { get; protected set; }
+        protected float _dodgeTime = 0;
+        [SerializeField] protected float _maxDodgeTime = 0.31f;
 
 
         protected override void ProcessorInput(int operate) {
-            GameLogicUtility.GetOperateFromInput(transform, operate, out Vector3 moveDirection, out bool cast1);
-
-            // 玩家发送射子弹
-            if (null != _localAbilityComponent && cast1)
-                _isFired = true;
-                //_localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
+            GameLogicUtility.GetOperateFromInput(transform, operate, _inputCommand);
 
             // 玩家进行移动
-            if (!moveDirection.Equals(Vector3.zero))
-                _movementComponent.Move(moveDirection);
+            if (!_inputCommand.Direction.Equals(Vector3.zero))
+                _movementComponent.Move(_inputCommand.Direction);
             else
                 _movementComponent.Stop();
         }
@@ -63,7 +67,6 @@ namespace Hamster.SpaceWar {
 
         public override void OnAlive(float dt) {
             while (_operates.Count > 0) {
-                Vector3 oldPosition = transform.position;
                 int input = GetOperator(InputKeyToValue);
                 ProcessorInput(input);
 
@@ -78,13 +81,34 @@ namespace Hamster.SpaceWar {
                     GameLogicUtility.SetPositionDirty(gameObject);
                 }
 
-                if (_isFired) {
-                    _isFired = false;
+                //if (_isFired) {
+                //    _isFired = false;
+                //    _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
+                //}
+                if (_inputCommand.IsCastAbility1) {
                     _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
                 }
+                if (_inputCommand.IsDodge) {
+                    IsDodge = true;
+                    Invincible = true;
+                    GameLogicUtility.SetDodgeDirty(gameObject);
+                }
+
+                _inputCommand.Reset();
 
                 _operate = 0;
                 _operatorIndex = -1;
+            }
+
+            // 闪避处理
+            if (IsDodge) {
+                _dodgeTime += dt;
+                if (_dodgeTime >= _maxDodgeTime) {
+                    _dodgeTime = 0;
+                    IsDodge = false;
+                    Invincible = false;
+                    GameLogicUtility.SetDodgeDirty(gameObject);
+                }
             }
         }
 

@@ -47,6 +47,7 @@ namespace Hamster.SpaceWar {
         // 預測相关
         private int _predictionIndex = 0;
         private List<NetPlayerCommand> _predicationCommands = new List<NetPlayerCommand>(32);
+        private InputCommand _inputCommand = new InputCommand();
 
         private NetSyncComponent _netSyncComponent = null;
         private MovementComponent _movementComponent = null;
@@ -202,10 +203,12 @@ namespace Hamster.SpaceWar {
         }
 
         public void SimulateAfter() {
+            MovementComponent movementComponent = GetMovementComponent();
             Vector3 lastLocation = CurrentLocation;
             foreach (var item in _predicationCommands) {
                 NetPlayerCommand command = item;
-                GameLogicUtility.GetOperateFromInput(transform, command.Operate, out Vector3 moveDirection, out bool _);
+                GameLogicUtility.GetOperateFromInput(transform, command.Operate, _inputCommand);
+                movementComponent.Move(_inputCommand.Direction);
                 command.Location = GetMovementComponent().MoveTick(lastLocation, BaseFrameDataManager.LOGIC_FRAME_TIME, command.FrameIndex);
                 lastLocation = command.Location;
             }

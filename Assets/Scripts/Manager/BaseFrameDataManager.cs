@@ -24,7 +24,8 @@ namespace Hamster.SpaceWar {
         Position,
         Angle,
         RoleState,
-        Health
+        Health,
+        Dodge
     }
 
     public class SpawnInfo : IFrameInfo, IPool {
@@ -132,12 +133,12 @@ namespace Hamster.SpaceWar {
             Data1.Int8 = value;
         }
 
-        public void SetInt32ForData1(int value) {
-            Data1.Int32 = value;
-        }
-
         public void SetInt16ForData1(short value) {
             Data1.Int16 = value;
+        }
+
+        public void SetInt32ForData1(int value) {
+            Data1.Int32 = value;
         }
 
         public void SetFloatForData1(float value) {
@@ -147,6 +148,10 @@ namespace Hamster.SpaceWar {
         public void SetVec3ForData1(float x, float y) {
             Data1.Vec3.x = x;
             Data1.Vec3.y = y;
+        }
+
+        public void SetBoolForData1(bool value) {
+            Data1.Boolean = value;
         }
 
         public void SetInt32ForData2(int value) {

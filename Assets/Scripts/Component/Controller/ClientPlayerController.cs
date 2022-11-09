@@ -9,13 +9,21 @@ namespace Hamster.SpaceWar {
         private MovementComponent _movementComponent = null;
         private SimulateComponent _simulateComponent = null;
         private PropertyComponent _propertyComponent = null;
+        private PlayerEffectComponent _playerEffectComponent = null;
+
+        private InputCommand _inputCommand = new InputCommand();
 
         public override void Init() {
             base.Init();
 
-            _movementComponent = gameObject.TryGetOrAdd<MovementComponent>();
-            _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
-            _propertyComponent = gameObject.TryGetOrAdd<PropertyComponent>();
+            if (null == _movementComponent)
+                _movementComponent = gameObject.TryGetOrAdd<MovementComponent>();
+            if (null == _simulateComponent)
+                _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
+            if (null == _propertyComponent)
+                _propertyComponent = gameObject.TryGetOrAdd<PropertyComponent>();
+            if (null == _playerEffectComponent)
+                _playerEffectComponent = gameObject.TryGetOrAdd<PlayerEffectComponent>();
 
             _propertyComponent.InitProperty(_netSyncComponent.ConfigID);
             _movementComponent.Speed = _propertyComponent.GetSpeed();
@@ -45,9 +53,10 @@ namespace Hamster.SpaceWar {
 
         protected override void ProcessorInput(int input) {
             // 客户端预表现
-            GameLogicUtility.GetOperateFromInput(transform, input, out Vector3 moveDirection, out bool cast1);
-            if (!moveDirection.Equals(Vector3.zero))
-                _movementComponent.Move(moveDirection);
+            // GameLogicUtility.GetOperateFromInput(transform, input, out Vector3 moveDirection, out bool cast1);
+            GameLogicUtility.GetOperateFromInput(transform, input, _inputCommand);
+            if (!_inputCommand.Direction.Equals(Vector3.zero))
+                _movementComponent.Move(_inputCommand.Direction);
             else
                 _movementComponent.Stop();
 
@@ -76,6 +85,12 @@ namespace Hamster.SpaceWar {
                 _simulateComponent.AddPredictionCommand(frameIndex, currentLocation, input);
             }
 
+            // 提前播放闪避动画
+            if (_inputCommand.IsDodge) {
+                _playerEffectComponent.PlayDodge();
+            }
+
+            _inputCommand.Reset();
         }
 
     }

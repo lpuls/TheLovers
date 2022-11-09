@@ -57,8 +57,8 @@ namespace Hamster.SpaceWar {
                 // 任一一方为玩家且另一方为敌人，各自扣除一定血量
                 else if ((ESpaceWarLayers.PLAYER == casterLayer && ESpaceWarLayers.ENEMY == colliderLayer) 
                     || (ESpaceWarLayers.PLAYER == colliderLayer && ESpaceWarLayers.ENEMY == casterLayer)) {
-                    OnPlayerImpactEnemey(item.Caster, colliderObject);
-                    OnPlayerImpactEnemey(colliderObject, item.Caster);
+                    OnUnitImpactSomething(item.Caster, colliderObject);
+                    OnUnitImpactSomething(colliderObject, item.Caster);
                 }
 
                 ObjectPool<CollisionResult>.Free(item);
@@ -67,6 +67,12 @@ namespace Hamster.SpaceWar {
         }
 
         private void OnBulletHitSomething(GameObject bullet, GameObject collider) {
+            // 无敌，不处理
+            if (UnitIsInvincible(collider)) {
+                return;
+            }
+
+            // 处理子弹打种的伤害
             if (bullet.TryGetComponent<TrajectoryComponent>(out TrajectoryComponent trajectoryComponent)) {
                 GameObject attacker = trajectoryComponent.GetOwner();
 
@@ -108,15 +114,20 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        private void OnPlayerImpactEnemey(GameObject player, GameObject enemy) {
+        private void OnUnitImpactSomething(GameObject unit, GameObject something) {
+            // 无敌，不处理
+            if (UnitIsInvincible(unit)) {
+                return;
+            }
+
             // 玩家受到敌人的伤害
-            if (enemy.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
+            if (something.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(netSyncComponent.ConfigID, out Config.ShipConfig config)) {
-                    if (player.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
+                    if (unit.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
                         DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
                         damageInfo.Damage = config.ImpactDamage;
-                        damageInfo.Caster = player;
-                        damageInfo.Murderer = player;
+                        damageInfo.Caster = unit;
+                        damageInfo.Murderer = unit;
                         damageInfo.DamageReason = EDamageReason.ImpactDamage;
                         
                         playerController.TakeDamage(damageInfo);
@@ -125,6 +136,13 @@ namespace Hamster.SpaceWar {
                     }
                 }
             }
+        }
+
+        private bool UnitIsInvincible(GameObject gameObject) {
+            if (gameObject.TryGetComponent<PropertyComponent>(out PropertyComponent propertyComponent)) {
+                return propertyComponent.Invincible;
+            }
+            return false;
         }
 
     }

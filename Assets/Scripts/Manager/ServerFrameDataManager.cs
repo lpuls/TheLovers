@@ -135,6 +135,12 @@ namespace Hamster.SpaceWar {
                                 }
                             }
                             break;
+                        case EUpdateActorType.Dodge: {
+                                if (netSyncComponent.gameObject.TryGetComponent<ServerPlayerController>(out ServerPlayerController serverPlayerController)) {
+                                    updateInfo.SetBoolForData1(serverPlayerController.IsDodge);
+                                }
+                            }
+                            break;
                     }
                     frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);
                 }

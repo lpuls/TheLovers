@@ -2,6 +2,20 @@
 
 namespace Hamster.SpaceWar {
 
+    public class InputCommand {
+        public Vector3 Direction = Vector3.zero;
+        public bool IsCastAbility1 = false;
+        public bool IsCastAbility2 = false;
+        public bool IsDodge = false;
+
+        public void Reset() {
+            Direction = Vector3.zero;
+            IsCastAbility1 = false;
+            IsCastAbility2 = false;
+            IsDodge = false;
+        }
+    }
+
     public static class GameLogicUtility {
 
         #region Server
@@ -167,6 +181,10 @@ namespace Hamster.SpaceWar {
             SetPropertyDirty(gameObject, EUpdateActorType.Health);
         }
 
+        public static void SetDodgeDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.Dodge);
+        }
+
         private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {
             if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent) && netSyncComponent.IsAuthority()) {
                 netSyncComponent.AddNewUpdate(updateType);
@@ -241,27 +259,31 @@ namespace Hamster.SpaceWar {
         #endregion
 
         #region Common
-        public static void GetOperateFromInput(Transform transform, int operate, out Vector3 direction, out bool castAbility1) {
-            direction = Vector3.zero;
-            castAbility1 = false;
+        public static void GetOperateFromInput(Transform transform, int operate, InputCommand inputCommand) {
+            //inputCommand.Direction = Vector3.zero;
+            //isDodge = true;
+            //castAbility1 = false;
             for (int i = 0; i < (int)EInputValue.Max; i++) {
                 EInputValue value = (EInputValue)i;
                 if (1 == ((operate >> i) & 1)) {
                     switch (value) {
                         case EInputValue.MoveUp:
-                            direction += transform.up;
+                            inputCommand.Direction += transform.up;
                             break;
                         case EInputValue.MoveDown:
-                            direction -= transform.up;
+                            inputCommand.Direction -= transform.up;
                             break;
                         case EInputValue.MoveLeft:
-                            direction -= transform.right;
+                            inputCommand.Direction -= transform.right;
                             break;
                         case EInputValue.MoveRight:
-                            direction += transform.right;
+                            inputCommand.Direction += transform.right;
                             break;
                         case EInputValue.Ability1:
-                            castAbility1 = true;
+                            inputCommand.IsCastAbility1 = true;
+                            break;
+                        case EInputValue.Dodge:
+                            inputCommand.IsDodge = true;
                             break;
                         default:
                             break;

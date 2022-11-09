@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
 
     public class ClientFrameDataManager : BaseFrameDataManager {
-        public const int MAX_SERVER_FRAME_COUNT = 3;
+        public const int MAX_SERVER_FRAME_COUNT = 1;  // 3;
 
         private List<FrameData> _frameDatas = new List<FrameData>();
 
