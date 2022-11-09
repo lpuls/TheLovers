@@ -86,8 +86,8 @@ namespace Hamster.SpaceWar {
             }
 
             // 提前播放闪避动画
-            if (_inputCommand.IsDodge) {
-                _playerEffectComponent.PlayDodge();
+            if (_inputCommand.IsDodge && !_playerEffectComponent.IsDodging) {
+                // _playerEffectComponent.PlayDodge();
             }
 
             _inputCommand.Reset();

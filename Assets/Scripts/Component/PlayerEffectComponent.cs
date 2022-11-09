@@ -46,8 +46,10 @@ namespace Hamster.SpaceWar {
         [SerializeField] private OverheadHealthUI _headHealthUI = null;
 
         // 闪避
-        // todo 最大闪避时长得读表，现在先写一下
-        private bool _isDodgeing = false;
+        public bool IsDodging {
+            get;
+            private set;
+        }
 
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
@@ -158,12 +160,12 @@ namespace Hamster.SpaceWar {
 
                 // 检查是否闪避
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.Dodge, out currentUpdateInfo)) {
-                    if (currentUpdateInfo.Data1.Boolean && !_isDodgeing) {
+                    if (currentUpdateInfo.Data1.Boolean && !IsDodging) {
                         _animator.SetTrigger("Dodge");
-                        _isDodgeing = true;
+                        IsDodging = true;
                     }
-                    else if (currentUpdateInfo.Data1.Boolean && _isDodgeing) {
-                        _isDodgeing = false;
+                    else if (currentUpdateInfo.Data1.Boolean && IsDodging) {
+                        IsDodging = false;
                     }
                 }
             }
@@ -252,7 +254,7 @@ namespace Hamster.SpaceWar {
 
         public void PlayDodge() {
             _animator.SetTrigger("Dodge");
-            _isDodgeing = true;
+            IsDodging = true;
         }
 
         private void OnDisable() {
