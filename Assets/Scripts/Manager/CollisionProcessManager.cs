@@ -69,6 +69,7 @@ namespace Hamster.SpaceWar {
         private void OnBulletHitSomething(GameObject bullet, GameObject collider) {
             // 无敌，不处理
             if (UnitIsInvincible(collider)) {
+                Debug.Log("Unit is invincible " + collider.name);
                 return;
             }
 
@@ -138,7 +139,7 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        private bool UnitIsInvincible(GameObject gameObject) {
+        public static bool UnitIsInvincible(GameObject gameObject) {
             if (gameObject.TryGetComponent<PropertyComponent>(out PropertyComponent propertyComponent)) {
                 return propertyComponent.Invincible;
             }

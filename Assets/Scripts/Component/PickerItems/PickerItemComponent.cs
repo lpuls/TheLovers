@@ -40,10 +40,11 @@ namespace Hamster.SpaceWar {
             return Physics2D.BoxCast(transform.position, GetSize(), 0, direction, distance, 1 << (int)ESpaceWarLayers.PLAYER);
         }
 
-        public void OnHitSomething(RaycastHit2D raycastHit) {
+        public bool OnHitSomething(RaycastHit2D raycastHit) {
             CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
             Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
             collisionProcessManager.AddCollisionResult(raycastHit, gameObject, ESpaceWarLayers.PICKER);
+            return true;
         }
 
         public Vector3 GetSize() {

@@ -18,13 +18,10 @@ namespace Hamster.SpaceWar {
         protected InputCommand _inputCommand = new InputCommand();
         protected List<ServerOperate> _operates = new List<ServerOperate>(8);
 
-        // 无敌
-        public bool Invincible { get; protected set; }
-
         // 闪避处理
         public bool IsDodge { get; protected set; }
         protected float _dodgeTime = 0;
-        [SerializeField] protected float _maxDodgeTime = 0.31f;
+        [SerializeField] protected float _maxDodgeTime = 0.62f;
 
 
         protected override void ProcessorInput(int operate) {
@@ -90,7 +87,7 @@ namespace Hamster.SpaceWar {
                 }
                 if (_inputCommand.IsDodge) {
                     IsDodge = true;
-                    Invincible = true;
+                    _propertyComponent.SetInvincible(true);
                     GameLogicUtility.SetDodgeDirty(gameObject);
                 }
 
@@ -106,7 +103,7 @@ namespace Hamster.SpaceWar {
                 if (_dodgeTime >= _maxDodgeTime) {
                     _dodgeTime = 0;
                     IsDodge = false;
-                    Invincible = false;
+                    _propertyComponent.SetInvincible(false);
                     GameLogicUtility.SetDodgeDirty(gameObject);
                 }
             }
