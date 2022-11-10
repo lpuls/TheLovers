@@ -164,7 +164,7 @@ namespace Hamster.SpaceWar {
                         _animator.SetTrigger("Dodge");
                         IsDodging = true;
                     }
-                    else if (currentUpdateInfo.Data1.Boolean && IsDodging) {
+                    else if (!currentUpdateInfo.Data1.Boolean && IsDodging) {
                         IsDodging = false;
                     }
                 }
