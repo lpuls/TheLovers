@@ -28,7 +28,7 @@ namespace Hamster.SpaceWar {
         protected ITrajectorySpanwer _parent = null;
         protected bool _isPlayer = false;
         protected bool _pendingKill = false;
-        protected Vector3 _moveDirection = Vector3.zero;
+        // protected Vector3 _moveDirection = Vector3.zero;
         protected float _moveSpeed = 100.0f;
 
         [SerializeField] protected bool _hitOnDestroy = true;
@@ -37,11 +37,11 @@ namespace Hamster.SpaceWar {
 
         public bool IsPlayer => _isPlayer;
 
-        public virtual void InitProperty(ITrajectorySpanwer parent, Vector3 moveDirection, float moveSpeed) {
+        public virtual void InitProperty(ITrajectorySpanwer parent, float moveSpeed) {
             Init();
 
             _parent = parent;
-            _moveDirection = moveDirection;
+            // _moveDirection = transform.right;  // moveDirection;
             _moveSpeed = moveSpeed;
 
             // 初始化移动组件
@@ -50,10 +50,10 @@ namespace Hamster.SpaceWar {
                 _movementComponent.Mover = this;
             }
             _movementComponent.Speed = _moveSpeed;
-            _movementComponent.Move(moveDirection);
+            _movementComponent.Move(transform.right);
 
             // 修改朝向
-            transform.rotation = Quaternion.Euler(moveDirection);
+            transform.rotation = Quaternion.Euler(transform.right);
            
             // 确定是玩家还是敌人的子弹
             _isPlayer = CheckLayerValue(parent.GetLayer(), ESpaceWarLayers.PLAYER);

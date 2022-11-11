@@ -137,20 +137,21 @@ namespace Hamster.SpaceWar {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
+                // trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
                 
                 // CD = abilityConfig.CD / 1000.0f;
             }
             return bullet;
         }
 
-        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Vector3 direction, ITrajectorySpanwer spanwer) {
+        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Quaternion rotation, ITrajectorySpanwer spanwer) {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             GameObject bullet = null;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
+                bullet.transform.rotation = rotation;
 
                 if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
@@ -159,7 +160,7 @@ namespace Hamster.SpaceWar {
                 //bullet.TryGetOrAdd<SimulateComponent>();
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.InitProperty(spanwer, direction, abilityConfig.Speed);
+                trajectoryComponent.InitProperty(spanwer, abilityConfig.Speed);
             }
             return bullet;
         }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231176944778eb744ac6255f4da4d4d1, type: 3}
+  m_Name: ShotgunSpawnerLv1
+  m_EditorClassIdentifier: 
+  DelayTime: 0
+  CD: 0.1
+  LauncherAudio: {fileID: 0}
+  SpawnIDs: 010000000100000001000000
+  SpawnCount: 3
+  Player1ID: 1
+  Player2ID: 2
+  EnemeyID: 3
+  SpawnOffsets:
+  - {x: 0, y: 0.5, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -0.5, z: 0}
+  SpawnDirections:
+  - {x: -0, y: -0, z: 30.000008}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 330}

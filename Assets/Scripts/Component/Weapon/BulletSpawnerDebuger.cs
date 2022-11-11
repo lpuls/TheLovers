@@ -44,7 +44,7 @@ namespace Hamster.SpaceWar {
                     else {
                         Spawner.SpawnIDs.Add(0);
                     }
-                    Spawner.SpawnDirections.Add(item.forward);
+                    Spawner.SpawnDirections.Add(item.rotation.eulerAngles);
                     Spawner.SpawnOffsets.Add(item.position - transform.position);
                 }
                 WriteToSpawner = false;
