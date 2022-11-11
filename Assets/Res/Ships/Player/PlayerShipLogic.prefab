@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4012478367286504076}
   - component: {fileID: 8852608851623935388}
   m_Layer: 9
-  m_Name: GreyPlayerShipLogic
+  m_Name: PlayerShipLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 5685879178270266555, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: Spawner
       value: 
-      objectReference: {fileID: 11400000, guid: 8e4820900c1dece4786813d8a89eff41, type: 2}
+      objectReference: {fileID: 11400000, guid: 8433b589cbcd17847a0d5af5b172634e, type: 2}
     - target: {fileID: 7545856162634404008, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: m_RootOrder
       value: 0
