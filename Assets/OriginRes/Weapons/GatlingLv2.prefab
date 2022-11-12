@@ -46,14 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa324d45f3767e3419bfb9bef708ac08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawner: {fileID: 11400000, guid: d491021279a34e94dbf13f382c202a1e, type: 2}
+  Spawner: {fileID: 11400000, guid: 8433b589cbcd17847a0d5af5b172634e, type: 2}
   CD: 0.05
   Delay: 0
   Reset: 0
   WriteToSpawner: 0
   Bullets:
   - {fileID: 8947449474677757860}
-  BulletIDs: 01000000
+  - {fileID: 2712480817279119510}
+  BulletIDs: 0100000001000000
   Player1ID: 1
   Player2ID: 2
   EnemeyID: 3

@@ -15,14 +15,12 @@ MonoBehaviour:
   DelayTime: 0
   CD: 0.05
   LauncherAudio: {fileID: 8300000, guid: caeba5be9f3f76c4385c517b20d04975, type: 3}
-  SpawnIDs: 0100000001000000
-  SpawnCount: 2
+  SpawnIDs: 01000000
+  SpawnCount: 1
   Player1ID: 1
   Player2ID: 2
   EnemeyID: 3
   SpawnOffsets:
-  - {x: 0, y: 0.5, z: 0.5}
-  - {x: 0, y: -0.5, z: 0.5}
+  - {x: 0, y: 0, z: 0.5}
   SpawnDirections:
-  - {x: -0, y: 0, z: 0}
   - {x: -0, y: 0, z: 0}
