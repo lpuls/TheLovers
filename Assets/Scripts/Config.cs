@@ -31,23 +31,26 @@ namespace Config {
             "b2dpY1BhdGgYBCABKAkilgEKClNoaXBDb25maWcSCgoCSUQYASABKAUSDAoE",
             "UGF0aBgCIAEoCRIRCglMb2dpY1BhdGgYAyABKAkSDgoGSGVhbHRoGAQgASgF",
             "Eg0KBVNwZWVkGAUgASgCEhcKD0Ryb3BQcm9iYWJpbGl0eRgGIAMoBRINCgVE",
-            "cm9wcxgHIAMoBRIUCgxJbXBhY3REYW1hZ2UYCCABKAUiMAoGV2VhcG9uEgoK",
-            "AklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCSIrCghWZWN0",
-            "b3IzRBIJCgFYGAEgASgCEgkKAVkYAiABKAISCQoBWhgDIAEoAiIrCgZEZXBl",
-            "bmQSEwoLUmVsb2FkQ291bnQYASABKAUSDAoEUGF0aBgCIAEoCSKSAQoLR2Ft",
-            "ZVNldHRpbmcSCgoCSUQYASABKAUSEQoJTWF4UGxheWVyGAIgASgFEhAKCFNl",
-            "cnZlcklQGAMgASgJEhIKClNlcnZlclBvcnQYBCABKAUSEAoIQ2xpZW50SVAY",
-            "BSABKAkSEgoKQ2xpZW50UG9ydBgGIAEoBRIYCgdEZXBlbmRzGAcgASgLMgcu",
-            "RGVwZW5kKhsKB0V4YW1wbGUSEAoMRXhhbXBsZV9OT05FEAAqTQoJR2FtZU1v",
-            "ZGVsEhIKDkdhbWVNb2RlbF9OT05FEAASFAoQR2FtZU1vZGVsX1NJTkdMRRAB",
-            "EhYKEkdhbWVNb2RlbF9NVUxUSVBMRRACQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "cm9wcxgHIAMoBRIUCgxJbXBhY3REYW1hZ2UYCCABKAUiUAoGV2VhcG9uEgoK",
+            "AklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0",
+            "THYYBCABKAUSDgoGVHlwZUlEGAUgASgFIisKCFZlY3RvcjNEEgkKAVgYASAB",
+            "KAISCQoBWRgCIAEoAhIJCgFaGAMgASgCIisKBkRlcGVuZBITCgtSZWxvYWRD",
+            "b3VudBgBIAEoBRIMCgRQYXRoGAIgASgJIpIBCgtHYW1lU2V0dGluZxIKCgJJ",
+            "RBgBIAEoBRIRCglNYXhQbGF5ZXIYAiABKAUSEAoIU2VydmVySVAYAyABKAkS",
+            "EgoKU2VydmVyUG9ydBgEIAEoBRIQCghDbGllbnRJUBgFIAEoCRISCgpDbGll",
+            "bnRQb3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsyBy5EZXBlbmQqGwoHRXhh",
+            "bXBsZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1lTW9kZWwSEgoOR2FtZU1v",
+            "ZGVsX05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xFEAESFgoSR2FtZU1vZGVs",
+            "X01VTFRJUExFEAIqUQoKV2VhcG9uVHlwZRITCg9XZWFwb25UeXBlX05PTkUQ",
+            "ABIWChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJXZWFwb25UeXBlX1NIT1RH",
+            "VU4QAkIJqgIGQ29uZmlnYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path", "NextLv", "TypeID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.GameSetting), global::Config.GameSetting.Parser, new[]{ "ID", "MaxPlayer", "ServerIP", "ServerPort", "ClientIP", "ClientPort", "Depends" }, null, null, null)
@@ -65,6 +68,12 @@ namespace Config {
     [pbr::OriginalName("GameModel_NONE")] None = 0,
     [pbr::OriginalName("GameModel_SINGLE")] Single = 1,
     [pbr::OriginalName("GameModel_MULTIPLE")] Multiple = 2,
+  }
+
+  public enum WeaponType {
+    [pbr::OriginalName("WeaponType_NONE")] None = 0,
+    [pbr::OriginalName("WeaponType_GALTING")] Galting = 1,
+    [pbr::OriginalName("WeaponType_SHOTGUN")] Shotgun = 2,
   }
 
   #endregion
@@ -891,6 +900,8 @@ namespace Config {
       iD_ = other.iD_;
       note_ = other.note_;
       path_ = other.path_;
+      nextLv_ = other.nextLv_;
+      typeID_ = other.typeID_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -932,6 +943,28 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "NextLv" field.</summary>
+    public const int NextLvFieldNumber = 4;
+    private int nextLv_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int NextLv {
+      get { return nextLv_; }
+      set {
+        nextLv_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "TypeID" field.</summary>
+    public const int TypeIDFieldNumber = 5;
+    private int typeID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TypeID {
+      get { return typeID_; }
+      set {
+        typeID_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Weapon);
@@ -948,6 +981,8 @@ namespace Config {
       if (ID != other.ID) return false;
       if (Note != other.Note) return false;
       if (Path != other.Path) return false;
+      if (NextLv != other.NextLv) return false;
+      if (TypeID != other.TypeID) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -957,6 +992,8 @@ namespace Config {
       if (ID != 0) hash ^= ID.GetHashCode();
       if (Note.Length != 0) hash ^= Note.GetHashCode();
       if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (NextLv != 0) hash ^= NextLv.GetHashCode();
+      if (TypeID != 0) hash ^= TypeID.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -982,6 +1019,14 @@ namespace Config {
         output.WriteRawTag(26);
         output.WriteString(Path);
       }
+      if (NextLv != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(NextLv);
+      }
+      if (TypeID != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(TypeID);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -998,6 +1043,12 @@ namespace Config {
       }
       if (Path.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (NextLv != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(NextLv);
+      }
+      if (TypeID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypeID);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1018,6 +1069,12 @@ namespace Config {
       }
       if (other.Path.Length != 0) {
         Path = other.Path;
+      }
+      if (other.NextLv != 0) {
+        NextLv = other.NextLv;
+      }
+      if (other.TypeID != 0) {
+        TypeID = other.TypeID;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1040,6 +1097,14 @@ namespace Config {
           }
           case 26: {
             Path = input.ReadString();
+            break;
+          }
+          case 32: {
+            NextLv = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            TypeID = input.ReadInt32();
             break;
           }
         }

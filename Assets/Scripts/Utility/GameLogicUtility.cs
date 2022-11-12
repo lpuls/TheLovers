@@ -53,7 +53,10 @@ namespace Hamster.SpaceWar {
 
             // 需要直接添加控制器
             ship.TryGetOrAdd<MovementComponent>();
-            ship.TryGetOrAdd<LocalAbilityComponent>();
+            LocalAbilityComponent localAbilityComponent = ship.TryGetOrAdd<LocalAbilityComponent>();
+            if (null != localAbilityComponent) {
+                localAbilityComponent.ChangeWeapon(EAbilityIndex.Fire, (int)Config.WeaponType.Galting);
+            }
             ServerPlayerController playerController = ship.TryGetOrAdd<ServerPlayerController>();
             if (null != playerController) {
                 playerController.Init();
@@ -111,6 +114,9 @@ namespace Hamster.SpaceWar {
                 GameObject gameObject = frameDataManager.SpawnNetObject(0, 0, info.LogicPath, configID, position, ENetType.PickerItem);
                 if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
+                }
+                if (gameObject.TryGetComponent<PickerItemComponent>(out PickerItemComponent pickerItemComponent)) {
+                    pickerItemComponent.Init();
                 }
             }
             return null;

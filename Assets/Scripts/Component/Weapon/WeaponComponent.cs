@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
         public EAbilityIndex Type = EAbilityIndex.Fire;
         public BulletSpawner Spawner = null;
         public GameObject Parent = null;
+        public int WeaponID = 0;
 
         private int _ownerID = 0;
         private float _cd = 0;

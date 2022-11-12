@@ -11,13 +11,10 @@ namespace Hamster.SpaceWar {
         public override void Init() {
             base.Init();
 
-            _movementComponent = GetComponent<MovementComponent>();
+            if (null == _movementComponent)
+                _movementComponent = GetComponent<MovementComponent>();
             _movementComponent.Speed = _moveSpeed;
             _movementComponent.Mover = this;
-        }
-
-        public override void OnEnable() {
-            base.OnEnable();
             _movementComponent.Move(Vector3.left);
         }
 
