@@ -81,7 +81,7 @@ namespace Hamster.SpaceWar {
             SetProgress(70);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Player/GreyPlayerShipLogic", 2);
+            Asset.Cache("Res/Ships/Player/PlayerShipLogic", 2);
             SetProgress(75);
             yield return _waiForEendOfFrame;
 
