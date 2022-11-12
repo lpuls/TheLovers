@@ -42,7 +42,7 @@ namespace Hamster.SpaceWar {
             ConfigID = binaryReader.ReadInt32();
             NetType = (ENetType)binaryReader.ReadInt16();
             Position.x = binaryReader.ReadSingle();
-            Position.z = binaryReader.ReadSingle();
+            Position.y = binaryReader.ReadSingle();
             Angle = binaryReader.ReadSingle();
         }
 
@@ -52,7 +52,7 @@ namespace Hamster.SpaceWar {
             packet.WriteInt32(ConfigID);
             packet.WriteInt16((short)NetType);
             packet.WriteFloat(Position.x);
-            packet.WriteFloat(Position.z);
+            packet.WriteFloat(Position.y);
             packet.WriteFloat(Angle);
         }
 
