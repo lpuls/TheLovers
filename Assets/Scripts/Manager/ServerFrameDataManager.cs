@@ -78,8 +78,11 @@ namespace Hamster.SpaceWar {
         }
 
         public void Tick() {
+            BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
+
             FrameData frameData = ObjectPool<FrameData>.Malloc();
             frameData.FrameIndex = ServerLogicFrame++;
+
 
             List<int> pendingKillActors = ListPool<int>.Malloc();
             // todo 这里也许可以改成有变更再添加
@@ -117,7 +120,8 @@ namespace Hamster.SpaceWar {
                     updateInfo.UpdateType = type;
                     switch (type) {
                         case EUpdateActorType.Position:
-                            updateInfo.SetVec3ForData1(netSyncComponent.transform.position.x, netSyncComponent.transform.position.y);
+                            // updateInfo.SetVec3ForData1(netSyncComponent.transform.position.x, netSyncComponent.transform.position.y);
+                            updateInfo.SetInt32ForData1(world.CompressionVectorToInt(netSyncComponent.transform.position));
                             updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                             break;
                         case EUpdateActorType.Angle:
@@ -138,7 +142,6 @@ namespace Hamster.SpaceWar {
                         case EUpdateActorType.Dodge: {
                                 if (netSyncComponent.gameObject.TryGetComponent<ServerPlayerController>(out ServerPlayerController serverPlayerController)) {
                                     updateInfo.SetBoolForData1(serverPlayerController.IsDodge);
-                                    // updateInfo.SetInt32ForData2(netSyncComponent.PredictionIndex);
                                 }
                             }
                             break;

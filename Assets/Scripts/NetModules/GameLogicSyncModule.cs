@@ -80,6 +80,13 @@ namespace Hamster.SpaceWar
 
         private GameLogicSyncMessage _gameLogicSyncMessage = new GameLogicSyncMessage();
 
+#if UNITY_EDITOR
+        public float TotalSize = 0;
+        public int PackageCount = 0;
+        public float AveSize = 0;
+        public int MaxSize = 0;
+#endif
+
         public override int GetModuleID() {
             return NET_GAME_LOGIC_SYNC_ID;
         }
@@ -90,6 +97,14 @@ namespace Hamster.SpaceWar
             int dataSize = p.ReadInt32();
             byte[] byteArray = p.ReadBytes(dataSize);
             frameDataManager.AnalyzeBinary(byteArray);
+
+#if UNITY_EDITOR
+            TotalSize += dataSize;
+            PackageCount++;
+            AveSize = TotalSize / PackageCount;
+            if (dataSize > MaxSize)
+                MaxSize = dataSize;
+#endif
         }
 
         public override void OnReceiveClientMessage(Packet p, ClientInstance inst) {

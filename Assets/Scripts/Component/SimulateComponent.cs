@@ -78,18 +78,22 @@ namespace Hamster.SpaceWar {
         }
 
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
+            BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
+
             int netID = _netSyncComponent.NetID;
             UpdateInfo preUpdateInfo;
             UpdateInfo currentUpdateInfo;
             Vector3 preLocation = CurrentLocation;  // PreLocation;
             Vector3 currentLocation = CurrentLocation;
             if (null != pre && pre.TryGetUpdateInfo(netID, EUpdateActorType.Position, out preUpdateInfo)) {
-                preLocation = preUpdateInfo.Data1.Vec3;
+                //preLocation = preUpdateInfo.Data1.Vec3;
+                preLocation = world.UncompressionIntToVector(preUpdateInfo.Data1.Int32);
                 //if (ENetType.Enemy == _netSyncComponent.NetType)
                 //    Debug.Log(string.Format("Unpack Pre {0} {1} {2}", gameObject.name, preUpdateInfo.Data1.Vec3, pre.FrameIndex));
             }
             if (null != current && current.TryGetUpdateInfo(netID, EUpdateActorType.Position, out currentUpdateInfo)) {
-                currentLocation = currentUpdateInfo.Data1.Vec3;
+                //currentLocation = currentUpdateInfo.Data1.Vec3;
+                currentLocation = world.UncompressionIntToVector(currentUpdateInfo.Data1.Int32);
                 if (_netSyncComponent.IsAutonomousProxy() && currentUpdateInfo.Data2.Int32 > -1) {
                     UpdateServerToPredictPosition(preLocation, currentLocation, currentUpdateInfo.Data2.Int32);
                 }

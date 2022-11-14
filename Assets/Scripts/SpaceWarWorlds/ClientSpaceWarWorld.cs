@@ -10,13 +10,17 @@ namespace Hamster.SpaceWar {
         private ClientNetDevice _netDevice = new ClientNetDevice();
         private ClientFrameDataManager _frameDataManager = new ClientFrameDataManager();
 
+        private GameLogicSyncModule _logicSyncModule = null;
+
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
 
             _netDevice = new ClientNetDevice();
 
+            _logicSyncModule = new GameLogicSyncModule();
+
             _netDevice.RegistModule(new NetPingModule());
-            _netDevice.RegistModule(new GameLogicSyncModule());
+            _netDevice.RegistModule(_logicSyncModule);
             _netDevice.RegistModule(new ClientGameLogicEventModule());
 
             _netDevice.Connect("127.0.0.1", 8888);
@@ -86,13 +90,20 @@ namespace Hamster.SpaceWar {
             _frameDataManager.Update();
         }
 
+#if UNITY_EDITOR
+        GUIStyle style = new GUIStyle();
+
         private void OnGUI() {
+            style.fontSize = 24;
             GUILayout.Label("Frame " + _frameDataManager.GameLogicFrame);
+            GUILayout.Label("Pack Ave " + _logicSyncModule.AveSize, style);
+            GUILayout.Label("Max Pack " + _logicSyncModule.MaxSize, style);
             if (GUILayout.Button("Spawn Ship")) {
                 ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
                 module.RequestSpawnShipToServer(2);
             }
         }
+#endif
 
         public void OnBeginSimulate() {
             Single<UIManager>.GetInstance().Open<MainUIController>();
