@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8f30099a79ebb48b16161bd902fed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldSize: {x: 22, y: 5, z: 40}
+  WorldSize: {x: 71, y: 40, z: 40}
 --- !u!4 &1450042927
 Transform:
   m_ObjectHideFlags: 0
@@ -318,6 +318,7 @@ MonoBehaviour:
   SpawnMinCount: 3
   SpawnMaxCount: 6
   SpawnDelay: 2
+  EnableSpawn: 1
 --- !u!1 &1518782553
 GameObject:
   m_ObjectHideFlags: 0

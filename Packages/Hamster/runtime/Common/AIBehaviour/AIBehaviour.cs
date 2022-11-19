@@ -51,17 +51,22 @@ namespace Hamster {
 
     public class AIBehaviour : IAIBehaviour {
 
-        private BaseBehaviour _root = null;
+        private AIBehaviourScript _root = null;
         private Blackboard _blackboard = new Blackboard();
         public bool IsRun {
             get;
             private set;
         }
 
-        public void Initialize(BaseBehaviour root, GameObject gameObject) {
+        public void Initialize(AIBehaviourScript root, GameObject gameObject) {
             _root = root;
             _blackboard.Clean();
-            _root.Initialize(gameObject, this, _blackboard);
+
+            _root.Initialize.Initialize(gameObject, this, _blackboard);
+            _root.Executor.Initialize(gameObject, this, _blackboard);
+            _root.Finish.Initialize(gameObject, this, _blackboard);
+
+            _root.Initialize.Execute(0);
         }
 
         public void Run() {
@@ -70,15 +75,18 @@ namespace Hamster {
 
         public void Execute(float dt) {
             if (IsRun)
-                _root.Execute(dt);
+                _root.Executor.Execute(dt);
         }
 
         public void Reset() {
-            _root.ResetBehaviour();
+            _root.Initialize.ResetBehaviour();
+            _root.Executor.ResetBehaviour();
+            _root.Finish.ResetBehaviour();
         }
 
         public void Stop() {
             IsRun = false;
+            _root.Finish.Execute(0);
         }
 
     }

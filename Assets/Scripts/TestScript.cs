@@ -1,45 +1,24 @@
 ﻿using Hamster;
 using UnityEngine;
 
+public class A : UnityEngine.ScriptableObject {
+    public B b = null;
+}
+
+public class B : UnityEngine.ScriptableObject {
+    public int a = 0;
+}
+
 [ExecuteInEditMode]
 public class TestScript : MonoBehaviour {
-
-    private ClientNetDevice _clientDevice = new ClientNetDevice();
-    private ServerNetDevice _serverDevice = new ServerNetDevice();
-
-    public string IP = "127.0.0.1";
-    public int Port = 8080;
-
-    private float _serverTick = 0;
+    public AIBehaviourScript Script = null;
+    public AIBehaviour AIBehaviour = new AIBehaviour();
 
     public void Awake() {
-        _serverDevice.Listen(IP, Port);
-
-        _clientDevice.RegistModule(new Hamster.SpaceWar.NetPingModule());
-        _serverDevice.RegistModule(new Hamster.SpaceWar.NetPingModule());
+        AIBehaviour.Initialize(Script, gameObject);
     }
-
 
     public void Update() {
-        _serverTick += Time.deltaTime;
-        if (_serverTick >= 0.1) {
-            _serverDevice.Update();
-            _serverTick = 0;
-        }
-        if (_clientDevice.IsValid)
-            _clientDevice.Update();
-    }
-
-    private void OnGUI() {
-        GUILayout.Label(string.Format("Server Tick: {0}", _serverTick));
-        if (!_clientDevice.IsValid) {
-            if (GUILayout.Button("Connect")) {
-                _clientDevice.Connect(IP, Port);
-            }
-        }
-        if (GUILayout.Button("Close")) {
-            _clientDevice.Close();
-            _serverDevice.Close();
-        }
+        AIBehaviour.Execute(Time.deltaTime);
     }
 }

@@ -16,6 +16,10 @@ MonoBehaviour:
   CD: 0.1
   LauncherAudio: {fileID: 8300000, guid: caeba5be9f3f76c4385c517b20d04975, type: 3}
   SpawnIDs: 03000000
+  SpawnCount: 1
+  Player1ID: 0
+  Player2ID: 0
+  EnemeyID: 0
   SpawnOffsets:
   - {x: 0, y: 0, z: 0.5}
   SpawnDirections:
