@@ -16,13 +16,13 @@ namespace Hamster.SpaceWar {
             Spawn,
         }
 
+        public static List<string> LocationNames = new();
+
         public ELevelProperty LevelProperty = ELevelProperty.None;
 
         // 场景数据
         public string ClientAsset = string.Empty;           // 客户端表现资源
-        public List<Vector3> FixLocations = new();          // 卡关中的特殊点 
-        public List<Vector3> PlayerSpawnLocations = new();  // 玩家生成点
-        public List<Vector3> EnemtySpawnLocations = new();  // 敌人生成点
+        public Dictionary<string, Vector3> FixLocations = new();          // 卡关中的特殊点 
 
         public List<LevelEditorProperty> LevelWaves = new();  // 敌人波数生成数据
 
@@ -49,23 +49,39 @@ namespace Hamster.SpaceWar {
         }
 
         public void UpdateLevelConfig() {
-            UpdateLevelLocations("FixLocations", FixLocations);
-            UpdateLevelLocations("PlayerLocations", PlayerSpawnLocations);
-            UpdateLevelLocations("EnemeyLocations", EnemtySpawnLocations);
-
-            LevelWaves.Clear();
-            Transform waveTransform = transform.Find("Waves");
-            if (null == waveTransform) {
-                GameObject fixLocationsGameObject = new GameObject("Waves");
-                fixLocationsGameObject.transform.SetParent(transform, false);
-                waveTransform = fixLocationsGameObject.transform;
+            {
+                FixLocations.Clear();
+                Transform waveTransform = transform.Find("FixLocations");
+                if (null == waveTransform) {
+                    GameObject fixLocationsGameObject = new GameObject("FixLocations");
+                    fixLocationsGameObject.transform.SetParent(transform, false);
+                    waveTransform = fixLocationsGameObject.transform;
+                }
+                for (int i = 0; i < waveTransform.childCount; i++) {
+                    Transform childTransform = waveTransform.GetChild(i);
+                    if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
+                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Location) {
+                            FixLocations.Add(temp.name, temp.transform.position);
+                        }
+                    }
+                }
             }
-            for (int i = 0; i < waveTransform.childCount; i++) {
-                Transform childTransform = waveTransform.GetChild(i);
-                if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
-                    if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave) {
-                        temp.UpdateWaveConfig();
-                        LevelWaves.Add(temp);
+
+            {
+                LevelWaves.Clear();
+                Transform waveTransform = transform.Find("Waves");
+                if (null == waveTransform) {
+                    GameObject fixLocationsGameObject = new GameObject("Waves");
+                    fixLocationsGameObject.transform.SetParent(transform, false);
+                    waveTransform = fixLocationsGameObject.transform;
+                }
+                for (int i = 0; i < waveTransform.childCount; i++) {
+                    Transform childTransform = waveTransform.GetChild(i);
+                    if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
+                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave) {
+                            temp.UpdateWaveConfig();
+                            LevelWaves.Add(temp);
+                        }
                     }
                 }
             }
@@ -93,12 +109,14 @@ namespace Hamster.SpaceWar {
             switch (LevelProperty) {
                 case ELevelProperty.Level: {
                         UpdateLevelConfig();
+                        LevelEditorProperty.LocationNames.Clear();
+                        LevelEditorProperty.LocationNames.AddRange(FixLocations.Keys);
+
                         LevelConfigScriptObject levelConfigScriptObject = ScriptableObject.CreateInstance<LevelConfigScriptObject>();
                         levelConfigScriptObject.name = gameObject.name;
                         levelConfigScriptObject.ClientAsset = ClientAsset;
-                        levelConfigScriptObject.FixLocations.AddRange(FixLocations);
-                        levelConfigScriptObject.PlayerSpawnLocations.AddRange(PlayerSpawnLocations);
-                        levelConfigScriptObject.EnemtySpawnLocations.AddRange(EnemtySpawnLocations);
+                        levelConfigScriptObject.LocationNames.AddRange(FixLocations.Keys);
+                        levelConfigScriptObject.FixLocations.AddRange(FixLocations.Values);
                         foreach (var item in LevelWaves) {
                             levelConfigScriptObject.LevelWaves.Add(item.CreateScriptableObject() as LevelWaveScriptObject);
                         }
@@ -108,7 +126,7 @@ namespace Hamster.SpaceWar {
                     }
                 case ELevelProperty.Wave: {
                         LevelWaveScriptObject levelWaveScriptObject = ScriptableObject.CreateInstance<LevelWaveScriptObject>();
-                        levelWaveScriptObject.name = gameObject.name;
+                        levelWaveScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         levelWaveScriptObject.TriggerTime = TriggerTime;
                         levelWaveScriptObject.CompleteType = CompleteType;
                         foreach (var item in UnitSpawns) {
@@ -120,6 +138,7 @@ namespace Hamster.SpaceWar {
                     break;
                 case ELevelProperty.Spawn: {
                         UnitSpawnScriptObject unitSpawnScriptObject = ScriptableObject.CreateInstance<UnitSpawnScriptObject>();
+                        unitSpawnScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         unitSpawnScriptObject.ID = SpawnID;
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
                         return unitSpawnScriptObject;
@@ -127,6 +146,7 @@ namespace Hamster.SpaceWar {
             }
             return null;
         }
+
 #endif
     }
 
@@ -142,7 +162,8 @@ namespace Hamster.SpaceWar {
             switch (levelEditorProperty.LevelProperty) {
                 case LevelEditorProperty.ELevelProperty.Spawn: {
                         levelEditorProperty.SpawnID = EditorGUILayout.IntField("生成ID", levelEditorProperty.SpawnID);
-                        levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
+                        //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
+                        levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, LevelEditorProperty.LocationNames.ToArray());
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
@@ -171,18 +192,9 @@ namespace Hamster.SpaceWar {
                         levelEditorProperty.ClientAsset = EditorGUILayout.TextField("客户端表现资源", levelEditorProperty.ClientAsset);
                         EditorGUILayout.Space();
                         EditorGUILayout.LabelField("特殊点 " + levelEditorProperty.FixLocations.Count);
-                        for (int i = 0; i < levelEditorProperty.FixLocations.Count; i++) {
-                            levelEditorProperty.FixLocations[i] = EditorGUILayout.Vector3Field("Location" + i, levelEditorProperty.FixLocations[i]);
-                        }
-                        EditorGUILayout.Space();
-                        EditorGUILayout.LabelField("玩家生成位置 " + levelEditorProperty.PlayerSpawnLocations.Count);
-                        for (int i = 0; i < levelEditorProperty.PlayerSpawnLocations.Count; i++) {
-                            levelEditorProperty.PlayerSpawnLocations[i] = EditorGUILayout.Vector3Field("Location" + i, levelEditorProperty.PlayerSpawnLocations[i]);
-                        }
-                        EditorGUILayout.Space();
-                        EditorGUILayout.LabelField("敌人生成位置 " + levelEditorProperty.EnemtySpawnLocations.Count);
-                        for (int i = 0; i < levelEditorProperty.EnemtySpawnLocations.Count; i++) {
-                            levelEditorProperty.EnemtySpawnLocations[i] = EditorGUILayout.Vector3Field("Location" + i, levelEditorProperty.EnemtySpawnLocations[i]);
+                        foreach (var item in levelEditorProperty.FixLocations) {
+                            EditorGUILayout.LabelField(string.Format("{0}: {1}", item.Key, item.Value));
+
                         }
                         
                         if (GUILayout.Button("更新")) {

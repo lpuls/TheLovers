@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 3
 --- !u!1 &122430346323519991
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,9 +97,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 11
+  LocationIndex: 4
 --- !u!1 &129663116165685966
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +135,13 @@ Transform:
   - {fileID: 7817662942715393842}
   - {fileID: 9134366018138884914}
   - {fileID: 7194180906193630255}
+  - {fileID: 1975733209389584479}
+  - {fileID: 3278614368253197539}
+  - {fileID: 785145405852120862}
+  - {fileID: 1475417134086231011}
+  - {fileID: 4465523920184587644}
+  - {fileID: 5428585024067804956}
+  - {fileID: 1785628400642358362}
   m_Father: {fileID: 6913372618819913112}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,39 +177,6 @@ Transform:
   - {fileID: 3124374994099097212}
   - {fileID: 1206765268063595863}
   - {fileID: 7845465663603017319}
-  m_Father: {fileID: 6913372618819913112}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &509943414393137427
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4612106455786424842}
-  m_Layer: 0
-  m_Name: PlayerLocations
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4612106455786424842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509943414393137427}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1975733209389584479}
-  - {fileID: 3278614368253197539}
   m_Father: {fileID: 6913372618819913112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -309,9 +291,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &2084119341803885583
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,9 +343,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 2
 --- !u!1 &2197298144121737485
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,9 +400,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 2
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0.25
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 1851628054956515328}
+  - {fileID: 6185683110584410627}
+  - {fileID: 498626077310612082}
+  - {fileID: 7483128973586545690}
+  - {fileID: 5301602677412179243}
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &2520217740547107190
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,9 +457,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 11
+  LocationIndex: 1
 --- !u!1 &2527663785443278357
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,8 +496,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 832332813566025812}
-  m_RootOrder: 4
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6535837055603671033
 MeshFilter:
@@ -572,9 +575,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &2593457591192275878
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,9 +630,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 2
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 7219263726036079211}
+  - {fileID: 2355683766479922590}
+  - {fileID: 469492414881286574}
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &2606921633319566562
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +651,7 @@ GameObject:
   - component: {fileID: 5533698048551714682}
   - component: {fileID: 2845599008206822681}
   m_Layer: 0
-  m_Name: Spawn 10 int location 4
+  m_Name: Spawn 10 int location 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,9 +685,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 3
 --- !u!1 &2995174904255656164
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,8 +724,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4612106455786424842}
-  m_RootOrder: 0
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8816069118035276312
 MeshFilter:
@@ -785,9 +803,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &3289025875055121216
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,9 +858,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 2
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0.25
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 1563014680382382438}
+  - {fileID: 4907780227970117749}
+  - {fileID: 2845599008206822681}
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &4878076751124698722
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,9 +915,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 2
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0.5
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 8074620875575778610}
+  - {fileID: 5767132702851279748}
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &5274209324324071309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,9 +1035,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &5339302373802545961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1053,7 @@ GameObject:
   - component: {fileID: 8748858702333551922}
   - component: {fileID: 7219263726036079211}
   m_Layer: 0
-  m_Name: Spawn 10 int location 2
+  m_Name: Spawn 10 int location 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1048,45 +1087,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
---- !u!1 &5476926049421441258
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 832332813566025812}
-  m_Layer: 0
-  m_Name: EnemeyLocations
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &832332813566025812
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5476926049421441258}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 785145405852120862}
-  - {fileID: 1475417134086231011}
-  - {fileID: 4465523920184587644}
-  - {fileID: 5428585024067804956}
-  - {fileID: 1785628400642358362}
-  m_Father: {fileID: 6913372618819913112}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 0
 --- !u!1 &5677353864794604631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1105,7 @@ GameObject:
   - component: {fileID: 425672956091643910}
   - component: {fileID: 4907780227970117749}
   m_Layer: 0
-  m_Name: Spawn 11 int location 3
+  m_Name: Spawn 10 int location 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1132,9 +1139,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 3
 --- !u!1 &5758557435707277415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,8 +1176,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5751581371287030640}
-  - {fileID: 4612106455786424842}
-  - {fileID: 832332813566025812}
   - {fileID: 5960133424501606685}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1184,9 +1193,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 1
-  LevelConfigScriptObject: {fileID: 11400000, guid: c0e6aa02966201c47b861edd9d418ab5, type: 2}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves:
+  - {fileID: 3427670122629675775}
+  - {fileID: 615061868455756711}
+  - {fileID: 5372964936572716562}
+  - {fileID: 3640939028943504194}
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &5820438417878024675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,9 +1315,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &5900294548450078994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,8 +1354,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 832332813566025812}
-  m_RootOrder: 1
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4461551910843677085
 MeshFilter:
@@ -1412,9 +1433,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &6962832382557003633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,8 +1472,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4612106455786424842}
-  m_RootOrder: 1
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4676894299883678700
 MeshFilter:
@@ -1526,9 +1551,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &7605039730083942436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,9 +1603,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 3
 --- !u!1 &7623936653766182530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,8 +1642,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 832332813566025812}
-  m_RootOrder: 2
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1304491417308617887
 MeshFilter:
@@ -1688,9 +1721,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &7688592774467344114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,8 +1760,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 832332813566025812}
-  m_RootOrder: 3
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4044558010314001572
 MeshFilter:
@@ -1802,9 +1839,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &7772297412938971970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,9 +1891,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 11
+  LocationIndex: 2
 --- !u!1 &8336970104425737735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1898,9 +1943,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 11
+  LocationIndex: 0
 --- !u!1 &8397782320269786190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,9 +1995,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 1
 --- !u!1 &8420206997434658239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,8 +2034,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 832332813566025812}
-  m_RootOrder: 0
+  m_Father: {fileID: 5751581371287030640}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1445553804318445741
 MeshFilter:
@@ -2060,9 +2113,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 3
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
 --- !u!1 &8775774323750886337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,9 +2165,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 11
+  LocationIndex: 4
 --- !u!1 &9024874823948188470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelProperty: 4
-  LevelConfigScriptObject: {fileID: 0}
-  LevelWaveScriptObject: {fileID: 0}
-  UnitSpawnScriptObject: {fileID: 0}
+  ClientAsset: 
+  LevelWaves: []
+  TriggerTime: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 10
+  LocationIndex: 1
