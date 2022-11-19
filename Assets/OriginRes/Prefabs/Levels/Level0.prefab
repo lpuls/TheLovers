@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5717357183513231978}
   - component: {fileID: 7483128973586545690}
   m_Layer: 0
-  m_Name: Spawn 10 int location 3
+  m_Name: Spawn 10 int location 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
-  LocationIndex: 3
+  LocationIndex: 8
 --- !u!1 &122430346323519991
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5789379735939324230}
   - component: {fileID: 5767132702851279748}
   m_Layer: 0
-  m_Name: Spawn 11 int location 4
+  m_Name: Spawn 11 int location 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
-  LocationIndex: 4
+  LocationIndex: 9
 --- !u!1 &129663116165685966
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 7326189423361167112}
   - component: {fileID: 469492414881286574}
   m_Layer: 0
-  m_Name: Spawn 10 int location 2
+  m_Name: Spawn 10 int location 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
-  LocationIndex: 2
+  LocationIndex: 7
 --- !u!1 &2197298144121737485
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 3897401270146951277}
   - component: {fileID: 2355683766479922590}
   m_Layer: 0
-  m_Name: Spawn 11 int location 1
+  m_Name: Spawn 11 int location 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
-  LocationIndex: 1
+  LocationIndex: 6
 --- !u!1 &2527663785443278357
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,58 +640,6 @@ MonoBehaviour:
   - {fileID: 469492414881286574}
   SpawnID: 0
   LocationIndex: 0
---- !u!1 &2606921633319566562
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5533698048551714682}
-  - component: {fileID: 2845599008206822681}
-  m_Layer: 0
-  m_Name: Spawn 10 int location 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5533698048551714682
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606921633319566562}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7845465663603017319}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2845599008206822681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606921633319566562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelProperty: 4
-  ClientAsset: 
-  LevelWaves: []
-  TriggerTime: 0
-  CompleteType: 0
-  UnitSpawns: []
-  SpawnID: 10
-  LocationIndex: 3
 --- !u!1 &2995174904255656164
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,8 +788,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8036232794999747335}
-  - {fileID: 425672956091643910}
-  - {fileID: 5533698048551714682}
   m_Father: {fileID: 5960133424501606685}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -864,8 +810,6 @@ MonoBehaviour:
   CompleteType: 1
   UnitSpawns:
   - {fileID: 1563014680382382438}
-  - {fileID: 4907780227970117749}
-  - {fileID: 2845599008206822681}
   SpawnID: 0
   LocationIndex: 0
 --- !u!1 &4878076751124698722
@@ -1053,7 +997,7 @@ GameObject:
   - component: {fileID: 8748858702333551922}
   - component: {fileID: 7219263726036079211}
   m_Layer: 0
-  m_Name: Spawn 10 int location 0
+  m_Name: Spawn 10 int location 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,59 +1037,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
-  LocationIndex: 0
---- !u!1 &5677353864794604631
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 425672956091643910}
-  - component: {fileID: 4907780227970117749}
-  m_Layer: 0
-  m_Name: Spawn 10 int location 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &425672956091643910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677353864794604631}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7845465663603017319}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4907780227970117749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677353864794604631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelProperty: 4
-  ClientAsset: 
-  LevelWaves: []
-  TriggerTime: 0
-  CompleteType: 0
-  UnitSpawns: []
-  SpawnID: 10
-  LocationIndex: 3
+  LocationIndex: 5
 --- !u!1 &5758557435707277415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,7 +1461,7 @@ GameObject:
   - component: {fileID: 1217424866643498543}
   - component: {fileID: 8074620875575778610}
   m_Layer: 0
-  m_Name: Spawn 10 int location 3
+  m_Name: Spawn 10 int location 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,7 +1501,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
-  LocationIndex: 3
+  LocationIndex: 8
 --- !u!1 &7623936653766182530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,7 +1749,7 @@ GameObject:
   - component: {fileID: 4064358808976325048}
   - component: {fileID: 498626077310612082}
   m_Layer: 0
-  m_Name: Spawn 11 int location 2
+  m_Name: Spawn 11 int location 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1897,7 +1789,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
-  LocationIndex: 2
+  LocationIndex: 7
 --- !u!1 &8336970104425737735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,7 +1801,7 @@ GameObject:
   - component: {fileID: 5191623003377813376}
   - component: {fileID: 1851628054956515328}
   m_Layer: 0
-  m_Name: Spawn 11 int location 0
+  m_Name: Spawn 11 int location 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1949,7 +1841,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
-  LocationIndex: 0
+  LocationIndex: 5
 --- !u!1 &8397782320269786190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1853,7 @@ GameObject:
   - component: {fileID: 8036232794999747335}
   - component: {fileID: 1563014680382382438}
   m_Layer: 0
-  m_Name: Spawn 10 int location 1
+  m_Name: Spawn 101 int location 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2000,8 +1892,8 @@ MonoBehaviour:
   TriggerTime: 0
   CompleteType: 0
   UnitSpawns: []
-  SpawnID: 10
-  LocationIndex: 1
+  SpawnID: 101
+  LocationIndex: 6
 --- !u!1 &8420206997434658239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,7 +2023,7 @@ GameObject:
   - component: {fileID: 8110571924120111062}
   - component: {fileID: 5301602677412179243}
   m_Layer: 0
-  m_Name: Spawn 11 int location 4
+  m_Name: Spawn 11 int location 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2171,7 +2063,7 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
-  LocationIndex: 4
+  LocationIndex: 9
 --- !u!1 &9024874823948188470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2075,7 @@ GameObject:
   - component: {fileID: 3178018914340497022}
   - component: {fileID: 6185683110584410627}
   m_Layer: 0
-  m_Name: Spawn 10 int location 1
+  m_Name: Spawn 10 int location 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2223,4 +2115,4 @@ MonoBehaviour:
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
-  LocationIndex: 1
+  LocationIndex: 6
