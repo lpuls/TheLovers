@@ -5,7 +5,8 @@ namespace Hamster.SpaceWar {
 
     public interface IMover {
         RaycastHit2D MoveRayCast(float distance, Vector3 direction);
-        void OnHitSomething(RaycastHit2D raycastHit);
+        // ture 时，停止移动；false 时，继续移动
+        bool OnHitSomething(RaycastHit2D raycastHit);
         Vector3 GetSize();
     }
 
@@ -51,8 +52,8 @@ namespace Hamster.SpaceWar {
             if (null != Mover) {
                 RaycastHit2D raycastHit = Mover.MoveRayCast(_moveSpeed, _moveDirection);
                 if (null != raycastHit.collider) {
-                    Mover.OnHitSomething(raycastHit);
-                    _moveSpeed = raycastHit.distance;
+                    if (Mover.OnHitSomething(raycastHit))
+                        _moveSpeed = raycastHit.distance;
                 }
                 location += _moveSpeed * _moveDirection;
 

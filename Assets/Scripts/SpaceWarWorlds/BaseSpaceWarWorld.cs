@@ -95,6 +95,22 @@ namespace Hamster.SpaceWar {
 
         }
 
+        public int CompressionVectorToInt(Vector3 position) {
+            ushort x = (ushort)((position.x + WorldSize.x) * 100);
+            ushort y = (ushort)((position.y + WorldSize.y) * 100);
+            int result = x;
+            return (result << 16) | y;
+        }
+
+        public Vector3 UncompressionIntToVector(int position) {
+            ushort y = (ushort)(position & 0xFFFF);
+            ushort x = (ushort)((position >> 16) & 0xFFFF);
+            return new Vector3(
+                    ((float)x) / 100 - WorldSize.x,
+                    ((float)y) / 100 - WorldSize.y
+                );
+        }
+
         public virtual void AddTicker(IServerTicker serverTicker) {
         }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public class PlayerEffectComponent : MonoBehaviour {
+        // 尾焰大小变化
         [SerializeField]
         private Transform[] _tailFlame = null;
         [SerializeField]
@@ -12,6 +13,7 @@ namespace Hamster.SpaceWar {
         [SerializeField]
         private float _slowDownTailFlame = 1;
 
+        // 左右移动时战机动画值
         [SerializeField]
         private float _moveLeftVelocity = -1;
         [SerializeField]
@@ -19,10 +21,12 @@ namespace Hamster.SpaceWar {
         [SerializeField]
         private float _moverightVelocity = 1;
 
+        // 组件
         private Animator _animator = null;
         private SimulateComponent _simulateComponent = null;
         private NetSyncComponent _netSyncComponent = null;
 
+        // 受击闪烁
         public Color HitAdditionColor = Color.red;
         public AnimationCurve HitColorUpdateCurve = null;
         public float UpdateColorMaxTime = 0.1f;
@@ -31,13 +35,21 @@ namespace Hamster.SpaceWar {
         private List<Color> _originAdditionColor = new List<Color>();
         private List<Material> _shipMaterials = new List<Material>();
 
+        // 移动时的尾焰及动画
         private float _velocityX = 0;
         private float _tailFlameSize = 2;
 
+        // 生命值UI
         private int _health = 1;
         private int _maxHealth = 1;
         private MainUIModule _mainUIModule = null;
         [SerializeField] private OverheadHealthUI _headHealthUI = null;
+
+        // 闪避
+        public bool IsDodging {
+            get;
+            private set;
+        }
 
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
@@ -90,11 +102,12 @@ namespace Hamster.SpaceWar {
 
         protected virtual void OnFrameUpdate(FrameData pre, FrameData current) {
             int netID = _netSyncComponent.NetID;
-            UpdateInfo updateInfo;
+
+            UpdateInfo currentUpdateInfo;
             if (null != current) {
                 // 检查角色状态变化
-                if (current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out updateInfo)) {
-                    switch ((EPlayerState)updateInfo.Data1.Int8) {
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out currentUpdateInfo)) {
+                    switch ((EPlayerState)currentUpdateInfo.Data1.Int8) {
                         case EPlayerState.Spawning: {
                                 GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
                                 spawnEffect.transform.position = transform.position;
@@ -118,7 +131,7 @@ namespace Hamster.SpaceWar {
                 }
 
                 // 检查角色生命值变化
-                if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out updateInfo)) {
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out currentUpdateInfo)) {
                     // 根据是否为主控角色
                     if (null != _mainUIModule) {
                         _mainUIModule.MaxHealth = _maxHealth;
@@ -128,8 +141,8 @@ namespace Hamster.SpaceWar {
                         _headHealthUI.SetHealth(_health, _maxHealth);
                     }
 
-                    int newHealth = updateInfo.Data1.Int16;
-                    if (_health > updateInfo.Data1.Int16) {
+                    int newHealth = currentUpdateInfo.Data1.Int16;
+                    if (_health > currentUpdateInfo.Data1.Int16) {
 
                         // todo update health ui
                         if (null != _headHealthUI) {
@@ -143,6 +156,17 @@ namespace Hamster.SpaceWar {
                         }
                     }
                     _health = newHealth;
+                }
+
+                // 检查是否闪避
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.Dodge, out currentUpdateInfo)) {
+                    if (currentUpdateInfo.Data1.Boolean && !IsDodging) {
+                        _animator.SetTrigger("Dodge");
+                        IsDodging = true;
+                    }
+                    else if (!currentUpdateInfo.Data1.Boolean && IsDodging) {
+                        IsDodging = false;
+                    }
                 }
             }
         }
@@ -195,6 +219,7 @@ namespace Hamster.SpaceWar {
                     _neeUpdateHitColor = false;
                 }
             }
+
         }
 
         private void SetTailFlameSize(float size) {
@@ -225,6 +250,11 @@ namespace Hamster.SpaceWar {
             _hitColorUpdateTime = 0;
             _velocityX = _normalTailFlame;
             _tailFlameSize = _normalTailFlame;
+        }
+
+        public void PlayDodge() {
+            _animator.SetTrigger("Dodge");
+            IsDodging = true;
         }
 
         private void OnDisable() {

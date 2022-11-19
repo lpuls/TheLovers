@@ -2,6 +2,20 @@
 
 namespace Hamster.SpaceWar {
 
+    public class InputCommand {
+        public Vector3 Direction = Vector3.zero;
+        public bool IsCastAbility1 = false;
+        public bool IsCastAbility2 = false;
+        public bool IsDodge = false;
+
+        public void Reset() {
+            Direction = Vector3.zero;
+            IsCastAbility1 = false;
+            IsCastAbility2 = false;
+            IsDodge = false;
+        }
+    }
+
     public static class GameLogicUtility {
 
         #region Server
@@ -39,7 +53,10 @@ namespace Hamster.SpaceWar {
 
             // 需要直接添加控制器
             ship.TryGetOrAdd<MovementComponent>();
-            ship.TryGetOrAdd<LocalAbilityComponent>();
+            LocalAbilityComponent localAbilityComponent = ship.TryGetOrAdd<LocalAbilityComponent>();
+            if (null != localAbilityComponent) {
+                localAbilityComponent.ChangeWeapon(EAbilityIndex.Fire, (int)Config.WeaponType.Galting);
+            }
             ServerPlayerController playerController = ship.TryGetOrAdd<ServerPlayerController>();
             if (null != playerController) {
                 playerController.Init();
@@ -98,6 +115,9 @@ namespace Hamster.SpaceWar {
                 if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
                 }
+                if (gameObject.TryGetComponent<PickerItemComponent>(out PickerItemComponent pickerItemComponent)) {
+                    pickerItemComponent.Init();
+                }
             }
             return null;
         }
@@ -123,20 +143,21 @@ namespace Hamster.SpaceWar {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
+                // trajectoryComponent.InitProperty(spanwer, Vector3.zero, 0);
                 
                 // CD = abilityConfig.CD / 1000.0f;
             }
             return bullet;
         }
 
-        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Vector3 direction, ITrajectorySpanwer spanwer) {
+        public static GameObject CreateServerBullet(int config, int ownerID, Vector3 position, Quaternion rotation, ITrajectorySpanwer spanwer) {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             GameObject bullet = null;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
+                bullet.transform.rotation = rotation;
 
                 if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
@@ -145,7 +166,7 @@ namespace Hamster.SpaceWar {
                 //bullet.TryGetOrAdd<SimulateComponent>();
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
-                trajectoryComponent.InitProperty(spanwer, direction, abilityConfig.Speed);
+                trajectoryComponent.InitProperty(spanwer, abilityConfig.Speed);
             }
             return bullet;
         }
@@ -165,6 +186,10 @@ namespace Hamster.SpaceWar {
 
         public static void SetHealthDirty(GameObject gameObject) {
             SetPropertyDirty(gameObject, EUpdateActorType.Health);
+        }
+
+        public static void SetDodgeDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.Dodge);
         }
 
         private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {
@@ -241,27 +266,31 @@ namespace Hamster.SpaceWar {
         #endregion
 
         #region Common
-        public static void GetOperateFromInput(Transform transform, int operate, out Vector3 direction, out bool castAbility1) {
-            direction = Vector3.zero;
-            castAbility1 = false;
+        public static void GetOperateFromInput(Transform transform, int operate, InputCommand inputCommand) {
+            //inputCommand.Direction = Vector3.zero;
+            //isDodge = true;
+            //castAbility1 = false;
             for (int i = 0; i < (int)EInputValue.Max; i++) {
                 EInputValue value = (EInputValue)i;
                 if (1 == ((operate >> i) & 1)) {
                     switch (value) {
                         case EInputValue.MoveUp:
-                            direction += transform.up;
+                            inputCommand.Direction += transform.up;
                             break;
                         case EInputValue.MoveDown:
-                            direction -= transform.up;
+                            inputCommand.Direction -= transform.up;
                             break;
                         case EInputValue.MoveLeft:
-                            direction -= transform.right;
+                            inputCommand.Direction -= transform.right;
                             break;
                         case EInputValue.MoveRight:
-                            direction += transform.right;
+                            inputCommand.Direction += transform.right;
                             break;
                         case EInputValue.Ability1:
-                            castAbility1 = true;
+                            inputCommand.IsCastAbility1 = true;
+                            break;
+                        case EInputValue.Dodge:
+                            inputCommand.IsDodge = true;
                             break;
                         default:
                             break;

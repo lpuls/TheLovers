@@ -150,10 +150,11 @@ namespace Hamster.SpaceWar {
             return (_collider2D as BoxCollider2D).size;
         }
 
-        public void OnHitSomething(RaycastHit2D raycastHit) {
+        public bool OnHitSomething(RaycastHit2D raycastHit) {
             CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
             Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
             collisionProcessManager.AddCollisionResult(raycastHit, gameObject, (ESpaceWarLayers)gameObject.layer);
+            return true;
         }
 
 #if UNITY_EDITOR

@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
         public EAbilityIndex Type = EAbilityIndex.Fire;
         public BulletSpawner Spawner = null;
         public GameObject Parent = null;
+        public int WeaponID = 0;
 
         private int _ownerID = 0;
         private float _cd = 0;
@@ -57,8 +58,11 @@ namespace Hamster.SpaceWar {
             }
             for (int i = 0; i < Spawner.SpawnCount; i++) {
                 Vector3 offset = Spawner.SpawnOffsets[i];
-                Vector3 direction = transform.rotation * Spawner.SpawnDirections[i];
-                GameLogicUtility.CreateServerBullet(spawnID, _ownerID, transform.position + offset, direction, this);
+                // Vector3 direction = transform.rotation * Spawner.SpawnDirections[i];
+                Quaternion rotation = transform.rotation;
+                rotation *= Quaternion.AngleAxis(Spawner.SpawnDirections[i].z, Vector3.forward);
+                GameObject bullet = GameLogicUtility.CreateServerBullet(spawnID, _ownerID, transform.position + offset, rotation, this);
+                bullet.transform.rotation = rotation;
             }
             _cd = Spawner.CD;
         }

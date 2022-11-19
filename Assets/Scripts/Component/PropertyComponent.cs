@@ -14,6 +14,8 @@ namespace Hamster.SpaceWar {
         protected ModifyProperty<int> _health = new ModifyProperty<int>();
         protected ModifyProperty<float> _speed = new ModifyProperty<float>();
 
+        public bool Invincible { get; protected set; }
+
         public bool IsDeading {
             get { return State == EPlayerState.Deading; }
         }
@@ -78,6 +80,11 @@ namespace Hamster.SpaceWar {
         public void SetSpawning() {
             State = EPlayerState.Spawning;
             GameLogicUtility.SetRoleStateDirty(gameObject);
+        }
+
+        public void SetInvincible(bool value) {
+            Invincible = value;
+            // set invincible dirty
         }
 
         public float GetSpeed() {

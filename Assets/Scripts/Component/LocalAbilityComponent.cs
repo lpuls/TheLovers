@@ -9,8 +9,10 @@ namespace Hamster.SpaceWar {
 
     [ExecuteInEditMode]
     public class LocalAbilityComponent : MonoBehaviour {
+        public const int MAX_WEAPON_ID = 300;
 
         private Dictionary<int, List<WeaponComponent>> _weapons = new Dictionary<int, List<WeaponComponent>>(new Int32Comparer());
+        private Dictionary<int, int> _weaponEquipIDs = new Dictionary<int, int>(new Int32Comparer());
 
         public void Awake() {
             WeaponComponent[] weaponComponents = GetComponentsInChildren<WeaponComponent>();
@@ -26,8 +28,23 @@ namespace Hamster.SpaceWar {
         }
 
         public void ChangeWeapon(EAbilityIndex abilityIndex, int id) {
+            // 判断是否升级
+            int realID = id;
+            if (_weaponEquipIDs.TryGetValue((int)abilityIndex, out int equipID)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(equipID, out Config.Weapon equipWeaponInfo)) {
+                    if (id == equipWeaponInfo.TypeID)
+                        realID = equipWeaponInfo.NextLv;
+                    else
+                        _weaponEquipIDs[(int)abilityIndex] = id;
+                }
+            }
+            else {
+                _weaponEquipIDs[(int)abilityIndex] = id;
+            }
+
+            // 更换武器
             if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(id, out Config.Weapon info)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(realID, out Config.Weapon info)) {
                     BulletSpawner bulletSpawner = Asset.Load<BulletSpawner>(info.Path);
                     foreach (var item in weapons) {
                         item.Spawner = bulletSpawner;

@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
 
             // 敌人管理器
             _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
-            //_enemyManager.EnableSpawn = false;
+            // _enemyManager.EnableSpawn = false;
 
             // 启用网络
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
@@ -81,7 +81,7 @@ namespace Hamster.SpaceWar {
             SetProgress(70);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Player/GreyPlayerShipLogic", 2);
+            Asset.Cache("Res/Ships/Player/PlayerShipLogic", 2);
             SetProgress(75);
             yield return _waiForEendOfFrame;
 

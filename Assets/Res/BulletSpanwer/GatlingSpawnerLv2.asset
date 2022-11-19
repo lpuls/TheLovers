@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 231176944778eb744ac6255f4da4d4d1, type: 3}
-  m_Name: GatlingSpawner
+  m_Name: GatlingSpawnerLv2
   m_EditorClassIdentifier: 
   DelayTime: 0
   CD: 0.05
   LauncherAudio: {fileID: 8300000, guid: caeba5be9f3f76c4385c517b20d04975, type: 3}
-  SpawnIDs: 01000000
-  SpawnCount: 1
+  SpawnIDs: 0100000001000000
+  SpawnCount: 2
   Player1ID: 1
   Player2ID: 2
   EnemeyID: 3
   SpawnOffsets:
-  - {x: 0, y: 0, z: 0.5}
+  - {x: 0, y: 0.5, z: 0.5}
+  - {x: 0, y: -0.5, z: 0.5}
   SpawnDirections:
-  - {x: 0, y: 0, z: 1}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}

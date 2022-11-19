@@ -21,8 +21,13 @@ namespace Hamster.SpaceWar {
             if (Reset) {
                 Bullets.Clear();
                 TrajectoryEffectComponent[] transforms = GetComponentsInChildren<TrajectoryEffectComponent>();
+                int index = 0;
                 foreach (var item in transforms) {
                     Bullets.Add(item.transform);
+                    if (index >= BulletIDs.Count) {
+                        BulletIDs.Add(1);
+                    }
+                    index++;
                 }
                 Reset = false;
             }
@@ -44,7 +49,7 @@ namespace Hamster.SpaceWar {
                     else {
                         Spawner.SpawnIDs.Add(0);
                     }
-                    Spawner.SpawnDirections.Add(item.forward);
+                    Spawner.SpawnDirections.Add(item.rotation.eulerAngles);
                     Spawner.SpawnOffsets.Add(item.position - transform.position);
                 }
                 WriteToSpawner = false;
