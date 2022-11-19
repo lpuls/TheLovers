@@ -11,7 +11,7 @@ namespace Hamster.SpaceWar {
         private ServerFrameDataManager _serveFrameDataManager = new ServerFrameDataManager();
         private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
         private CollisionProcessManager _collisionResultManager = new CollisionProcessManager();
-        private EnemyManager _enemyManager = null;
+        private LevelManager _levelManager = null;
 
         public ServerNetDevice NetDevice {
             get {
@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
             base.InitWorld();
 
             // 敌人管理器
-            _enemyManager = gameObject.TryGetOrAdd<EnemyManager>();
+            _levelManager = gameObject.TryGetOrAdd<LevelManager>();
             // _enemyManager.EnableSpawn = false;
 
             // 启用网络
@@ -40,13 +40,15 @@ namespace Hamster.SpaceWar {
             RegisterManager<ServerFrameDataManager>(_serveFrameDataManager);
             RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
             RegisterManager<CollisionProcessManager>(_collisionResultManager);
-            RegisterManager<EnemyManager>(_enemyManager);
+            RegisterManager<LevelManager>(_levelManager);
+
+            _levelManager.Initilze("Res/Levels/Level0");
 
             // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
             _serveFrameDataManager.AddTicker(_collisionResultManager);
-            _serveFrameDataManager.AddTicker(_enemyManager);
+            _serveFrameDataManager.AddTicker(_levelManager);
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
 
 
@@ -156,13 +158,13 @@ namespace Hamster.SpaceWar {
 
         [GM]
         public static void GM_EnableEnemySpawn(string[] gmParams) {
-            EnemyManager enemyManager = World.GetWorld().GetManager<EnemyManager>();
+            LevelManager enemyManager = World.GetWorld().GetManager<LevelManager>();
             enemyManager.EnableSpawn = !enemyManager.EnableSpawn;
         }
 
         [GM]
         public static void GM_KillAllEnemy(string[] gmParams) {
-            EnemyManager enemyManager = World.GetWorld().GetManager<EnemyManager>();
+            LevelManager enemyManager = World.GetWorld().GetManager<LevelManager>();
             enemyManager.KillAllEnemys();
         }
 

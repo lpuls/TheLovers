@@ -3,9 +3,15 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
+    public enum EEnemyType {
+        Normal,
+        Boss
+    }
+
     public class BaseEnemy : ServerBaseController {
 
         private BoxCollider2D _collider = null;
+        public EEnemyType EnemyType = EEnemyType.Normal;
 
         public override void Awake() {
             base.Awake();
