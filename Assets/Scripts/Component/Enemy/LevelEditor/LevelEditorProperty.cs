@@ -51,6 +51,7 @@ namespace Hamster.SpaceWar {
         public void UpdateLevelConfig() {
             {
                 FixLocations.Clear();
+                LocationNames.Clear();
                 Transform waveTransform = transform.Find("FixLocations");
                 if (null == waveTransform) {
                     GameObject fixLocationsGameObject = new GameObject("FixLocations");
@@ -62,6 +63,7 @@ namespace Hamster.SpaceWar {
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
                         if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Location) {
                             FixLocations.Add(temp.name, temp.transform.position);
+                            LocationNames.Add(temp.name);
                         }
                     }
                 }
@@ -147,6 +149,22 @@ namespace Hamster.SpaceWar {
             return null;
         }
 
+        public void OnDrawGizmos() {
+            switch (LevelProperty) {
+                case ELevelProperty.Level:
+                    break;
+                case ELevelProperty.Wave:
+                    break;
+                case ELevelProperty.Location:
+                    Handles.Label(transform.position, gameObject.name + "-" + LocationNames.IndexOf(gameObject.name));
+                    break;
+                case ELevelProperty.Spawn:
+                    break;
+                default:
+                    break;
+            }
+        }
+
 #endif
     }
 
@@ -155,6 +173,7 @@ namespace Hamster.SpaceWar {
     public class LevelEditorPropertyInspector : UnityEditor.Editor {
 
         public override void OnInspectorGUI() {
+            serializedObject.Update();
             LevelEditorProperty levelEditorProperty = (LevelEditorProperty)target;
 
             levelEditorProperty.LevelProperty = (LevelEditorProperty.ELevelProperty)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.LevelProperty);
@@ -163,7 +182,8 @@ namespace Hamster.SpaceWar {
                 case LevelEditorProperty.ELevelProperty.Spawn: {
                         levelEditorProperty.SpawnID = EditorGUILayout.IntField("生成ID", levelEditorProperty.SpawnID);
                         //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
-                        levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, LevelEditorProperty.LocationNames.ToArray());
+                        if (LevelEditorProperty.LocationNames.Count > 0)
+                            levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, LevelEditorProperty.LocationNames.ToArray());
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
@@ -211,6 +231,10 @@ namespace Hamster.SpaceWar {
                     break;
             }
 
+            if (GUI.changed) {
+                EditorUtility.SetDirty(levelEditorProperty);
+            }
+            serializedObject.ApplyModifiedProperties();
         }
 
 
