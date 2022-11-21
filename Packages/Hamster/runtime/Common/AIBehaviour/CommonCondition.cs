@@ -11,28 +11,28 @@ namespace Hamster {
     }
 
     [SerializeField]
-    public class Int32CompareCondition : SelectBehaviour.ISelectCondition {
+    public class Int32CompareCondition : ScriptableObject, SelectBehaviour.ISelectCondition {
 
         public ECompare CompareType = ECompare.Equ;
         public string BlackboardKey = string.Empty;
         public int CompareValue = 0;
 
-        public int Select(GameObject gameObject, Blackboard blackboard) {
+        public bool Select(GameObject gameObject, Blackboard blackboard) {
             if (blackboard.TryGetValue<int>(BlackboardKey, out int value)) {
                 switch (CompareType) {
                     case ECompare.Big:
-                        return value > CompareValue ? 0 : 1;
+                        return value > CompareValue;
                     case ECompare.Less:
-                        return value < CompareValue ? 0 : 1;
+                        return value < CompareValue;
                     case ECompare.BigEqu:
-                        return value >= CompareValue ? 0 : 1;
+                        return value >= CompareValue;
                     case ECompare.LessEqu:
-                        return value <= CompareValue ? 0 : 1;
+                        return value <= CompareValue;
                     case ECompare.Equ:
-                        return value == CompareValue ? 0 : 1;
+                        return value == CompareValue;
                 }
             }
-            return -1;
+            return false;
         }
     }
 

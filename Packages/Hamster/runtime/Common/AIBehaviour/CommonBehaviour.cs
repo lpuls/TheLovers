@@ -18,15 +18,15 @@ namespace Hamster {
             WaitTime = waitTime;
         }
 
-        public override void Initialize(GameObject gameObject, IAIBehaviour behaviour, Blackboard blackboard) {
-            base.Initialize(gameObject, behaviour, blackboard);
-            blackboard.SetValue<float>(WAIT_TICK_TIME_ID, 0);
+        public override void Initialize(IAIBehaviour behaviour) {
+            base.Initialize(behaviour);
+            behaviour.GetBlackboard().SetValue<float>(WAIT_TICK_TIME_ID, 0);
         }
 
-        public override EBehavourExecuteResult Execute(float dt) {
-            if (Blackboard.TryGetValue<float>(WAIT_TICK_TIME_ID, out float value)) {
+        public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
+            if (behaviour.GetBlackboard().TryGetValue<float>(WAIT_TICK_TIME_ID, out float value)) {
                 value += dt;
-                Blackboard.SetValue<float>(WAIT_TICK_TIME_ID, value);
+                behaviour.GetBlackboard().SetValue<float>(WAIT_TICK_TIME_ID, value);
                 if (value >= WaitTime) {
                     return EBehavourExecuteResult.Done;
                 }
@@ -37,8 +37,8 @@ namespace Hamster {
             }
         }
 
-        public override void ResetBehaviour() {
-            Blackboard.SetValue<float>(WAIT_TICK_TIME_ID, 0);
+        public override void ResetBehaviour(IAIBehaviour behaviour) {
+            behaviour.GetBlackboard().SetValue<float>(WAIT_TICK_TIME_ID, 0);
         }
     }
 
@@ -56,15 +56,15 @@ namespace Hamster {
             DebugInfo = debugInfo;
         }
 
-        public override EBehavourExecuteResult Execute(float dt) {
-            Debug.Log(string.Format("{0}: {1}", Owner.name, DebugInfo));
+        public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
+            Debug.Log(string.Format("{0}: {1}", behaviour.GetOwner().name, DebugInfo));
             return EBehavourExecuteResult.Done;
         }
     }
 
     [SerializeField]
     public class StopAndResetBehaviour : BaseBehaviour {
-        public override EBehavourExecuteResult Execute(float dt) {
+        public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
             AIBehaviour.Stop();
             AIBehaviour.Reset();
             return EBehavourExecuteResult.Done;
@@ -72,7 +72,7 @@ namespace Hamster {
     }
 
     public class ResetBehaviour : BaseBehaviour {
-        public override EBehavourExecuteResult Execute(float dt) {
+        public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
             AIBehaviour.Reset();
             return EBehavourExecuteResult.Done;
         }

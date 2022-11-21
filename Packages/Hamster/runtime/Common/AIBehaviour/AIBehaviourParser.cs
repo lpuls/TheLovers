@@ -22,6 +22,7 @@ namespace Hamster {
             "FinishEnd\n" +
             "";
 
+        public static int NodeIndex = 0;
         public static Dictionary<string, CreateBehaviour> BehaviourDict = new();
         public static Dictionary<string, CreateSelectCondition> ConditionDict = new();
 
@@ -38,7 +39,6 @@ namespace Hamster {
             UnityEditor.AssetDatabase.SaveAssets();
 #endif
             int index = 0;
-
 
             script.Initialize = ScriptableObject.CreateInstance<SequenceBehaviour>();
             script.Executor = ScriptableObject.CreateInstance<SequenceBehaviour>();
@@ -82,9 +82,9 @@ namespace Hamster {
                 string funcName = commands[0];
                 switch (funcName) {
                     case "SequenceBehaviour": {
-                            BaseBehaviour newRoot = ScriptableObject.CreateInstance<SequenceBehaviour>();
-                            // BaseBehaviour newRoot = new SequenceBehaviour();
+                            SequenceBehaviour newRoot = ScriptableObject.CreateInstance<SequenceBehaviour>();
                             newRoot.name = command;
+                            newRoot.BBKey = string.Format("{0}_Execute_Index", newRoot.name);
                             AddToRoot(root, newRoot);
                             Parse(input, newRoot, ref index);
                         }
@@ -92,9 +92,6 @@ namespace Hamster {
                     case "SelectBehaviour": {
                             SelectBehaviour newRoot = ScriptableObject.CreateInstance<SelectBehaviour>();
                             newRoot.name = command;
-                            // SelectBehaviour newRoot = new SelectBehaviour();
-                            SelectBehaviour.ISelectCondition condition = CreateConditionByCommand(commands);
-                            newRoot.SetSelectCondition(condition);
                             AddToRoot(root, newRoot);
                             Parse(input, newRoot, ref index);
                         }
@@ -102,7 +99,6 @@ namespace Hamster {
                     case "ParallelBehaviour": {
                             BaseBehaviour newRoot = ScriptableObject.CreateInstance<ParallelBehaviour>();
                             newRoot.name = command;
-                            // BaseBehaviour newRoot = new ParallelBehaviour();
                             AddToRoot(root, newRoot);
                             Parse(input, newRoot, ref index);
                         }
@@ -118,16 +114,27 @@ namespace Hamster {
                         break;
                     default: {
                             BaseBehaviour baseBehaviour = CreateBehaviourByCommand(commands);
-                            if (null == baseBehaviour) {
-                                Debug.LogError("Create Behaviour Failed " + commands);
-                            }
-                            else {
+                            if (null != baseBehaviour) {
                                 baseBehaviour.name = command;
                                 AddToRoot(root, baseBehaviour);
+                            }
+                            else {
+                                ScriptableObject selectCondition = CreateConditionByCommand(commands);
+                                if (null != selectCondition) {
+                                    selectCondition.name = command;
+                                    AddConditionToSelect(root, selectCondition as SelectBehaviour.ISelectCondition);
+                                }
                             }
                         }
                         break;
                 }
+            }
+        }
+
+        public static void AddConditionToSelect(BaseBehaviour root, SelectBehaviour.ISelectCondition condition) {
+            SelectBehaviour selectBehaviour = root as SelectBehaviour;
+            if (null != selectBehaviour) {
+                (root as SelectBehaviour).AddSelectCondition(condition);
             }
         }
 
@@ -152,7 +159,7 @@ namespace Hamster {
 #endif
         }
 
-        public static SelectBehaviour.ISelectCondition CreateConditionByCommand(string[] commands) {
+        public static ScriptableObject CreateConditionByCommand(string[] commands) {
             switch (commands[1]) {
                 case "Int32CompareCondition": {
                         Int32CompareCondition int32CompareCondition = new Int32CompareCondition();

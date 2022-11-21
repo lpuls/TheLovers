@@ -6,31 +6,36 @@ namespace Hamster {
     public class SequenceBehaviour : BaseBehaviour {
         private int _executeIndex = 0;
         private List<BaseBehaviour> _behaviours = new();
+        public string BBKey = string.Empty;
 
-        public override void Initialize(GameObject gameObject, IAIBehaviour behaviour, Blackboard blackboard) {
-            base.Initialize(gameObject, behaviour, blackboard);
+        public override void Initialize(IAIBehaviour behaviour) {
+            base.Initialize(behaviour);
             for (int i = 0; i < _behaviours.Count; i++) {
-                _behaviours[i].Initialize(gameObject, behaviour, blackboard);
+                _behaviours[i].Initialize(behaviour);
             }
-            _executeIndex = 0;
+            behaviour.GetBlackboard().SetValue<int>(BBKey, 0);
         }
 
-        public override EBehavourExecuteResult Execute(float dt) {
-            for (int i = _executeIndex; i < _behaviours.Count; i++) {
-                EBehavourExecuteResult result = _behaviours[i].Execute(dt);
+        public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
+            if (!behaviour.GetBlackboard().TryGetValue<int>(BBKey, out int ExecuteIndex))
+                return EBehavourExecuteResult.Error;
+
+            for (int i = ExecuteIndex; i < _behaviours.Count; i++) {
+                EBehavourExecuteResult result = _behaviours[i].Execute(behaviour, dt);
                 if (EBehavourExecuteResult.Wait == result) {
+                    behaviour.GetBlackboard().SetValue<int>(BBKey, ExecuteIndex);
                     return result;
                 }
                 else if (EBehavourExecuteResult.Stop == result) {
-                    _executeIndex = 0;
+                    behaviour.GetBlackboard().SetValue<int>(BBKey, ExecuteIndex);
                     return result;
                 }
                 else if (EBehavourExecuteResult.Error == result) {
                     throw new System.Exception("AI Behaviour Execute Error");
                 }
-                _executeIndex = i;
+                ExecuteIndex = i;
             }
-            base.Execute(dt);
+            base.Execute(behaviour, dt);
             return EBehavourExecuteResult.Done;
         }
 
@@ -39,9 +44,9 @@ namespace Hamster {
             return this;
         }
 
-        public override void ResetBehaviour() {
-            for (int i = _executeIndex; i < _behaviours.Count; i++) {
-                _behaviours[i].ResetBehaviour();
+        public override void ResetBehaviour(IAIBehaviour behaviour) {
+            for (int i = 0; i < _behaviours.Count; i++) {
+                _behaviours[i].ResetBehaviour(behaviour);
             }
         }
     }
