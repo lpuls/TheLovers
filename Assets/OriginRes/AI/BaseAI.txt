@@ -1,5 +1,5 @@
 Executor
-    MoveToFixLocation;0
+    MoveIntoScreen
     ParallelBehaviour
         CastAbility;true;0;1.0
         RandomMove;true

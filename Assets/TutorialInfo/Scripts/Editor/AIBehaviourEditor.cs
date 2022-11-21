@@ -13,6 +13,7 @@ namespace Hamster.SpaceWar {
             AIBehaviourParser.BehaviourDict.Add("MoveToFixLocation", CreateMoveToFixLocation);
             AIBehaviourParser.BehaviourDict.Add("RandomMove", CreateRandomMove);
             AIBehaviourParser.BehaviourDict.Add("CastAbility", CreateCastAbility);
+            AIBehaviourParser.BehaviourDict.Add("MoveIntoScreen", CreateMoveIntoScreen);
 
             List<string> paths = new List<string>();
             GetDirs(Application.dataPath + "/OriginRes/AI", paths);
@@ -53,6 +54,11 @@ namespace Hamster.SpaceWar {
             RandomMove behaviour = ScriptableObject.CreateInstance<RandomMove>();
             behaviour.Loop = "true" == commands[1].ToLower();
             behaviour.BBKey = string.Format("{0}_Target", string.Join('_', commands));
+            return behaviour;
+        }
+
+        private static BaseBehaviour CreateMoveIntoScreen(string[] commands) {
+            MoveIntoScreen behaviour = ScriptableObject.CreateInstance<MoveIntoScreen>();
             return behaviour;
         }
 
