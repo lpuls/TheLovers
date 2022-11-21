@@ -96,7 +96,8 @@ namespace Hamster.SpaceWar {
             }
 
             // 播放出生动画
-            _animator.Play("Spawn", 0, 0.0f);
+            if (null != _animator)
+                _animator.Play("Spawn", 0, 0.0f);
 
         }
 
@@ -122,7 +123,8 @@ namespace Hamster.SpaceWar {
                             }
                             break;
                         case EPlayerState.Dead: {
-                                _animator.SetTrigger("Dead");
+                                if (null != _animator)
+                                    _animator.SetTrigger("Dead");
                                 GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
                                 deadEffect.transform.position = transform.position;
                             }
@@ -161,7 +163,8 @@ namespace Hamster.SpaceWar {
                 // 检查是否闪避
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.Dodge, out currentUpdateInfo)) {
                     if (currentUpdateInfo.Data1.Boolean && !IsDodging) {
-                        _animator.SetTrigger("Dodge");
+                        if (null != _animator)
+                            _animator.SetTrigger("Dodge");
                         IsDodging = true;
                     }
                     else if (!currentUpdateInfo.Data1.Boolean && IsDodging) {
@@ -196,7 +199,8 @@ namespace Hamster.SpaceWar {
                     _velocityX = Mathf.MoveTowards(_velocityX, _moverightVelocity, 0.1f);
                 else if (dotValue < 0)
                     _velocityX = Mathf.MoveTowards(_velocityX, _moveLeftVelocity, 0.1f);
-                _animator.SetFloat("VelocityX", _velocityX);
+                if (null != _animator)
+                    _animator.SetFloat("VelocityX", _velocityX);
             }
 
             // 闪白

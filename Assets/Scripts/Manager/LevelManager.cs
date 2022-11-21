@@ -44,13 +44,17 @@ namespace Hamster.SpaceWar {
                 nextWave = _levelConfig.LevelWaves[nextWaveIndex];
 
             Debug.Assert(null != nextWave, "Next wave is null");
+            if (null != nextWave) {
+                // 判断是否到达下一波的条件，如果是则生成下一波的敌人
+                SpawnUnits(nextWave);
 
-            // 判断是否到达下一波的条件，如果是则生成下一波的敌人
-            SpawnUnits(nextWave);
-
-            // 更新数据
-            _time = 0;
-            _waveIndex = nextWaveIndex;
+                // 更新数据
+                _time = 0;
+                _waveIndex = nextWaveIndex;
+            }
+            else if (nextWaveIndex >= _levelConfig.LevelWaves.Count) {
+                // TODO 通过关卡结束
+            }
         }
 
         private void SpawnUnits(LevelWaveScriptObject waveConfig) {
