@@ -11,7 +11,10 @@ namespace Hamster.SpaceWar {
     public class BaseEnemy : ServerBaseController {
 
         private BoxCollider2D _collider = null;
+        private AIBehaviourRunner AIBehaviour = new();
+        
         public EEnemyType EnemyType = EEnemyType.Normal;
+        public AIBehaviourScript AIBehaviourScript = null;
 
         public override void Awake() {
             base.Awake();
@@ -19,6 +22,12 @@ namespace Hamster.SpaceWar {
             _collider = GetComponent<BoxCollider2D>();
 
             OnDie += OnDieSpawnItem;
+
+            AIBehaviourScript = Asset.Load<AIBehaviourScript>("Res/AI/BaseAI");
+            if (null != AIBehaviourScript) {
+                AIBehaviour.Initialize(AIBehaviourScript, gameObject);
+                AIBehaviour.Run();
+            }
         }
 
         public override void OnDestroy() {
@@ -43,6 +52,10 @@ namespace Hamster.SpaceWar {
 
             // 更新武器
             _localAbilityComponent.Tick(dt);
+
+            // 更新AI行为树
+            if (AIBehaviour.IsRun)
+                AIBehaviour.Execute(dt);
         }
 
         public Vector3 GetRandomLocation() {

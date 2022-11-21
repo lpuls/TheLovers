@@ -87,10 +87,10 @@ namespace Hamster.SpaceWar {
                     if (Mover.OnHitSomething(raycastHit))
                         _moveSpeed = raycastHit.distance;
                 }
-                location += _moveSpeed * _moveDirection;
+                location += _moveSpeed * direction;
             }
             else {
-                location += _moveDirection * _moveSpeed;
+                location += direction * _moveSpeed;
             }
             if (checkBound)
                 location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size);

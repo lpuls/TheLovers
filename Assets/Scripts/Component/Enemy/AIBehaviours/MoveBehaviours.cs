@@ -22,9 +22,12 @@ namespace Hamster.SpaceWar {
             if (gameObject.TryGetComponent<MovementComponent>(out MovementComponent movementComponent)) {
                 if (Vector3.Distance(gameObject.transform.position, _fixLocation) <= movementComponent.Speed * dt) {
                     gameObject.transform.position = _fixLocation;
+                    GameLogicUtility.SetPositionDirty(gameObject);
                     return EBehavourExecuteResult.Done;
                 }
-                gameObject.transform.position = movementComponent.MoveTick(gameObject.transform.position, dt, (gameObject.transform.position - _fixLocation).normalized, true);
+                gameObject.transform.position = movementComponent.MoveTick(gameObject.transform.position, dt, 
+                    (_fixLocation - gameObject.transform.position).normalized, false);
+                GameLogicUtility.SetPositionDirty(gameObject);
                 return EBehavourExecuteResult.Wait;
             }
             return EBehavourExecuteResult.Error;
@@ -51,8 +54,10 @@ namespace Hamster.SpaceWar {
 
             GameObject gameObject = behaviour.GetOwner();
             if (gameObject.TryGetComponent<MovementComponent>(out MovementComponent movementComponent)) {
+                Debug.DrawLine(gameObject.transform.position, target);
                 if (Vector3.Distance(gameObject.transform.position, target) <= movementComponent.Speed * dt) {
                     gameObject.transform.position = target;
+                    GameLogicUtility.SetPositionDirty(gameObject);
                     if (Loop) {
                         if (gameObject.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                             target = baseEnemy.GetRandomLocation();
@@ -63,7 +68,9 @@ namespace Hamster.SpaceWar {
                         return EBehavourExecuteResult.Done;
                     }
                 }
-                gameObject.transform.position = movementComponent.MoveTick(gameObject.transform.position, dt, (gameObject.transform.position - target).normalized, true);
+                gameObject.transform.position = movementComponent.MoveTick(gameObject.transform.position, dt, 
+                    (target - gameObject.transform.position).normalized, true);
+                GameLogicUtility.SetPositionDirty(gameObject);
                 return EBehavourExecuteResult.Wait;
             }
             return EBehavourExecuteResult.Error;

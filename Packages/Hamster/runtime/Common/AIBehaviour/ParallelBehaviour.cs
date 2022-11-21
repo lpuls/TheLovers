@@ -4,23 +4,30 @@ using UnityEngine;
 namespace Hamster {
     [SerializeField]
     public class ParallelBehaviour : BaseBehaviour {
-        private List<BaseBehaviour> _behaviours = new();
-        private List<EBehavourExecuteResult> _behaviourState = new();
+        public List<BaseBehaviour> Behaviours = new();
+        public string BBKey = string.Empty;
 
         public override void Initialize(IAIBehaviour behaviour) {
             base.Initialize(behaviour);
-            for (int i = 0; i < _behaviours.Count; i++) {
-                _behaviourState.Add(EBehavourExecuteResult.Wait);
-                _behaviours[i].Initialize(behaviour);
+
+            List<EBehavourExecuteResult> results = new();
+            behaviour.GetBlackboard().SetValue<List<EBehavourExecuteResult>>(BBKey, results);
+
+            for (int i = 0; i < Behaviours.Count; i++) {
+                results.Add(EBehavourExecuteResult.Wait);
+                Behaviours[i].Initialize(behaviour);
             }
         }
 
         public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
+            if (!behaviour.GetBlackboard().TryGetValue<List<EBehavourExecuteResult>>(BBKey, out List<EBehavourExecuteResult> array))
+                Debug.LogError("Can't Find Execute Result " + BBKey);
+
             bool isDone = false;
-            for (int i = 0; i < _behaviours.Count; i++) {
-                if (EBehavourExecuteResult.Done != _behaviourState[i]) {
-                    EBehavourExecuteResult result = _behaviours[i].Execute(behaviour, dt);
-                    _behaviourState[i] = result;
+            for (int i = 0; i < Behaviours.Count; i++) {
+                if (EBehavourExecuteResult.Done != array[i]) {
+                    EBehavourExecuteResult result = Behaviours[i].Execute(behaviour, dt);
+                    array[i] = result;
                     isDone = isDone && EBehavourExecuteResult.Done == result;
                 }
             }
@@ -28,14 +35,16 @@ namespace Hamster {
         }
 
         public override void ResetBehaviour(IAIBehaviour behaviour) {
-            for (int i = 0; i < _behaviours.Count; i++) {
-                _behaviourState[i] = EBehavourExecuteResult.Wait;
-                _behaviours[i].ResetBehaviour(behaviour);
+            if (!behaviour.GetBlackboard().TryGetValue<List<EBehavourExecuteResult>>(BBKey, out List<EBehavourExecuteResult> array))
+                Debug.LogError("Can't Find Execute Result " + BBKey);
+            for (int i = 0; i < Behaviours.Count; i++) {
+                array[i] = EBehavourExecuteResult.Wait;
+                Behaviours[i].ResetBehaviour(behaviour);
             }
         }
 
         public ParallelBehaviour AddBehaviour(BaseBehaviour baseBehaviour) {
-            _behaviours.Add(baseBehaviour);
+            Behaviours.Add(baseBehaviour);
             return this;
         }
     }

@@ -58,9 +58,14 @@ namespace Hamster.SpaceWar {
 
         private static BaseBehaviour CreateCastAbility(string[] commands) {
             CastAbility behaviour = ScriptableObject.CreateInstance<CastAbility>();
+            behaviour.BBKey = string.Join("_", commands) + "Interval";
             behaviour.Loop = "true" == commands[1].ToLower();
             if (int.TryParse(commands[2], out int index))
                 behaviour.AbilityIndex = (EAbilityIndex)index;
+            else
+                Debug.LogError("Error CastAbility Behaviour Arg " + commands[2]);
+            if (float.TryParse(commands[3], out float interval))
+                behaviour.Interval = interval;
             else
                 Debug.LogError("Error CastAbility Behaviour Arg " + commands[2]);
             return behaviour;

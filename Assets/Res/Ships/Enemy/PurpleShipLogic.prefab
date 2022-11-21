@@ -109,6 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputKeyToValue: {fileID: 0}
   EnableDebugDraw: 1
+  EnemyType: 0
+  AIBehaviourScript: {fileID: 0}
   _fireInterval: 0.5
   _closeDistance: 0.5
 --- !u!61 &8899322176739395468

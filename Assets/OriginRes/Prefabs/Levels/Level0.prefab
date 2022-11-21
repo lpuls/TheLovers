@@ -47,7 +47,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
@@ -99,7 +99,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
@@ -293,7 +293,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
@@ -402,7 +402,7 @@ MonoBehaviour:
   LevelProperty: 2
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0.25
+  Time: 0
   CompleteType: 1
   UnitSpawns:
   - {fileID: 1851628054956515328}
@@ -459,7 +459,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
@@ -577,7 +577,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   LevelProperty: 2
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 1
   UnitSpawns:
   - {fileID: 7219263726036079211}
@@ -753,7 +753,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -806,7 +806,7 @@ MonoBehaviour:
   LevelProperty: 2
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0.25
+  Time: 0
   CompleteType: 1
   UnitSpawns:
   - {fileID: 1563014680382382438}
@@ -861,7 +861,7 @@ MonoBehaviour:
   LevelProperty: 2
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0.5
+  Time: 0
   CompleteType: 1
   UnitSpawns:
   - {fileID: 8074620875575778610}
@@ -981,7 +981,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   - {fileID: 615061868455756711}
   - {fileID: 5372964936572716562}
   - {fileID: 3640939028943504194}
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -1785,7 +1785,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
@@ -1889,7 +1889,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 101
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   LevelProperty: 3
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
@@ -2059,7 +2059,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 11
@@ -2111,7 +2111,7 @@ MonoBehaviour:
   LevelProperty: 4
   ClientAsset: 
   LevelWaves: []
-  TriggerTime: 0
+  Time: 0
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 10

@@ -22,6 +22,8 @@ namespace Hamster.SpaceWar {
         public override void OnAlive(float dt) {
             base.OnAlive(dt);
 
+            return;
+
             // 检查是否到达指定位置
             if (Vector3.Distance(transform.position, _moveTarget) < _closeDistance) {
                 RandomMoveTarget();

@@ -1,7 +1,7 @@
 Executor
-    MoveToFixLocation;1
+    MoveToFixLocation;0
     ParallelBehaviour
-        CastAbility;true;0
+        CastAbility;true;0;1.0
         RandomMove;true
     End
 ExecutorEnd

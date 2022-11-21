@@ -46,6 +46,7 @@ namespace Hamster {
 #if UNITY_EDITOR
             script.Initialize.name = "Initialize";
             script.Executor.name = "Executor";
+            (script.Executor as SequenceBehaviour).BBKey = "Base_Execute_Index";
             script.Finish.name = "Finish";
             UnityEditor.AssetDatabase.AddObjectToAsset(script.Initialize, script);
             UnityEditor.AssetDatabase.AddObjectToAsset(script.Executor, script);
@@ -97,7 +98,8 @@ namespace Hamster {
                         }
                         break;
                     case "ParallelBehaviour": {
-                            BaseBehaviour newRoot = ScriptableObject.CreateInstance<ParallelBehaviour>();
+                            ParallelBehaviour newRoot = ScriptableObject.CreateInstance<ParallelBehaviour>();
+                            newRoot.BBKey = string.Format("{0}_Execute_List", newRoot.name);
                             newRoot.name = command;
                             AddToRoot(root, newRoot);
                             Parse(input, newRoot, ref index);
