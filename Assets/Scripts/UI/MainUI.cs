@@ -29,7 +29,6 @@ namespace Hamster.SpaceWar {
     public class MainUIModule : UIModule {
         public int MaxHealth = 1;
         public ModityValue<int> Health = new ModityValue<int>();
-
     }
 
     [UIInfo("Res/UI/MainUI", typeof(MainUIView), typeof(MainUIModule))]
