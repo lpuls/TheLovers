@@ -78,5 +78,24 @@ namespace Hamster.SpaceWar {
             return location;
         }
 
+        public Vector3 MoveTick(Vector3 location, float dt, Vector3 direction, bool checkBound = true) {
+            _moveSpeed = Speed * dt;
+
+            if (null != Mover) {
+                RaycastHit2D raycastHit = Mover.MoveRayCast(_moveSpeed, direction);
+                if (null != raycastHit.collider) {
+                    if (Mover.OnHitSomething(raycastHit))
+                        _moveSpeed = raycastHit.distance;
+                }
+                location += _moveSpeed * _moveDirection;
+            }
+            else {
+                location += _moveDirection * _moveSpeed;
+            }
+            if (checkBound)
+                location = World.GetWorld<BaseSpaceWarWorld>().ClampInWorld(location, _collider.size);
+            return location;
+        }
+
     }
 }

@@ -96,6 +96,15 @@ namespace Hamster.SpaceWar {
             ObjectPool<DamageInfo>.Free(damageInfo);
         }
 
+        public bool TryGetFixLocation(int index, out Vector3 location) {
+            location = Vector3.zero;
+            if (null == _levelConfig)
+                return false;
+            Debug.Assert(index >= 0 && index < _levelConfig.FixLocations.Count, "Get Fix Location Index out of range");
+            location = _levelConfig.FixLocations[index];
+            return true;
+        }
+
         public int GetPriority() {
             return (int)EServerTickLayers.PreTick;
         }

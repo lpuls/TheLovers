@@ -22,7 +22,6 @@ namespace Hamster {
             "FinishEnd\n" +
             "";
 
-        public static int NodeIndex = 0;
         public static Dictionary<string, CreateBehaviour> BehaviourDict = new();
         public static Dictionary<string, CreateSelectCondition> ConditionDict = new();
 
@@ -55,19 +54,20 @@ namespace Hamster {
             UnityEditor.AssetDatabase.SaveAssets();
 #endif
 
-            int initBegin = input.IndexOf("Initialize");
-            int initEnd = input.IndexOf("InitEnd\n") + "InitEnd\n".Length;
-            Parse(input.Substring(initBegin, initEnd - initBegin), script.Initialize, ref index);
+            input = input.Replace("\r\n", "\n");
+            //int initBegin = input.IndexOf("Initialize");
+            //int initEnd = input.IndexOf("InitEnd\n") + "InitEnd\n".Length;
+            //Parse(input.Substring(initBegin, initEnd - initBegin), script.Initialize, ref index);
 
             int executorBegin = input.IndexOf("Executor");
             int executorEnd = input.IndexOf("ExecutorEnd") + "ExecutorEnd".Length;
             index = 0;
             Parse(input.Substring(executorBegin, executorEnd - executorBegin), script.Executor, ref index);
 
-            int finishBegin = input.IndexOf("Finish");
-            int finishEnd = input.IndexOf("FinishEnd") + "FinishEnd".Length;
-            index = 0;
-            Parse(input.Substring(finishBegin, finishEnd - finishBegin), script.Finish, ref index);
+            //int finishBegin = input.IndexOf("Finish");
+            //int finishEnd = input.IndexOf("FinishEnd") + "FinishEnd".Length;
+            //index = 0;
+            //Parse(input.Substring(finishBegin, finishEnd - finishBegin), script.Finish, ref index);
 
 
         }
@@ -171,6 +171,8 @@ namespace Hamster {
                         return int32CompareCondition;
                     }
                 default:
+                    if (ConditionDict.TryGetValue(commands[0], out CreateSelectCondition value))
+                        return value.Invoke(commands) as ScriptableObject;
                     return null;
             }
         }
@@ -203,6 +205,8 @@ namespace Hamster {
                         return behaviour;
                     }
                 default:
+                    if (BehaviourDict.TryGetValue(command[0], out CreateBehaviour value))
+                        return value.Invoke(command);
                     return null;
             }
         }

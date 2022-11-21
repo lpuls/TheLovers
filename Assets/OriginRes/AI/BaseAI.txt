@@ -1,0 +1,7 @@
+Executor
+    MoveToFixLocation;1
+    ParallelBehaviour
+        CastAbility;true;0
+        RandomMove;true
+    End
+ExecutorEnd
