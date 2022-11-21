@@ -20,13 +20,12 @@ namespace Hamster.SpaceWar {
     [SerializeField]
     public class LevelWaveScriptObject : ScriptableObject {
         public enum ELevelWaveCompleteType {
-            Continue,
+            WaitTime,
             WaitAllDie,
-            WaitBossDie
         }
 
-        public float TriggerTime = 0;
-        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.Continue;
+        public float Time = 0;
+        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
         public List<UnitSpawnScriptObject> UnitSpawns = new();  // 敌人生成数据
 
 #if UNITY_EDITOR
@@ -45,7 +44,6 @@ namespace Hamster.SpaceWar {
 
     [SerializeField]
     public class LevelConfigScriptObject : ScriptableObject {
-        public float LevelTime = 10.0f;                     // 关卡时长
         public string ClientAsset = string.Empty;           // 客户端表现资源
         public List<string> LocationNames = new();          // 特殊点的名称
         public List<Vector3> FixLocations = new();          // 卡关中的特殊点 

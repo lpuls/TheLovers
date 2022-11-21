@@ -27,8 +27,8 @@ namespace Hamster.SpaceWar {
         public List<LevelEditorProperty> LevelWaves = new();  // 敌人波数生成数据
 
         // 关卡波数
-        public float TriggerTime = 0;
-        public LevelWaveScriptObject.ELevelWaveCompleteType CompleteType = LevelWaveScriptObject.ELevelWaveCompleteType.Continue;
+        public float Time = 0;
+        public LevelWaveScriptObject.ELevelWaveCompleteType CompleteType = LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime;
         public List<LevelEditorProperty> UnitSpawns = new();  // 敌人生成数据
 
         // 类型为对象生成
@@ -129,7 +129,7 @@ namespace Hamster.SpaceWar {
                 case ELevelProperty.Wave: {
                         LevelWaveScriptObject levelWaveScriptObject = ScriptableObject.CreateInstance<LevelWaveScriptObject>();
                         levelWaveScriptObject.name = transform.parent.name + "_" + gameObject.name;
-                        levelWaveScriptObject.TriggerTime = TriggerTime;
+                        levelWaveScriptObject.Time = Time;
                         levelWaveScriptObject.CompleteType = CompleteType;
                         foreach (var item in UnitSpawns) {
                             levelWaveScriptObject.UnitSpawns.Add(item.CreateScriptableObject() as UnitSpawnScriptObject);
@@ -191,7 +191,8 @@ namespace Hamster.SpaceWar {
                         levelEditorProperty.CompleteType = (LevelWaveScriptObject.ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
 
                         // 触发时间
-                        levelEditorProperty.TriggerTime = EditorGUILayout.Slider("触发时间", levelEditorProperty.TriggerTime, 0, 1);
+                        if (LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                            levelEditorProperty.Time = EditorGUILayout.Slider("持续时长", levelEditorProperty.Time, 0, 1);
 
                         // 敌人生成数据
                         EditorGUILayout.Space();

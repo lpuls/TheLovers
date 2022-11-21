@@ -8,45 +8,49 @@ namespace Hamster.SpaceWar {
         public bool EnableSpawn = true;
         private List<BaseEnemy> _aliveEnemys = new List<BaseEnemy>();
 
-        private float _progress = 0.0f;
+        private float _time = 0.0f;
         private int _waveIndex = 0;
         private LevelConfigScriptObject _levelConfig = null;
 
         public void Initilze(string configPath) {
             _levelConfig = Asset.Load<LevelConfigScriptObject>(configPath);
-            _progress = 0;
+            _time = 0;
             _waveIndex = -1;
-            CheckNextWave();
+            EnterNextWave();
         }
 
         private void CheckNextWave() {
             LevelWaveScriptObject currentWave = null;
-            LevelWaveScriptObject nextWave = null;
             if (_waveIndex >= 0 && _waveIndex < _levelConfig.LevelWaves.Count)
                 currentWave = _levelConfig.LevelWaves[_waveIndex];
 
+            // 检查是否有进入下一波的条件
+            bool enterNext = false;
+            if ((LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime == currentWave.CompleteType && _time >= currentWave.Time)
+                || (LevelWaveScriptObject.ELevelWaveCompleteType.WaitAllDie == currentWave.CompleteType && _aliveEnemys.Count <= 0)) {
+                enterNext = true;
+            }
+
+            // 进入下一波敌人
+            if (enterNext) {
+                EnterNextWave();
+            }
+        }
+
+        private void EnterNextWave() {
             int nextWaveIndex = _waveIndex + 1;
+            LevelWaveScriptObject nextWave = null;
             if (nextWaveIndex >= 0 && nextWaveIndex < _levelConfig.LevelWaves.Count)
                 nextWave = _levelConfig.LevelWaves[nextWaveIndex];
 
-            // 到达触发条件了，判断是否
-            if (null != currentWave) {
-                if (LevelWaveScriptObject.ELevelWaveCompleteType.WaitAllDie == currentWave.CompleteType && _aliveEnemys.Count > 0) {
-                    if (null != nextWave) {
-                        _progress = nextWave.TriggerTime;
-                    }
-                    return;
-                }
-            }
+            Debug.Assert(null != nextWave, "Next wave is null");
 
             // 判断是否到达下一波的条件，如果是则生成下一波的敌人
-            float t = _progress / _levelConfig.LevelTime;
-            if (null != nextWave) {
-                if (t >= nextWave.TriggerTime) {
-                    SpawnUnits(nextWave);
-                    _waveIndex = nextWaveIndex;
-                }
-            }
+            SpawnUnits(nextWave);
+
+            // 更新数据
+            _time = 0;
+            _waveIndex = nextWaveIndex;
         }
 
         private void SpawnUnits(LevelWaveScriptObject waveConfig) {
@@ -69,6 +73,9 @@ namespace Hamster.SpaceWar {
             if (deceased.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                 baseEnemy.OnDie -= OnEnemyDie;
                 _aliveEnemys.Remove(baseEnemy);
+                if (_aliveEnemys.Count <= 0) {
+                    CheckNextWave();
+                }
             }
         }
 
@@ -97,7 +104,7 @@ namespace Hamster.SpaceWar {
             if (!EnableSpawn)
                 return;
 
-            _progress += dt;
+            _time += dt;
             CheckNextWave();
         }
 
