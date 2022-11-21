@@ -5,13 +5,16 @@ namespace Hamster {
     [SerializeField]
     public class ParallelBehaviour : BaseBehaviour {
         public List<BaseBehaviour> Behaviours = new();
+        private Dictionary<GameObject, List<EBehavourExecuteResult>> _resuls = new();
         public string BBKey = string.Empty;
 
         public override void Initialize(IAIBehaviour behaviour) {
             base.Initialize(behaviour);
 
-            List<EBehavourExecuteResult> results = new();
-            behaviour.GetBlackboard().SetValue<List<EBehavourExecuteResult>>(BBKey, results);
+            if (!_resuls.TryGetValue(behaviour.GetOwner(), out List<EBehavourExecuteResult> results)) {
+                results = new List<EBehavourExecuteResult>();
+                _resuls[behaviour.GetOwner()] = results;
+            }
 
             for (int i = 0; i < Behaviours.Count; i++) {
                 results.Add(EBehavourExecuteResult.Wait);
@@ -20,14 +23,15 @@ namespace Hamster {
         }
 
         public override EBehavourExecuteResult Execute(IAIBehaviour behaviour, float dt) {
-            if (!behaviour.GetBlackboard().TryGetValue<List<EBehavourExecuteResult>>(BBKey, out List<EBehavourExecuteResult> array))
-                Debug.LogError("Can't Find Execute Result " + BBKey);
+            if (!_resuls.TryGetValue(behaviour.GetOwner(), out List<EBehavourExecuteResult> results)) {
+                return EBehavourExecuteResult.Error;
+            }
 
             bool isDone = false;
             for (int i = 0; i < Behaviours.Count; i++) {
-                if (EBehavourExecuteResult.Done != array[i]) {
+                if (EBehavourExecuteResult.Done != results[i]) {
                     EBehavourExecuteResult result = Behaviours[i].Execute(behaviour, dt);
-                    array[i] = result;
+                    results[i] = result;
                     isDone = isDone && EBehavourExecuteResult.Done == result;
                 }
             }
@@ -35,10 +39,11 @@ namespace Hamster {
         }
 
         public override void ResetBehaviour(IAIBehaviour behaviour) {
-            if (!behaviour.GetBlackboard().TryGetValue<List<EBehavourExecuteResult>>(BBKey, out List<EBehavourExecuteResult> array))
-                Debug.LogError("Can't Find Execute Result " + BBKey);
+            if (!_resuls.TryGetValue(behaviour.GetOwner(), out List<EBehavourExecuteResult> results)) {
+                return;
+            }
             for (int i = 0; i < Behaviours.Count; i++) {
-                array[i] = EBehavourExecuteResult.Wait;
+                results[i] = EBehavourExecuteResult.Wait;
                 Behaviours[i].ResetBehaviour(behaviour);
             }
         }
