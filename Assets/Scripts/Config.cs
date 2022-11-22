@@ -26,28 +26,31 @@ namespace Config {
           string.Concat(
             "ChFUZW1wL0NvbmZpZy5wcm90byJkCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
             "CgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJ",
-            "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJHCgpQY2tlckl0ZW1z",
-            "EgoKAklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIRCglM",
-            "b2dpY1BhdGgYBCABKAkilgEKClNoaXBDb25maWcSCgoCSUQYASABKAUSDAoE",
-            "UGF0aBgCIAEoCRIRCglMb2dpY1BhdGgYAyABKAkSDgoGSGVhbHRoGAQgASgF",
-            "Eg0KBVNwZWVkGAUgASgCEhcKD0Ryb3BQcm9iYWJpbGl0eRgGIAMoBRINCgVE",
-            "cm9wcxgHIAMoBRIUCgxJbXBhY3REYW1hZ2UYCCABKAUiXgoGV2VhcG9uEgoK",
-            "AklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0",
-            "THYYBCABKAUSDgoGVHlwZUlEGAUgASgFEgwKBEljb24YBiABKAkiKwoIVmVj",
-            "dG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIiKwoGRGVw",
-            "ZW5kEhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAkikgEKC0dh",
-            "bWVTZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEoBRIQCghT",
-            "ZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENsaWVudElQ",
-            "GAUgASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgHIAEoCzIH",
-            "LkRlcGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0KCUdhbWVN",
-            "b2RlbBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9TSU5HTEUQ",
-            "ARIWChJHYW1lTW9kZWxfTVVMVElQTEUQAipRCgpXZWFwb25UeXBlEhMKD1dl",
-            "YXBvblR5cGVfTk9ORRAAEhYKEldlYXBvblR5cGVfR0FMVElORxABEhYKEldl",
-            "YXBvblR5cGVfU0hPVEdVThACQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJDCgdNaXNzaW9uEgoK",
+            "AklEGAEgASgFEg0KBVRpdGxlGAIgASgJEg8KB0NvbnRleHQYAyABKAkSDAoE",
+            "UGF0aBgEIAEoCSJHCgpQY2tlckl0ZW1zEgoKAklEGAEgASgFEgwKBE5vdGUY",
+            "AiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCABKAkilgEKClNo",
+            "aXBDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglMb2dpY1Bh",
+            "dGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUgASgCEhcKD0Ry",
+            "b3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIUCgxJbXBhY3RE",
+            "YW1hZ2UYCCABKAUiXgoGV2VhcG9uEgoKAklEGAEgASgFEgwKBE5vdGUYAiAB",
+            "KAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0THYYBCABKAUSDgoGVHlwZUlEGAUg",
+            "ASgFEgwKBEljb24YBiABKAkiKwoIVmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZ",
+            "GAIgASgCEgkKAVoYAyABKAIiKwoGRGVwZW5kEhMKC1JlbG9hZENvdW50GAEg",
+            "ASgFEgwKBFBhdGgYAiABKAkikgEKC0dhbWVTZXR0aW5nEgoKAklEGAEgASgF",
+            "EhEKCU1heFBsYXllchgCIAEoBRIQCghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2",
+            "ZXJQb3J0GAQgASgFEhAKCENsaWVudElQGAUgASgJEhIKCkNsaWVudFBvcnQY",
+            "BiABKAUSGAoHRGVwZW5kcxgHIAEoCzIHLkRlcGVuZCobCgdFeGFtcGxlEhAK",
+            "DEV4YW1wbGVfTk9ORRAAKk0KCUdhbWVNb2RlbBISCg5HYW1lTW9kZWxfTk9O",
+            "RRAAEhQKEEdhbWVNb2RlbF9TSU5HTEUQARIWChJHYW1lTW9kZWxfTVVMVElQ",
+            "TEUQAipRCgpXZWFwb25UeXBlEhMKD1dlYXBvblR5cGVfTk9ORRAAEhYKEldl",
+            "YXBvblR5cGVfR0FMVElORxABEhYKEldlYXBvblR5cGVfU0hPVEdVThACQgmq",
+            "AgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path", "NextLv", "TypeID", "Icon" }, null, null, null),
@@ -348,6 +351,219 @@ namespace Config {
 
   }
 
+  public sealed partial class Mission : pb::IMessage<Mission> {
+    private static readonly pb::MessageParser<Mission> _parser = new pb::MessageParser<Mission>(() => new Mission());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Mission> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Mission() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Mission(Mission other) : this() {
+      iD_ = other.iD_;
+      title_ = other.title_;
+      context_ = other.context_;
+      path_ = other.path_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Mission Clone() {
+      return new Mission(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private int iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Title" field.</summary>
+    public const int TitleFieldNumber = 2;
+    private string title_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Title {
+      get { return title_; }
+      set {
+        title_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Context" field.</summary>
+    public const int ContextFieldNumber = 3;
+    private string context_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Context {
+      get { return context_; }
+      set {
+        context_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 4;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Mission);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Mission other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (Title != other.Title) return false;
+      if (Context != other.Context) return false;
+      if (Path != other.Path) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0) hash ^= ID.GetHashCode();
+      if (Title.Length != 0) hash ^= Title.GetHashCode();
+      if (Context.Length != 0) hash ^= Context.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ID);
+      }
+      if (Title.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Title);
+      }
+      if (Context.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Context);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Path);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ID);
+      }
+      if (Title.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Title);
+      }
+      if (Context.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Context);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Mission other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0) {
+        ID = other.ID;
+      }
+      if (other.Title.Length != 0) {
+        Title = other.Title;
+      }
+      if (other.Context.Length != 0) {
+        Context = other.Context;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Title = input.ReadString();
+            break;
+          }
+          case 26: {
+            Context = input.ReadString();
+            break;
+          }
+          case 34: {
+            Path = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class PckerItems : pb::IMessage<PckerItems> {
     private static readonly pb::MessageParser<PckerItems> _parser = new pb::MessageParser<PckerItems>(() => new PckerItems());
     private pb::UnknownFieldSet _unknownFields;
@@ -356,7 +572,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -569,7 +785,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -880,7 +1096,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1149,7 +1365,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1334,7 +1550,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1491,7 +1707,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
