@@ -60,7 +60,10 @@ namespace Hamster.SpaceWar {
             SetProgress(50);
             yield return _waiForEendOfFrame;
 
+            // 加载图集
             Single<AtlasManager>.GetInstance().LoadAtlas("Res/SpriteAtlas/MainUI");
+            SetProgress(55);
+            yield return _waiForEendOfFrame;
 
             Asset.Cache("Res/VFX/DeadBoom", 4);
             SetProgress(60);

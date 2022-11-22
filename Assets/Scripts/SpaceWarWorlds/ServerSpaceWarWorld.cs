@@ -80,6 +80,11 @@ namespace Hamster.SpaceWar {
             SetProgress(50);
             yield return _waiForEendOfFrame;
 
+            // º”‘ÿÕººØ
+            Single<AtlasManager>.GetInstance().LoadAtlas("Res/SpriteAtlas/MainUI");
+            SetProgress(55);
+            yield return _waiForEendOfFrame;
+
             Asset.Cache("Res/Unit/Enemy/RedShip", 2);
             SetProgress(60);
             yield return _waiForEendOfFrame;
