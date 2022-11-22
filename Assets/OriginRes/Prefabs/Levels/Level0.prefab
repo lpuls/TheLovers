@@ -52,6 +52,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 8
+  MissionID: 0
 --- !u!1 &122430346323519991
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +105,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 9
+  MissionID: 0
 --- !u!1 &129663116165685966
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +300,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &2084119341803885583
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +353,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 7
+  MissionID: 0
 --- !u!1 &2197298144121737485
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +416,7 @@ MonoBehaviour:
   - {fileID: 5301602677412179243}
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &2520217740547107190
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +469,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 6
+  MissionID: 0
 --- !u!1 &2527663785443278357
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +588,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &2593457591192275878
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +647,7 @@ MonoBehaviour:
   - {fileID: 469492414881286574}
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &2995174904255656164
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +766,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &3289025875055121216
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +821,7 @@ MonoBehaviour:
   - {fileID: 1563014680382382438}
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &4878076751124698722
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +878,7 @@ MonoBehaviour:
   - {fileID: 5767132702851279748}
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &5274209324324071309
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +997,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &5339302373802545961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1050,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 5
+  MissionID: 0
 --- !u!1 &5758557435707277415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1109,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &5820438417878024675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1228,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &5900294548450078994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1347,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &6962832382557003633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1466,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &7605039730083942436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1519,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 8
+  MissionID: 0
 --- !u!1 &7623936653766182530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1638,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &7688592774467344114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1757,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &7772297412938971970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1810,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 7
+  MissionID: 0
 --- !u!1 &8336970104425737735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,6 +1863,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 5
+  MissionID: 0
 --- !u!1 &8397782320269786190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,6 +1916,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 101
   LocationIndex: 6
+  MissionID: 0
 --- !u!1 &8420206997434658239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,6 +2035,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  MissionID: 0
 --- !u!1 &8775774323750886337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,6 +2088,7 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 9
+  MissionID: 0
 --- !u!1 &9024874823948188470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,3 +2141,4 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 6
+  MissionID: 0

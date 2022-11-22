@@ -133,5 +133,5 @@ ModelImporter:
   remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
-  assetBundleName: res/ships/enemy/whaleship
+  assetBundleName: res/unit/enemy/whaleship
   assetBundleVariant: 

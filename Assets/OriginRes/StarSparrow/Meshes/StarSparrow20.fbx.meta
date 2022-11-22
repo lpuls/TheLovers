@@ -102,5 +102,5 @@ ModelImporter:
   remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
-  assetBundleName: res/ships/enemy/purpleship
+  assetBundleName: res/unit/enemy/purpleship
   assetBundleVariant: 
