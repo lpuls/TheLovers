@@ -8,11 +8,11 @@ namespace Hamster.SpaceWar {
     }
 
     public interface ILevelManager {
-        bool IsServer();
         float GetTime();
         int GetEnemeyCount();
         void SpawnUnit(int id, int locationIndex);
         void DestroyAllUnit();
+        bool IsClient();
 
     }
 
@@ -60,8 +60,9 @@ namespace Hamster.SpaceWar {
         }
 
         public override void OnEnter(ILevelManager levelManager) {
-            if (!levelManager.IsServer())
+            if (levelManager.IsClient())
                 return;
+
             foreach (var item in UnitSpawns) {
                 levelManager.SpawnUnit(item.ID, item.LocationIndex);
             }
@@ -84,16 +85,18 @@ namespace Hamster.SpaceWar {
         public int MissionID = 0;
 
         public override void OnEnter(ILevelManager levelManager) {
-            if (levelManager.IsServer())
+            if (!levelManager.IsClient())
                 return;
+
             Single<UIManager>.GetInstance().Open<MissonUIController>();
             MissionUIModule missionUIModule = Single<UIManager>.GetInstance().GetModule<MissonUIController>() as MissionUIModule;
             missionUIModule.MissionID.SetValue(MissionID);
         }
 
         public override void OnLevel(ILevelManager levelManager) {
-            if (levelManager.IsServer())
+            if (!levelManager.IsClient())
                 return;
+
             Single<UIManager>.GetInstance().Close<MissonUIController>();
         }
     }

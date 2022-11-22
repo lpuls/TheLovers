@@ -9,15 +9,14 @@ namespace Hamster.SpaceWar {
 
         private ClientNetDevice _netDevice = new ClientNetDevice();
         private ClientFrameDataManager _frameDataManager = new ClientFrameDataManager();
-        private LevelManager _levelManager = null;
+        private ClientLevelManager _levelManager = null;
 
         private GameLogicSyncModule _logicSyncModule = null;
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
 
-            _levelManager = gameObject.TryGetOrAdd<LevelManager>();
-            _levelManager.IsServerManager = false;
+            _levelManager = gameObject.TryGetOrAdd<ClientLevelManager>();
 
             _netDevice = new ClientNetDevice();
 
@@ -30,12 +29,12 @@ namespace Hamster.SpaceWar {
             _netDevice.Connect("127.0.0.1", 8888);
             RegisterManager<ClientNetDevice>(_netDevice);
             RegisterManager<ClientFrameDataManager>(_frameDataManager);
-            RegisterManager<LevelManager>(_levelManager);
+            RegisterManager<ClientLevelManager>(_levelManager);
 
             _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
 
             _frameDataManager.OnBeginSimulate += OnBeginSimulate;
-            _frameDataManager.OnFrameUpdate += OnFrameUpdate;
+            _frameDataManager.OnFrameUpdate += _levelManager.OnFrameDataUpdate;
 
         }
 
@@ -60,6 +59,8 @@ namespace Hamster.SpaceWar {
             Asset.Cache("Res/Bullet/OriginBullet", 100);
             SetProgress(50);
             yield return _waiForEendOfFrame;
+
+            Single<AtlasManager>.GetInstance().LoadAtlas("Res/SpriteAtlas/MainUI");
 
             Asset.Cache("Res/VFX/DeadBoom", 4);
             SetProgress(60);

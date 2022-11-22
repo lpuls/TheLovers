@@ -5,7 +5,6 @@ namespace Hamster.SpaceWar {
     public class LevelManager : MonoBehaviour, IServerTicker, ILevelManager {
 
         public bool EnableSpawn = true;
-        public bool IsServerManager = true;
         private List<BaseEnemy> _aliveEnemys = new();
 
         private float _time = 0.0f;
@@ -20,9 +19,6 @@ namespace Hamster.SpaceWar {
         }
 
         private void CheckNextWave() {
-            if (!IsServer())
-                return;
-
             LevelEventScriptObject currentEvent = null;
             if (_eventIndex >= 0 && _eventIndex < _levelConfig.LevelWaves.Count)
                 currentEvent = _levelConfig.LevelWaves[_eventIndex];
@@ -40,9 +36,6 @@ namespace Hamster.SpaceWar {
         }
 
         private void EnterNextWave() {
-            if (!IsServer())
-                return;
-
             int nextWaveIndex = _eventIndex + 1;
             LevelEventScriptObject nextWave = null;
             if (nextWaveIndex >= 0 && nextWaveIndex < _levelConfig.LevelWaves.Count)
@@ -63,28 +56,6 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public void SetLevelEventIndex(int index) {
-            if (IsServer())
-                return;
-
-            // 退出上一个事件
-            if (_eventIndex >= 0 && _eventIndex < _levelConfig.LevelWaves.Count) {
-                LevelEventScriptObject currentWave = _levelConfig.LevelWaves[_eventIndex];
-                if (null != currentWave) {
-                    currentWave.OnLevel(this);
-                }
-            }
-
-            // 进入新的事件
-            if (index >= 0 && index < _levelConfig.LevelWaves.Count) {
-                LevelEventScriptObject nextWave = _levelConfig.LevelWaves[index];
-                if (null != nextWave) {
-                    _time = 0;
-                    _eventIndex = index;
-                    nextWave.OnEnter(this);
-                }
-            }
-        }
 
         private void OnEnemyDie(GameObject deceased, GameObject killer) {
             if (deceased.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
@@ -114,20 +85,11 @@ namespace Hamster.SpaceWar {
                 return;
 
             _time += dt;
-            if (IsServer()) {
-                CheckNextWave();
-            }
-            else {
-                
-            }
+            CheckNextWave();
         }
 
         public bool IsEnable() {
             return true;
-        }
-
-        public bool IsServer() {
-            return IsServerManager;
         }
 
         public float GetTime() {
@@ -171,5 +133,10 @@ namespace Hamster.SpaceWar {
         public int GetCurrentLevelEventIndex() {
             return _eventIndex;
         }
+
+        public bool IsClient() {
+            return false;
+        }
+
     }
 }

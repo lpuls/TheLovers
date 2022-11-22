@@ -12,6 +12,7 @@ namespace Hamster.SpaceWar {
         private ClientFrameDataManager _clientFrameDataManager = new ClientFrameDataManager();
         private CollisionProcessManager _collisionResultManager = new CollisionProcessManager();
         private LevelManager _levelManager = null;
+        private ClientLevelManager _clientLevelManager = null;
 
         public ServerNetDevice NetDevice {
             get {
@@ -24,7 +25,7 @@ namespace Hamster.SpaceWar {
 
             // 敌人管理器
             _levelManager = gameObject.TryGetOrAdd<LevelManager>();
-            _levelManager.IsServerManager = true;
+            _clientLevelManager = gameObject.TryGetOrAdd<ClientLevelManager>();
             // _enemyManager.EnableSpawn = false;
 
             // 启用网络
@@ -42,8 +43,10 @@ namespace Hamster.SpaceWar {
             RegisterManager<ClientFrameDataManager>(_clientFrameDataManager);
             RegisterManager<CollisionProcessManager>(_collisionResultManager);
             RegisterManager<LevelManager>(_levelManager);
+            RegisterManager<ClientLevelManager>(_clientLevelManager);
 
             _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
+            _clientLevelManager.Initilze("Res/ScriptObjects/Levels/Level0");
 
             // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;
@@ -51,6 +54,7 @@ namespace Hamster.SpaceWar {
             _serveFrameDataManager.AddTicker(_collisionResultManager);
             _serveFrameDataManager.AddTicker(_levelManager);
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
+            _clientFrameDataManager.OnFrameUpdate += _clientLevelManager.OnFrameDataUpdate;
 
 
             // 服务端一起就创建服务器自己的飞机

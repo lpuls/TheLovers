@@ -6,22 +6,18 @@ namespace Hamster.SpaceWar {
     public class MissionUI : UIView {
         private Text _title = null;
         private Text _context = null;
-        private RectTransform _background = null;
-
-        private float _right = 1620.0f;
+        private Animator _animator = null;
 
         public override void Initialize() {
             base.Initialize();
             _title = GetComponentFromChild<Text>("MissionTitle");
             _context = GetComponentFromChild<Text>("MissionContext");
-            _background = GetComponent<RectTransform>();
+            _animator = GetComponent<Animator>();
         }
 
         protected override void OnShow() {
             base.OnShow();
-            _title.DOFade(0, 1.0f);
-            Tween tween = DOTween.To(()=> _right, x => _right = x, 960, 1.0f);
-            tween.OnUpdate(() => UpdateRectTransformRight(_right));
+            _animator.Play("Show");
         }
 
         public void SetMissionInfo(string title, string context) {
@@ -29,9 +25,6 @@ namespace Hamster.SpaceWar {
             _context.text = context;
         }
 
-        private void UpdateRectTransformRight(float value) {
-            _background.offsetMin.SetX(value);
-        }
     }
 
     public class MissionUIModule : UIModule {
@@ -52,9 +45,9 @@ namespace Hamster.SpaceWar {
             _module.MissionID.OnValueChange -= OnMissionChange;
         }
 
-        private void OnMissionChange(int newValue, int oldValue) {
+        private void OnMissionChange(int oldValue, int newValue) {
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Mission>(newValue, out Config.Mission mission)) {
-                _view.SetMissionInfo(mission.Title, mission.Context);
+                _view.SetMissionInfo(mission.Title, mission.Context.Replace("\\n", "\n"));
             }
         }
 

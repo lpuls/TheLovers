@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7779779169678922370
+--- !u!114 &-8387167386841350499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,13 +10,81 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Waves_Wave3
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -2823691768476687584}
---- !u!114 &-6537823610702201066
+  m_Name: Wave4_Spawn 101 int location 6
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 101
+  LocationIndex: 6
+--- !u!114 &-7961179248451371423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave0_Spawn 10 int location 5
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 10
+  LocationIndex: 5
+--- !u!114 &-7841262656376370128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave2_Spawn 10 int location 8
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 10
+  LocationIndex: 8
+--- !u!114 &-7378813708525769741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Waves_Wave1
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelMissionUIScriptObject
+  Time: 3
+  MissionID: 1
+--- !u!114 &-7206576933697089976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave2_Spawn 11 int location 5
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 11
+  LocationIndex: 5
+--- !u!114 &-6794662703610391615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave3_Spawn 10 int location 8
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 10
+  LocationIndex: 8
+--- !u!114 &-6545271978958562105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,10 +99,10 @@ MonoBehaviour:
   Time: 0
   CompleteType: 1
   UnitSpawns:
-  - {fileID: -3721789678215774316}
-  - {fileID: 1465435204043196794}
-  - {fileID: 6746901219558473176}
---- !u!114 &-4669477804540603570
+  - {fileID: -7961179248451371423}
+  - {fileID: -3888267715486903139}
+  - {fileID: 310916390692892493}
+--- !u!114 &-4814644241249676206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,45 +112,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Wave1_Spawn 10 int location 8
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  LocationIndex: 8
---- !u!114 &-3721789678215774316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave0_Spawn 10 int location 5
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  LocationIndex: 5
---- !u!114 &-3024124520748494288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave1
+  m_Name: Waves_Wave3
   m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
   Time: 0
   CompleteType: 1
   UnitSpawns:
-  - {fileID: 3820123485899066911}
-  - {fileID: 8026696203672940911}
-  - {fileID: 2323472240645839888}
-  - {fileID: -4669477804540603570}
-  - {fileID: 3139254489555391933}
---- !u!114 &-2823691768476687584
+  - {fileID: -6794662703610391615}
+  - {fileID: -3781996012909487204}
+--- !u!114 &-3888267715486903139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,11 +129,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Wave3_Spawn 101 int location 6
+  m_Name: Wave0_Spawn 11 int location 6
   m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 101
+  ID: 11
   LocationIndex: 6
---- !u!114 &-1939335556946509524
+--- !u!114 &-3781996012909487204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave3_Spawn 11 int location 9
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 11
+  LocationIndex: 9
+--- !u!114 &-3056778214188802459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +161,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
   ID: 11
   LocationIndex: 9
+--- !u!114 &-1263459414564096018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Waves_Wave2
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -7206576933697089976}
+  - {fileID: 2152460725143017169}
+  - {fileID: 8355495639046515501}
+  - {fileID: -7841262656376370128}
+  - {fileID: -3056778214188802459}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,98 +217,12 @@ MonoBehaviour:
   - {x: 43.5, y: 5, z: 0}
   - {x: 43.5, y: -5, z: 0}
   LevelWaves:
-  - {fileID: -6537823610702201066}
-  - {fileID: -3024124520748494288}
-  - {fileID: 3815432544727947805}
-  - {fileID: -7779779169678922370}
---- !u!114 &1465435204043196794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave0_Spawn 11 int location 6
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  LocationIndex: 6
---- !u!114 &2323472240645839888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave1_Spawn 11 int location 7
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  LocationIndex: 7
---- !u!114 &2331078339280466798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Spawn 10 int location 8
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  LocationIndex: 8
---- !u!114 &3139254489555391933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave1_Spawn 11 int location 9
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  LocationIndex: 9
---- !u!114 &3815432544727947805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave2
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: 2331078339280466798}
-  - {fileID: -1939335556946509524}
---- !u!114 &3820123485899066911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave1_Spawn 11 int location 5
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  LocationIndex: 5
---- !u!114 &6746901219558473176
+  - {fileID: -6545271978958562105}
+  - {fileID: -7378813708525769741}
+  - {fileID: -1263459414564096018}
+  - {fileID: -4814644241249676206}
+  - {fileID: 2645544705213387372}
+--- !u!114 &310916390692892493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
   ID: 10
   LocationIndex: 7
---- !u!114 &8026696203672940911
+--- !u!114 &2152460725143017169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,7 +246,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Wave1_Spawn 10 int location 6
+  m_Name: Wave2_Spawn 10 int location 6
   m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
   ID: 10
   LocationIndex: 6
+--- !u!114 &2645544705213387372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Waves_Wave4
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -8387167386841350499}
+--- !u!114 &8355495639046515501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wave2_Spawn 11 int location 7
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  ID: 11
+  LocationIndex: 7

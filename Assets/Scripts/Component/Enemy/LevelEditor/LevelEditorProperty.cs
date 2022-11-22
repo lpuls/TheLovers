@@ -84,7 +84,7 @@ namespace Hamster.SpaceWar {
                 for (int i = 0; i < waveTransform.childCount; i++) {
                     Transform childTransform = waveTransform.GetChild(i);
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
-                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave) {
+                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave || temp.LevelProperty == ELevelProperty.MissionUI) {
                             temp.UpdateWaveConfig();
                             LevelWaves.Add(temp);
                         }
@@ -124,7 +124,7 @@ namespace Hamster.SpaceWar {
                         levelConfigScriptObject.LocationNames.AddRange(FixLocations.Keys);
                         levelConfigScriptObject.FixLocations.AddRange(FixLocations.Values);
                         foreach (var item in LevelWaves) {
-                            levelConfigScriptObject.LevelWaves.Add(item.CreateScriptableObject() as LevelWaveScriptObject);
+                            levelConfigScriptObject.LevelWaves.Add(item.CreateScriptableObject() as LevelEventScriptObject);
                         }
                         string path = "Assets/Res/ScriptObjects/Levels/" + name + ".asset";
                         levelConfigScriptObject.Save(path);

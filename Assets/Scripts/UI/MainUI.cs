@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void UpdateWeapon(string spriteName) {
-            Sprite sprite = Single<AtlasManager>.GetInstance().GetSprite("MainUI", spriteName);
+            Sprite sprite = Single<AtlasManager>.GetInstance().GetSprite("Res/SpriteAtlas/MainUI", spriteName);
             _weaponIcon.sprite = sprite;
         }
 

@@ -176,6 +176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2280777502267692580}
+  - {fileID: 835845627365553439}
   - {fileID: 3124374994099097212}
   - {fileID: 1206765268063595863}
   - {fileID: 7845465663603017319}
@@ -365,7 +366,7 @@ GameObject:
   - component: {fileID: 3124374994099097212}
   - component: {fileID: 615061868455756711}
   m_Layer: 0
-  m_Name: Wave1
+  m_Name: Wave2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +390,7 @@ Transform:
   - {fileID: 5717357183513231978}
   - {fileID: 8110571924120111062}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &615061868455756711
 MonoBehaviour:
@@ -778,7 +779,7 @@ GameObject:
   - component: {fileID: 7845465663603017319}
   - component: {fileID: 3640939028943504194}
   m_Layer: 0
-  m_Name: Wave3
+  m_Name: Wave4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,7 +799,7 @@ Transform:
   m_Children:
   - {fileID: 8036232794999747335}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3640939028943504194
 MonoBehaviour:
@@ -833,7 +834,7 @@ GameObject:
   - component: {fileID: 1206765268063595863}
   - component: {fileID: 5372964936572716562}
   m_Layer: 0
-  m_Name: Wave2
+  m_Name: Wave3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,7 +855,7 @@ Transform:
   - {fileID: 1217424866643498543}
   - {fileID: 5789379735939324230}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5372964936572716562
 MonoBehaviour:
@@ -1101,6 +1102,7 @@ MonoBehaviour:
   ClientAsset: 
   LevelWaves:
   - {fileID: 3427670122629675775}
+  - {fileID: 3184713807021272911}
   - {fileID: 615061868455756711}
   - {fileID: 5372964936572716562}
   - {fileID: 3640939028943504194}
@@ -1811,6 +1813,59 @@ MonoBehaviour:
   SpawnID: 11
   LocationIndex: 7
   MissionID: 0
+--- !u!1 &7871958010531908655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835845627365553439}
+  - component: {fileID: 3184713807021272911}
+  m_Layer: 0
+  m_Name: Wave1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &835845627365553439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871958010531908655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3184713807021272911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871958010531908655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 5
+  ClientAsset: 
+  LevelWaves: []
+  Time: 3
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
+  MissionID: 1
 --- !u!1 &8336970104425737735
 GameObject:
   m_ObjectHideFlags: 0
