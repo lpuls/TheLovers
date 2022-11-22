@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public class LevelManager : MonoBehaviour, IServerTicker {
+    public class LevelManager : MonoBehaviour, IServerTicker, ILevelManager {
 
         public bool EnableSpawn = true;
-        private List<BaseEnemy> _aliveEnemys = new List<BaseEnemy>();
+        public bool IsServerManager = true;
+        private List<BaseEnemy> _aliveEnemys = new();
 
         private float _time = 0.0f;
         private int _waveIndex = 0;
@@ -20,14 +20,13 @@ namespace Hamster.SpaceWar {
         }
 
         private void CheckNextWave() {
-            LevelWaveScriptObject currentWave = null;
+            LevelEventScriptObject currentEvent = null;
             if (_waveIndex >= 0 && _waveIndex < _levelConfig.LevelWaves.Count)
-                currentWave = _levelConfig.LevelWaves[_waveIndex];
+                currentEvent = _levelConfig.LevelWaves[_waveIndex];
 
             // 检查是否有进入下一波的条件
             bool enterNext = false;
-            if ((LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime == currentWave.CompleteType && _time >= currentWave.Time)
-                || (LevelWaveScriptObject.ELevelWaveCompleteType.WaitAllDie == currentWave.CompleteType && _aliveEnemys.Count <= 0)) {
+            if (currentEvent.IsComplete(this)) {
                 enterNext = true;
             }
 
@@ -39,14 +38,14 @@ namespace Hamster.SpaceWar {
 
         private void EnterNextWave() {
             int nextWaveIndex = _waveIndex + 1;
-            LevelWaveScriptObject nextWave = null;
+            LevelEventScriptObject nextWave = null;
             if (nextWaveIndex >= 0 && nextWaveIndex < _levelConfig.LevelWaves.Count)
                 nextWave = _levelConfig.LevelWaves[nextWaveIndex];
 
             Debug.Assert(null != nextWave, "Next wave is null");
             if (null != nextWave) {
                 // 判断是否到达下一波的条件，如果是则生成下一波的敌人
-                SpawnUnits(nextWave);
+                nextWave.OnEnter(this);
 
                 // 更新数据
                 _time = 0;
@@ -83,23 +82,6 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public void KillAllEnemys() {
-            DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
-            damageInfo.Caster = null;
-            damageInfo.Murderer = null;
-            damageInfo.Damage = 1000;
-            damageInfo.DamageReason = EDamageReason.SystemKill;
-
-            List<BaseEnemy> baseEnemies = ListPool<BaseEnemy>.Malloc();
-            baseEnemies.AddRange(_aliveEnemys);
-            foreach (var item in baseEnemies) {
-                item.TakeDamage(damageInfo);
-            }
-            ListPool<BaseEnemy>.Free(baseEnemies);
-
-            ObjectPool<DamageInfo>.Free(damageInfo);
-        }
-
         public bool TryGetFixLocation(int index, out Vector3 location) {
             location = Vector3.zero;
             if (null == _levelConfig)
@@ -123,6 +105,48 @@ namespace Hamster.SpaceWar {
 
         public bool IsEnable() {
             return true;
+        }
+
+        public bool IsServer() {
+            return IsServerManager;
+        }
+
+        public float GetTime() {
+            return _time;
+        }
+
+        public int GetEnemeyCount() {
+            return _aliveEnemys.Count;
+        }
+
+        public void SpawnUnit(int id, int locationIndex) {
+            GameObject ship = GameLogicUtility.ServerCreateEnemy(id, _levelConfig.FixLocations[locationIndex], 180);
+            if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
+                baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
+                baseEnemy.OnDie += OnEnemyDie;
+                _aliveEnemys.Add(baseEnemy);
+                GameLogicUtility.SetPositionDirty(ship);
+            }
+            else {
+                AssetPool.Free(ship);
+            }
+        }
+
+        public void DestroyAllUnit() {
+            DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
+            damageInfo.Caster = null;
+            damageInfo.Murderer = null;
+            damageInfo.Damage = 1000;
+            damageInfo.DamageReason = EDamageReason.SystemKill;
+
+            List<BaseEnemy> baseEnemies = ListPool<BaseEnemy>.Malloc();
+            baseEnemies.AddRange(_aliveEnemys);
+            foreach (var item in baseEnemies) {
+                item.TakeDamage(damageInfo);
+            }
+            ListPool<BaseEnemy>.Free(baseEnemies);
+
+            ObjectPool<DamageInfo>.Free(damageInfo);
         }
     }
 }

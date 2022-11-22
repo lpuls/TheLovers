@@ -14,6 +14,7 @@ namespace Hamster.SpaceWar {
             Wave,
             Location,
             Spawn,
+            MissionUI,
         }
 
         public static List<string> LocationNames = new();
@@ -28,12 +29,15 @@ namespace Hamster.SpaceWar {
 
         // 关卡波数
         public float Time = 0;
-        public LevelWaveScriptObject.ELevelWaveCompleteType CompleteType = LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime;
+        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
         public List<LevelEditorProperty> UnitSpawns = new();  // 敌人生成数据
 
         // 类型为对象生成
         public int SpawnID = 0;
         public int LocationIndex = 0;
+
+        // MissionUI显示
+        public int MissionID = 0;
 
         public void UpdateWaveConfig() {
             UnitSpawns.Clear();
@@ -145,6 +149,13 @@ namespace Hamster.SpaceWar {
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
                         return unitSpawnScriptObject;
                     }
+                case ELevelProperty.MissionUI: {
+                        LevelMissionUIScriptObject levelMissionUIScriptObject = ScriptableObject.CreateInstance<LevelMissionUIScriptObject>();
+                        levelMissionUIScriptObject.name = transform.parent.name + "_" + gameObject.name;
+                        levelMissionUIScriptObject.Time = Time;
+                        levelMissionUIScriptObject.MissionID = MissionID;
+                        return levelMissionUIScriptObject;
+                    }
             }
             return null;
         }
@@ -188,11 +199,11 @@ namespace Hamster.SpaceWar {
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
                         // 结束类型
-                        levelEditorProperty.CompleteType = (LevelWaveScriptObject.ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
+                        levelEditorProperty.CompleteType = (ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
 
                         // 触发时间
-                        if (LevelWaveScriptObject.ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
-                            levelEditorProperty.Time = EditorGUILayout.Slider("持续时长", levelEditorProperty.Time, 0, 1);
+                        if (ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                            levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
 
                         // 敌人生成数据
                         EditorGUILayout.Space();
@@ -228,6 +239,11 @@ namespace Hamster.SpaceWar {
                     break;
                 case LevelEditorProperty.ELevelProperty.Location: {
                         EditorGUILayout.LabelField("特殊点 " + levelEditorProperty.name);
+                    }
+                    break;
+                case LevelEditorProperty.ELevelProperty.MissionUI: {
+                        levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
+                        levelEditorProperty.MissionID = EditorGUILayout.IntField("任务ID", levelEditorProperty.MissionID);
                     }
                     break;
             }

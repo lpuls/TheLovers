@@ -40,7 +40,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void InitProperty(int configID) {
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig config)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig config)) {
                 _health.Init(config.Health, config.Health);
                 _speed.Init(config.Speed, config.Speed);
             }

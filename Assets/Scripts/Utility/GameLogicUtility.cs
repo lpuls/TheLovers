@@ -25,7 +25,7 @@ namespace Hamster.SpaceWar {
 
             Vector3 spawnLocation = 0 == frameDataManager.CurrentPlayerCount ? new Vector3(-25, 4, 0) : new Vector3(-25, -4, 0);
 
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig))
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig shipConfig))
                 return frameDataManager.SpawnNetObject(0, 0, shipConfig.LogicPath, configID, spawnLocation, netType);
 
             return frameDataManager.SpawnNetObject(0, 0, "Res/Ships/Player/GreyPlayerShipLogic", configID, spawnLocation, ENetType.None);
@@ -139,7 +139,7 @@ namespace Hamster.SpaceWar {
 
             CD = 0;
             GameObject bullet = null;
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.BulletConfig>(config, out Config.BulletConfig abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
 
                 TrajectoryComponent trajectoryComponent = bullet.TryGetOrAdd<TrajectoryComponent>();
@@ -155,7 +155,7 @@ namespace Hamster.SpaceWar {
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             GameObject bullet = null;
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.BulletConfig>(config, out Config.BulletConfig abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(0, ownerID, abilityConfig.LogicPath, config, position, ENetType.Bullet);
                 bullet.transform.rotation = rotation;
 
@@ -206,7 +206,7 @@ namespace Hamster.SpaceWar {
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
             GameObject bullet = null;
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(config, out Config.Abilitys abilityConfig)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.BulletConfig>(config, out Config.BulletConfig abilityConfig)) {
                 bullet = frameDataManager.SpawnNetObject(netID, ownerID, abilityConfig.Path, config, position, ENetType.Bullet);
                 bullet.transform.rotation = Quaternion.Euler(0, angle, 0);
                 if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
@@ -228,7 +228,7 @@ namespace Hamster.SpaceWar {
             bool userShip = netID == world.PlayerNetID;
             ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
             if (!frameDataManager.HasNetObject(netID, 0)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(configID, out Config.ShipConfig shipConfig)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig shipConfig)) {
                     ship = frameDataManager.SpawnNetObject(netID, 0, shipConfig.Path, configID, position, netType);
                     ship.transform.rotation = Quaternion.Euler(0, angle, 0);
 

@@ -24,35 +24,35 @@ namespace Config {
     static ConfigReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFUZW1wL0NvbmZpZy5wcm90byJkCghBYmlsaXR5cxIKCgJJRBgBIAEoBRIM",
-            "CgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJ",
-            "Eg0KBVNwZWVkGAUgASgCEg4KBkRhbWFnZRgGIAEoBSJDCgdNaXNzaW9uEgoK",
-            "AklEGAEgASgFEg0KBVRpdGxlGAIgASgJEg8KB0NvbnRleHQYAyABKAkSDAoE",
-            "UGF0aBgEIAEoCSJHCgpQY2tlckl0ZW1zEgoKAklEGAEgASgFEgwKBE5vdGUY",
-            "AiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCABKAkilgEKClNo",
-            "aXBDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglMb2dpY1Bh",
-            "dGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUgASgCEhcKD0Ry",
-            "b3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIUCgxJbXBhY3RE",
-            "YW1hZ2UYCCABKAUiXgoGV2VhcG9uEgoKAklEGAEgASgFEgwKBE5vdGUYAiAB",
-            "KAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0THYYBCABKAUSDgoGVHlwZUlEGAUg",
-            "ASgFEgwKBEljb24YBiABKAkiKwoIVmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZ",
-            "GAIgASgCEgkKAVoYAyABKAIiKwoGRGVwZW5kEhMKC1JlbG9hZENvdW50GAEg",
-            "ASgFEgwKBFBhdGgYAiABKAkikgEKC0dhbWVTZXR0aW5nEgoKAklEGAEgASgF",
-            "EhEKCU1heFBsYXllchgCIAEoBRIQCghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2",
-            "ZXJQb3J0GAQgASgFEhAKCENsaWVudElQGAUgASgJEhIKCkNsaWVudFBvcnQY",
-            "BiABKAUSGAoHRGVwZW5kcxgHIAEoCzIHLkRlcGVuZCobCgdFeGFtcGxlEhAK",
-            "DEV4YW1wbGVfTk9ORRAAKk0KCUdhbWVNb2RlbBISCg5HYW1lTW9kZWxfTk9O",
-            "RRAAEhQKEEdhbWVNb2RlbF9TSU5HTEUQARIWChJHYW1lTW9kZWxfTVVMVElQ",
-            "TEUQAipRCgpXZWFwb25UeXBlEhMKD1dlYXBvblR5cGVfTk9ORRAAEhYKEldl",
-            "YXBvblR5cGVfR0FMVElORxABEhYKEldlYXBvblR5cGVfU0hPVEdVThACQgmq",
-            "AgZDb25maWdiBnByb3RvMw=="));
+            "ChFUZW1wL0NvbmZpZy5wcm90byJoCgxCdWxsZXRDb25maWcSCgoCSUQYASAB",
+            "KAUSDAoETm90ZRgCIAEoCRIMCgRQYXRoGAMgASgJEhEKCUxvZ2ljUGF0aBgE",
+            "IAEoCRINCgVTcGVlZBgFIAEoAhIOCgZEYW1hZ2UYBiABKAUiQwoHTWlzc2lv",
+            "bhIKCgJJRBgBIAEoBRINCgVUaXRsZRgCIAEoCRIPCgdDb250ZXh0GAMgASgJ",
+            "EgwKBFBhdGgYBCABKAkiRwoKUGNrZXJJdGVtcxIKCgJJRBgBIAEoBRIMCgRO",
+            "b3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJIpYB",
+            "CgpVbml0Q29uZmlnEgoKAklEGAEgASgFEgwKBFBhdGgYAiABKAkSEQoJTG9n",
+            "aWNQYXRoGAMgASgJEg4KBkhlYWx0aBgEIAEoBRINCgVTcGVlZBgFIAEoAhIX",
+            "Cg9Ecm9wUHJvYmFiaWxpdHkYBiADKAUSDQoFRHJvcHMYByADKAUSFAoMSW1w",
+            "YWN0RGFtYWdlGAggASgFIl4KBldlYXBvbhIKCgJJRBgBIAEoBRIMCgROb3Rl",
+            "GAIgASgJEgwKBFBhdGgYAyABKAkSDgoGTmV4dEx2GAQgASgFEg4KBlR5cGVJ",
+            "RBgFIAEoBRIMCgRJY29uGAYgASgJIisKCFZlY3RvcjNEEgkKAVgYASABKAIS",
+            "CQoBWRgCIAEoAhIJCgFaGAMgASgCIisKBkRlcGVuZBITCgtSZWxvYWRDb3Vu",
+            "dBgBIAEoBRIMCgRQYXRoGAIgASgJIpIBCgtHYW1lU2V0dGluZxIKCgJJRBgB",
+            "IAEoBRIRCglNYXhQbGF5ZXIYAiABKAUSEAoIU2VydmVySVAYAyABKAkSEgoK",
+            "U2VydmVyUG9ydBgEIAEoBRIQCghDbGllbnRJUBgFIAEoCRISCgpDbGllbnRQ",
+            "b3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsyBy5EZXBlbmQqGwoHRXhhbXBs",
+            "ZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1lTW9kZWwSEgoOR2FtZU1vZGVs",
+            "X05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xFEAESFgoSR2FtZU1vZGVsX01V",
+            "TFRJUExFEAIqUQoKV2VhcG9uVHlwZRITCg9XZWFwb25UeXBlX05PTkUQABIW",
+            "ChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJXZWFwb25UeXBlX1NIT1RHVU4Q",
+            "AkIJqgIGQ29uZmlnYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Abilitys), global::Config.Abilitys.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.BulletConfig), global::Config.BulletConfig.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.ShipConfig), global::Config.ShipConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.UnitConfig), global::Config.UnitConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path", "NextLv", "TypeID", "Icon" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
@@ -82,11 +82,11 @@ namespace Config {
   #endregion
 
   #region Messages
-  public sealed partial class Abilitys : pb::IMessage<Abilitys> {
-    private static readonly pb::MessageParser<Abilitys> _parser = new pb::MessageParser<Abilitys>(() => new Abilitys());
+  public sealed partial class BulletConfig : pb::IMessage<BulletConfig> {
+    private static readonly pb::MessageParser<BulletConfig> _parser = new pb::MessageParser<BulletConfig>(() => new BulletConfig());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Abilitys> Parser { get { return _parser; } }
+    public static pb::MessageParser<BulletConfig> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -99,14 +99,14 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Abilitys() {
+    public BulletConfig() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Abilitys(Abilitys other) : this() {
+    public BulletConfig(BulletConfig other) : this() {
       iD_ = other.iD_;
       note_ = other.note_;
       path_ = other.path_;
@@ -117,8 +117,8 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Abilitys Clone() {
-      return new Abilitys(this);
+    public BulletConfig Clone() {
+      return new BulletConfig(this);
     }
 
     /// <summary>Field number for the "ID" field.</summary>
@@ -189,11 +189,11 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Abilitys);
+      return Equals(other as BulletConfig);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Abilitys other) {
+    public bool Equals(BulletConfig other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -288,7 +288,7 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Abilitys other) {
+    public void MergeFrom(BulletConfig other) {
       if (other == null) {
         return;
       }
@@ -777,11 +777,11 @@ namespace Config {
 
   }
 
-  public sealed partial class ShipConfig : pb::IMessage<ShipConfig> {
-    private static readonly pb::MessageParser<ShipConfig> _parser = new pb::MessageParser<ShipConfig>(() => new ShipConfig());
+  public sealed partial class UnitConfig : pb::IMessage<UnitConfig> {
+    private static readonly pb::MessageParser<UnitConfig> _parser = new pb::MessageParser<UnitConfig>(() => new UnitConfig());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ShipConfig> Parser { get { return _parser; } }
+    public static pb::MessageParser<UnitConfig> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -794,14 +794,14 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ShipConfig() {
+    public UnitConfig() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ShipConfig(ShipConfig other) : this() {
+    public UnitConfig(UnitConfig other) : this() {
       iD_ = other.iD_;
       path_ = other.path_;
       logicPath_ = other.logicPath_;
@@ -814,8 +814,8 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ShipConfig Clone() {
-      return new ShipConfig(this);
+    public UnitConfig Clone() {
+      return new UnitConfig(this);
     }
 
     /// <summary>Field number for the "ID" field.</summary>
@@ -906,11 +906,11 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ShipConfig);
+      return Equals(other as UnitConfig);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ShipConfig other) {
+    public bool Equals(UnitConfig other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1013,7 +1013,7 @@ namespace Config {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ShipConfig other) {
+    public void MergeFrom(UnitConfig other) {
       if (other == null) {
         return;
       }

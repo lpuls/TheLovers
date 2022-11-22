@@ -165,7 +165,7 @@ namespace Hamster.SpaceWar {
         [GM]
         public static void GM_KillAllEnemy(string[] gmParams) {
             LevelManager enemyManager = World.GetWorld().GetManager<LevelManager>();
-            enemyManager.KillAllEnemys();
+            enemyManager.DestroyAllUnit();
         }
 
         #endregion

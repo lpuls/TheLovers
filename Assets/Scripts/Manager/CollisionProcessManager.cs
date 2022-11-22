@@ -79,7 +79,7 @@ namespace Hamster.SpaceWar {
 
                 int damage = 1;
                 if (bullet.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                    if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Abilitys>(netSyncComponent.ConfigID, out Config.Abilitys abilitys)) {
+                    if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.BulletConfig>(netSyncComponent.ConfigID, out Config.BulletConfig abilitys)) {
                         damage = abilitys.Damage;
                     }
                 }
@@ -123,7 +123,7 @@ namespace Hamster.SpaceWar {
 
             // 玩家受到敌人的伤害
             if (something.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(netSyncComponent.ConfigID, out Config.UnitConfig config)) {
                     if (unit.TryGetComponent<ServerBaseController>(out ServerBaseController playerController)) {
                         DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
                         damageInfo.Damage = config.ImpactDamage;

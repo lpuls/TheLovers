@@ -45,6 +45,11 @@ namespace Hamster.SpaceWar {
             // 更换武器
             if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(realID, out Config.Weapon info)) {
+                    // 通知UI变更
+                    MainUIModule mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
+                    mainUIModule.WeaponID.SetValue(realID);
+
+                    // 更换生成器
                     BulletSpawner bulletSpawner = Asset.Load<BulletSpawner>(info.Path);
                     foreach (var item in weapons) {
                         item.Spawner = bulletSpawner;

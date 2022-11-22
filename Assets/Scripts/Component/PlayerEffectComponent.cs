@@ -76,7 +76,7 @@ namespace Hamster.SpaceWar {
 
         public void Init() {
             // 读取配置
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.ShipConfig>(_netSyncComponent.ConfigID, out Config.ShipConfig config)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(_netSyncComponent.ConfigID, out Config.UnitConfig config)) {
                 _health = config.Health;
                 _maxHealth = config.Health;
             }

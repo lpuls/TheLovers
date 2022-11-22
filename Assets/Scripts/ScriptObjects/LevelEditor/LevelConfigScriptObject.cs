@@ -18,37 +18,12 @@ namespace Hamster.SpaceWar {
     }
 
     [SerializeField]
-    public class LevelWaveScriptObject : ScriptableObject {
-        public enum ELevelWaveCompleteType {
-            WaitTime,
-            WaitAllDie,
-        }
-
-        public float Time = 0;
-        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
-        public List<UnitSpawnScriptObject> UnitSpawns = new();  // 敌人生成数据
-
-#if UNITY_EDITOR
-        public void Save(ScriptableObject parent) {
-            UnityEditor.AssetDatabase.AddObjectToAsset(this, parent);
-            UnityEditor.EditorUtility.SetDirty(this);
-            UnityEditor.AssetDatabase.SaveAssets();
-
-            foreach (var item in UnitSpawns) {
-                item.Save(this);
-            }
-
-        }
-#endif 
-    }
-
-    [SerializeField]
     public class LevelConfigScriptObject : ScriptableObject {
         public string ClientAsset = string.Empty;           // 客户端表现资源
         public List<string> LocationNames = new();          // 特殊点的名称
         public List<Vector3> FixLocations = new();          // 卡关中的特殊点 
 
-        public List<LevelWaveScriptObject> LevelWaves = new();  // 敌人波数生成数据
+        public List<LevelEventScriptObject> LevelWaves = new();  // 敌人波数生成数据
 
 #if UNITY_EDITOR
         public void Save(string path) {
