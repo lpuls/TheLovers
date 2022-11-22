@@ -10,6 +10,7 @@ namespace Hamster.SpaceWar {
         private S2CGameFrameDataSyncMessage _syncMessage = new S2CGameFrameDataSyncMessage();
 
         private List<NetSyncComponent> _players = new List<NetSyncComponent>(4);
+        private HashSet<EUpdateActorType> _systemUpdateTypes = new HashSet<EUpdateActorType>(new EUpdateActorTypeComparer());
 
         public Action OnGameStart;
         public Action<FrameData> OnNewFrameData;
@@ -85,7 +86,26 @@ namespace Hamster.SpaceWar {
 
 
             List<int> pendingKillActors = ListPool<int>.Malloc();
-            // todo 这里也许可以改成有变更再添加
+
+            // 优化添加全局系统事件
+            foreach (var item in _systemUpdateTypes) {
+                UpdateInfo updateInfo = ObjectPool<UpdateInfo>.Malloc();
+                updateInfo.UpdateType = item;
+                switch (item) {
+                    case EUpdateActorType.LevelEventIndex: {
+                            LevelManager levelManager = world.GetManager<LevelManager>();
+                            updateInfo.Data1.Int32 = levelManager.GetCurrentLevelEventIndex();
+                        }
+                        break;
+                    default:
+                        UnityEngine.Debug.LogError("Can't Add System Update Info by " + item);
+                        break;
+                }
+                frameData.AddUpdateInfo(SYSTEM_NET_ACTOR_ID, updateInfo);
+            }
+            _systemUpdateTypes.Clear();
+
+            // 处理每个网络单位的数据
             var it = _netActors.GetEnumerator();
             while (it.MoveNext()) {
                 NetSyncComponent netSyncComponent = it.Current.Value;
@@ -145,6 +165,9 @@ namespace Hamster.SpaceWar {
                                 }
                             }
                             break;
+                        default:
+                            UnityEngine.Debug.LogError("Can't Add Update Info by " + type);
+                            break;
                     }
                     frameData.AddUpdateInfo(netSyncComponent.NetID, updateInfo);
                 }
@@ -171,6 +194,10 @@ namespace Hamster.SpaceWar {
             if (null != OnNewFrameData)
                 OnNewFrameData?.Invoke(frameData);
             ObjectPool<FrameData>.Free(frameData);
+        }
+
+        public void AddSystemUpdateInfo(EUpdateActorType updateActorType) {
+            _systemUpdateTypes.Add(updateActorType);
         }
     }
 }

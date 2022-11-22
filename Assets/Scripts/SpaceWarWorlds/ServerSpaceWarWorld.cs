@@ -24,6 +24,7 @@ namespace Hamster.SpaceWar {
 
             // 敌人管理器
             _levelManager = gameObject.TryGetOrAdd<LevelManager>();
+            _levelManager.IsServerManager = true;
             // _enemyManager.EnableSpawn = false;
 
             // 启用网络
@@ -42,7 +43,7 @@ namespace Hamster.SpaceWar {
             RegisterManager<CollisionProcessManager>(_collisionResultManager);
             RegisterManager<LevelManager>(_levelManager);
 
-            _levelManager.Initilze("Res/Levels/Level0");
+            _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
 
             // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;
@@ -59,31 +60,31 @@ namespace Hamster.SpaceWar {
 
         protected override IEnumerator PreloadAssets() {
             // 预先加载
-            Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            Asset.Cache("Res/Unit/Player/GreyPlayerShip", 2);
             SetProgress(20);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Player/RedPlayerShip", 2);
+            Asset.Cache("Res/Unit/Player/RedPlayerShip", 2);
             SetProgress(30);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/PurpleShip", 2);
+            Asset.Cache("Res/Unit/Enemy/PurpleShip", 2);
             SetProgress(40);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/PurpleShipLogic", 2);
+            Asset.Cache("Res/Unit/Enemy/PurpleShipLogic", 2);
             SetProgress(50);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/RedShip", 2);
+            Asset.Cache("Res/Unit/Enemy/RedShip", 2);
             SetProgress(60);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/RedShipLogic", 2);
+            Asset.Cache("Res/Unit/Enemy/RedShipLogic", 2);
             SetProgress(70);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Player/PlayerShipLogic", 2);
+            Asset.Cache("Res/Unit/Player/PlayerShipLogic", 2);
             SetProgress(75);
             yield return _waiForEendOfFrame;
 
@@ -123,6 +124,10 @@ namespace Hamster.SpaceWar {
 
         public List<NetSyncComponent> GetPlayers() {
             return _serveFrameDataManager.GetPlayers();
+        }
+
+        public void SetSystemPropertyDirty(EUpdateActorType updateActorType) {
+            _serveFrameDataManager.AddSystemUpdateInfo(updateActorType);
         }
 
         protected override void Update() {

@@ -23,7 +23,7 @@ namespace Hamster.SpaceWar {
 
             OnDie += OnDieSpawnItem;
 
-            AIBehaviourScript = Asset.Load<AIBehaviourScript>("Res/AI/BaseAI");
+            AIBehaviourScript = Asset.Load<AIBehaviourScript>("Res/ScriptObjects/AI/BaseAI");
             if (null != AIBehaviourScript) {
                 AIBehaviour.Initialize(AIBehaviourScript, gameObject);
                 AIBehaviour.Run();

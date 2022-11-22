@@ -126,7 +126,7 @@ namespace Hamster.SpaceWar {
                         foreach (var item in LevelWaves) {
                             levelConfigScriptObject.LevelWaves.Add(item.CreateScriptableObject() as LevelWaveScriptObject);
                         }
-                        string path = "Assets/Res/Levels/" + name + ".asset";
+                        string path = "Assets/Res/ScriptObjects/Levels/" + name + ".asset";
                         levelConfigScriptObject.Save(path);
                         return levelConfigScriptObject;
                     }

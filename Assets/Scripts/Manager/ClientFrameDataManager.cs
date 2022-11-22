@@ -125,6 +125,7 @@ namespace Hamster.SpaceWar {
                 destroyInfo.Read(_binaryReader);
                 frameData.DestroyInfos.Add(destroyInfo);
             }
+
             int updateCount = _binaryReader.ReadInt32();
             for (int i = 0; i < updateCount; i++) {
                 int netID = _binaryReader.ReadInt32();

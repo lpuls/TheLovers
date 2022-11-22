@@ -9,11 +9,15 @@ namespace Hamster.SpaceWar {
 
         private ClientNetDevice _netDevice = new ClientNetDevice();
         private ClientFrameDataManager _frameDataManager = new ClientFrameDataManager();
+        private LevelManager _levelManager = null;
 
         private GameLogicSyncModule _logicSyncModule = null;
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
+
+            _levelManager = gameObject.TryGetOrAdd<LevelManager>();
+            _levelManager.IsServerManager = false;
 
             _netDevice = new ClientNetDevice();
 
@@ -26,26 +30,30 @@ namespace Hamster.SpaceWar {
             _netDevice.Connect("127.0.0.1", 8888);
             RegisterManager<ClientNetDevice>(_netDevice);
             RegisterManager<ClientFrameDataManager>(_frameDataManager);
+            RegisterManager<LevelManager>(_levelManager);
+
+            _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
 
             _frameDataManager.OnBeginSimulate += OnBeginSimulate;
+            _frameDataManager.OnFrameUpdate += OnFrameUpdate;
 
         }
 
         protected override IEnumerator PreloadAssets() {
             // 预先加载
-            Asset.Cache("Res/Ships/Player/GreyPlayerShip", 2);
+            Asset.Cache("Res/Unit/Player/GreyPlayerShip", 2);
             SetProgress(20);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Player/RedPlayerShip", 2);
+            Asset.Cache("Res/Unit/Player/RedPlayerShip", 2);
             SetProgress(30);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/PurpleShip", 2);
+            Asset.Cache("Res/Unit/Enemy/PurpleShip", 2);
             SetProgress(30);
             yield return _waiForEendOfFrame;
 
-            Asset.Cache("Res/Ships/Enemy/RedShip", 2);
+            Asset.Cache("Res/Unit/Enemy/RedShip", 2);
             SetProgress(30);
             yield return _waiForEendOfFrame;
 
@@ -79,6 +87,15 @@ namespace Hamster.SpaceWar {
 
         public float GetLogicFramepercentage() {
             return _frameDataManager.GetLogicFramepercentage();
+        }
+
+        private void OnFrameUpdate(FrameData pre, FrameData current) {
+            if (null != current) {
+                // 检查关卡事件的下标是否发生了更新
+                if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info)) {
+                    _levelManager.SetLevelEventIndex(info.Data1.Int32);
+                }
+            }
         }
 
         protected override void Update() {

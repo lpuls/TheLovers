@@ -25,7 +25,9 @@ namespace Hamster.SpaceWar {
         Angle,
         RoleState,
         Health,
-        Dodge
+        Dodge,
+
+        LevelEventIndex
     }
 
     public class SpawnInfo : IFrameInfo, IPool {
@@ -308,6 +310,7 @@ namespace Hamster.SpaceWar {
 
     public class BaseFrameDataManager {
         public const float LOGIC_FRAME_TIME = 1 / 15.0f;
+        public const int SYSTEM_NET_ACTOR_ID = 0;
 
         protected Dictionary<int, NetSyncComponent> _netActors = new Dictionary<int, NetSyncComponent>(new Int32Comparer());
         //protected HashSet<IServerTicker> _tickers = new HashSet<IServerTicker>();

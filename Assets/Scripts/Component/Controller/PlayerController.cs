@@ -13,7 +13,7 @@ namespace Hamster.SpaceWar {
             if (null == InputKeyToValue && !_netSyncComponent.IsSimulatedProxy()) {
                 Debug.LogError("=====>Local LocalPlayerController Input Key To Value ");
 
-                InputKeyToValue = Asset.Load<InputKeyMapValue>("Res/KeyMap/LocalInputKeyMapValue");
+                InputKeyToValue = Asset.Load<InputKeyMapValue>("Res/ScriptObjects/KeyMap/LocalInputKeyMapValue");
                 if (null == InputKeyToValue) {
                     Debug.LogError("=====>Local LocalPlayerController Input Key To Value is null");
                 }

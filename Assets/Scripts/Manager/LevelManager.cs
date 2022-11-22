@@ -9,20 +9,23 @@ namespace Hamster.SpaceWar {
         private List<BaseEnemy> _aliveEnemys = new();
 
         private float _time = 0.0f;
-        private int _waveIndex = 0;
+        private int _eventIndex = 0;
         private LevelConfigScriptObject _levelConfig = null;
 
         public void Initilze(string configPath) {
             _levelConfig = Asset.Load<LevelConfigScriptObject>(configPath);
             _time = 0;
-            _waveIndex = -1;
+            _eventIndex = -1;
             EnterNextWave();
         }
 
         private void CheckNextWave() {
+            if (!IsServer())
+                return;
+
             LevelEventScriptObject currentEvent = null;
-            if (_waveIndex >= 0 && _waveIndex < _levelConfig.LevelWaves.Count)
-                currentEvent = _levelConfig.LevelWaves[_waveIndex];
+            if (_eventIndex >= 0 && _eventIndex < _levelConfig.LevelWaves.Count)
+                currentEvent = _levelConfig.LevelWaves[_eventIndex];
 
             // 检查是否有进入下一波的条件
             bool enterNext = false;
@@ -37,7 +40,10 @@ namespace Hamster.SpaceWar {
         }
 
         private void EnterNextWave() {
-            int nextWaveIndex = _waveIndex + 1;
+            if (!IsServer())
+                return;
+
+            int nextWaveIndex = _eventIndex + 1;
             LevelEventScriptObject nextWave = null;
             if (nextWaveIndex >= 0 && nextWaveIndex < _levelConfig.LevelWaves.Count)
                 nextWave = _levelConfig.LevelWaves[nextWaveIndex];
@@ -49,25 +55,33 @@ namespace Hamster.SpaceWar {
 
                 // 更新数据
                 _time = 0;
-                _waveIndex = nextWaveIndex;
+                _eventIndex = nextWaveIndex;
+                World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.LevelEventIndex);
             }
             else if (nextWaveIndex >= _levelConfig.LevelWaves.Count) {
                 // TODO 通过关卡结束
             }
         }
 
-        private void SpawnUnits(LevelWaveScriptObject waveConfig) {
-            // todo 之后需要考虑敌人延迟生成的问题
-            foreach (var item in waveConfig.UnitSpawns) {
-                GameObject ship = GameLogicUtility.ServerCreateEnemy(item.ID, _levelConfig.FixLocations[item.LocationIndex], 180);
-                if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
-                    baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
-                    baseEnemy.OnDie += OnEnemyDie;
-                    _aliveEnemys.Add(baseEnemy);
-                    GameLogicUtility.SetPositionDirty(ship);
+        public void SetLevelEventIndex(int index) {
+            if (IsServer())
+                return;
+
+            // 退出上一个事件
+            if (_eventIndex >= 0 && _eventIndex < _levelConfig.LevelWaves.Count) {
+                LevelEventScriptObject currentWave = _levelConfig.LevelWaves[_eventIndex];
+                if (null != currentWave) {
+                    currentWave.OnLevel(this);
                 }
-                else {
-                    AssetPool.Free(ship);
+            }
+
+            // 进入新的事件
+            if (index >= 0 && index < _levelConfig.LevelWaves.Count) {
+                LevelEventScriptObject nextWave = _levelConfig.LevelWaves[index];
+                if (null != nextWave) {
+                    _time = 0;
+                    _eventIndex = index;
+                    nextWave.OnEnter(this);
                 }
             }
         }
@@ -100,7 +114,12 @@ namespace Hamster.SpaceWar {
                 return;
 
             _time += dt;
-            CheckNextWave();
+            if (IsServer()) {
+                CheckNextWave();
+            }
+            else {
+                
+            }
         }
 
         public bool IsEnable() {
@@ -147,6 +166,10 @@ namespace Hamster.SpaceWar {
             ListPool<BaseEnemy>.Free(baseEnemies);
 
             ObjectPool<DamageInfo>.Free(damageInfo);
+        }
+
+        public int GetCurrentLevelEventIndex() {
+            return _eventIndex;
         }
     }
 }
