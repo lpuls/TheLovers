@@ -83,7 +83,7 @@ namespace Hamster.SpaceWar {
                 //    _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
                 //}
                 if (_inputCommand.IsCastAbility1) {
-                    _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
+                    _localAbilityComponent.Cast((int)EAbilityIndex.MainWeapon, 1.0f);
                 }
                 if (_inputCommand.IsDodge) {
                     IsDodge = true;

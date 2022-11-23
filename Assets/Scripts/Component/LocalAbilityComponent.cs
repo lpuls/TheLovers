@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public enum EAbilityIndex {
-        Fire = 0,
-        Ultimate = 1
+        MainWeapon = 0,
+        SecondaryWeapon = 1,
+        UltimateWeapon = 1
     }
 
     [ExecuteInEditMode]
@@ -34,20 +35,15 @@ namespace Hamster.SpaceWar {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(equipID, out Config.Weapon equipWeaponInfo)) {
                     if (id == equipWeaponInfo.TypeID)
                         realID = equipWeaponInfo.NextLv;
-                    else
-                        _weaponEquipIDs[(int)abilityIndex] = id;
                 }
             }
-            else {
-                _weaponEquipIDs[(int)abilityIndex] = id;
-            }
+            _weaponEquipIDs[(int)abilityIndex] = realID;
 
             // 更换武器
             if (_weapons.TryGetValue((int)abilityIndex, out List<WeaponComponent> weapons)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(realID, out Config.Weapon info)) {
                     // 通知UI变更
-                    MainUIModule mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
-                    mainUIModule.WeaponID.SetValue(realID);
+                    GameLogicUtility.SetMainWeaponIDDirty(gameObject);
 
                     // 更换生成器
                     BulletSpawner bulletSpawner = Asset.Load<BulletSpawner>(info.Path);
@@ -66,6 +62,10 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public bool TryGetWeaponID(int index, out int id) {
+            return _weaponEquipIDs.TryGetValue(index, out id);
+        }
+ 
         public void Tick(float dt) {
             var it = _weapons.GetEnumerator();
             while (it.MoveNext()) {

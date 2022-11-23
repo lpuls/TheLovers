@@ -55,7 +55,10 @@ namespace Hamster.SpaceWar {
             ship.TryGetOrAdd<MovementComponent>();
             LocalAbilityComponent localAbilityComponent = ship.TryGetOrAdd<LocalAbilityComponent>();
             if (null != localAbilityComponent) {
-                localAbilityComponent.ChangeWeapon(EAbilityIndex.Fire, (int)Config.WeaponType.Galting);
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig unitConfig))
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, unitConfig.ID);
+                else
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, (int)Config.WeaponType.Galting);
             }
             ServerPlayerController playerController = ship.TryGetOrAdd<ServerPlayerController>();
             if (null != playerController) {
@@ -92,6 +95,15 @@ namespace Hamster.SpaceWar {
             ship.layer = (int)ESpaceWarLayers.ENEMY;
             ship.transform.position = position;
             ship.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+            // 初始化武器
+            LocalAbilityComponent localAbilityComponent = ship.TryGetOrAdd<LocalAbilityComponent>();
+            if (null != localAbilityComponent) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig unitConfig))
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, unitConfig.WeaponID);
+                else
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, (int)Config.WeaponType.Galting);
+            }
 
             // 服务端即是客户端也是服务端
             if (ship.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
@@ -190,6 +202,16 @@ namespace Hamster.SpaceWar {
 
         public static void SetDodgeDirty(GameObject gameObject) {
             SetPropertyDirty(gameObject, EUpdateActorType.Dodge);
+        }
+
+        public static void SetMainWeaponIDDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.MainWeapon);
+        }
+        public static void SetSecondaryWeaponIDDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.SecondaryWeapon);
+        }
+        public static void SetUltimateWeaponIDDirty(GameObject gameObject) {
+            SetPropertyDirty(gameObject, EUpdateActorType.UltimateWeapon);
         }
 
         private static void SetPropertyDirty(GameObject gameObject, EUpdateActorType updateType) {

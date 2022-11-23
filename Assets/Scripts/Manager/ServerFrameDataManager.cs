@@ -165,6 +165,13 @@ namespace Hamster.SpaceWar {
                                 }
                             }
                             break;
+                        case EUpdateActorType.MainWeapon: {
+                                if (netSyncComponent.gameObject.TryGetComponent<LocalAbilityComponent>(out LocalAbilityComponent localAbilityComponent)) {
+                                    if (localAbilityComponent.TryGetWeaponID((int)EAbilityIndex.MainWeapon, out int id))
+                                        updateInfo.SetInt16ForData1((short)id);
+                                }
+                            }
+                            break;
                         default:
                             UnityEngine.Debug.LogError("Can't Add Update Info by " + type);
                             break;

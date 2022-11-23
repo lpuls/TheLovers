@@ -110,6 +110,7 @@ MonoBehaviour:
   InputKeyToValue: {fileID: 0}
   EnableDebugDraw: 1
   EnemyType: 0
+  AIBehaviourScript: {fileID: 0}
   _fireInterval: 0.5
   _closeDistance: 0.5
 --- !u!61 &1582562924637066771
@@ -160,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 5685879178270266555, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: Spawner
       value: 
-      objectReference: {fileID: 11400000, guid: 8e4820900c1dece4786813d8a89eff41, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7545856162634404008, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: m_RootOrder
       value: 0

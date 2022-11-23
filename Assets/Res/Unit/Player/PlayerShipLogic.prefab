@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 5685879178270266555, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: Spawner
       value: 
-      objectReference: {fileID: 11400000, guid: d491021279a34e94dbf13f382c202a1e, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7545856162634404008, guid: 4207af181ad223c4890f8179c13b2e9e, type: 3}
       propertyPath: m_RootOrder
       value: 0

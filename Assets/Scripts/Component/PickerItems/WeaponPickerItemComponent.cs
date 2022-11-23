@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public class WeaponPickerItemComponent : PickerItemComponent {
-        public EAbilityIndex AbilityIndex = EAbilityIndex.Fire;
+        public EAbilityIndex AbilityIndex = EAbilityIndex.MainWeapon;
         public Config.WeaponType WeaponID = Config.WeaponType.None;
 
         public override void OnPicker(PlayerController playerController) {

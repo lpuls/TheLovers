@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
     public class WeaponComponent : MonoBehaviour, ITrajectorySpanwer {
 
-        public EAbilityIndex Type = EAbilityIndex.Fire;
+        public EAbilityIndex Type = EAbilityIndex.MainWeapon;
         public BulletSpawner Spawner = null;
         public GameObject Parent = null;
         public int WeaponID = 0;

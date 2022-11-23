@@ -29,30 +29,30 @@ namespace Config {
             "IAEoCRINCgVTcGVlZBgFIAEoAhIOCgZEYW1hZ2UYBiABKAUiQwoHTWlzc2lv",
             "bhIKCgJJRBgBIAEoBRINCgVUaXRsZRgCIAEoCRIPCgdDb250ZXh0GAMgASgJ",
             "EgwKBFBhdGgYBCABKAkiRwoKUGNrZXJJdGVtcxIKCgJJRBgBIAEoBRIMCgRO",
-            "b3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJIpYB",
+            "b3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJIqgB",
             "CgpVbml0Q29uZmlnEgoKAklEGAEgASgFEgwKBFBhdGgYAiABKAkSEQoJTG9n",
             "aWNQYXRoGAMgASgJEg4KBkhlYWx0aBgEIAEoBRINCgVTcGVlZBgFIAEoAhIX",
             "Cg9Ecm9wUHJvYmFiaWxpdHkYBiADKAUSDQoFRHJvcHMYByADKAUSFAoMSW1w",
-            "YWN0RGFtYWdlGAggASgFIl4KBldlYXBvbhIKCgJJRBgBIAEoBRIMCgROb3Rl",
-            "GAIgASgJEgwKBFBhdGgYAyABKAkSDgoGTmV4dEx2GAQgASgFEg4KBlR5cGVJ",
-            "RBgFIAEoBRIMCgRJY29uGAYgASgJIisKCFZlY3RvcjNEEgkKAVgYASABKAIS",
-            "CQoBWRgCIAEoAhIJCgFaGAMgASgCIisKBkRlcGVuZBITCgtSZWxvYWRDb3Vu",
-            "dBgBIAEoBRIMCgRQYXRoGAIgASgJIpIBCgtHYW1lU2V0dGluZxIKCgJJRBgB",
-            "IAEoBRIRCglNYXhQbGF5ZXIYAiABKAUSEAoIU2VydmVySVAYAyABKAkSEgoK",
-            "U2VydmVyUG9ydBgEIAEoBRIQCghDbGllbnRJUBgFIAEoCRISCgpDbGllbnRQ",
-            "b3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsyBy5EZXBlbmQqGwoHRXhhbXBs",
-            "ZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1lTW9kZWwSEgoOR2FtZU1vZGVs",
-            "X05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xFEAESFgoSR2FtZU1vZGVsX01V",
-            "TFRJUExFEAIqUQoKV2VhcG9uVHlwZRITCg9XZWFwb25UeXBlX05PTkUQABIW",
-            "ChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJXZWFwb25UeXBlX1NIT1RHVU4Q",
-            "AkIJqgIGQ29uZmlnYgZwcm90bzM="));
+            "YWN0RGFtYWdlGAggASgFEhAKCFdlYXBvbklEGAkgASgFIl4KBldlYXBvbhIK",
+            "CgJJRBgBIAEoBRIMCgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSDgoGTmV4",
+            "dEx2GAQgASgFEg4KBlR5cGVJRBgFIAEoBRIMCgRJY29uGAYgASgJIisKCFZl",
+            "Y3RvcjNEEgkKAVgYASABKAISCQoBWRgCIAEoAhIJCgFaGAMgASgCIisKBkRl",
+            "cGVuZBITCgtSZWxvYWRDb3VudBgBIAEoBRIMCgRQYXRoGAIgASgJIpIBCgtH",
+            "YW1lU2V0dGluZxIKCgJJRBgBIAEoBRIRCglNYXhQbGF5ZXIYAiABKAUSEAoI",
+            "U2VydmVySVAYAyABKAkSEgoKU2VydmVyUG9ydBgEIAEoBRIQCghDbGllbnRJ",
+            "UBgFIAEoCRISCgpDbGllbnRQb3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsy",
+            "By5EZXBlbmQqGwoHRXhhbXBsZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1l",
+            "TW9kZWwSEgoOR2FtZU1vZGVsX05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xF",
+            "EAESFgoSR2FtZU1vZGVsX01VTFRJUExFEAIqUQoKV2VhcG9uVHlwZRITCg9X",
+            "ZWFwb25UeXBlX05PTkUQABIWChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJX",
+            "ZWFwb25UeXBlX1NIT1RHVU4QAkIJqgIGQ29uZmlnYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.BulletConfig), global::Config.BulletConfig.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.UnitConfig), global::Config.UnitConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.UnitConfig), global::Config.UnitConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage", "WeaponID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path", "NextLv", "TypeID", "Icon" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Vector3D), global::Config.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Depend), global::Config.Depend.Parser, new[]{ "ReloadCount", "Path" }, null, null, null),
@@ -810,6 +810,7 @@ namespace Config {
       dropProbability_ = other.dropProbability_.Clone();
       drops_ = other.drops_.Clone();
       impactDamage_ = other.impactDamage_;
+      weaponID_ = other.weaponID_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -904,6 +905,17 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "WeaponID" field.</summary>
+    public const int WeaponIDFieldNumber = 9;
+    private int weaponID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int WeaponID {
+      get { return weaponID_; }
+      set {
+        weaponID_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as UnitConfig);
@@ -925,6 +937,7 @@ namespace Config {
       if(!dropProbability_.Equals(other.dropProbability_)) return false;
       if(!drops_.Equals(other.drops_)) return false;
       if (ImpactDamage != other.ImpactDamage) return false;
+      if (WeaponID != other.WeaponID) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -939,6 +952,7 @@ namespace Config {
       hash ^= dropProbability_.GetHashCode();
       hash ^= drops_.GetHashCode();
       if (ImpactDamage != 0) hash ^= ImpactDamage.GetHashCode();
+      if (WeaponID != 0) hash ^= WeaponID.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -978,6 +992,10 @@ namespace Config {
         output.WriteRawTag(64);
         output.WriteInt32(ImpactDamage);
       }
+      if (WeaponID != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(WeaponID);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1005,6 +1023,9 @@ namespace Config {
       size += drops_.CalculateSize(_repeated_drops_codec);
       if (ImpactDamage != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ImpactDamage);
+      }
+      if (WeaponID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeaponID);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1036,6 +1057,9 @@ namespace Config {
       drops_.Add(other.drops_);
       if (other.ImpactDamage != 0) {
         ImpactDamage = other.ImpactDamage;
+      }
+      if (other.WeaponID != 0) {
+        WeaponID = other.WeaponID;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1080,6 +1104,10 @@ namespace Config {
           }
           case 64: {
             ImpactDamage = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            WeaponID = input.ReadInt32();
             break;
           }
         }

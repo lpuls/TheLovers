@@ -76,9 +76,11 @@ namespace Hamster.SpaceWar {
 
         public void Init() {
             // 读取配置
+            int weaponID = (int)Config.WeaponType.Galting;
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(_netSyncComponent.ConfigID, out Config.UnitConfig config)) {
                 _health = config.Health;
                 _maxHealth = config.Health;
+                weaponID = config.WeaponID;
             }
 
             // 确定UI
@@ -88,6 +90,7 @@ namespace Hamster.SpaceWar {
 
                 _mainUIModule.MaxHealth = _maxHealth;
                 _mainUIModule.Health.SetValue(_health);
+                _mainUIModule.WeaponID.SetValue(weaponID);
             }
             else if (null != _headHealthUI) {
                 _headHealthUI.gameObject.SetActive(true);
@@ -170,6 +173,12 @@ namespace Hamster.SpaceWar {
                     else if (!currentUpdateInfo.Data1.Boolean && IsDodging) {
                         IsDodging = false;
                     }
+                }
+
+                // 检查武器变化
+                if (current.TryGetUpdateInfo(netID, EUpdateActorType.MainWeapon, out currentUpdateInfo)) {
+                    MainUIModule mainUIModule = Single<UIManager>.GetInstance().GetModule<MainUIController>() as MainUIModule;
+                    mainUIModule.WeaponID.SetValue(currentUpdateInfo.Data1.Int16);
                 }
             }
         }

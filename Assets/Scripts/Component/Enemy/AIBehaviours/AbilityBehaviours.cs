@@ -5,7 +5,7 @@ namespace Hamster.SpaceWar {
     public class CastAbility : BaseBehaviour {
         public bool Loop = false;
         public float Interval = 1.0f;
-        public EAbilityIndex AbilityIndex = EAbilityIndex.Fire;
+        public EAbilityIndex AbilityIndex = EAbilityIndex.MainWeapon;
         public string BBKey = string.Empty;
 
 

@@ -26,6 +26,9 @@ namespace Hamster.SpaceWar {
         RoleState,
         Health,
         Dodge,
+        MainWeapon,
+        SecondaryWeapon,
+        UltimateWeapon,
 
         LevelEventIndex
     }
