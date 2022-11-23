@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: acab66c59b8813648b030c9561ceb213
+guid: 561189c7fbe9a604ca82bdc3477ad478
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000
   userData: 
-  assetBundleName: res/ui/missionui
+  assetBundleName: res/ui/levelselect/levelselectui
   assetBundleVariant: 

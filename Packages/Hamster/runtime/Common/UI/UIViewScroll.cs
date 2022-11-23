@@ -25,13 +25,12 @@ namespace Hamster {
     }
 
     public class UIViewScroll : MonoBehaviour {
-        private Transform _context = null;
+        [SerializeField] private Transform _context = null;
         private string _prefabPath = string.Empty;
         private HashSet<GameObject> _items = new HashSet<GameObject>();
 
         public void Init(string prefabPath) {
             _prefabPath = prefabPath;
-            _context = transform.Find("Scroll View/Viewport/Content");
         }
 
         public void AddItem<T>(UIViewScrollData data) where T: UIViewScrollItem {

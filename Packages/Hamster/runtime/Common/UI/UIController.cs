@@ -43,8 +43,10 @@ namespace Hamster {
         }
 
         public void Finish() {
-            _view.Finish();
-            _module.Finish();
+            if (null != _view)
+                _view.Finish();
+            if (null != _module)
+                _module.Finish();
             OnFinish();
 
             _view = null;

@@ -98,13 +98,24 @@ namespace Hamster {
         public void Close(Type controllerType, bool finish = true, float delay = -1) {
             if (_uiInfos.TryGetValue(controllerType, out UIInfo info)) {
                 if (finish) {
-                    AssetPool.Free(info.View.gameObject, delay);
                     info.Controller.Finish();
+                    AssetPool.Free(info.View.gameObject, delay);
                     info.View = null;
                 }
                 else {
                     info.View.Hide();  
                 }
+            }
+        }
+
+        public void CloseAll() {
+            foreach (var item in _uiInfos) {
+                if (null != item.Value.View) {
+                    if (null != item.Value.Controller)
+                        item.Value.Controller.Finish();
+                    AssetPool.Free(item.Value.View.gameObject);
+                }
+                item.Value.View = null;
             }
         }
 
