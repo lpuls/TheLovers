@@ -56,6 +56,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &122430346323519991
 GameObject:
@@ -113,6 +114,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &129663116165685966
 GameObject:
@@ -187,6 +189,7 @@ Transform:
   - {fileID: 835845627365553439}
   - {fileID: 3124374994099097212}
   - {fileID: 1206765268063595863}
+  - {fileID: 8868163706393455918}
   - {fileID: 7845465663603017319}
   m_Father: {fileID: 6913372618819913112}
   m_RootOrder: 1
@@ -313,6 +316,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &856930323175193003
 GameObject:
@@ -376,6 +380,7 @@ MonoBehaviour:
   - {x: 17.79, y: 0, z: 0}
   - {x: 43.64, y: -0.11, z: 0}
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &1605430797180649749
 GameObject:
@@ -725,6 +730,7 @@ MonoBehaviour:
   PathProperty: {fileID: 8214589978114803091}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &2197298144121737485
 GameObject:
@@ -737,7 +743,7 @@ GameObject:
   - component: {fileID: 3124374994099097212}
   - component: {fileID: 615061868455756711}
   m_Layer: 0
-  m_Name: Wave2
+  m_Name: Wave2_Frees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,6 +798,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &2520217740547107190
 GameObject:
@@ -850,6 +857,7 @@ MonoBehaviour:
   PathProperty: {fileID: 2304966197418415038}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &2527663785443278357
 GameObject:
@@ -973,6 +981,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &2593457591192275878
 GameObject:
@@ -985,7 +994,7 @@ GameObject:
   - component: {fileID: 2280777502267692580}
   - component: {fileID: 3427670122629675775}
   m_Layer: 0
-  m_Name: Wave0
+  m_Name: Wave0_Paths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1036,6 +1045,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &2995174904255656164
 GameObject:
@@ -1159,6 +1169,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &3289025875055121216
 GameObject:
@@ -1171,7 +1182,7 @@ GameObject:
   - component: {fileID: 7845465663603017319}
   - component: {fileID: 3640939028943504194}
   m_Layer: 0
-  m_Name: Wave4
+  m_Name: Wave5_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1191,7 +1202,7 @@ Transform:
   m_Children:
   - {fileID: 8036232794999747335}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3640939028943504194
 MonoBehaviour:
@@ -1218,6 +1229,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &3474412225583902692
 GameObject:
@@ -1521,7 +1533,7 @@ GameObject:
   - component: {fileID: 1206765268063595863}
   - component: {fileID: 5372964936572716562}
   m_Layer: 0
-  m_Name: Wave3
+  m_Name: Wave3_Frees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1570,6 +1582,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &4923456961706429596
 GameObject:
@@ -1984,6 +1997,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &5339302373802545961
 GameObject:
@@ -2042,6 +2056,7 @@ MonoBehaviour:
   PathProperty: {fileID: 9163480890902886440}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &5537732048029342519
 GameObject:
@@ -2300,6 +2315,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &5820438417878024675
 GameObject:
@@ -2423,6 +2439,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &5900294548450078994
 GameObject:
@@ -2546,6 +2563,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &6071783498580217346
 GameObject:
@@ -2615,6 +2633,7 @@ MonoBehaviour:
   - {x: 30.14, y: 10.01, z: 0}
   - {x: 43.57, y: 9.82, z: 0}
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 1
 --- !u!1 &6869272439126065269
 GameObject:
@@ -2932,6 +2951,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &7026915734691960369
 GameObject:
@@ -3086,6 +3106,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &7623936653766182530
 GameObject:
@@ -3209,6 +3230,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &7688592774467344114
 GameObject:
@@ -3332,6 +3354,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &7772297412938971970
 GameObject:
@@ -3389,6 +3412,65 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
+  EnableDebugDraw: 0
+--- !u!1 &7826987744469987971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8868163706393455918}
+  - component: {fileID: 4151745925185981645}
+  m_Layer: 0
+  m_Name: Wave4_WarningUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8868163706393455918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826987744469987971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4151745925185981645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826987744469987971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  SpawnID: 0
+  LocationIndex: 0
+  PathProperty: {fileID: 0}
+  Paths: []
+  MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &7859330530372472048
 GameObject:
@@ -3498,7 +3580,7 @@ GameObject:
   - component: {fileID: 835845627365553439}
   - component: {fileID: 3184713807021272911}
   m_Layer: 0
-  m_Name: Wave1
+  m_Name: Wave1_MissionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3543,6 +3625,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 1
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &8299108983104058278
 GameObject:
@@ -3612,6 +3695,7 @@ MonoBehaviour:
   - {x: 30.14, y: -10.14, z: 0}
   - {x: 43.57, y: -10.14, z: 0}
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &8336970104425737735
 GameObject:
@@ -3669,6 +3753,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &8397782320269786190
 GameObject:
@@ -3726,6 +3811,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &8420206997434658239
 GameObject:
@@ -3849,6 +3935,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &8775774323750886337
 GameObject:
@@ -3906,6 +3993,7 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0
 --- !u!1 &9024874823948188470
 GameObject:
@@ -3963,4 +4051,5 @@ MonoBehaviour:
   PathProperty: {fileID: 0}
   Paths: []
   MissionID: 0
+  EventUI: 0
   EnableDebugDraw: 0

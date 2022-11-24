@@ -15,8 +15,11 @@ namespace Hamster.SpaceWar {
             Location,
             Spawn,
             MissionUI,
-            Path
+            Path,
+            UI,
         }
+
+
 
         // public static List<string> LocationNames = new();
         public static LevelEditorProperty LevelParent = null;
@@ -46,6 +49,9 @@ namespace Hamster.SpaceWar {
 
         // MissionUI显示
         public int MissionID = 0;
+
+        // UI显示
+        public ELevelEventUI EventUI = ELevelEventUI.Warning;
 
         // debug
         public bool EnableDebugDraw = false;
@@ -193,8 +199,12 @@ namespace Hamster.SpaceWar {
                         levelMissionUIScriptObject.MissionID = MissionID;
                         return levelMissionUIScriptObject;
                     }
-                case ELevelProperty.Path:
-                    break;
+                case ELevelProperty.Path: {
+                        LevelUIScriptObject levelUIScriptObject = ScriptableObject.CreateInstance<LevelUIScriptObject>();
+                        levelUIScriptObject.Time = Time;
+                        levelUIScriptObject.UIType = EventUI;
+                        return levelUIScriptObject;
+                    }
             }
             return null;
         }
@@ -327,6 +337,10 @@ namespace Hamster.SpaceWar {
                         if (GUILayout.Button("更新")) {
                             levelEditorProperty.UpdatePath();
                         }
+                    }
+                    break;
+                case LevelEditorProperty.ELevelProperty.UI: {
+                        levelEditorProperty.EventUI = (ELevelEventUI)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
                     }
                     break;
             }

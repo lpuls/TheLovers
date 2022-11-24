@@ -64,6 +64,16 @@ namespace Hamster {
             GameObject.DontDestroyOnLoad(eventSystem);
         }
 
+        public void ResetUICamera() {
+            GameObject gameObject = GameObject.Find("UICamera");
+            if (gameObject.TryGetComponent<Camera>(out Camera camera) && _canvas.TryGetComponent<Canvas>(out Canvas canvas)) {
+                canvas.worldCamera = camera;
+            }
+            else {
+                Debug.LogError("Can't Find UICamera or Canvas");
+            }
+        }
+
         public UIModule GetModule<T>() where T : IUIController {
             if (_uiInfos.TryGetValue(typeof(T), out UIInfo info)) {
                 return info.Module;

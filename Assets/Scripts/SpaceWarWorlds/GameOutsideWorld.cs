@@ -13,8 +13,9 @@ namespace Hamster.SpaceWar {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
             base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
+            UIManager.ResetUICamera();
 
-            Single<UIManager>.GetInstance().Open<LevelSelectController>();
+            //Single<UIManager>.GetInstance().Open<LevelSelectController>();
         }
 
         protected IEnumerator LoadScene(string path, string sceneName, Config.GameModel gameModel) {
