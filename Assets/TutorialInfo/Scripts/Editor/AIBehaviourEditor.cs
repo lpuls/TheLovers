@@ -14,13 +14,14 @@ namespace Hamster.SpaceWar {
             AIBehaviourParser.BehaviourDict.Add("RandomMove", CreateRandomMove);
             AIBehaviourParser.BehaviourDict.Add("CastAbility", CreateCastAbility);
             AIBehaviourParser.BehaviourDict.Add("MoveIntoScreen", CreateMoveIntoScreen);
+            AIBehaviourParser.BehaviourDict.Add("EnemyMoveByPath", CreateEnemyMoveByPath);
 
             List<string> paths = new List<string>();
             GetDirs(Application.dataPath + "/OriginRes/AI", paths);
             foreach (var item in paths) {
                 TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(item);
                 if (null != textAsset)
-                    AIBehaviourParser.Parse(textAsset.text, "Assets/Res/AI/" + textAsset.name + ".asset");
+                    AIBehaviourParser.Parse(textAsset.text, "Assets/Res/ScriptObjects/AI/" + textAsset.name + ".asset");
             }
         }
 
@@ -76,5 +77,11 @@ namespace Hamster.SpaceWar {
                 Debug.LogError("Error CastAbility Behaviour Arg " + commands[2]);
             return behaviour;
         }
+
+        private static BaseBehaviour CreateEnemyMoveByPath(string[] commands) {
+            EnemyMoveByPath enemyMoveByPath = LevelConfigScriptObject.CreateInstance<EnemyMoveByPath>();
+            enemyMoveByPath.BBKey = string.Join("_", commands).Replace(";", "_") + "_Index";
+            return enemyMoveByPath;
+        } 
     }
 }

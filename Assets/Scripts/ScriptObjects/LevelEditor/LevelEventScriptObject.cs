@@ -10,7 +10,7 @@ namespace Hamster.SpaceWar {
     public interface ILevelManager {
         float GetTime();
         int GetEnemeyCount();
-        void SpawnUnit(int id, int locationIndex);
+        void SpawnUnit(int id, int locationIndex, List<Vector3> path);
         void DestroyAllUnit();
         bool IsClient();
 
@@ -64,7 +64,7 @@ namespace Hamster.SpaceWar {
                 return;
 
             foreach (var item in UnitSpawns) {
-                levelManager.SpawnUnit(item.ID, item.LocationIndex);
+                levelManager.SpawnUnit(item.ID, item.LocationIndex, item.Path.Count > 0 ? item.Path : null);
             }
         }
 

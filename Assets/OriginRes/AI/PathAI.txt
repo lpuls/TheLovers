@@ -1,0 +1,6 @@
+Executor
+    ParallelBehaviour
+        CastAbility;true;0;1.0
+        EnemyMoveByPath
+    End
+ExecutorEnd

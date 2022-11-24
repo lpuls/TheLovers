@@ -17,6 +17,7 @@ namespace Hamster.SpaceWar {
         HitOther,
         TimeOut,
         BePick,
+        SystemKill
     }
 
     public enum EUpdateActorType {

@@ -100,11 +100,12 @@ namespace Hamster.SpaceWar {
             return _aliveEnemys.Count;
         }
 
-        public void SpawnUnit(int id, int locationIndex) {
+        public void SpawnUnit(int id, int locationIndex, List<Vector3> path) {
             GameObject ship = GameLogicUtility.ServerCreateEnemy(id, _levelConfig.FixLocations[locationIndex], 180);
             if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                 baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
                 baseEnemy.OnDie += OnEnemyDie;
+                baseEnemy.MovePath = path;
                 _aliveEnemys.Add(baseEnemy);
                 GameLogicUtility.SetPositionDirty(ship);
             }

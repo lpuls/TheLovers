@@ -15,9 +15,11 @@ namespace Hamster.SpaceWar {
             Location,
             Spawn,
             MissionUI,
+            Path
         }
 
-        public static List<string> LocationNames = new();
+        // public static List<string> LocationNames = new();
+        public static LevelEditorProperty LevelParent = null;
 
         public ELevelProperty LevelProperty = ELevelProperty.None;
 
@@ -26,18 +28,49 @@ namespace Hamster.SpaceWar {
         public Dictionary<string, Vector3> FixLocations = new();          // 卡关中的特殊点 
 
         public List<LevelEditorProperty> LevelWaves = new();  // 敌人波数生成数据
+        public List<LevelEditorProperty> UnitPaths = new();  // 敌人移动路径数据
 
         // 关卡波数
         public float Time = 0;
         public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
         public List<LevelEditorProperty> UnitSpawns = new();  // 敌人生成数据
+        
 
         // 类型为对象生成
         public int SpawnID = 0;
         public int LocationIndex = 0;
+        public LevelEditorProperty PathProperty = null;
+
+        // 路径
+        public List<Vector3> Paths = new();
 
         // MissionUI显示
         public int MissionID = 0;
+
+        // debug
+        public bool EnableDebugDraw = false;
+
+
+        public void UpdatePath() {
+            Paths.Clear();
+            for (int i = 0; i < transform.childCount; i++) {
+                Transform child = transform.GetChild(i);
+                child.name = "PathNode " + i;
+                Paths.Add(child.position);
+            }
+        }
+
+        public void UpdateUnitSpawn() {
+            for (int i = 0; i < transform.childCount; i++) {
+                Transform child = transform.GetChild(i);
+                if (child.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty levelEditorProperty)) {
+                    if (ELevelProperty.Path == levelEditorProperty.LevelProperty) {
+                        PathProperty = levelEditorProperty;
+                        levelEditorProperty.UpdatePath();
+                    }
+                }
+            }
+        }
 
         public void UpdateWaveConfig() {
             UnitSpawns.Clear();
@@ -46,6 +79,7 @@ namespace Hamster.SpaceWar {
                 if (child.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
                     if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Spawn) {
                         temp.name = string.Format("Spawn {0} int location {1}", temp.SpawnID, temp.LocationIndex);
+                        temp.UpdateUnitSpawn();
                         UnitSpawns.Add(temp);
                     }
                 }
@@ -55,7 +89,7 @@ namespace Hamster.SpaceWar {
         public void UpdateLevelConfig() {
             {
                 FixLocations.Clear();
-                LocationNames.Clear();
+                // LocationNames.Clear();
                 Transform waveTransform = transform.Find("FixLocations");
                 if (null == waveTransform) {
                     GameObject fixLocationsGameObject = new GameObject("FixLocations");
@@ -67,7 +101,7 @@ namespace Hamster.SpaceWar {
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
                         if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Location) {
                             FixLocations.Add(temp.name, temp.transform.position);
-                            LocationNames.Add(temp.name);
+                            // LocationNames.Add(temp.name);
                         }
                     }
                 }
@@ -115,8 +149,8 @@ namespace Hamster.SpaceWar {
             switch (LevelProperty) {
                 case ELevelProperty.Level: {
                         UpdateLevelConfig();
-                        LevelEditorProperty.LocationNames.Clear();
-                        LevelEditorProperty.LocationNames.AddRange(FixLocations.Keys);
+                        // LevelEditorProperty.LocationNames.Clear();
+                        // LevelEditorProperty.LocationNames.AddRange(FixLocations.Keys);
 
                         LevelConfigScriptObject levelConfigScriptObject = ScriptableObject.CreateInstance<LevelConfigScriptObject>();
                         levelConfigScriptObject.name = gameObject.name;
@@ -143,10 +177,13 @@ namespace Hamster.SpaceWar {
                 case ELevelProperty.Location:
                     break;
                 case ELevelProperty.Spawn: {
+                        UpdateUnitSpawn();
                         UnitSpawnScriptObject unitSpawnScriptObject = ScriptableObject.CreateInstance<UnitSpawnScriptObject>();
                         unitSpawnScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         unitSpawnScriptObject.ID = SpawnID;
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
+                        if (null != PathProperty)
+                            unitSpawnScriptObject.Path.AddRange(PathProperty.Paths);
                         return unitSpawnScriptObject;
                     }
                 case ELevelProperty.MissionUI: {
@@ -156,20 +193,44 @@ namespace Hamster.SpaceWar {
                         levelMissionUIScriptObject.MissionID = MissionID;
                         return levelMissionUIScriptObject;
                     }
+                case ELevelProperty.Path:
+                    break;
             }
             return null;
         }
 
         public void OnDrawGizmos() {
+            if (!EnableDebugDraw)
+                return;
+
             switch (LevelProperty) {
                 case ELevelProperty.Level:
                     break;
                 case ELevelProperty.Wave:
                     break;
-                case ELevelProperty.Location:
-                    Handles.Label(transform.position, gameObject.name + "-" + LocationNames.IndexOf(gameObject.name));
+                case ELevelProperty.Location: {
+                        int index = 0;
+                        var it = LevelEditorProperty.LevelParent.FixLocations.Keys.GetEnumerator();
+                        while (it.MoveNext()) {
+                            if (it.Current == gameObject.name) {
+                                break;
+                            }
+                            index++;
+                        }
+                        Handles.Label(transform.position, gameObject.name + "-" + index);
+                    }
                     break;
                 case ELevelProperty.Spawn:
+                    break;
+                case ELevelProperty.Path: {
+                        if (Paths.Count > 0) {
+                            Gizmos.DrawWireSphere(Paths[0], 0.5f);
+                            for (int i = 1; i < Paths.Count; i++) {
+                                Gizmos.DrawLine(Paths[i - 1], Paths[i]);
+                                Gizmos.DrawWireSphere(Paths[i], 0.5f);
+                            }
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -183,18 +244,30 @@ namespace Hamster.SpaceWar {
     [CustomEditor(typeof(Hamster.SpaceWar.LevelEditorProperty))]
     public class LevelEditorPropertyInspector : UnityEditor.Editor {
 
+        private string[] FixLocationNames = new string[128];
+
+        public void OnEnable() {
+            LevelEditorProperty levelEditorProperty = (LevelEditorProperty)target;
+            if (LevelEditorProperty.ELevelProperty.Level == levelEditorProperty.LevelProperty) {
+                LevelEditorProperty.LevelParent = levelEditorProperty;
+                levelEditorProperty.UpdateLevelConfig();
+                System.Array.Clear(FixLocationNames, 0, 128);
+                LevelEditorProperty.LevelParent.FixLocations.Keys.CopyTo(FixLocationNames, 0);
+            }
+        }
         public override void OnInspectorGUI() {
             serializedObject.Update();
             LevelEditorProperty levelEditorProperty = (LevelEditorProperty)target;
 
             levelEditorProperty.LevelProperty = (LevelEditorProperty.ELevelProperty)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.LevelProperty);
+            levelEditorProperty.EnableDebugDraw = EditorGUILayout.Toggle("启用调试", levelEditorProperty.EnableDebugDraw);
 
             switch (levelEditorProperty.LevelProperty) {
                 case LevelEditorProperty.ELevelProperty.Spawn: {
                         levelEditorProperty.SpawnID = EditorGUILayout.IntField("生成ID", levelEditorProperty.SpawnID);
                         //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
-                        if (LevelEditorProperty.LocationNames.Count > 0)
-                            levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, LevelEditorProperty.LocationNames.ToArray());
+                        if (LevelEditorProperty.LevelParent.FixLocations.Count > 0)
+                            levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, FixLocationNames);
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
@@ -244,6 +317,16 @@ namespace Hamster.SpaceWar {
                 case LevelEditorProperty.ELevelProperty.MissionUI: {
                         levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
                         levelEditorProperty.MissionID = EditorGUILayout.IntField("任务ID", levelEditorProperty.MissionID);
+                    }
+                    break;
+                case LevelEditorProperty.ELevelProperty.Path: {
+                        int index = 0;
+                        foreach (var item in levelEditorProperty.Paths) {
+                            EditorGUILayout.LabelField(string.Format("Path{0}: {1}", index++, item));
+                        }
+                        if (GUILayout.Button("更新")) {
+                            levelEditorProperty.UpdatePath();
+                        }
                     }
                     break;
             }

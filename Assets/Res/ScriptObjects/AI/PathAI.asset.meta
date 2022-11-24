@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 8e4820900c1dece4786813d8a89eff41
+guid: 2b1e5cbdac12a064daa28e543512205d
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
   userData: 
-  assetBundleName: res/scriptobjects/bulletspanwer/shotgunspawnerlv3
+  assetBundleName: res/scriptobjects/ai/pathai
   assetBundleVariant: 

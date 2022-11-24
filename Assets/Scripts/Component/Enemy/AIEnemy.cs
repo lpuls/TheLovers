@@ -42,7 +42,7 @@ namespace Hamster.SpaceWar {
             _fireTime += dt;
             if (_fireTime >= _fireInterval) {
                 _fireTime -= _fireInterval;
-                _localAbilityComponent.Cast((int)EAbilityIndex.Fire, 1.0f);
+                _localAbilityComponent.Cast((int)EAbilityIndex.MainWeapon, 1.0f);
             }
         }
 

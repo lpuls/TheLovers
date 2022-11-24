@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8125182081113670273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102adcdfe693c504f8127a653e93e7dd, type: 3}
+  m_Name: Initialize
+  m_EditorClassIdentifier: 
+  Behaviours: []
+  BBKey: 
+--- !u!114 &-4865080727742348606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cdb21838c1aae4fba7d491b0d3a176, type: 3}
+  m_Name: ParallelBehaviour
+  m_EditorClassIdentifier: 
+  Behaviours:
+  - {fileID: -1806724184124771716}
+  - {fileID: 6004144305071645674}
+  BBKey: _Execute_List
+--- !u!114 &-1806724184124771716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CastAbility;true;0;1.0
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:CastAbility
+  Loop: 1
+  Interval: 1
+  AbilityIndex: 0
+  BBKey: CastAbility_true_0_1.0Interval
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98e97b0f9f3af14bb3b24db9e1020cc, type: 3}
+  m_Name: PathAI
+  m_EditorClassIdentifier: 
+  Initialize: {fileID: -8125182081113670273}
+  Executor: {fileID: 5662589776468509251}
+  Finish: {fileID: 3224882288334584151}
+--- !u!114 &3224882288334584151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102adcdfe693c504f8127a653e93e7dd, type: 3}
+  m_Name: Finish
+  m_EditorClassIdentifier: 
+  Behaviours: []
+  BBKey: 
+--- !u!114 &5662589776468509251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102adcdfe693c504f8127a653e93e7dd, type: 3}
+  m_Name: Executor
+  m_EditorClassIdentifier: 
+  Behaviours:
+  - {fileID: -4865080727742348606}
+  BBKey: Base_Execute_Index
+--- !u!114 &6004144305071645674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: EnemyMoveByPath
+  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:EnemyMoveByPath
+  BBKey: EnemyMoveByPath_Index

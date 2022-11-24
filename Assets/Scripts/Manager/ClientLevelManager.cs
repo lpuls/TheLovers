@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Hamster.SpaceWar {
     public class ClientLevelManager : MonoBehaviour, ILevelManager {
@@ -17,7 +18,7 @@ namespace Hamster.SpaceWar {
             return _time;
         }
 
-        public void SpawnUnit(int id, int locationIndex) {
+        public void SpawnUnit(int id, int locationIndex, List<Vector3> path) {
         }
 
         public bool IsClient() {

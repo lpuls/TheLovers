@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
@@ -15,6 +16,7 @@ namespace Hamster.SpaceWar {
         
         public EEnemyType EnemyType = EEnemyType.Normal;
         public AIBehaviourScript AIBehaviourScript = null;
+        public List<Vector3> MovePath = null;
 
         public override void Awake() {
             base.Awake();
@@ -23,7 +25,7 @@ namespace Hamster.SpaceWar {
 
             OnDie += OnDieSpawnItem;
 
-            AIBehaviourScript = Asset.Load<AIBehaviourScript>("Res/ScriptObjects/AI/BaseAI");
+            AIBehaviourScript = Asset.Load<AIBehaviourScript>("Res/ScriptObjects/AI/PathAI");
             if (null != AIBehaviourScript) {
                 AIBehaviour.Initialize(AIBehaviourScript, gameObject);
                 AIBehaviour.Run();
@@ -45,6 +47,16 @@ namespace Hamster.SpaceWar {
                     }
                 }
             }
+        }
+
+        public void ForceKill() {
+            DamageInfo damageInfo = ObjectPool<DamageInfo>.Malloc();
+            damageInfo.Caster = null;
+            damageInfo.Murderer = null;
+            damageInfo.Damage = 1000;
+            damageInfo.DamageReason = EDamageReason.SystemKill;
+
+            TakeDamage(damageInfo);
         }
 
         public override void Tick(float dt) {
