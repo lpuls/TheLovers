@@ -21,6 +21,10 @@ namespace Hamster.SpaceWar {
         public void SpawnUnit(UnitSpawnScriptObject data) {
         }
 
+        public int GetPendingSpawnUnitCount() {
+            return 0;
+        }
+
         public bool IsClient() {
             return true;
         }

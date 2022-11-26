@@ -37,9 +37,10 @@ namespace Hamster.SpaceWar {
         public float Time = 0;
         public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
         public List<LevelEditorProperty> UnitSpawns = new();  // 敌人生成数据
-        
+
 
         // 类型为对象生成
+        public float DelaySpawn = 0;
         public int SpawnID = 0;
         public int LocationIndex = 0;
         public string AIAssetPath = string.Empty;
@@ -216,6 +217,7 @@ namespace Hamster.SpaceWar {
                         UnitSpawnScriptObject unitSpawnScriptObject = ScriptableObject.CreateInstance<UnitSpawnScriptObject>();
                         unitSpawnScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         unitSpawnScriptObject.ID = SpawnID;
+                        unitSpawnScriptObject.Delay = DelaySpawn;
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
                         unitSpawnScriptObject.AIAssetPath = AIAssetPath;
                         if (null != PathProperty)
@@ -305,6 +307,7 @@ namespace Hamster.SpaceWar {
             switch (levelEditorProperty.LevelProperty) {
                 case LevelEditorProperty.ELevelProperty.Spawn: {
                         levelEditorProperty.SpawnID = EditorGUILayout.IntField("生成ID", levelEditorProperty.SpawnID);
+                        levelEditorProperty.DelaySpawn = EditorGUILayout.FloatField("延迟生成时间", levelEditorProperty.DelaySpawn);
                         levelEditorProperty.AIAssetPath = EditorGUILayout.TextField("行为树路径", levelEditorProperty.AIAssetPath);
                         //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
                         if (LevelEditorProperty.LevelParent.FixLocations.Count > 0)

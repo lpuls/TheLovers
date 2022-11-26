@@ -10,6 +10,7 @@ namespace Hamster.SpaceWar {
     public interface ILevelManager {
         float GetTime();
         int GetEnemeyCount();
+        int GetPendingSpawnUnitCount();
         void SpawnUnit(UnitSpawnScriptObject data);
         void DestroyAllUnit();
         bool IsClient();
@@ -50,7 +51,7 @@ namespace Hamster.SpaceWar {
                 return levelManager.GetTime() >= Time;
             }
             else if (ELevelWaveCompleteType.WaitAllDie == CompleteType) {
-                return levelManager.GetEnemeyCount() <= 0;
+                return levelManager.GetEnemeyCount() <= 0 && levelManager.GetPendingSpawnUnitCount() <= 0;
             }
             return false;
         }
@@ -69,9 +70,19 @@ namespace Hamster.SpaceWar {
         }
 
 #if UNITY_EDITOR
+        private int CompareUnitSpawnByDelay(UnitSpawnScriptObject x, UnitSpawnScriptObject y) {
+            if (x.Delay > y.Delay)
+                return 1;
+            else if (x.Delay < y.Delay)
+                return -1;
+            else
+                return 0;
+        }
+
         public override void Save(ScriptableObject parent) {
             base.Save(parent);
 
+            UnitSpawns.Sort(CompareUnitSpawnByDelay);
             foreach (var item in UnitSpawns) {
                 item.Save(this);
             }

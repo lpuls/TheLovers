@@ -10,6 +10,7 @@ namespace Hamster.SpaceWar {
         private float _time = 0.0f;
         private int _eventIndex = 0;
         private LevelConfigScriptObject _levelConfig = null;
+        private List<UnitSpawnScriptObject> _pendingSpawnUnit = new List<UnitSpawnScriptObject>(32);
 
         public void Initilze(string configPath) {
             _levelConfig = Asset.Load<LevelConfigScriptObject>(configPath);
@@ -31,6 +32,9 @@ namespace Hamster.SpaceWar {
 
             // 进入下一波敌人
             if (enterNext) {
+                if (_pendingSpawnUnit.Count > 0) 
+                    Debug.LogWarningFormat("Pending Spawn Count > 0");
+                _pendingSpawnUnit.Clear();
                 EnterNextWave();
             }
         }
@@ -86,6 +90,23 @@ namespace Hamster.SpaceWar {
 
             _time += dt;
             CheckNextWave();
+
+            // 检查延时生成的单位
+            List<int> pendingKill = ListPool<int>.Malloc();
+            for (int i = 0; i < _pendingSpawnUnit.Count; i++) {
+                UnitSpawnScriptObject item = _pendingSpawnUnit[i];
+                if (item.Delay <= _time) {
+                    pendingKill.Add(i);
+                    SpawnUnitImpl(item);
+                }
+                else {
+                    break;
+                }
+            }
+            foreach (var item in pendingKill) {
+                _pendingSpawnUnit.RemoveAt(item);
+            }
+            ListPool<int>.Free(pendingKill);
         }
 
         public bool IsEnable() {
@@ -101,6 +122,15 @@ namespace Hamster.SpaceWar {
         }
 
         public void SpawnUnit(UnitSpawnScriptObject data) {
+            if (data.Delay > 0) {
+                _pendingSpawnUnit.Add(data);
+            }
+            else {
+                SpawnUnitImpl(data);
+            }
+        }
+
+        private void SpawnUnitImpl(UnitSpawnScriptObject data) {
             GameObject ship = GameLogicUtility.ServerCreateEnemy(data.ID, _levelConfig.FixLocations[data.LocationIndex], 180);
             if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                 baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
@@ -138,6 +168,10 @@ namespace Hamster.SpaceWar {
 
         public bool IsClient() {
             return false;
+        }
+
+        public int GetPendingSpawnUnitCount() {
+            return _pendingSpawnUnit.Count;
         }
 
     }
