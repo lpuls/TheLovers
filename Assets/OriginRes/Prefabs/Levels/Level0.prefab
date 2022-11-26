@@ -51,6 +51,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 8
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -112,6 +113,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 9
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -317,6 +319,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -381,6 +384,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -741,6 +745,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 7
   AIAssetPath: Res/ScriptObjects/AI/PathAI
@@ -812,6 +817,7 @@ MonoBehaviour:
   - {fileID: 498626077310612082}
   - {fileID: 7483128973586545690}
   - {fileID: 5301602677412179243}
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -874,6 +880,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 6
   AIAssetPath: Res/ScriptObjects/AI/PathAI
@@ -1001,6 +1008,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -1068,6 +1076,7 @@ MonoBehaviour:
   - {fileID: 7219263726036079211}
   - {fileID: 2355683766479922590}
   - {fileID: 469492414881286574}
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -1195,6 +1204,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -1258,6 +1268,7 @@ MonoBehaviour:
   CompleteType: 1
   UnitSpawns:
   - {fileID: 1563014680382382438}
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -1614,6 +1625,7 @@ MonoBehaviour:
   UnitSpawns:
   - {fileID: 8074620875575778610}
   - {fileID: 5767132702851279748}
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -2032,6 +2044,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -2094,6 +2107,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/PathAI
@@ -2357,6 +2371,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -2484,6 +2499,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -2611,6 +2627,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -2678,6 +2695,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3015,6 +3033,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3173,6 +3192,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 8
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -3300,6 +3320,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3427,6 +3448,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3488,6 +3510,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 3
   SpawnID: 11
   LocationIndex: 7
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -3549,6 +3572,7 @@ MonoBehaviour:
   Time: 3
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3707,6 +3731,7 @@ MonoBehaviour:
   Time: 3
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3774,6 +3799,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -3841,6 +3867,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 1
   SpawnID: 11
   LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -3902,6 +3929,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 101
   LocationIndex: 6
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -4029,6 +4057,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
   AIAssetPath: 
@@ -4090,6 +4119,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 9
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
@@ -4151,6 +4181,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  DelaySpawn: 2
   SpawnID: 10
   LocationIndex: 6
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
