@@ -97,6 +97,11 @@ namespace Hamster.SpaceWar {
                             updateInfo.Data1.Int32 = levelManager.GetCurrentLevelEventIndex();
                         }
                         break;
+                    case EUpdateActorType.MissionResult: {
+                            LevelManager levelManager = world.GetManager<LevelManager>();
+                            updateInfo.Data1.Boolean = levelManager.GetGameResult();
+                        }
+                        break;
                     default:
                         UnityEngine.Debug.LogError("Can't Add System Update Info by " + item);
                         break;

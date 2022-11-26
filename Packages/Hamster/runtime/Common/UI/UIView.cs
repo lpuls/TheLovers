@@ -16,7 +16,7 @@ namespace Hamster {
             return child.GetComponent<T>();
         }
 
-        public T GetMonoComponentFromChild<T>(string path) where T : MonoBehaviour {
+        public T GetMonoComponentFromChild<T>(string path) where T : Behaviour {
             Transform child = transform.Find(path);
             if (null == child)
                 return null;

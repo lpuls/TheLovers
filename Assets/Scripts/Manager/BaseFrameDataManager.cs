@@ -31,7 +31,8 @@ namespace Hamster.SpaceWar {
         SecondaryWeapon,
         UltimateWeapon,
 
-        LevelEventIndex
+        LevelEventIndex,
+        MissionResult,
     }
 
     public class SpawnInfo : IFrameInfo, IPool {

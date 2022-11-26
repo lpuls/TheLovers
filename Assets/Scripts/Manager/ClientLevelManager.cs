@@ -56,9 +56,15 @@ namespace Hamster.SpaceWar {
         }
 
         public void OnFrameDataUpdate(FrameData pre, FrameData current) {
-            if (null != current 
-                && current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info)) {
-                SetLevelEventIndex(info.Data1.Int32);
+            if (null != current) {
+                if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info))
+                    SetLevelEventIndex(info.Data1.Int32);
+                if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.MissionResult, out info)) {
+                    Single<UIManager>.GetInstance().Close<MainUIController>();
+                    Single<UIManager>.GetInstance().Open<MissionOverUIController>();
+                    MissionOverUIModule module = Single<UIManager>.GetInstance().GetModule<MissionOverUIController>() as MissionOverUIModule;
+                    module.IsComplete.SetValue(info.Data1.Boolean);
+                }
             }
         }
 

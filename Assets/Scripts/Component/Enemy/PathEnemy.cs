@@ -4,12 +4,12 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
     public class PathEnemy : BaseEnemy {
         public float CurrentTime = 0;
-        public MovePath MovePath = null;
+        // public MovePath MovePath = null;
 
         private bool _beginMove = false;
 
         public void BeginMove(MovePath movePath) {
-            MovePath = movePath;
+            // MovePath = movePath;
             CurrentTime = 0;
             _beginMove = false;
         }
@@ -21,15 +21,15 @@ namespace Hamster.SpaceWar {
 
             base.Tick(dt);
 
-            if (null != MovePath && _beginMove) {
-                CurrentTime += dt;
-                Vector3 delta = MovePath.Evaluate(CurrentTime);
-                MoveByDelta(delta);
+            //if (null != MovePath && _beginMove) {
+            //    CurrentTime += dt;
+            //    Vector3 delta = MovePath.Evaluate(CurrentTime);
+            //    MoveByDelta(delta);
 
-                if (CurrentTime >= MovePath.Time) {
-                    _netSyncComponent.Kill(EDestroyActorReason.TimeOut);
-                }
-            }
+            //    if (CurrentTime >= MovePath.Time) {
+            //        _netSyncComponent.Kill(EDestroyActorReason.TimeOut);
+            //    }
+            //}
         }
 
         protected void MoveByDelta(Vector3 delta) {

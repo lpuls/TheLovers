@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
         public bool EnableSpawn = true;
         private List<BaseEnemy> _aliveEnemys = new();
 
+        private bool _gameResult = false;
         private float _time = 0.0f;
         private int _eventIndex = 0;
         private LevelConfigScriptObject _levelConfig = null;
@@ -26,7 +27,7 @@ namespace Hamster.SpaceWar {
 
             // 检查是否有进入下一波的条件
             bool enterNext = false;
-            if (currentEvent.IsComplete(this)) {
+            if (null != currentEvent && currentEvent.IsComplete(this)) {
                 enterNext = true;
             }
 
@@ -45,7 +46,6 @@ namespace Hamster.SpaceWar {
             if (nextWaveIndex >= 0 && nextWaveIndex < _levelConfig.LevelWaves.Count)
                 nextWave = _levelConfig.LevelWaves[nextWaveIndex];
 
-            Debug.Assert(null != nextWave, "Next wave is null");
             if (null != nextWave) {
                 // 判断是否到达下一波的条件，如果是则生成下一波的敌人
                 nextWave.OnEnter(this);
@@ -57,6 +57,9 @@ namespace Hamster.SpaceWar {
             }
             else if (nextWaveIndex >= _levelConfig.LevelWaves.Count) {
                 // TODO 通过关卡结束
+                _eventIndex = -1;
+                _gameResult = true;
+                World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.LevelEventIndex);
             }
         }
 
@@ -172,6 +175,10 @@ namespace Hamster.SpaceWar {
 
         public int GetPendingSpawnUnitCount() {
             return _pendingSpawnUnit.Count;
+        }
+
+        public bool GetGameResult() {
+            return _gameResult;
         }
 
     }
