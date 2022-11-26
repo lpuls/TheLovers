@@ -18,7 +18,7 @@ namespace Hamster.SpaceWar {
             return _time;
         }
 
-        public void SpawnUnit(int id, int locationIndex, List<Vector3> path) {
+        public void SpawnUnit(UnitSpawnScriptObject data) {
         }
 
         public bool IsClient() {

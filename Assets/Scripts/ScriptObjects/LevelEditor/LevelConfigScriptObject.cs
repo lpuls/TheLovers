@@ -7,6 +7,7 @@ namespace Hamster.SpaceWar {
     public class UnitSpawnScriptObject : ScriptableObject {
         public int ID = 0;
         public int LocationIndex = 0;
+        public string AIAssetPath = string.Empty;
         public List<Vector3> Path = new List<Vector3>();
 
 #if UNITY_EDITOR

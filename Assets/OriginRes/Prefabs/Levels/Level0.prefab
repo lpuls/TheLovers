@@ -53,7 +53,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 8
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -111,7 +114,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 9
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -313,7 +319,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -374,10 +383,17 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths:
   - {x: 43.49, y: -0.09, z: 0}
+  - {x: 37.08588, y: 11.009187, z: 0}
+  - {x: 24.27172, y: 11.054072, z: 0}
   - {x: 17.79, y: 0, z: 0}
+  - {x: 24.32162, y: 11.102872, z: 0}
+  - {x: 37.20311, y: 11.048056, z: 0}
   - {x: 43.64, y: -0.11, z: 0}
   MissionID: 0
   EventUI: 0
@@ -727,7 +743,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 7
+  AIAssetPath: Res/ScriptObjects/AI/PathAI
   PathProperty: {fileID: 8214589978114803091}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -795,7 +814,10 @@ MonoBehaviour:
   - {fileID: 5301602677412179243}
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -854,7 +876,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 6
+  AIAssetPath: Res/ScriptObjects/AI/PathAI
   PathProperty: {fileID: 2304966197418415038}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -978,7 +1003,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -1042,7 +1070,10 @@ MonoBehaviour:
   - {fileID: 469492414881286574}
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -1166,7 +1197,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -1226,7 +1260,10 @@ MonoBehaviour:
   - {fileID: 1563014680382382438}
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -1452,7 +1489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4809565406337258089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.95, y: 9.95, z: 0}
+  m_LocalPosition: {x: 29.95, y: 11.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1579,7 +1616,10 @@ MonoBehaviour:
   - {fileID: 5767132702851279748}
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -1994,7 +2034,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -2053,7 +2096,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 5
+  AIAssetPath: Res/ScriptObjects/AI/PathAI
   PathProperty: {fileID: 9163480890902886440}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -2305,6 +2351,7 @@ MonoBehaviour:
   - {fileID: 3184713807021272911}
   - {fileID: 615061868455756711}
   - {fileID: 5372964936572716562}
+  - {fileID: 4151745925185981645}
   - {fileID: 3640939028943504194}
   UnitPaths: []
   Time: 0
@@ -2312,7 +2359,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -2436,7 +2486,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -2560,7 +2613,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -2624,17 +2680,30 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths:
   - {x: 43.49, y: -10.01, z: 0}
+  - {x: 39.848045, y: -15.096727, z: 0}
+  - {x: 33.591957, y: -15.096728, z: 0}
   - {x: 29.95, y: -10.01, z: 0}
+  - {x: 28.491486, y: -4.2346106, z: 0}
+  - {x: 22.956385, y: -2.033464, z: 0}
   - {x: 17.93, y: -5.23, z: 0}
+  - {x: 21.152077, y: -2.6477964, z: 0}
+  - {x: 21.111816, y: 1.4811177, z: 0}
   - {x: 17.84, y: 4, z: 0}
+  - {x: 23.407513, y: 0.98741627, z: 0}
+  - {x: 29.095173, y: 3.7665105, z: 0}
   - {x: 30.14, y: 10.01, z: 0}
+  - {x: 33.82548, y: 14.998502, z: 0}
+  - {x: 40.027115, y: 14.910766, z: 0}
   - {x: 43.57, y: 9.82, z: 0}
   MissionID: 0
   EventUI: 0
-  EnableDebugDraw: 1
+  EnableDebugDraw: 0
 --- !u!1 &6869272439126065269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,7 +3017,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3103,7 +3175,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 8
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3227,7 +3302,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3351,7 +3429,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3409,7 +3490,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 7
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3462,12 +3546,15 @@ MonoBehaviour:
   ClientAsset: 
   LevelWaves: []
   UnitPaths: []
-  Time: 0
+  Time: 3
   CompleteType: 0
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3622,7 +3709,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 1
   EventUI: 0
@@ -3686,17 +3776,20 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 5
+  IsSoomth: 0
   Paths:
   - {x: 43.49, y: 9.95, z: 0}
-  - {x: 29.95, y: 9.95, z: 0}
+  - {x: 29.95, y: 11.58, z: 0}
   - {x: 17.93, y: 4.13, z: 0}
   - {x: 17.84, y: -5.07, z: 0}
   - {x: 30.14, y: -10.14, z: 0}
   - {x: 43.57, y: -10.14, z: 0}
   MissionID: 0
   EventUI: 0
-  EnableDebugDraw: 0
+  EnableDebugDraw: 1
 --- !u!1 &8336970104425737735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3750,7 +3843,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 5
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3808,7 +3904,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 101
   LocationIndex: 6
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3932,7 +4031,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 0
   LocationIndex: 0
+  AIAssetPath: 
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -3990,7 +4092,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 11
   LocationIndex: 9
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0
@@ -4048,7 +4153,10 @@ MonoBehaviour:
   UnitSpawns: []
   SpawnID: 10
   LocationIndex: 6
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
   PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
   Paths: []
   MissionID: 0
   EventUI: 0

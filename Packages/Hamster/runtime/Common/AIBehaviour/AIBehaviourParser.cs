@@ -39,36 +39,18 @@ namespace Hamster {
 #endif
             int index = 0;
 
-            script.Initialize = ScriptableObject.CreateInstance<SequenceBehaviour>();
             script.Executor = ScriptableObject.CreateInstance<SequenceBehaviour>();
-            script.Finish = ScriptableObject.CreateInstance<SequenceBehaviour>();
 
 #if UNITY_EDITOR
-            script.Initialize.name = "Initialize";
             script.Executor.name = "Executor";
             (script.Executor as SequenceBehaviour).BBKey = "Base_Execute_Index";
-            script.Finish.name = "Finish";
-            UnityEditor.AssetDatabase.AddObjectToAsset(script.Initialize, script);
             UnityEditor.AssetDatabase.AddObjectToAsset(script.Executor, script);
-            UnityEditor.AssetDatabase.AddObjectToAsset(script.Finish, script);
             UnityEditor.EditorUtility.SetDirty(script);
             UnityEditor.AssetDatabase.SaveAssets();
 #endif
 
             input = input.Replace("\r\n", "\n");
-            //int initBegin = input.IndexOf("Initialize");
-            //int initEnd = input.IndexOf("InitEnd\n") + "InitEnd\n".Length;
-            //Parse(input.Substring(initBegin, initEnd - initBegin), script.Initialize, ref index);
-
-            int executorBegin = input.IndexOf("Executor");
-            int executorEnd = input.IndexOf("ExecutorEnd") + "ExecutorEnd".Length;
-            index = 0;
-            Parse(input.Substring(executorBegin, executorEnd - executorBegin), script.Executor, ref index);
-
-            //int finishBegin = input.IndexOf("Finish");
-            //int finishEnd = input.IndexOf("FinishEnd") + "FinishEnd".Length;
-            //index = 0;
-            //Parse(input.Substring(finishBegin, finishEnd - finishBegin), script.Finish, ref index);
+            Parse(input, script.Executor, ref index);
 
 
         }

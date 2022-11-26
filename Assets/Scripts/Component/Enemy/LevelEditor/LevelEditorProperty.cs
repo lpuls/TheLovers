@@ -42,9 +42,12 @@ namespace Hamster.SpaceWar {
         // 类型为对象生成
         public int SpawnID = 0;
         public int LocationIndex = 0;
+        public string AIAssetPath = string.Empty;
         public LevelEditorProperty PathProperty = null;
 
         // 路径
+        public int Step = 3;
+        public bool IsSoomth = true;
         public List<Vector3> Paths = new();
 
         // MissionUI显示
@@ -59,10 +62,34 @@ namespace Hamster.SpaceWar {
 
         public void UpdatePath() {
             Paths.Clear();
-            for (int i = 0; i < transform.childCount; i++) {
-                Transform child = transform.GetChild(i);
-                child.name = "PathNode " + i;
+            if (transform.childCount > 0) {
+                Transform child = transform.GetChild(0);
+                child.name = "PathNode 0";
+
                 Paths.Add(child.position);
+                Vector3 last = child.position;
+                for (int i = 1; i < transform.childCount; i++) {
+                    child = transform.GetChild(i);
+
+                    Vector3 center = Vector3.Lerp(last, child.position, 0.5f);
+                    Vector3 centerProject = Vector3.Project(center, last - child.position);
+                    center = Vector3.MoveTowards(center, centerProject, 1.0f);
+
+                    Vector3 rightCenter = last - center;
+                    Vector3 lastCenter = child.position - center;
+
+                    if (IsSoomth) {
+                        for (int j = 1; j < Step; j++) {
+                            //Vector3 temp = Vector3.Slerp(last, child.position, j * 1.0f / Step);
+                            Vector3 temp = Vector3.Slerp(rightCenter, lastCenter, j * 1.0f / Step) + center;
+                            Paths.Add(temp);
+                        }
+                    }
+                    child.name = "PathNode " + i;
+                    Paths.Add(child.position);
+                    last = child.position;
+                }
+
             }
         }
 
@@ -124,7 +151,9 @@ namespace Hamster.SpaceWar {
                 for (int i = 0; i < waveTransform.childCount; i++) {
                     Transform childTransform = waveTransform.GetChild(i);
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
-                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave || temp.LevelProperty == ELevelProperty.MissionUI) {
+                        if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave 
+                            || temp.LevelProperty == ELevelProperty.MissionUI
+                            || temp.LevelProperty == ELevelProperty.UI) {
                             temp.UpdateWaveConfig();
                             LevelWaves.Add(temp);
                         }
@@ -188,6 +217,7 @@ namespace Hamster.SpaceWar {
                         unitSpawnScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         unitSpawnScriptObject.ID = SpawnID;
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
+                        unitSpawnScriptObject.AIAssetPath = AIAssetPath;
                         if (null != PathProperty)
                             unitSpawnScriptObject.Path.AddRange(PathProperty.Paths);
                         return unitSpawnScriptObject;
@@ -199,7 +229,7 @@ namespace Hamster.SpaceWar {
                         levelMissionUIScriptObject.MissionID = MissionID;
                         return levelMissionUIScriptObject;
                     }
-                case ELevelProperty.Path: {
+                case ELevelProperty.UI: {
                         LevelUIScriptObject levelUIScriptObject = ScriptableObject.CreateInstance<LevelUIScriptObject>();
                         levelUIScriptObject.Time = Time;
                         levelUIScriptObject.UIType = EventUI;
@@ -275,6 +305,7 @@ namespace Hamster.SpaceWar {
             switch (levelEditorProperty.LevelProperty) {
                 case LevelEditorProperty.ELevelProperty.Spawn: {
                         levelEditorProperty.SpawnID = EditorGUILayout.IntField("生成ID", levelEditorProperty.SpawnID);
+                        levelEditorProperty.AIAssetPath = EditorGUILayout.TextField("行为树路径", levelEditorProperty.AIAssetPath);
                         //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
                         if (LevelEditorProperty.LevelParent.FixLocations.Count > 0)
                             levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, FixLocationNames);
@@ -330,6 +361,10 @@ namespace Hamster.SpaceWar {
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.Path: {
+                        levelEditorProperty.IsSoomth = EditorGUILayout.Toggle("平滑", levelEditorProperty.IsSoomth);
+                        if (levelEditorProperty.IsSoomth)
+                            levelEditorProperty.Step = EditorGUILayout.IntField("步长", levelEditorProperty.Step);
+
                         int index = 0;
                         foreach (var item in levelEditorProperty.Paths) {
                             EditorGUILayout.LabelField(string.Format("Path{0}: {1}", index++, item));
@@ -340,6 +375,7 @@ namespace Hamster.SpaceWar {
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.UI: {
+                        levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
                         levelEditorProperty.EventUI = (ELevelEventUI)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
                     }
                     break;
