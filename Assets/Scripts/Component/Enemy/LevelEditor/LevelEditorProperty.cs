@@ -233,6 +233,7 @@ namespace Hamster.SpaceWar {
                     }
                 case ELevelProperty.UI: {
                         LevelUIScriptObject levelUIScriptObject = ScriptableObject.CreateInstance<LevelUIScriptObject>();
+                        levelUIScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         levelUIScriptObject.Time = Time;
                         levelUIScriptObject.UIType = EventUI;
                         return levelUIScriptObject;
