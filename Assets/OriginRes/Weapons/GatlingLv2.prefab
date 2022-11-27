@@ -51,6 +51,9 @@ MonoBehaviour:
   Delay: 0
   Reset: 0
   WriteToSpawner: 0
+  Delays:
+  - 0
+  - 0
   Bullets:
   - {fileID: 8947449474677757860}
   - {fileID: 2712480817279119510}

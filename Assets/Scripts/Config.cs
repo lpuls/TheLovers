@@ -43,9 +43,10 @@ namespace Config {
             "UBgFIAEoCRISCgpDbGllbnRQb3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsy",
             "By5EZXBlbmQqGwoHRXhhbXBsZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1l",
             "TW9kZWwSEgoOR2FtZU1vZGVsX05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xF",
-            "EAESFgoSR2FtZU1vZGVsX01VTFRJUExFEAIqUQoKV2VhcG9uVHlwZRITCg9X",
+            "EAESFgoSR2FtZU1vZGVsX01VTFRJUExFEAIqbAoKV2VhcG9uVHlwZRITCg9X",
             "ZWFwb25UeXBlX05PTkUQABIWChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJX",
-            "ZWFwb25UeXBlX1NIT1RHVU4QAkIJqgIGQ29uZmlnYgZwcm90bzM="));
+            "ZWFwb25UeXBlX1NIT1RHVU4QAhIZChVXZWFwb25UeXBlX0RJU1BFUlNJT04Q",
+            "A0IJqgIGQ29uZmlnYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
@@ -77,6 +78,7 @@ namespace Config {
     [pbr::OriginalName("WeaponType_NONE")] None = 0,
     [pbr::OriginalName("WeaponType_GALTING")] Galting = 1,
     [pbr::OriginalName("WeaponType_SHOTGUN")] Shotgun = 2,
+    [pbr::OriginalName("WeaponType_DISPERSION")] Dispersion = 3,
   }
 
   #endregion

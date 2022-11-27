@@ -12,27 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231176944778eb744ac6255f4da4d4d1, type: 3}
   m_Name: ShotgunSpawnerLv3
   m_EditorClassIdentifier: 
-  DelayTime: 0
   CD: 0.06
   LauncherAudio: {fileID: 0}
-  SpawnIDs: 01000000010000000100000000000000000000000000000000000000
-  SpawnCount: 7
   Player1ID: 1
   Player2ID: 2
   EnemeyID: 3
-  SpawnOffsets:
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -0.5, z: 0}
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 0, y: -0.5, z: 0}
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 0, y: -0.5, z: 0}
-  SpawnDirections:
-  - {x: -0, y: -0, z: 30.000008}
-  - {x: -0, y: 0, z: 0}
-  - {x: -0, y: 0, z: 330}
-  - {x: -0, y: -0, z: 14.999995}
-  - {x: -0, y: 0, z: 345}
-  - {x: -0, y: -0, z: 44.999996}
-  - {x: -0, y: 0, z: 345}
+  SpawnInfos:
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: 0.5, z: 0}
+    Rotation: {x: -0, y: -0, z: 30.000008}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 0}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: -0.5, z: 0}
+    Rotation: {x: -0, y: 0, z: 330}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: 0.5, z: 0}
+    Rotation: {x: -0, y: -0, z: 14.999995}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: -0.5, z: 0}
+    Rotation: {x: -0, y: 0, z: 345}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: 0.5, z: 0}
+    Rotation: {x: -0, y: -0, z: 44.999996}
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: -0.5, z: 0}
+    Rotation: {x: -0, y: 0, z: 345}

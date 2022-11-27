@@ -54,11 +54,19 @@ MonoBehaviour:
   Delay: 0
   Reset: 0
   WriteToSpawner: 0
+  Delays:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   Bullets:
   - {fileID: 1802749927450076225}
   - {fileID: 6923863052906748368}
   - {fileID: 8642185321826462828}
-  BulletIDs: 010000000100000001000000
+  - {fileID: 2146445018590821148}
+  - {fileID: 4510387565640824637}
+  BulletIDs: 0100000001000000010000000100000001000000
   Player1ID: 1
   Player2ID: 2
   EnemeyID: 3

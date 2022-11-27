@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231176944778eb744ac6255f4da4d4d1, type: 3}
+  m_Name: DispersionLv1
+  m_EditorClassIdentifier: 
+  CD: 0.23
+  LauncherAudio: {fileID: 8300000, guid: caeba5be9f3f76c4385c517b20d04975, type: 3}
+  Player1ID: 1
+  Player2ID: 2
+  EnemeyID: 3
+  SpawnInfos:
+  - ID: 1
+    Delay: 0
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 300}
+  - ID: 1
+    Delay: 0.05
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 310}
+  - ID: 1
+    Delay: 0.1
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 320}
+  - ID: 1
+    Delay: 0.15
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 330}
+  - ID: 1
+    Delay: 0.2
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 340}
+  - ID: 1
+    Delay: 0.25
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 350}
+  - ID: 1
+    Delay: 0.3
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: 0, z: 0}
+  - ID: 1
+    Delay: 0.35
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 10.000004}
+  - ID: 1
+    Delay: 0.4
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 19.999998}
+  - ID: 1
+    Delay: 0.45000002
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 30.000008}
+  - ID: 1
+    Delay: 0.5
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 39.999996}
+  - ID: 1
+    Delay: 0.55
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 49.999996}
+  - ID: 1
+    Delay: 0.6
+    Offset: {x: 0, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: 60.000004}

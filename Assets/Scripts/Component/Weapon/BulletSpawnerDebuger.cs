@@ -7,10 +7,11 @@ namespace Hamster.SpaceWar {
 #if UNITY_EDITOR
         public BulletSpawner Spawner = null;
         public float CD = 0;
-        public float Delay = 0;
+        public float DelayDelta = 0.0f;
 
         public bool Reset = false;
         public bool WriteToSpawner = false;
+        public List<float> Delays = new List<float>();
         public List<Transform> Bullets = new List<Transform>();
         public List<int> BulletIDs = new List<int>();
         public int Player1ID = 0;
@@ -24,8 +25,12 @@ namespace Hamster.SpaceWar {
                 int index = 0;
                 foreach (var item in transforms) {
                     Bullets.Add(item.transform);
+                    item.name = "Bullet" + index;
                     if (index >= BulletIDs.Count) {
                         BulletIDs.Add(1);
+                    }
+                    if (index >= Delays.Count) {
+                        Delays.Add(DelayDelta * index);
                     }
                     index++;
                 }
@@ -33,29 +38,34 @@ namespace Hamster.SpaceWar {
             }
             if (WriteToSpawner) {
                 Spawner.CD = CD;
-                Spawner.DelayTime = Delay;
-                Spawner.SpawnIDs.Clear();
-                Spawner.SpawnDirections.Clear();
-                Spawner.SpawnOffsets.Clear();
                 Spawner.Player1ID = Player1ID;
                 Spawner.Player2ID = Player2ID;
                 Spawner.EnemeyID = EnemeyID;
-                Spawner.SpawnCount = Bullets.Count;
+                Spawner.SpawnInfos.Clear();
                 for (int i = 0; i < Bullets.Count; i++) {
                     var item = Bullets[i];
-                    if (BulletIDs.Count > i) {
-                        Spawner.SpawnIDs.Add(BulletIDs[i]);
-                    }
-                    else {
-                        Spawner.SpawnIDs.Add(0);
-                    }
-                    Spawner.SpawnDirections.Add(item.rotation.eulerAngles);
-                    Spawner.SpawnOffsets.Add(item.position - transform.position);
+                    BulletSpawnInfo info = new BulletSpawnInfo {
+                        ID = BulletIDs.Count > i ? BulletIDs[i] : 0,
+                        Delay = Delays.Count > i ? Delays[i] : 0.0f,
+                        Offset = item.position - transform.position,
+                        Rotation = item.rotation.eulerAngles
+                    };
+                    Spawner.SpawnInfos.Add(info);
                 }
+                Spawner.SpawnInfos.Sort(CompareBulletSpawnInfo);
                 WriteToSpawner = false;
                 UnityEditor.EditorUtility.SetDirty(Spawner);
                 UnityEditor.AssetDatabase.SaveAssets();
             }
+        }
+
+        private static int CompareBulletSpawnInfo(BulletSpawnInfo x, BulletSpawnInfo y) {
+            if (x.Delay < y.Delay)
+                return -1;
+            else if (x.Delay > y.Delay)
+                return 1;
+            else
+                return 0;
         }
 
 #endif

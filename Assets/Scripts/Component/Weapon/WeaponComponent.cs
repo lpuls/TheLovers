@@ -11,38 +11,66 @@ namespace Hamster.SpaceWar {
 
         private int _ownerID = 0;
         private float _cd = 0;
-        private WaitForSeconds _waitSecond = null;
 
-        public void Awake() {
-            if (null != _waitSecond) {
-                _waitSecond = new WaitForSeconds(Spawner.DelayTime);
-            }
-        }
+        private bool _spawning = false;
+        private int _spawnIndex = -1;
+        private float _spawningTime = 0;
+
 
         public void Tick(float dt) {
             _cd -= dt;
             if (_cd <= 0)
                 _cd = 0;
+
+            // 检查是否有进行中的子弹生成
+            if (_spawning) {
+                _spawningTime += dt;
+                CheckPendingSpawnBullet();
+            }
         }
 
         public void Spawn(float cdGain) {
             if (_cd > 0)
                 return;
 
-            if (Spawner.DelayTime > 0) {
-                StartCoroutine(SpawnBullets(cdGain));
+            if (_spawning) {
+                Debug.LogWarning("Bullet Spaing, Check CD And Spawn Delay");
+                return;
             }
-            else {
-                SpawnBulletImpl(cdGain);
+
+            // 检查子弹生成是否没有延时
+            _spawnIndex = 0;
+            _spawningTime = 0.0f;
+            _spawning = false;
+            CheckPendingSpawnBullet();
+
+            _cd = Spawner.CD;
+        }
+
+        private void CheckPendingSpawnBullet() {
+            bool complete = true;
+            // 检查生成时间是否大于延迟时间，如果是则生成子弹
+            for (int i = _spawnIndex; i < Spawner.SpawnInfos.Count; i++) {
+                BulletSpawnInfo info = Spawner.SpawnInfos[i];
+                _spawnIndex = i;
+                if (info.Delay <= _spawningTime) {
+                    SpawnBullet(info);
+                }
+                else {
+                    complete = false;
+                    break;
+                }
+            }
+
+            // 检查是否生成完成
+            _spawning = !complete;
+            if (!_spawning) {
+                _spawnIndex = 0;
+                _spawningTime = 0;
             }
         }
 
-        private IEnumerator SpawnBullets(float cdGain) {
-            yield return _waitSecond;
-            SpawnBulletImpl(cdGain);
-        }
-
-        private void SpawnBulletImpl(float cdGain) {
+        private void SpawnBullet(BulletSpawnInfo info) {
             ESpaceWarUnitType unitType = GetUnitType();
             int spawnID = Spawner.EnemeyID;
             switch (unitType) {
@@ -56,15 +84,12 @@ namespace Hamster.SpaceWar {
                     spawnID = Spawner.EnemeyID;
                     break;
             }
-            for (int i = 0; i < Spawner.SpawnCount; i++) {
-                Vector3 offset = Spawner.SpawnOffsets[i];
-                // Vector3 direction = transform.rotation * Spawner.SpawnDirections[i];
-                Quaternion rotation = transform.rotation;
-                rotation *= Quaternion.AngleAxis(Spawner.SpawnDirections[i].z, Vector3.forward);
-                GameObject bullet = GameLogicUtility.CreateServerBullet(spawnID, _ownerID, transform.position + offset, rotation, this);
-                bullet.transform.rotation = rotation;
-            }
-            _cd = Spawner.CD;
+
+            Vector3 offset = info.Offset;
+            Quaternion rotation = transform.rotation;
+            rotation *= Quaternion.AngleAxis(info.Rotation.z, Vector3.forward);
+            GameObject bullet = GameLogicUtility.CreateServerBullet(spawnID, _ownerID, transform.position + offset, rotation, this);
+            bullet.transform.rotation = rotation;
         }
 
         public void Equip(int ownerID) {
@@ -76,7 +101,7 @@ namespace Hamster.SpaceWar {
         }
 
         public GameObject GetOwner() {
-            return null != Parent ? Parent : gameObject;
+            return Parent != null ? Parent : gameObject;
         }
 
         public int GetLayer() {
