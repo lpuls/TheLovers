@@ -32,7 +32,8 @@ namespace Hamster.SpaceWar {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
-            base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
+            InitLoading();
+            // base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
             UIManager.ResetUICamera();
 
             // 根据视口大小计算可行动区域
@@ -118,6 +119,31 @@ namespace Hamster.SpaceWar {
         public virtual void RemoveTicker(IServerTicker serverTicker) {
         }
 
+        public void GoBackToOutside() {
+            StartCoroutine(OnGoBackToOutside());
+        }
+
+        private IEnumerator OnGoBackToOutside() {
+            yield return new WaitForSeconds(5.0f);
+
+            ShowLoading();
+            SetProgress(0);
+            yield return new WaitForSeconds(0.1f);
+
+            Single<UIManager>.GetInstance().CloseAll();
+            Asset.UnloadAll();
+            SetProgress(50);
+            yield return new WaitForSeconds(1.0f);
+
+            SpaceWarSwapData worldSwapData = SingleMonobehaviour<WorldSwapData>.GetInstance() as SpaceWarSwapData;
+            if (null != worldSwapData) {
+                worldSwapData.Setting = null;;
+                worldSwapData.GameModel = Config.GameModel.None;
+                Asset.LoadScene("Res/Scene/GameOutsideScene", "GameOutsideScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+            }
+            SetProgress(100);
+            yield return new WaitForSeconds(1.0f);
+        }
 
 #if UNITY_EDITOR
         public virtual void OnDrawGizmos() {

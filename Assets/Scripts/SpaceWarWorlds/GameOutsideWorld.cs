@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Reflection;
 using UnityEngine;
 
@@ -12,10 +13,16 @@ namespace Hamster.SpaceWar {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
-            base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
+            // base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
             UIManager.ResetUICamera();
 
-            //Single<UIManager>.GetInstance().Open<LevelSelectController>();
+            InitLoading();
+            StartCoroutine(PreloadAssets());
+        }
+
+        private IEnumerator PreloadAssets() {
+            yield return new WaitForSeconds(1.0f);
+            HideLoading();
         }
 
         protected IEnumerator LoadScene(string path, string sceneName, Config.GameModel gameModel) {

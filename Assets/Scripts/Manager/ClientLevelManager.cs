@@ -60,10 +60,16 @@ namespace Hamster.SpaceWar {
                 if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info))
                     SetLevelEventIndex(info.Data1.Int32);
                 if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.MissionResult, out info)) {
+                    // 关闭主界面UI
                     Single<UIManager>.GetInstance().Close<MainUIController>();
+
+                    // 开打任务完成界面
                     Single<UIManager>.GetInstance().Open<MissionOverUIController>();
                     MissionOverUIModule module = Single<UIManager>.GetInstance().GetModule<MissionOverUIController>() as MissionOverUIModule;
                     module.IsComplete.SetValue(info.Data1.Boolean);
+
+                    // 等待并切场景
+                    World.GetWorld<BaseSpaceWarWorld>().GoBackToOutside();
                 }
             }
         }

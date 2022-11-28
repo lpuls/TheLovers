@@ -44,7 +44,7 @@ namespace Hamster.SpaceWar {
             _module.IsComplete.OnValueChange -= OnResultChange;
         }
 
-        private void OnResultChange(bool newValue, bool oldValue) {
+        private void OnResultChange(bool oldValue, bool newValue) {
             if (newValue)
                 _view.ShowMissionComplete();
             else

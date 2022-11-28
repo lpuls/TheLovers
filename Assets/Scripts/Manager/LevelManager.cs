@@ -59,7 +59,7 @@ namespace Hamster.SpaceWar {
                 // TODO 通过关卡结束
                 _eventIndex = -1;
                 _gameResult = true;
-                World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.LevelEventIndex);
+                World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.MissionResult);
             }
         }
 

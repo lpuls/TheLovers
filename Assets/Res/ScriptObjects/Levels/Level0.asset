@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8243481826581408169
+--- !u!114 &-8927076686825436166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
   m_Name: Waves_Wave5_Boss
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
+  m_EditorClassIdentifier: 
   Time: 0
   CompleteType: 1
   UnitSpawns:
-  - {fileID: -7883711639053723276}
---- !u!114 &-7883711639053723276
+  - {fileID: 58700608416751447}
+--- !u!114 &-8805696839146735667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25,97 +25,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave5_Boss_Spawn 101 int location 6
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 101
-  Delay: 0
-  LocationIndex: 6
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-7514632762810229647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave2_Frees
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -6806964932120549041}
-  - {fileID: -7395898415011602375}
-  - {fileID: 9006583524159812188}
-  - {fileID: -3395918259426833554}
-  - {fileID: -6226168613615505476}
---- !u!114 &-7395898415011602375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Frees_Spawn 11 int location 9
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  Delay: 0
-  LocationIndex: 9
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-6806964932120549041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Frees_Spawn 10 int location 8
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  Delay: 0
-  LocationIndex: 8
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-6226168613615505476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Frees_Spawn 11 int location 7
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  Delay: 3
-  LocationIndex: 7
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-5515120115815142366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
   m_Name: Wave0_Paths_Spawn 11 int location 6
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  m_EditorClassIdentifier: 
   ID: 11
   Delay: 0
   LocationIndex: 6
@@ -128,7 +40,7 @@ MonoBehaviour:
   - {x: 24.32162, y: 11.102872, z: 0}
   - {x: 37.20311, y: 11.048056, z: 0}
   - {x: 43.64, y: -0.11, z: 0}
---- !u!114 &-4177122625788938922
+--- !u!114 &-8654584211090994459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +49,159 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave3_Frees_Spawn 10 int location 8
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 0
+  LocationIndex: 8
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-7468333563178100682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave0_Paths_Spawn 10 int location 7
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 0
+  LocationIndex: 7
+  AIAssetPath: Res/ScriptObjects/AI/PathAI
+  Path:
+  - {x: 43.49, y: -10.01, z: 0}
+  - {x: 39.848045, y: -15.096727, z: 0}
+  - {x: 33.591957, y: -15.096728, z: 0}
+  - {x: 29.95, y: -10.01, z: 0}
+  - {x: 28.491486, y: -4.2346106, z: 0}
+  - {x: 22.956385, y: -2.033464, z: 0}
+  - {x: 17.93, y: -5.23, z: 0}
+  - {x: 21.152077, y: -2.6477964, z: 0}
+  - {x: 21.111816, y: 1.4811177, z: 0}
+  - {x: 17.84, y: 4, z: 0}
+  - {x: 23.407513, y: 0.98741627, z: 0}
+  - {x: 29.095173, y: 3.7665105, z: 0}
+  - {x: 30.14, y: 10.01, z: 0}
+  - {x: 33.82548, y: 14.998502, z: 0}
+  - {x: 40.027115, y: 14.910766, z: 0}
+  - {x: 43.57, y: 9.82, z: 0}
+--- !u!114 &-5890688877190469017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Wave0_Paths
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -690461573919308351}
+  - {fileID: -8805696839146735667}
+  - {fileID: -7468333563178100682}
+--- !u!114 &-5854667007218112063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_Wave4_WarningUI
+  m_EditorClassIdentifier: 
+  Time: 3
+  UIType: 0
+--- !u!114 &-4632226436159428167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave2_Frees_Spawn 11 int location 7
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 3
+  LocationIndex: 7
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-4557610607198443804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a716ae0cc9db04c83b065d98d8ee44, type: 3}
+  m_Name: Waves_Wave1_MissionUI
+  m_EditorClassIdentifier: 
+  Time: 3
+  MissionID: 1
+--- !u!114 &-2988731569511832917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Wave2_Frees
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 7271413647341599870}
+  - {fileID: 6911619947068666080}
+  - {fileID: -551375623671894764}
+  - {fileID: -1928361726568002471}
+  - {fileID: -4632226436159428167}
+--- !u!114 &-1928361726568002471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave2_Frees_Spawn 10 int location 6
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 2
+  LocationIndex: 6
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-690461573919308351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
   m_Name: Wave0_Paths_Spawn 10 int location 5
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
   LocationIndex: 5
@@ -151,7 +213,7 @@ MonoBehaviour:
   - {x: 17.84, y: -5.07, z: 0}
   - {x: 30.14, y: -10.14, z: 0}
   - {x: 43.57, y: -10.14, z: 0}
---- !u!114 &-3405059394860808013
+--- !u!114 &-551375623671894764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,29 +222,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave3_Frees_Spawn 11 int location 9
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave2_Frees_Spawn 11 int location 5
+  m_EditorClassIdentifier: 
   ID: 11
-  Delay: 0
-  LocationIndex: 9
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-3395918259426833554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Frees_Spawn 10 int location 6
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  Delay: 2
-  LocationIndex: 6
+  Delay: 1
+  LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
 --- !u!114 &11400000
@@ -221,13 +266,13 @@ MonoBehaviour:
   - {x: 43.5, y: 5, z: 0}
   - {x: 43.5, y: -5, z: 0}
   LevelWaves:
-  - {fileID: 8956264115787690732}
-  - {fileID: 6834055001874967095}
-  - {fileID: -7514632762810229647}
-  - {fileID: 5633571613803310228}
-  - {fileID: 1658763573313001333}
-  - {fileID: -8243481826581408169}
---- !u!114 &705353942583135340
+  - {fileID: -5890688877190469017}
+  - {fileID: -4557610607198443804}
+  - {fileID: -2988731569511832917}
+  - {fileID: 1398531127354489580}
+  - {fileID: -5854667007218112063}
+  - {fileID: -8927076686825436166}
+--- !u!114 &58700608416751447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,124 +281,79 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave3_Frees_Spawn 10 int location 8
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave5_Boss_Spawn 101 int location 6
+  m_EditorClassIdentifier: 
+  ID: 101
+  Delay: 0
+  LocationIndex: 6
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &1398531127354489580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Wave3_Frees
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -8654584211090994459}
+  - {fileID: 6419671026842421191}
+--- !u!114 &6419671026842421191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave3_Frees_Spawn 11 int location 9
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 0
+  LocationIndex: 9
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &6911619947068666080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave2_Frees_Spawn 11 int location 9
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 0
+  LocationIndex: 9
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &7271413647341599870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Wave2_Frees_Spawn 10 int location 8
+  m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
   LocationIndex: 8
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &1658763573313001333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave4_WarningUI
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelUIScriptObject
-  Time: 3
-  UIType: 0
---- !u!114 &5633571613803310228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave3_Frees
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: 705353942583135340}
-  - {fileID: -3405059394860808013}
---- !u!114 &6834055001874967095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave1_MissionUI
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelMissionUIScriptObject
-  Time: 3
-  MissionID: 1
---- !u!114 &7643203489121672006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave0_Paths_Spawn 10 int location 7
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 10
-  Delay: 0
-  LocationIndex: 7
-  AIAssetPath: Res/ScriptObjects/AI/PathAI
-  Path:
-  - {x: 43.49, y: -10.01, z: 0}
-  - {x: 39.848045, y: -15.096727, z: 0}
-  - {x: 33.591957, y: -15.096728, z: 0}
-  - {x: 29.95, y: -10.01, z: 0}
-  - {x: 28.491486, y: -4.2346106, z: 0}
-  - {x: 22.956385, y: -2.033464, z: 0}
-  - {x: 17.93, y: -5.23, z: 0}
-  - {x: 21.152077, y: -2.6477964, z: 0}
-  - {x: 21.111816, y: 1.4811177, z: 0}
-  - {x: 17.84, y: 4, z: 0}
-  - {x: 23.407513, y: 0.98741627, z: 0}
-  - {x: 29.095173, y: 3.7665105, z: 0}
-  - {x: 30.14, y: 10.01, z: 0}
-  - {x: 33.82548, y: 14.998502, z: 0}
-  - {x: 40.027115, y: 14.910766, z: 0}
-  - {x: 43.57, y: 9.82, z: 0}
---- !u!114 &8956264115787690732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Waves_Wave0_Paths
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:LevelWaveScriptObject
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -4177122625788938922}
-  - {fileID: -5515120115815142366}
-  - {fileID: 7643203489121672006}
---- !u!114 &9006583524159812188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Wave2_Frees_Spawn 11 int location 5
-  m_EditorClassIdentifier: Assembly-CSharp:Hamster.SpaceWar:UnitSpawnScriptObject
-  ID: 11
-  Delay: 1
-  LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []

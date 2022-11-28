@@ -49,7 +49,7 @@ namespace Hamster {
             return default;
         }
 
-        protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
+        protected void InitLoading() {
             // 初始化加载界面
             GameObject canvasGameObject = GameObject.Find("Canvas");
             if (null != canvasGameObject) {
@@ -58,7 +58,9 @@ namespace Hamster {
                 if (null != loadingInstance)
                     _loadingUI = loadingInstance.gameObject.TryGetOrAdd<LoadingUI>();
             }
+        }
 
+        protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             // 初始化GM组件
             if (null != gmAssemlby)
                 GMAttributeProcessor.Processor(gmAssemlby);
