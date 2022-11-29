@@ -26,31 +26,33 @@ namespace Config {
           string.Concat(
             "ChFUZW1wL0NvbmZpZy5wcm90byJoCgxCdWxsZXRDb25maWcSCgoCSUQYASAB",
             "KAUSDAoETm90ZRgCIAEoCRIMCgRQYXRoGAMgASgJEhEKCUxvZ2ljUGF0aBgE",
-            "IAEoCRINCgVTcGVlZBgFIAEoAhIOCgZEYW1hZ2UYBiABKAUiQwoHTWlzc2lv",
-            "bhIKCgJJRBgBIAEoBRINCgVUaXRsZRgCIAEoCRIPCgdDb250ZXh0GAMgASgJ",
-            "EgwKBFBhdGgYBCABKAkiRwoKUGNrZXJJdGVtcxIKCgJJRBgBIAEoBRIMCgRO",
-            "b3RlGAIgASgJEgwKBFBhdGgYAyABKAkSEQoJTG9naWNQYXRoGAQgASgJIqgB",
-            "CgpVbml0Q29uZmlnEgoKAklEGAEgASgFEgwKBFBhdGgYAiABKAkSEQoJTG9n",
-            "aWNQYXRoGAMgASgJEg4KBkhlYWx0aBgEIAEoBRINCgVTcGVlZBgFIAEoAhIX",
-            "Cg9Ecm9wUHJvYmFiaWxpdHkYBiADKAUSDQoFRHJvcHMYByADKAUSFAoMSW1w",
-            "YWN0RGFtYWdlGAggASgFEhAKCFdlYXBvbklEGAkgASgFIl4KBldlYXBvbhIK",
-            "CgJJRBgBIAEoBRIMCgROb3RlGAIgASgJEgwKBFBhdGgYAyABKAkSDgoGTmV4",
-            "dEx2GAQgASgFEg4KBlR5cGVJRBgFIAEoBRIMCgRJY29uGAYgASgJIisKCFZl",
-            "Y3RvcjNEEgkKAVgYASABKAISCQoBWRgCIAEoAhIJCgFaGAMgASgCIisKBkRl",
-            "cGVuZBITCgtSZWxvYWRDb3VudBgBIAEoBRIMCgRQYXRoGAIgASgJIpIBCgtH",
-            "YW1lU2V0dGluZxIKCgJJRBgBIAEoBRIRCglNYXhQbGF5ZXIYAiABKAUSEAoI",
-            "U2VydmVySVAYAyABKAkSEgoKU2VydmVyUG9ydBgEIAEoBRIQCghDbGllbnRJ",
-            "UBgFIAEoCRISCgpDbGllbnRQb3J0GAYgASgFEhgKB0RlcGVuZHMYByABKAsy",
-            "By5EZXBlbmQqGwoHRXhhbXBsZRIQCgxFeGFtcGxlX05PTkUQACpNCglHYW1l",
-            "TW9kZWwSEgoOR2FtZU1vZGVsX05PTkUQABIUChBHYW1lTW9kZWxfU0lOR0xF",
-            "EAESFgoSR2FtZU1vZGVsX01VTFRJUExFEAIqbAoKV2VhcG9uVHlwZRITCg9X",
-            "ZWFwb25UeXBlX05PTkUQABIWChJXZWFwb25UeXBlX0dBTFRJTkcQARIWChJX",
-            "ZWFwb25UeXBlX1NIT1RHVU4QAhIZChVXZWFwb25UeXBlX0RJU1BFUlNJT04Q",
-            "A0IJqgIGQ29uZmlnYgZwcm90bzM="));
+            "IAEoCRINCgVTcGVlZBgFIAEoAhIOCgZEYW1hZ2UYBiABKAUiMAoRTWFpblVJ",
+            "VGFsa0NvbnRleHQSCgoCSUQYASABKAUSDwoHQ29udGV4dBgCIAEoCSJDCgdN",
+            "aXNzaW9uEgoKAklEGAEgASgFEg0KBVRpdGxlGAIgASgJEg8KB0NvbnRleHQY",
+            "AyABKAkSDAoEUGF0aBgEIAEoCSJHCgpQY2tlckl0ZW1zEgoKAklEGAEgASgF",
+            "EgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCAB",
+            "KAkiqAEKClVuaXRDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIR",
+            "CglMb2dpY1BhdGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUg",
+            "ASgCEhcKD0Ryb3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIU",
+            "CgxJbXBhY3REYW1hZ2UYCCABKAUSEAoIV2VhcG9uSUQYCSABKAUiXgoGV2Vh",
+            "cG9uEgoKAklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIO",
+            "CgZOZXh0THYYBCABKAUSDgoGVHlwZUlEGAUgASgFEgwKBEljb24YBiABKAki",
+            "KwoIVmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIi",
+            "KwoGRGVwZW5kEhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAki",
+            "kgEKC0dhbWVTZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEo",
+            "BRIQCghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENs",
+            "aWVudElQGAUgASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgH",
+            "IAEoCzIHLkRlcGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0K",
+            "CUdhbWVNb2RlbBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9T",
+            "SU5HTEUQARIWChJHYW1lTW9kZWxfTVVMVElQTEUQAipsCgpXZWFwb25UeXBl",
+            "EhMKD1dlYXBvblR5cGVfTk9ORRAAEhYKEldlYXBvblR5cGVfR0FMVElORxAB",
+            "EhYKEldlYXBvblR5cGVfU0hPVEdVThACEhkKFVdlYXBvblR5cGVfRElTUEVS",
+            "U0lPThADQgmqAgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.BulletConfig), global::Config.BulletConfig.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.MainUITalkContext), global::Config.MainUITalkContext.Parser, new[]{ "ID", "Context" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.UnitConfig), global::Config.UnitConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage", "WeaponID" }, null, null, null),
@@ -353,6 +355,163 @@ namespace Config {
 
   }
 
+  public sealed partial class MainUITalkContext : pb::IMessage<MainUITalkContext> {
+    private static readonly pb::MessageParser<MainUITalkContext> _parser = new pb::MessageParser<MainUITalkContext>(() => new MainUITalkContext());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MainUITalkContext> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MainUITalkContext() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MainUITalkContext(MainUITalkContext other) : this() {
+      iD_ = other.iD_;
+      context_ = other.context_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MainUITalkContext Clone() {
+      return new MainUITalkContext(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private int iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Context" field.</summary>
+    public const int ContextFieldNumber = 2;
+    private string context_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Context {
+      get { return context_; }
+      set {
+        context_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MainUITalkContext);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MainUITalkContext other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (Context != other.Context) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0) hash ^= ID.GetHashCode();
+      if (Context.Length != 0) hash ^= Context.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ID);
+      }
+      if (Context.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Context);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ID);
+      }
+      if (Context.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Context);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MainUITalkContext other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0) {
+        ID = other.ID;
+      }
+      if (other.Context.Length != 0) {
+        Context = other.Context;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Context = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class Mission : pb::IMessage<Mission> {
     private static readonly pb::MessageParser<Mission> _parser = new pb::MessageParser<Mission>(() => new Mission());
     private pb::UnknownFieldSet _unknownFields;
@@ -361,7 +520,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -574,7 +733,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -787,7 +946,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1126,7 +1285,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1395,7 +1554,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1580,7 +1739,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1737,7 +1896,7 @@ namespace Config {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Config.ConfigReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

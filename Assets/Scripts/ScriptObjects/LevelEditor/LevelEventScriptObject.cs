@@ -5,6 +5,7 @@ namespace Hamster.SpaceWar {
     public enum ELevelWaveCompleteType {
         WaitTime,
         WaitAllDie,
+        Continue
     }
 
     public interface ILevelManager {

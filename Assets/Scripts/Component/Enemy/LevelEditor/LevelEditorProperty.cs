@@ -56,6 +56,7 @@ namespace Hamster.SpaceWar {
 
         // UI显示
         public ELevelEventUI EventUI = ELevelEventUI.Warning;
+        public int ArgInt = 0;
 
         // debug
         public bool EnableDebugDraw = false;
@@ -236,6 +237,7 @@ namespace Hamster.SpaceWar {
                         levelUIScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         levelUIScriptObject.Time = Time;
                         levelUIScriptObject.UIType = EventUI;
+                        levelUIScriptObject.ArgInt = ArgInt;
                         return levelUIScriptObject;
                     }
             }
@@ -381,6 +383,7 @@ namespace Hamster.SpaceWar {
                 case LevelEditorProperty.ELevelProperty.UI: {
                         levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
                         levelEditorProperty.EventUI = (ELevelEventUI)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
+                        levelEditorProperty.ArgInt = EditorGUILayout.IntField("int参数", levelEditorProperty.ArgInt);
                     }
                     break;
             }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9062920674331714895
+--- !u!114 &-8849189155007296135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,32 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave2_Frees_Spawn 10 int location 6
+  m_Name: Frees_5_Spawn 10 int location 6
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 2
   LocationIndex: 6
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &-7954173024425242129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Wave0_Paths
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -449813016740459394}
-  - {fileID: 987083389514622597}
-  - {fileID: 3815035816263429507}
---- !u!114 &-7398851503342351848
+--- !u!114 &-8091052602591316156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,82 +27,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave2_Frees_Spawn 11 int location 5
-  m_EditorClassIdentifier: 
-  ID: 11
-  Delay: 1
-  LocationIndex: 5
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-6688276318247731024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave2_Frees_Spawn 11 int location 7
-  m_EditorClassIdentifier: 
-  ID: 11
-  Delay: 3
-  LocationIndex: 7
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-5179600503315526126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Wave3_Frees
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: 404111222934827281}
-  - {fileID: -160928474042513609}
---- !u!114 &-2706702792104406631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave2_Frees_Spawn 11 int location 9
-  m_EditorClassIdentifier: 
-  ID: 11
-  Delay: 0
-  LocationIndex: 9
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-2030058709423901958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave5_Boss_Spawn 101 int location 6
+  m_Name: Boss_Spawn 101 int location 6
   m_EditorClassIdentifier: 
   ID: 101
   Delay: 0
   LocationIndex: 6
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &-1319413615101137536
+--- !u!114 &-6828358188124943372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +44,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
-  m_Name: Waves_Wave4_WarningUI
+  m_Name: Waves_WarningUI
   m_EditorClassIdentifier: 
   Time: 3
   UIType: 0
---- !u!114 &-449813016740459394
+  ArgInt: 0
+--- !u!114 &-5026864788592007363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a716ae0cc9db04c83b065d98d8ee44, type: 3}
+  m_Name: Waves_MissionUI
+  m_EditorClassIdentifier: 
+  Time: 3
+  MissionID: 1
+--- !u!114 &-4562604593948033767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,20 +73,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave0_Paths_Spawn 10 int location 5
+  m_Name: Ambush_Spawn 10 int location 7
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
-  LocationIndex: 5
+  LocationIndex: 7
   AIAssetPath: Res/ScriptObjects/AI/PathAI
   Path:
-  - {x: 43.49, y: 9.95, z: 0}
-  - {x: 29.95, y: 11.58, z: 0}
-  - {x: 17.93, y: 4.13, z: 0}
-  - {x: 17.84, y: -5.07, z: 0}
-  - {x: 30.14, y: -10.14, z: 0}
-  - {x: 43.57, y: -10.14, z: 0}
---- !u!114 &-160928474042513609
+  - {x: 43.49, y: -10.01, z: 0}
+  - {x: 39.848045, y: -15.096727, z: 0}
+  - {x: 33.591957, y: -15.096728, z: 0}
+  - {x: 29.95, y: -10.01, z: 0}
+  - {x: 28.491486, y: -4.2346106, z: 0}
+  - {x: 22.956385, y: -2.033464, z: 0}
+  - {x: 17.93, y: -5.23, z: 0}
+  - {x: 21.152077, y: -2.6477964, z: 0}
+  - {x: 21.111816, y: 1.4811177, z: 0}
+  - {x: 17.84, y: 4, z: 0}
+  - {x: 23.407513, y: 0.98741627, z: 0}
+  - {x: 29.095173, y: 3.7665105, z: 0}
+  - {x: 30.14, y: 10.01, z: 0}
+  - {x: 33.82548, y: 14.998502, z: 0}
+  - {x: 40.027115, y: 14.910766, z: 0}
+  - {x: 43.57, y: 9.82, z: 0}
+--- !u!114 &-4086085823973873698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,13 +106,117 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave3_Frees_Spawn 11 int location 9
+  m_Name: Frees_5_Spawn 11 int location 7
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 3
+  LocationIndex: 7
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-3468177042701756053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Frees_5
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -3455779535320901418}
+  - {fileID: -2413144221518168595}
+  - {fileID: 6339346983535962113}
+  - {fileID: -8849189155007296135}
+  - {fileID: -4086085823973873698}
+--- !u!114 &-3455779535320901418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Frees_5_Spawn 10 int location 8
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 0
+  LocationIndex: 8
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-2708705273834729178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Frees_2
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 2665655746822719550}
+  - {fileID: 3996286790746083765}
+--- !u!114 &-2413144221518168595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Frees_5_Spawn 11 int location 9
   m_EditorClassIdentifier: 
   ID: 11
   Delay: 0
   LocationIndex: 9
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
+--- !u!114 &-1693136090043986825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Ambush
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 6181646694559442137}
+  - {fileID: 4503327218635604410}
+  - {fileID: -4562604593948033767}
+--- !u!114 &-1098818500504841137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_SystemTalk_3
+  m_EditorClassIdentifier: 
+  Time: 1.5
+  UIType: 1
+  ArgInt: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,13 +253,46 @@ MonoBehaviour:
   - {x: 43.5, y: 5, z: 0}
   - {x: 43.5, y: -5, z: 0}
   LevelWaves:
-  - {fileID: -7954173024425242129}
-  - {fileID: 8900391970784040703}
-  - {fileID: 8312918142536494635}
-  - {fileID: -5179600503315526126}
-  - {fileID: -1319413615101137536}
-  - {fileID: 1455637750704313674}
---- !u!114 &404111222934827281
+  - {fileID: 2035351613694871261}
+  - {fileID: 879167691032999796}
+  - {fileID: -1693136090043986825}
+  - {fileID: -5026864788592007363}
+  - {fileID: -3468177042701756053}
+  - {fileID: -2708705273834729178}
+  - {fileID: -1098818500504841137}
+  - {fileID: -6828358188124943372}
+  - {fileID: 6465473331108859468}
+--- !u!114 &879167691032999796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_SystemTalk_2
+  m_EditorClassIdentifier: 
+  Time: 1.5
+  UIType: 1
+  ArgInt: 2
+--- !u!114 &2035351613694871261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_SystemTalk_1
+  m_EditorClassIdentifier: 
+  Time: 1.5
+  UIType: 1
+  ArgInt: 1
+--- !u!114 &2665655746822719550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,14 +302,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave3_Frees_Spawn 10 int location 8
+  m_Name: Frees_2_Spawn 10 int location 8
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
   LocationIndex: 8
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &987083389514622597
+--- !u!114 &3996286790746083765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +319,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave0_Paths_Spawn 11 int location 6
+  m_Name: Frees_2_Spawn 11 int location 9
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 0
+  LocationIndex: 9
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &4503327218635604410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Ambush_Spawn 11 int location 6
   m_EditorClassIdentifier: 
   ID: 11
   Delay: 0
@@ -257,23 +350,7 @@ MonoBehaviour:
   - {x: 24.32162, y: 11.102872, z: 0}
   - {x: 37.20311, y: 11.048056, z: 0}
   - {x: 43.64, y: -0.11, z: 0}
---- !u!114 &1455637750704313674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Wave5_Boss
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -2030058709423901958}
---- !u!114 &3815035816263429507
+--- !u!114 &6181646694559442137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,30 +360,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave0_Paths_Spawn 10 int location 7
+  m_Name: Ambush_Spawn 10 int location 5
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
-  LocationIndex: 7
+  LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/PathAI
   Path:
-  - {x: 43.49, y: -10.01, z: 0}
-  - {x: 39.848045, y: -15.096727, z: 0}
-  - {x: 33.591957, y: -15.096728, z: 0}
-  - {x: 29.95, y: -10.01, z: 0}
-  - {x: 28.491486, y: -4.2346106, z: 0}
-  - {x: 22.956385, y: -2.033464, z: 0}
-  - {x: 17.93, y: -5.23, z: 0}
-  - {x: 21.152077, y: -2.6477964, z: 0}
-  - {x: 21.111816, y: 1.4811177, z: 0}
-  - {x: 17.84, y: 4, z: 0}
-  - {x: 23.407513, y: 0.98741627, z: 0}
-  - {x: 29.095173, y: 3.7665105, z: 0}
-  - {x: 30.14, y: 10.01, z: 0}
-  - {x: 33.82548, y: 14.998502, z: 0}
-  - {x: 40.027115, y: 14.910766, z: 0}
-  - {x: 43.57, y: 9.82, z: 0}
---- !u!114 &3949416382045927791
+  - {x: 43.49, y: 9.95, z: 0}
+  - {x: 29.95, y: 11.58, z: 0}
+  - {x: 17.93, y: 4.13, z: 0}
+  - {x: 17.84, y: -5.07, z: 0}
+  - {x: 30.14, y: -10.14, z: 0}
+  - {x: 43.57, y: -10.14, z: 0}
+--- !u!114 &6339346983535962113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,14 +383,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Wave2_Frees_Spawn 10 int location 8
+  m_Name: Frees_5_Spawn 11 int location 5
   m_EditorClassIdentifier: 
-  ID: 10
-  Delay: 0
-  LocationIndex: 8
+  ID: 11
+  Delay: 1
+  LocationIndex: 5
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &8312918142536494635
+--- !u!114 &6465473331108859468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,27 +400,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Wave2_Frees
+  m_Name: Waves_Boss
   m_EditorClassIdentifier: 
   Time: 0
   CompleteType: 1
   UnitSpawns:
-  - {fileID: 3949416382045927791}
-  - {fileID: -2706702792104406631}
-  - {fileID: -7398851503342351848}
-  - {fileID: -9062920674331714895}
-  - {fileID: -6688276318247731024}
---- !u!114 &8900391970784040703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a716ae0cc9db04c83b065d98d8ee44, type: 3}
-  m_Name: Waves_Wave1_MissionUI
-  m_EditorClassIdentifier: 
-  Time: 3
-  MissionID: 1
+  - {fileID: -8091052602591316156}

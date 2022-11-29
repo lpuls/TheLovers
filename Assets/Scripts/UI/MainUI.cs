@@ -7,6 +7,8 @@ namespace Hamster.SpaceWar {
         private Image _slowHealth = null;
         private Text _healthValue = null;
         private Image _weaponIcon = null;
+        private Animator _systemTalkDialogue = null;
+        private Text _systemTalkDialogueText = null;
 
         public override void Initialize() {
             base.Initialize();
@@ -15,6 +17,9 @@ namespace Hamster.SpaceWar {
             _slowHealth = GetComponentFromChild<Image>("PlayerInfo/Health/ValueSlow");
             _healthValue = GetComponentFromChild<Text>("PlayerInfo/Health/HealthValue");
             _weaponIcon = GetComponentFromChild<Image>("PlayerInfo/Weapons/Weapon");
+
+            _systemTalkDialogue = gameObject.GetComponentFromeChild<Animator>("SystemTalkDialogue");
+            _systemTalkDialogueText = GetComponentFromChild<Text>("SystemTalkDialogue/Text");
         }
 
         public void UpdateHealth(int value, int max) {
@@ -27,6 +32,11 @@ namespace Hamster.SpaceWar {
             _weaponIcon.sprite = sprite;
         }
 
+        public void ShowSystemTalkDialogue(string text) {
+            _systemTalkDialogue.Play("ShowSystemTalkDialogue");
+            _systemTalkDialogueText.text = text;
+        }
+
         private void Update() {
             if (_slowHealth.fillAmount != _health.fillAmount)
                 _slowHealth.fillAmount = Mathf.MoveTowards(_slowHealth.fillAmount, _health.fillAmount, 0.1f);
@@ -37,6 +47,7 @@ namespace Hamster.SpaceWar {
         public int MaxHealth = 1;
         public ModityValue<int> Health = new ModityValue<int>();
         public ModityValue<int> WeaponID = new ModityValue<int>();
+        public ModityValue<int> SystemTalkID = new ModityValue<int>();
     }
 
     [UIInfo("Res/UI/MainUI", typeof(MainUIView), typeof(MainUIModule))]
@@ -50,6 +61,7 @@ namespace Hamster.SpaceWar {
             // 绑定属性修改事件
             _module.Health.OnValueChange += OnHealthChange;
             _module.WeaponID.OnValueChange += OnWeaponChange;
+            _module.SystemTalkID.OnValueChange += OnSystemTalkIDChange;
         }
 
         protected override void OnFinish() {
@@ -57,6 +69,7 @@ namespace Hamster.SpaceWar {
 
             _module.Health.OnValueChange -= OnHealthChange;
             _module.WeaponID.OnValueChange -= OnWeaponChange;
+            _module.SystemTalkID.OnValueChange -= OnSystemTalkIDChange;
         }
 
         private void OnHealthChange(int oldValue, int newValue) {
@@ -66,6 +79,12 @@ namespace Hamster.SpaceWar {
         private void OnWeaponChange(int oldValue, int newValue) {
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(newValue, out Config.Weapon weapon)) {
                 _view.UpdateWeapon(weapon.Icon);
+            }
+        }
+
+        private void OnSystemTalkIDChange(int oldValue, int newValue) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.MainUITalkContext>(newValue, out Config.MainUITalkContext context)) {
+                _view.ShowSystemTalkDialogue(context.Context);
             }
         }
     }
