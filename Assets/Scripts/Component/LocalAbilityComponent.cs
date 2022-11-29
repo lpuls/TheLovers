@@ -35,6 +35,9 @@ namespace Hamster.SpaceWar {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(equipID, out Config.Weapon equipWeaponInfo)) {
                     if (id == equipWeaponInfo.TypeID)
                         realID = equipWeaponInfo.NextLv;
+                    // NetxtID 为0时，说明没有下一个等级了
+                    if (0 == realID)
+                        realID = equipID;
                 }
             }
             _weaponEquipIDs[(int)abilityIndex] = realID;
