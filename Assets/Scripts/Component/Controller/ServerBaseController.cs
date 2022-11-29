@@ -146,8 +146,20 @@ namespace Hamster.SpaceWar {
                     _collider2D = boxCollider2D;
                     return boxCollider2D.size;
                 }
+                else if (gameObject.TryGetComponent<CircleCollider2D>(out CircleCollider2D circleCollider2D)) {
+                    _collider2D = circleCollider2D;
+                    float radius = (_collider2D as CircleCollider2D).radius;
+                    return new Vector3(radius, radius);
+                }
             }
-            return (_collider2D as BoxCollider2D).size;
+            else if (_collider2D is BoxCollider2D) {
+                return (_collider2D as BoxCollider2D).size;
+            }
+            else if (_collider2D is CircleCollider2D) {
+                float radius = (_collider2D as CircleCollider2D).radius;
+                return new Vector3(radius, radius);
+            }
+            return Vector3.zero;
         }
 
         public bool OnHitSomething(RaycastHit2D raycastHit) {
