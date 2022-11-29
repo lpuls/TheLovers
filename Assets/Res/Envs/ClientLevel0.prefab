@@ -1092,9 +1092,25 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 2832
+      objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: looping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 2832
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19911156, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1191,9 +1207,25 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 408
+      objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: looping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 408
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19911156, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1290,9 +1322,25 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 5254
+      objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: looping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 5254
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19911156, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1491,9 +1539,25 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 9422
+      objectReference: {fileID: 0}
+    - target: {fileID: 19832468, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: looping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: randomSeed
+      value: 9422
+      objectReference: {fileID: 0}
+    - target: {fileID: 19878614, guid: 85d3916633997dd469d512cae33e8793, type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19911156, guid: 85d3916633997dd469d512cae33e8793, type: 3}
       propertyPath: m_Materials.Array.size
