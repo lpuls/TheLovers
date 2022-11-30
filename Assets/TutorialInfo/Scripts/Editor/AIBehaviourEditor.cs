@@ -15,6 +15,7 @@ namespace Hamster.SpaceWar {
             AIBehaviourParser.BehaviourDict.Add("CastAbility", CreateCastAbility);
             AIBehaviourParser.BehaviourDict.Add("MoveIntoScreen", CreateMoveIntoScreen);
             AIBehaviourParser.BehaviourDict.Add("EnemyMoveByPath", CreateEnemyMoveByPath);
+            AIBehaviourParser.BehaviourDict.Add("MoveDirection", CreateMoveDirection);
 
             List<string> paths = new List<string>();
             GetDirs(Application.dataPath + "/OriginRes/AI", paths);
@@ -79,9 +80,22 @@ namespace Hamster.SpaceWar {
         }
 
         private static BaseBehaviour CreateEnemyMoveByPath(string[] commands) {
-            EnemyMoveByPath enemyMoveByPath = LevelConfigScriptObject.CreateInstance<EnemyMoveByPath>();
+            EnemyMoveByPath enemyMoveByPath = ScriptableObject.CreateInstance<EnemyMoveByPath>();
             enemyMoveByPath.BBKey = string.Join("_", commands).Replace(";", "_") + "_Index";
             return enemyMoveByPath;
-        } 
+        }
+
+        private static BaseBehaviour CreateMoveDirection(string[] commands) {
+            MoveDirection moveDirection = ScriptableObject.CreateInstance<MoveDirection>();
+            moveDirection.BBKey = string.Join("_", commands).Replace(";", "_") + "_Index";
+            if (commands.Length >= 4) {
+                if (float.TryParse(commands[1], out float x)
+                    && float.TryParse(commands[2], out float y)
+                    && float.TryParse(commands[3], out float z)) {
+                    moveDirection.Direction = new Vector3(x, y, z);
+                }
+            }
+            return moveDirection;
+        }
     }
 }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8299409088751557055}
   - component: {fileID: 8299409088740494639}
+  - component: {fileID: 1232244815322340170}
+  - component: {fileID: -5228342909563592594}
   m_Layer: 0
   m_Name: Asteroid3
   m_TagString: Enemy
@@ -46,6 +48,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 0.25
+--- !u!114 &1232244815322340170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8299409088751177149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec78fddf5212d24fab3910f79482f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxDistanceWithServer: 1
+--- !u!114 &-5228342909563592594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8299409088751177149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c628509f14ea1cc418c9542f600fbb46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetID: 0
+  OwnerID: 0
+  ConfigID: 0
+  PendingKill: 0
+  NetType: 0
 --- !u!1 &8299409088751216573
 GameObject:
   m_ObjectHideFlags: 0

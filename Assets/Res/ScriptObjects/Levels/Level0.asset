@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8849189155007296135
+--- !u!114 &-9073761559601016893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_5_Spawn 10 int location 6
+  m_Name: Frees_5_Spawn 10 int location 8
   m_EditorClassIdentifier: 
   ID: 10
-  Delay: 2
-  LocationIndex: 6
+  Delay: 0
+  UseIndex: 1
+  LocationIndex: 8
+  SpawnLocation: {x: 0, y: 0, z: 0}
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &-8091052602591316156
+--- !u!114 &-8849437086349102625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27,14 +29,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Boss_Spawn 101 int location 6
+  m_Name: Frees_5_Spawn 11 int location 5
   m_EditorClassIdentifier: 
-  ID: 101
-  Delay: 0
-  LocationIndex: 6
+  ID: 11
+  Delay: 1
+  UseIndex: 1
+  LocationIndex: 5
+  SpawnLocation: {x: 0, y: 0, z: 0}
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &-6828358188124943372
+--- !u!114 &-8818199361968873416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +48,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
-  m_Name: Waves_WarningUI
+  m_Name: Waves_SystemTalk_3
   m_EditorClassIdentifier: 
-  Time: 3
-  UIType: 0
-  ArgInt: 0
---- !u!114 &-5026864788592007363
+  Time: 2
+  UIType: 1
+  ArgInt: 3
+--- !u!114 &-8608216509437367044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,12 +62,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a716ae0cc9db04c83b065d98d8ee44, type: 3}
-  m_Name: Waves_MissionUI
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Frees_5
   m_EditorClassIdentifier: 
-  Time: 3
-  MissionID: 1
---- !u!114 &-4562604593948033767
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: -9073761559601016893}
+  - {fileID: -6668794734449125924}
+  - {fileID: -8849437086349102625}
+  - {fileID: -2909355247666307680}
+  - {fileID: 1305465638229306827}
+--- !u!114 &-8472611972441274465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Boss
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 2572352674051205672}
+--- !u!114 &-6668794734449125924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Frees_5_Spawn 11 int location 9
+  m_EditorClassIdentifier: 
+  ID: 11
+  Delay: 0
+  UseIndex: 1
+  LocationIndex: 9
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-6150261482062845649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,7 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
+  UseIndex: 1
   LocationIndex: 7
+  SpawnLocation: {x: 0, y: 0, z: 0}
   AIAssetPath: Res/ScriptObjects/AI/PathAI
   Path:
   - {x: 43.49, y: -10.01, z: 0}
@@ -96,7 +143,7 @@ MonoBehaviour:
   - {x: 33.82548, y: 14.998502, z: 0}
   - {x: 40.027115, y: 14.910766, z: 0}
   - {x: 43.57, y: 9.82, z: 0}
---- !u!114 &-4086085823973873698
+--- !u!114 &-5412029527866272458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,103 +153,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_5_Spawn 11 int location 7
+  m_Name: Asteroids_Spawn 202 int location 0
   m_EditorClassIdentifier: 
-  ID: 11
-  Delay: 3
-  LocationIndex: 7
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  ID: 202
+  Delay: 0.5
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 45.42, y: -9.48, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
   Path: []
---- !u!114 &-3468177042701756053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Frees_5
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: -3455779535320901418}
-  - {fileID: -2413144221518168595}
-  - {fileID: 6339346983535962113}
-  - {fileID: -8849189155007296135}
-  - {fileID: -4086085823973873698}
---- !u!114 &-3455779535320901418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_5_Spawn 10 int location 8
-  m_EditorClassIdentifier: 
-  ID: 10
-  Delay: 0
-  LocationIndex: 8
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-2708705273834729178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Frees_2
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: 2665655746822719550}
-  - {fileID: 3996286790746083765}
---- !u!114 &-2413144221518168595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_5_Spawn 11 int location 9
-  m_EditorClassIdentifier: 
-  ID: 11
-  Delay: 0
-  LocationIndex: 9
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &-1693136090043986825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Ambush
-  m_EditorClassIdentifier: 
-  Time: 0
-  CompleteType: 1
-  UnitSpawns:
-  - {fileID: 6181646694559442137}
-  - {fileID: 4503327218635604410}
-  - {fileID: -4562604593948033767}
---- !u!114 &-1098818500504841137
+--- !u!114 &-3887461222062686361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,11 +172,173 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
-  m_Name: Waves_SystemTalk_3
+  m_Name: Waves_SystemTalk_1
   m_EditorClassIdentifier: 
-  Time: 1.5
+  Time: 2
   UIType: 1
-  ArgInt: 3
+  ArgInt: 1
+--- !u!114 &-2945909728416550402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 203 int location 0
+  m_EditorClassIdentifier: 
+  ID: 203
+  Delay: 0.45
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 45.51, y: -4.14, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &-2909355247666307680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Frees_5_Spawn 10 int location 6
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 2
+  UseIndex: 1
+  LocationIndex: 6
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &-2791125220998019654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a716ae0cc9db04c83b065d98d8ee44, type: 3}
+  m_Name: Waves_MissionUI
+  m_EditorClassIdentifier: 
+  Time: 3
+  MissionID: 1
+--- !u!114 &-2509546507089196247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 202 int location 0
+  m_EditorClassIdentifier: 
+  ID: 202
+  Delay: 0.1
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 45.35, y: 9.01, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &-2384264889094463147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 202 int location 0
+  m_EditorClassIdentifier: 
+  ID: 202
+  Delay: 0.3
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 43.26, y: 4.3, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &-2034492161539135947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_WarningUI
+  m_EditorClassIdentifier: 
+  Time: 3
+  UIType: 0
+  ArgInt: 0
+--- !u!114 &-1912995742701775246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 201 int location 0
+  m_EditorClassIdentifier: 
+  ID: 201
+  Delay: 0.5
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 46.69, y: -7.2, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &-1558013745683547372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 201 int location 0
+  m_EditorClassIdentifier: 
+  ID: 201
+  Delay: 0.3
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 61.81, y: 6.6, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &-961423599824691173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 201 int location 0
+  m_EditorClassIdentifier: 
+  ID: 201
+  Delay: 0.4
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 55.42, y: -6.25, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,63 +375,17 @@ MonoBehaviour:
   - {x: 43.5, y: 5, z: 0}
   - {x: 43.5, y: -5, z: 0}
   LevelWaves:
-  - {fileID: 2035351613694871261}
-  - {fileID: 879167691032999796}
-  - {fileID: -1693136090043986825}
-  - {fileID: -5026864788592007363}
-  - {fileID: -3468177042701756053}
-  - {fileID: -2708705273834729178}
-  - {fileID: -1098818500504841137}
-  - {fileID: -6828358188124943372}
-  - {fileID: 6465473331108859468}
---- !u!114 &879167691032999796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
-  m_Name: Waves_SystemTalk_2
-  m_EditorClassIdentifier: 
-  Time: 1.5
-  UIType: 1
-  ArgInt: 2
---- !u!114 &2035351613694871261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
-  m_Name: Waves_SystemTalk_1
-  m_EditorClassIdentifier: 
-  Time: 1.5
-  UIType: 1
-  ArgInt: 1
---- !u!114 &2665655746822719550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_2_Spawn 10 int location 8
-  m_EditorClassIdentifier: 
-  ID: 10
-  Delay: 0
-  LocationIndex: 8
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
-  Path: []
---- !u!114 &3996286790746083765
+  - {fileID: -3887461222062686361}
+  - {fileID: 6680987646593868060}
+  - {fileID: 3013409507845201530}
+  - {fileID: 1393071435005433465}
+  - {fileID: -2791125220998019654}
+  - {fileID: -8608216509437367044}
+  - {fileID: 6786066374042088398}
+  - {fileID: -8818199361968873416}
+  - {fileID: -2034492161539135947}
+  - {fileID: -8472611972441274465}
+--- !u!114 &379164434827150543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,10 +399,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 11
   Delay: 0
+  UseIndex: 1
   LocationIndex: 9
+  SpawnLocation: {x: 0, y: 0, z: 0}
   AIAssetPath: Res/ScriptObjects/AI/BaseAI
   Path: []
---- !u!114 &4503327218635604410
+--- !u!114 &1305465638229306827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,21 +414,177 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Ambush_Spawn 11 int location 6
+  m_Name: Frees_5_Spawn 11 int location 7
   m_EditorClassIdentifier: 
   ID: 11
+  Delay: 3
+  UseIndex: 1
+  LocationIndex: 7
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &1393071435005433465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Ambush
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 5305868187928049396}
+  - {fileID: 6302075335125785657}
+  - {fileID: -6150261482062845649}
+--- !u!114 &1701109847909242692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 202 int location 0
+  m_EditorClassIdentifier: 
+  ID: 202
+  Delay: 0.5
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 43.7, y: 1.3, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &1746236991554160803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 202 int location 0
+  m_EditorClassIdentifier: 
+  ID: 202
+  Delay: 0.4
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 43.7, y: 6.6, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &2156090518142173793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 201 int location 0
+  m_EditorClassIdentifier: 
+  ID: 201
   Delay: 0
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 52.95, y: 4.95, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &2559575713109803148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Frees_2_Spawn 10 int location 8
+  m_EditorClassIdentifier: 
+  ID: 10
+  Delay: 0
+  UseIndex: 1
+  LocationIndex: 8
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &2572352674051205672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Boss_Spawn 101 int location 6
+  m_EditorClassIdentifier: 
+  ID: 101
+  Delay: 0
+  UseIndex: 1
   LocationIndex: 6
-  AIAssetPath: Res/ScriptObjects/AI/PathAI
-  Path:
-  - {x: 43.49, y: -0.09, z: 0}
-  - {x: 37.08588, y: 11.009187, z: 0}
-  - {x: 24.27172, y: 11.054072, z: 0}
-  - {x: 17.79, y: 0, z: 0}
-  - {x: 24.32162, y: 11.102872, z: 0}
-  - {x: 37.20311, y: 11.048056, z: 0}
-  - {x: 43.64, y: -0.11, z: 0}
---- !u!114 &6181646694559442137
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Path: []
+--- !u!114 &3013409507845201530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
+  m_Name: Waves_Asteroids
+  m_EditorClassIdentifier: 
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 2156090518142173793}
+  - {fileID: -2509546507089196247}
+  - {fileID: 3474996159658595116}
+  - {fileID: 7889712892394745829}
+  - {fileID: -2384264889094463147}
+  - {fileID: 6500715972641323095}
+  - {fileID: -1558013745683547372}
+  - {fileID: -961423599824691173}
+  - {fileID: 1746236991554160803}
+  - {fileID: -2945909728416550402}
+  - {fileID: 6346150846909255785}
+  - {fileID: -1912995742701775246}
+  - {fileID: -5412029527866272458}
+  - {fileID: 1701109847909242692}
+--- !u!114 &3474996159658595116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 203 int location 0
+  m_EditorClassIdentifier: 
+  ID: 203
+  Delay: 0.1
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 43.7, y: -2.72, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &5305868187928049396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,7 +598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 10
   Delay: 0
+  UseIndex: 1
   LocationIndex: 5
+  SpawnLocation: {x: 0, y: 0, z: 0}
   AIAssetPath: Res/ScriptObjects/AI/PathAI
   Path:
   - {x: 43.49, y: 9.95, z: 0}
@@ -373,7 +609,7 @@ MonoBehaviour:
   - {x: 17.84, y: -5.07, z: 0}
   - {x: 30.14, y: -10.14, z: 0}
   - {x: 43.57, y: -10.14, z: 0}
---- !u!114 &6339346983535962113
+--- !u!114 &6302075335125785657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,14 +619,76 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
-  m_Name: Frees_5_Spawn 11 int location 5
+  m_Name: Ambush_Spawn 11 int location 6
   m_EditorClassIdentifier: 
   ID: 11
-  Delay: 1
-  LocationIndex: 5
-  AIAssetPath: Res/ScriptObjects/AI/BaseAI
+  Delay: 0
+  UseIndex: 1
+  LocationIndex: 6
+  SpawnLocation: {x: 0, y: 0, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/PathAI
+  Path:
+  - {x: 43.49, y: -0.09, z: 0}
+  - {x: 37.08588, y: 11.009187, z: 0}
+  - {x: 24.27172, y: 11.054072, z: 0}
+  - {x: 17.79, y: 0, z: 0}
+  - {x: 24.32162, y: 11.102872, z: 0}
+  - {x: 37.20311, y: 11.048056, z: 0}
+  - {x: 43.64, y: -0.11, z: 0}
+--- !u!114 &6346150846909255785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 203 int location 0
+  m_EditorClassIdentifier: 
+  ID: 203
+  Delay: 0.45
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 47.32, y: -5.4, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
   Path: []
---- !u!114 &6465473331108859468
+--- !u!114 &6500715972641323095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 202 int location 0
+  m_EditorClassIdentifier: 
+  ID: 202
+  Delay: 0.3
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 50.82, y: 3.21, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []
+--- !u!114 &6680987646593868060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2d6cdf06560c4aadb752538d795ba, type: 3}
+  m_Name: Waves_SystemTalk_2
+  m_EditorClassIdentifier: 
+  Time: 2
+  UIType: 1
+  ArgInt: 2
+--- !u!114 &6786066374042088398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,9 +698,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18b46f08b5dc09f48a8de3b06ff87728, type: 3}
-  m_Name: Waves_Boss
+  m_Name: Waves_Frees_2
   m_EditorClassIdentifier: 
   Time: 0
   CompleteType: 1
   UnitSpawns:
-  - {fileID: -8091052602591316156}
+  - {fileID: 2559575713109803148}
+  - {fileID: 379164434827150543}
+--- !u!114 &7889712892394745829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8880dff3c9c1044a1cf82d2638c6d4, type: 3}
+  m_Name: Asteroids_Spawn 203 int location 0
+  m_EditorClassIdentifier: 
+  ID: 203
+  Delay: 0.2
+  UseIndex: 0
+  LocationIndex: 0
+  SpawnLocation: {x: 48.86, y: -0.75, z: 0}
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  Path: []

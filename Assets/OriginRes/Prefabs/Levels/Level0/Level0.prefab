@@ -51,6 +51,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 8
@@ -62,6 +63,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &122430346323519991
 GameObject:
@@ -114,6 +120,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 9
@@ -125,6 +132,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &129663116165685966
 GameObject:
@@ -197,6 +209,7 @@ Transform:
   m_Children:
   - {fileID: 575999275499060201}
   - {fileID: 2172494121486183612}
+  - {fileID: 3491252104784375396}
   - {fileID: 2280777502267692580}
   - {fileID: 835845627365553439}
   - {fileID: 3124374994099097212}
@@ -207,6 +220,75 @@ Transform:
   m_Father: {fileID: 6913372618819913112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &287485435053347358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2570476872398364425}
+  - component: {fileID: 6588464628312367165}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2570476872398364425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287485435053347358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.7, y: 6.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6588464628312367165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287485435053347358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.4
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &550107168369787445
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5194178288710156095
 MonoBehaviour:
@@ -255,9 +337,10 @@ MonoBehaviour:
   ClientAsset: 
   LevelWaves: []
   UnitPaths: []
-  Time: 1.5
+  Time: 2
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -269,6 +352,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 1
   ArgInt: 3
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &793612633180939430
 GameObject:
@@ -387,6 +475,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -398,6 +487,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &856930323175193003
 GameObject:
@@ -453,6 +547,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -471,6 +566,80 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &1527718069990365820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5820568703796953380}
+  - component: {fileID: 3851665822092282368}
+  m_Layer: 0
+  m_Name: Spawn 203 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5820568703796953380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527718069990365820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 48.86, y: -0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3851665822092282368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527718069990365820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.2
+  SpawnID: 203
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &1605430797180649749
 GameObject:
@@ -569,6 +738,144 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1639628175968498680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7627836597499197499}
+  - component: {fileID: 3566319792286921744}
+  m_Layer: 0
+  m_Name: Spawn 201 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7627836597499197499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639628175968498680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 61.81, y: 6.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3566319792286921744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639628175968498680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.3
+  SpawnID: 201
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &1813527680478994997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6907574326446432304}
+  - component: {fileID: 5591339843455968826}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6907574326446432304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813527680478994997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.82, y: 3.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5591339843455968826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813527680478994997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.3
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &1929205738008841289
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +973,144 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1944312584726325919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6477957875309306125}
+  - component: {fileID: 7877717063920328969}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6477957875309306125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944312584726325919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.7, y: 1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7877717063920328969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944312584726325919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.5
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &1953721714347243682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 514916549723410835}
+  - component: {fileID: 4668444024514323144}
+  m_Layer: 0
+  m_Name: Spawn 201 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &514916549723410835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953721714347243682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.42, y: -6.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4668444024514323144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953721714347243682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.4
+  SpawnID: 201
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &1975402897202901484
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +1260,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 7
@@ -826,6 +1272,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2197298144121737485
 GameObject:
@@ -862,7 +1313,7 @@ Transform:
   - {fileID: 5717357183513231978}
   - {fileID: 8110571924120111062}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &615061868455756711
 MonoBehaviour:
@@ -888,6 +1339,7 @@ MonoBehaviour:
   - {fileID: 498626077310612082}
   - {fileID: 7483128973586545690}
   - {fileID: 5301602677412179243}
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -899,6 +1351,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2520217740547107190
 GameObject:
@@ -952,6 +1409,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 6
@@ -963,6 +1421,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2527663785443278357
 GameObject:
@@ -1081,6 +1544,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1092,6 +1556,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2593457591192275878
 GameObject:
@@ -1126,7 +1595,7 @@ Transform:
   - {fileID: 3897401270146951277}
   - {fileID: 7326189423361167112}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3427670122629675775
 MonoBehaviour:
@@ -1150,6 +1619,7 @@ MonoBehaviour:
   - {fileID: 7219263726036079211}
   - {fileID: 2355683766479922590}
   - {fileID: 469492414881286574}
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1161,6 +1631,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2763374573569020460
 GameObject:
@@ -1210,9 +1685,10 @@ MonoBehaviour:
   ClientAsset: 
   LevelWaves: []
   UnitPaths: []
-  Time: 1.5
+  Time: 2
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1224,6 +1700,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 1
   ArgInt: 1
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &2995174904255656164
 GameObject:
@@ -1342,6 +1823,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1353,6 +1835,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &3289025875055121216
 GameObject:
@@ -1385,7 +1872,7 @@ Transform:
   m_Children:
   - {fileID: 8036232794999747335}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3640939028943504194
 MonoBehaviour:
@@ -1407,6 +1894,7 @@ MonoBehaviour:
   CompleteType: 1
   UnitSpawns:
   - {fileID: 1563014680382382438}
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1418,6 +1906,80 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &3312116910005313954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3168471121921457449}
+  - component: {fileID: 2473208776493206750}
+  m_Layer: 0
+  m_Name: Spawn 203 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3168471121921457449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312116910005313954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.32, y: -5.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2473208776493206750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312116910005313954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.45
+  SpawnID: 203
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &3474412225583902692
 GameObject:
@@ -1613,6 +2175,144 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4118041540870054851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6979679497868984860}
+  - component: {fileID: 8423900584264712983}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6979679497868984860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118041540870054851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.42, y: -9.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8423900584264712983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118041540870054851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.5
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &4362325711463364050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893278971173329491}
+  - component: {fileID: 4484013954156242399}
+  m_Layer: 0
+  m_Name: Spawn 201 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &893278971173329491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362325711463364050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.69, y: -7.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4484013954156242399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362325711463364050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.5
+  SpawnID: 201
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &4809565406337258089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,7 +2442,7 @@ Transform:
   - {fileID: 1217424866643498543}
   - {fileID: 5789379735939324230}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5372964936572716562
 MonoBehaviour:
@@ -1765,6 +2465,7 @@ MonoBehaviour:
   UnitSpawns:
   - {fileID: 8074620875575778610}
   - {fileID: 5767132702851279748}
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -1776,6 +2477,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &4923456961706429596
 GameObject:
@@ -1874,6 +2580,75 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5021756501195017196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1442883698851581131}
+  - component: {fileID: 1248902004301051820}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1442883698851581131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021756501195017196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.35, y: 9.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248902004301051820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021756501195017196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.1
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &5057973229381366622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,6 +2960,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -2196,6 +2972,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &5339302373802545961
 GameObject:
@@ -2249,6 +3030,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 5
@@ -2260,6 +3042,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &5537732048029342519
 GameObject:
@@ -2506,6 +3293,7 @@ MonoBehaviour:
   LevelWaves:
   - {fileID: 5918704656573986891}
   - {fileID: 5918409430965830502}
+  - {fileID: 4186413145813425360}
   - {fileID: 3427670122629675775}
   - {fileID: 3184713807021272911}
   - {fileID: 615061868455756711}
@@ -2517,6 +3305,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -2528,6 +3317,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &5820438417878024675
 GameObject:
@@ -2646,6 +3440,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -2657,6 +3452,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &5900294548450078994
 GameObject:
@@ -2775,6 +3575,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -2786,6 +3587,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &6071783498580217346
 GameObject:
@@ -2844,6 +3650,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -2871,6 +3678,149 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &6629013839916016022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114689137336642311}
+  - component: {fileID: 9068768100070980021}
+  m_Layer: 0
+  m_Name: Spawn 203 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1114689137336642311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6629013839916016022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.51, y: -4.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9068768100070980021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6629013839916016022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.45
+  SpawnID: 203
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &6674334738954849948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5773303452975328567}
+  - component: {fileID: 3160818226670501991}
+  m_Layer: 0
+  m_Name: Spawn 202 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5773303452975328567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6674334738954849948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.26, y: 4.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3160818226670501991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6674334738954849948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.3
+  SpawnID: 202
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &6869272439126065269
 GameObject:
@@ -3183,6 +4133,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3194,6 +4145,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7026915734691960369
 GameObject:
@@ -3292,6 +4248,172 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7153134231337818518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6589280931847027868}
+  - component: {fileID: 6358052697735981765}
+  m_Layer: 0
+  m_Name: Spawn 203 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6589280931847027868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153134231337818518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.7, y: -2.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6358052697735981765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153134231337818518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0.1
+  SpawnID: 203
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &7488305582165803859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3491252104784375396}
+  - component: {fileID: 4186413145813425360}
+  m_Layer: 0
+  m_Name: Asteroids
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3491252104784375396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488305582165803859}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 720709669308952353}
+  - {fileID: 1442883698851581131}
+  - {fileID: 6589280931847027868}
+  - {fileID: 5820568703796953380}
+  - {fileID: 514916549723410835}
+  - {fileID: 5773303452975328567}
+  - {fileID: 6907574326446432304}
+  - {fileID: 7627836597499197499}
+  - {fileID: 2570476872398364425}
+  - {fileID: 1114689137336642311}
+  - {fileID: 3168471121921457449}
+  - {fileID: 893278971173329491}
+  - {fileID: 6979679497868984860}
+  - {fileID: 6477957875309306125}
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4186413145813425360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488305582165803859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 2
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 1
+  UnitSpawns:
+  - {fileID: 8953271903487994342}
+  - {fileID: 1248902004301051820}
+  - {fileID: 6358052697735981765}
+  - {fileID: 3851665822092282368}
+  - {fileID: 4668444024514323144}
+  - {fileID: 3160818226670501991}
+  - {fileID: 5591339843455968826}
+  - {fileID: 3566319792286921744}
+  - {fileID: 6588464628312367165}
+  - {fileID: 9068768100070980021}
+  - {fileID: 2473208776493206750}
+  - {fileID: 4484013954156242399}
+  - {fileID: 8423900584264712983}
+  - {fileID: 7877717063920328969}
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &7605039730083942436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,6 +4465,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 10
   LocationIndex: 8
@@ -3354,6 +4477,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7623936653766182530
 GameObject:
@@ -3472,6 +4600,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3483,6 +4612,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7648088325442257366
 GameObject:
@@ -3532,9 +4666,10 @@ MonoBehaviour:
   ClientAsset: 
   LevelWaves: []
   UnitPaths: []
-  Time: 1.5
+  Time: 2
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3546,6 +4681,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 1
   ArgInt: 2
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7688592774467344114
 GameObject:
@@ -3664,6 +4804,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3675,6 +4816,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7772297412938971970
 GameObject:
@@ -3727,6 +4873,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 3
   SpawnID: 11
   LocationIndex: 7
@@ -3738,6 +4885,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7826987744469987971
 GameObject:
@@ -3769,7 +4921,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4151745925185981645
 MonoBehaviour:
@@ -3790,6 +4942,7 @@ MonoBehaviour:
   Time: 3
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3801,6 +4954,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &7859330530372472048
 GameObject:
@@ -3929,7 +5087,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3184713807021272911
 MonoBehaviour:
@@ -3950,6 +5108,7 @@ MonoBehaviour:
   Time: 3
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -3961,6 +5120,80 @@ MonoBehaviour:
   MissionID: 1
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &8296547449207012567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720709669308952353}
+  - component: {fileID: 8953271903487994342}
+  m_Layer: 0
+  m_Name: Spawn 201 int location 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720709669308952353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296547449207012567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.95, y: 4.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491252104784375396}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8953271903487994342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296547449207012567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 4
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 201
+  LocationIndex: 0
+  AIAssetPath: Res/ScriptObjects/AI/AsteroidAI
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &8299108983104058278
 GameObject:
@@ -4019,6 +5252,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -4036,6 +5270,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 1
 --- !u!1 &8336970104425737735
 GameObject:
@@ -4088,6 +5327,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 1
   SpawnID: 11
   LocationIndex: 5
@@ -4099,6 +5339,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &8397782320269786190
 GameObject:
@@ -4151,6 +5396,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 101
   LocationIndex: 6
@@ -4162,6 +5408,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &8420206997434658239
 GameObject:
@@ -4280,6 +5531,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 1
   DelaySpawn: 0
   SpawnID: 0
   LocationIndex: 0
@@ -4291,6 +5543,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &8775774323750886337
 GameObject:
@@ -4343,6 +5600,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 0
   SpawnID: 11
   LocationIndex: 9
@@ -4354,6 +5612,11 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0
 --- !u!1 &9024874823948188470
 GameObject:
@@ -4406,6 +5669,7 @@ MonoBehaviour:
   Time: 0
   CompleteType: 0
   UnitSpawns: []
+  AsTransform: 0
   DelaySpawn: 2
   SpawnID: 10
   LocationIndex: 6
@@ -4417,4 +5681,9 @@ MonoBehaviour:
   MissionID: 0
   EventUI: 0
   ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
   EnableDebugDraw: 0

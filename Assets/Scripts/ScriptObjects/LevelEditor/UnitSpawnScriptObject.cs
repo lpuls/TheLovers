@@ -7,7 +7,9 @@ namespace Hamster.SpaceWar {
     public class UnitSpawnScriptObject : ScriptableObject {
         public int ID = 0;
         public float Delay = 0;
-        public int LocationIndex = 0;
+        public bool UseIndex = false;
+        public int LocationIndex = -1;
+        public Vector3 SpawnLocation = Vector3.zero;
         public string AIAssetPath = string.Empty;
         public List<Vector3> Path = new List<Vector3>();
 

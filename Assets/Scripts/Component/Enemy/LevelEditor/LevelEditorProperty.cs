@@ -17,6 +17,7 @@ namespace Hamster.SpaceWar {
             MissionUI,
             Path,
             UI,
+            RandomSpawn
         }
 
 
@@ -40,6 +41,7 @@ namespace Hamster.SpaceWar {
 
 
         // 类型为对象生成
+        public bool AsTransform = true;
         public float DelaySpawn = 0;
         public int SpawnID = 0;
         public int LocationIndex = 0;
@@ -58,9 +60,28 @@ namespace Hamster.SpaceWar {
         public ELevelEventUI EventUI = ELevelEventUI.Warning;
         public int ArgInt = 0;
 
+        // 随机生成
+        public int RandomSpawnCountMin = 3;
+        public int RandomSpawnCountMax = 6;
+        public Vector2 RandomSpawnDelay = new Vector2(0.00f, 0.03f);
+        public List<int> RandomSpawnIDs = new List<int>();
+        public List<Vector3> SpawnLocations = new List<Vector3>();
+
         // debug
         public bool EnableDebugDraw = false;
 
+        public void UpdateRandome() {
+            // RandomSpawnIDs.Clear();
+            SpawnLocations.Clear();
+            for (int i = 0; i < transform.childCount; i++) {
+                Transform child = transform.GetChild(i);
+                if (child.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty levelEditorProperty)) {
+                    if (ELevelProperty.Location == levelEditorProperty.LevelProperty) {
+                        SpawnLocations.Add(levelEditorProperty.transform.position);
+                    }
+                }
+            }
+        }
 
         public void UpdatePath() {
             Paths.Clear();
@@ -155,7 +176,8 @@ namespace Hamster.SpaceWar {
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
                         if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave 
                             || temp.LevelProperty == ELevelProperty.MissionUI
-                            || temp.LevelProperty == ELevelProperty.UI) {
+                            || temp.LevelProperty == ELevelProperty.UI
+                            || temp.LevelProperty == ELevelProperty.RandomSpawn) {
                             temp.UpdateWaveConfig();
                             LevelWaves.Add(temp);
                         }
@@ -220,7 +242,11 @@ namespace Hamster.SpaceWar {
                         unitSpawnScriptObject.ID = SpawnID;
                         unitSpawnScriptObject.Delay = DelaySpawn;
                         unitSpawnScriptObject.LocationIndex = LocationIndex;
+                        unitSpawnScriptObject.UseIndex = !AsTransform;
                         unitSpawnScriptObject.AIAssetPath = AIAssetPath;
+                        if (AsTransform) {
+                            unitSpawnScriptObject.SpawnLocation = transform.position;
+                        }
                         if (null != PathProperty)
                             unitSpawnScriptObject.Path.AddRange(PathProperty.Paths);
                         return unitSpawnScriptObject;
@@ -239,6 +265,19 @@ namespace Hamster.SpaceWar {
                         levelUIScriptObject.UIType = EventUI;
                         levelUIScriptObject.ArgInt = ArgInt;
                         return levelUIScriptObject;
+                    }
+                case ELevelProperty.RandomSpawn: {
+                        LevelRandomSpawnScriptObject randomSpawnScriptObject = ScriptableObject.CreateInstance<LevelRandomSpawnScriptObject>();
+                        randomSpawnScriptObject.name = transform.parent.name + "_" + gameObject.name;
+                        randomSpawnScriptObject.Time = Time;
+                        randomSpawnScriptObject.CompleteType = CompleteType;
+                        randomSpawnScriptObject.SpawnIDs.AddRange(RandomSpawnIDs);
+                        randomSpawnScriptObject.SpawnLocations.AddRange(SpawnLocations);
+                        randomSpawnScriptObject.RandomSpawnDelay = RandomSpawnDelay;
+                        randomSpawnScriptObject.RandomSpawnCountMin = RandomSpawnCountMin;
+                        randomSpawnScriptObject.RandomSpawnCountMax = RandomSpawnCountMax;
+                        randomSpawnScriptObject.AIAssetPath = AIAssetPath;
+                        return randomSpawnScriptObject;   
                     }
             }
             return null;
@@ -290,6 +329,7 @@ namespace Hamster.SpaceWar {
     public class LevelEditorPropertyInspector : UnityEditor.Editor {
 
         private string[] FixLocationNames = new string[128];
+        private SerializedProperty _randomSpawnIDsProperty = null;
 
         public void OnEnable() {
             LevelEditorProperty levelEditorProperty = (LevelEditorProperty)target;
@@ -299,6 +339,8 @@ namespace Hamster.SpaceWar {
                 System.Array.Clear(FixLocationNames, 0, 128);
                 LevelEditorProperty.LevelParent.FixLocations.Keys.CopyTo(FixLocationNames, 0);
             }
+
+            _randomSpawnIDsProperty = serializedObject.FindProperty("RandomSpawnIDs");
         }
         public override void OnInspectorGUI() {
             serializedObject.Update();
@@ -313,8 +355,11 @@ namespace Hamster.SpaceWar {
                         levelEditorProperty.DelaySpawn = EditorGUILayout.FloatField("延迟生成时间", levelEditorProperty.DelaySpawn);
                         levelEditorProperty.AIAssetPath = EditorGUILayout.TextField("行为树路径", levelEditorProperty.AIAssetPath);
                         //levelEditorProperty.LocationIndex = EditorGUILayout.IntField("生成位置下标", levelEditorProperty.LocationIndex);
-                        if (LevelEditorProperty.LevelParent.FixLocations.Count > 0)
-                            levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, FixLocationNames);
+                        levelEditorProperty.AsTransform = EditorGUILayout.Toggle("以当前位置为生成点", levelEditorProperty.AsTransform);
+                        if (!levelEditorProperty.AsTransform) {
+                            if (LevelEditorProperty.LevelParent.FixLocations.Count > 0)
+                                levelEditorProperty.LocationIndex = EditorGUILayout.Popup(levelEditorProperty.LocationIndex, FixLocationNames);
+                        }
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
@@ -384,6 +429,33 @@ namespace Hamster.SpaceWar {
                         levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
                         levelEditorProperty.EventUI = (ELevelEventUI)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
                         levelEditorProperty.ArgInt = EditorGUILayout.IntField("int参数", levelEditorProperty.ArgInt);
+                    }
+                    break;
+                case LevelEditorProperty.ELevelProperty.RandomSpawn: {
+                        // 结束类型
+                        levelEditorProperty.CompleteType = (ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
+
+                        // 触发时间
+                        if (ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                            levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
+
+                        levelEditorProperty.RandomSpawnCountMin = EditorGUILayout.IntField("最小生成数量", levelEditorProperty.RandomSpawnCountMin);
+                        levelEditorProperty.RandomSpawnCountMax = EditorGUILayout.IntField("最大生成数量", levelEditorProperty.RandomSpawnCountMax);
+                        levelEditorProperty.RandomSpawnDelay = EditorGUILayout.Vector2Field("延时范围", levelEditorProperty.RandomSpawnDelay);
+
+
+                        levelEditorProperty.AIAssetPath = EditorGUILayout.TextField("行为树路径", levelEditorProperty.AIAssetPath);
+
+                        EditorGUILayout.PropertyField(_randomSpawnIDsProperty);
+                        EditorGUILayout.Space();
+                        foreach (var item in levelEditorProperty.SpawnLocations) {
+                            EditorGUILayout.LabelField(item.ToString());
+
+                        }
+
+                        if (GUILayout.Button("更新")) {
+                            levelEditorProperty.UpdateRandome();
+                        }
                     }
                     break;
             }

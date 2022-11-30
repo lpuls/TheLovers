@@ -33,7 +33,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void ShowSystemTalkDialogue(string text) {
-            _systemTalkDialogue.Play("ShowSystemTalkDialogue");
+            _systemTalkDialogue.Play("ShoSystemTalkDialogue", 0, 0);
             _systemTalkDialogueText.text = text;
         }
 

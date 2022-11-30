@@ -95,21 +95,13 @@ namespace Hamster.SpaceWar {
             CheckNextWave();
 
             // 检查延时生成的单位
-            List<int> pendingKill = ListPool<int>.Malloc();
-            for (int i = 0; i < _pendingSpawnUnit.Count; i++) {
+            for (int i = _pendingSpawnUnit.Count - 1; i >= 0; i--) {
                 UnitSpawnScriptObject item = _pendingSpawnUnit[i];
                 if (item.Delay <= _time) {
-                    pendingKill.Add(i);
+                    _pendingSpawnUnit.RemoveAt(i);
                     SpawnUnitImpl(item);
                 }
-                else {
-                    break;
-                }
             }
-            foreach (var item in pendingKill) {
-                _pendingSpawnUnit.RemoveAt(item);
-            }
-            ListPool<int>.Free(pendingKill);
         }
 
         public bool IsEnable() {
@@ -134,7 +126,9 @@ namespace Hamster.SpaceWar {
         }
 
         private void SpawnUnitImpl(UnitSpawnScriptObject data) {
-            GameObject ship = GameLogicUtility.ServerCreateEnemy(data.ID, _levelConfig.FixLocations[data.LocationIndex], 180);
+            GameObject ship = GameLogicUtility.ServerCreateEnemy(data.ID, 
+                data.UseIndex ? _levelConfig.FixLocations[data.LocationIndex] : data.SpawnLocation, 
+                180);
             if (ship.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
                 baseEnemy.UnitType = ESpaceWarUnitType.Enemy;
                 baseEnemy.OnDie += OnEnemyDie;
