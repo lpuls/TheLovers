@@ -24,7 +24,7 @@ namespace Hamster.SpaceWar {
 
         public void UpdateHealth(int value, int max) {
             _health.fillAmount = value * 1.0f / max;
-            _healthValue.text = string.Format("{0}", value);
+            _healthValue.text = CommonString.CommonIntString[value];  // string.Format("{0}", value);
         }
 
         public void UpdateWeapon(string spriteName) {

@@ -8,7 +8,7 @@ using UnityEngine.U2D;
 #if UNITY_EDITOR
 namespace Hamster.Editor {
     public class BuildResources : EditorWindow {
-        [MenuItem("Tools/Build AssetBundle")]
+        [MenuItem("Tools/Res/Build AssetBundle")]
         static void ExportResource() {
             CleanAllAssetBundleName();
 
@@ -18,7 +18,7 @@ namespace Hamster.Editor {
             BuildPipeline.BuildAssetBundles(Application.dataPath + "/../AssetBundle/Win", BuildAssetBundleOptions.StrictMode, BuildTarget.StandaloneWindows);
         }
 
-        [MenuItem("Tools/Build Android AssetBundle")]
+        [MenuItem("Tools/Res/Build Android AssetBundle")]
         static void ExportAndroidResource() {
             CleanAllAssetBundleName();
 
@@ -28,13 +28,13 @@ namespace Hamster.Editor {
             BuildPipeline.BuildAssetBundles(Application.dataPath + "/../AssetBundle/Android", BuildAssetBundleOptions.StrictMode, BuildTarget.Android);
         }
 
-        [MenuItem("Tools/Update AssetBundle")]
+        [MenuItem("Tools/Res/Update AssetBundle")]
         static void UpdateResourceGraph() {
             AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
             directGraph.Build(Application.dataPath + "/Res");
         }
 
-        [MenuItem("Tools/Clean All AssetBundleName")]
+        [MenuItem("Tools/Res/Clean All AssetBundleName")]
         static void CleanAllAssetBundleName() {
             List<AssetImporter> importers = new List<AssetImporter>();
             CleanAllAssetBundleName(Application.dataPath, importers);
@@ -45,14 +45,14 @@ namespace Hamster.Editor {
             EditorUtility.ClearProgressBar();
         }
 
-        [MenuItem("Tools/Show Depedens Graph")]
+        [MenuItem("Tools/Res/Show Depedens Graph")]
         static void ShowDepedensGraph() {
             AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
             directGraph.Build(Application.dataPath + "/Res");
             directGraph.ToGraph();
         }
 
-        [MenuItem("Assets/To Atlas")]
+        [MenuItem("Assets/Tools/To Atlas")]
         static void PackageAtlas() {
             Debug.Log("Start Create Sprite Atlas");
             if (null == Selection.objects ||
