@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WorldSize: {x: 71, y: 40, z: 40}
+  GlobalVolume: {fileID: 1518782554}
 --- !u!4 &1450042927
 Transform:
   m_ObjectHideFlags: 0

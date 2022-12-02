@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d839ba915600b346bf156e1e96c4fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GlobalVolume: {fileID: 1131375085}
 --- !u!4 &1697755307
 Transform:
   m_ObjectHideFlags: 0
