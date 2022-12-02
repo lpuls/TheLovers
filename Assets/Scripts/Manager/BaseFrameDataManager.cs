@@ -182,6 +182,12 @@ namespace Hamster.SpaceWar {
                 case EUpdateActorType.Health:
                     Data1.Int16 = binaryReader.ReadInt16();
                     break;
+                case EUpdateActorType.LevelEventIndex:
+                    Data1.Int32 = binaryReader.ReadInt32();
+                    break;
+                case EUpdateActorType.MissionResult:
+                    Data1.Boolean = binaryReader.ReadBoolean();
+                    break;
             }
         }
 
@@ -201,6 +207,12 @@ namespace Hamster.SpaceWar {
                     break;
                 case EUpdateActorType.Health:
                     packet.WriteInt16(Data1.Int16);
+                    break;
+                case EUpdateActorType.LevelEventIndex:
+                    packet.WriteInt32(Data1.Int32);
+                    break;
+                case EUpdateActorType.MissionResult:
+                    packet.WriteBool(Data1.Boolean);
                     break;
             }
         }

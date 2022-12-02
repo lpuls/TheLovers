@@ -113,18 +113,22 @@ namespace Hamster.SpaceWar {
 
 #if UNITY_EDITOR
         GUIStyle style = new GUIStyle();
+#endif
 
         private void OnGUI() {
-            style.fontSize = 24;
             GUILayout.Label("Frame " + _frameDataManager.GameLogicFrame);
-            GUILayout.Label("Pack Ave " + _logicSyncModule.AveSize, style);
-            GUILayout.Label("Max Pack " + _logicSyncModule.MaxSize, style);
+#if UNITY_EDITOR
+            style.fontSize = 24;
+            if (null != _logicSyncModule) {
+                GUILayout.Label("Pack Ave " + _logicSyncModule.AveSize, style);
+                GUILayout.Label("Max Pack " + _logicSyncModule.MaxSize, style);
+            }
+#endif
             if (GUILayout.Button("Spawn Ship")) {
                 ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
                 module.RequestSpawnShipToServer(2);
             }
         }
-#endif
 
         public void OnBeginSimulate() {
             Single<UIManager>.GetInstance().Open<MainUIController>();
