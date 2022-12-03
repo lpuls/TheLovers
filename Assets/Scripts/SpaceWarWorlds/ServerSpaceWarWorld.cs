@@ -29,12 +29,18 @@ namespace Hamster.SpaceWar {
             // _enemyManager.EnableSpawn = false;
 
             // 启用网络
+            string levelPath = string.Empty;
             if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Mission>(swapData.LevelID, out Config.Mission mission)) {
+                    levelPath = mission.Path;
+                }
+
                 _netDevice = new ServerNetDevice();
                 _netDevice.RegistModule(new NetPingModule());
                 _netDevice.RegistModule(new GameLogicSyncModule());
                 _netDevice.RegistModule(new ServerGameLogicEventModule());
-                _netDevice.Listen("127.0.0.1", 8888);
+                //_netDevice.Listen("127.0.0.1", 8888);
+                _netDevice.Listen(swapData.IP, swapData.Port);
                 RegisterManager<ServerNetDevice>(_netDevice);
             }
 
@@ -45,8 +51,10 @@ namespace Hamster.SpaceWar {
             RegisterManager<LevelManager>(_levelManager);
             RegisterManager<ClientLevelManager>(_clientLevelManager);
 
-            _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
-            _clientLevelManager.Initilze("Res/ScriptObjects/Levels/Level0");
+            if (!string.IsNullOrEmpty(levelPath)) {
+                _levelManager.Initilze(levelPath);
+                _clientLevelManager.Initilze(levelPath);
+            }
 
             // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;

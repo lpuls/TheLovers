@@ -26,12 +26,25 @@ namespace Hamster.SpaceWar {
             _netDevice.RegistModule(_logicSyncModule);
             _netDevice.RegistModule(new ClientGameLogicEventModule());
 
-            _netDevice.Connect("127.0.0.1", 8888);
+            string levelPath = string.Empty;
+            string ip = string.Empty;
+            int port = 0;
+            if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
+                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Mission>(swapData.LevelID, out Config.Mission mission)) {
+                    levelPath = mission.Path;
+                }
+                ip = swapData.IP;
+                port = swapData.Port;
+            }
+
+            //_netDevice.Connect("127.0.0.1", 8888);
+            _netDevice.Connect(ip, port);
             RegisterManager<ClientNetDevice>(_netDevice);
             RegisterManager<ClientFrameDataManager>(_frameDataManager);
             RegisterManager<ClientLevelManager>(_levelManager);
 
-            _levelManager.Initilze("Res/ScriptObjects/Levels/Level0");
+            if (!string.IsNullOrEmpty(levelPath))
+                _levelManager.Initilze(levelPath);
 
             _frameDataManager.OnBeginSimulate += OnBeginSimulate;
             _frameDataManager.OnFrameUpdate += _levelManager.OnFrameDataUpdate;

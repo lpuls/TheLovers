@@ -27,33 +27,34 @@ namespace Config {
             "ChFUZW1wL0NvbmZpZy5wcm90byJoCgxCdWxsZXRDb25maWcSCgoCSUQYASAB",
             "KAUSDAoETm90ZRgCIAEoCRIMCgRQYXRoGAMgASgJEhEKCUxvZ2ljUGF0aBgE",
             "IAEoCRINCgVTcGVlZBgFIAEoAhIOCgZEYW1hZ2UYBiABKAUiMAoRTWFpblVJ",
-            "VGFsa0NvbnRleHQSCgoCSUQYASABKAUSDwoHQ29udGV4dBgCIAEoCSJDCgdN",
+            "VGFsa0NvbnRleHQSCgoCSUQYASABKAUSDwoHQ29udGV4dBgCIAEoCSJnCgdN",
             "aXNzaW9uEgoKAklEGAEgASgFEg0KBVRpdGxlGAIgASgJEg8KB0NvbnRleHQY",
-            "AyABKAkSDAoEUGF0aBgEIAEoCSJHCgpQY2tlckl0ZW1zEgoKAklEGAEgASgF",
-            "EgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCAB",
-            "KAkiqAEKClVuaXRDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIR",
-            "CglMb2dpY1BhdGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUg",
-            "ASgCEhcKD0Ryb3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIU",
-            "CgxJbXBhY3REYW1hZ2UYCCABKAUSEAoIV2VhcG9uSUQYCSABKAUiXgoGV2Vh",
-            "cG9uEgoKAklEGAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIO",
-            "CgZOZXh0THYYBCABKAUSDgoGVHlwZUlEGAUgASgFEgwKBEljb24YBiABKAki",
-            "KwoIVmVjdG9yM0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIi",
-            "KwoGRGVwZW5kEhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAki",
-            "kgEKC0dhbWVTZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEo",
-            "BRIQCghTZXJ2ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENs",
-            "aWVudElQGAUgASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgH",
-            "IAEoCzIHLkRlcGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0K",
-            "CUdhbWVNb2RlbBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9T",
-            "SU5HTEUQARIWChJHYW1lTW9kZWxfTVVMVElQTEUQAipsCgpXZWFwb25UeXBl",
-            "EhMKD1dlYXBvblR5cGVfTk9ORRAAEhYKEldlYXBvblR5cGVfR0FMVElORxAB",
-            "EhYKEldlYXBvblR5cGVfU0hPVEdVThACEhkKFVdlYXBvblR5cGVfRElTUEVS",
-            "U0lPThADQgmqAgZDb25maWdiBnByb3RvMw=="));
+            "AyABKAkSDAoEUGF0aBgEIAEoCRIMCgRJY29uGAUgASgJEgkKAVgYBiABKAUS",
+            "CQoBWRgHIAEoBSJHCgpQY2tlckl0ZW1zEgoKAklEGAEgASgFEgwKBE5vdGUY",
+            "AiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCABKAkiqAEKClVu",
+            "aXRDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglMb2dpY1Bh",
+            "dGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUgASgCEhcKD0Ry",
+            "b3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIUCgxJbXBhY3RE",
+            "YW1hZ2UYCCABKAUSEAoIV2VhcG9uSUQYCSABKAUiXgoGV2VhcG9uEgoKAklE",
+            "GAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0THYY",
+            "BCABKAUSDgoGVHlwZUlEGAUgASgFEgwKBEljb24YBiABKAkiKwoIVmVjdG9y",
+            "M0QSCQoBWBgBIAEoAhIJCgFZGAIgASgCEgkKAVoYAyABKAIiKwoGRGVwZW5k",
+            "EhMKC1JlbG9hZENvdW50GAEgASgFEgwKBFBhdGgYAiABKAkikgEKC0dhbWVT",
+            "ZXR0aW5nEgoKAklEGAEgASgFEhEKCU1heFBsYXllchgCIAEoBRIQCghTZXJ2",
+            "ZXJJUBgDIAEoCRISCgpTZXJ2ZXJQb3J0GAQgASgFEhAKCENsaWVudElQGAUg",
+            "ASgJEhIKCkNsaWVudFBvcnQYBiABKAUSGAoHRGVwZW5kcxgHIAEoCzIHLkRl",
+            "cGVuZCobCgdFeGFtcGxlEhAKDEV4YW1wbGVfTk9ORRAAKk0KCUdhbWVNb2Rl",
+            "bBISCg5HYW1lTW9kZWxfTk9ORRAAEhQKEEdhbWVNb2RlbF9TSU5HTEUQARIW",
+            "ChJHYW1lTW9kZWxfTVVMVElQTEUQAipsCgpXZWFwb25UeXBlEhMKD1dlYXBv",
+            "blR5cGVfTk9ORRAAEhYKEldlYXBvblR5cGVfR0FMVElORxABEhYKEldlYXBv",
+            "blR5cGVfU0hPVEdVThACEhkKFVdlYXBvblR5cGVfRElTUEVSU0lPThADQgmq",
+            "AgZDb25maWdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Config.Example), typeof(global::Config.GameModel), typeof(global::Config.WeaponType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.BulletConfig), global::Config.BulletConfig.Parser, new[]{ "ID", "Note", "Path", "LogicPath", "Speed", "Damage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.MainUITalkContext), global::Config.MainUITalkContext.Parser, new[]{ "ID", "Context" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Config.Mission), global::Config.Mission.Parser, new[]{ "ID", "Title", "Context", "Path", "Icon", "X", "Y" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.PckerItems), global::Config.PckerItems.Parser, new[]{ "ID", "Note", "Path", "LogicPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.UnitConfig), global::Config.UnitConfig.Parser, new[]{ "ID", "Path", "LogicPath", "Health", "Speed", "DropProbability", "Drops", "ImpactDamage", "WeaponID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Config.Weapon), global::Config.Weapon.Parser, new[]{ "ID", "Note", "Path", "NextLv", "TypeID", "Icon" }, null, null, null),
@@ -541,6 +542,9 @@ namespace Config {
       title_ = other.title_;
       context_ = other.context_;
       path_ = other.path_;
+      icon_ = other.icon_;
+      x_ = other.x_;
+      y_ = other.y_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -593,6 +597,39 @@ namespace Config {
       }
     }
 
+    /// <summary>Field number for the "Icon" field.</summary>
+    public const int IconFieldNumber = 5;
+    private string icon_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Icon {
+      get { return icon_; }
+      set {
+        icon_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "X" field.</summary>
+    public const int XFieldNumber = 6;
+    private int x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Y" field.</summary>
+    public const int YFieldNumber = 7;
+    private int y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Mission);
@@ -610,6 +647,9 @@ namespace Config {
       if (Title != other.Title) return false;
       if (Context != other.Context) return false;
       if (Path != other.Path) return false;
+      if (Icon != other.Icon) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -620,6 +660,9 @@ namespace Config {
       if (Title.Length != 0) hash ^= Title.GetHashCode();
       if (Context.Length != 0) hash ^= Context.GetHashCode();
       if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (Icon.Length != 0) hash ^= Icon.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -649,6 +692,18 @@ namespace Config {
         output.WriteRawTag(34);
         output.WriteString(Path);
       }
+      if (Icon.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Icon);
+      }
+      if (X != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Y);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -668,6 +723,15 @@ namespace Config {
       }
       if (Path.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (Icon.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Icon);
+      }
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      }
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -691,6 +755,15 @@ namespace Config {
       }
       if (other.Path.Length != 0) {
         Path = other.Path;
+      }
+      if (other.Icon.Length != 0) {
+        Icon = other.Icon;
+      }
+      if (other.X != 0) {
+        X = other.X;
+      }
+      if (other.Y != 0) {
+        Y = other.Y;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -717,6 +790,18 @@ namespace Config {
           }
           case 34: {
             Path = input.ReadString();
+            break;
+          }
+          case 42: {
+            Icon = input.ReadString();
+            break;
+          }
+          case 48: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            Y = input.ReadInt32();
             break;
           }
         }

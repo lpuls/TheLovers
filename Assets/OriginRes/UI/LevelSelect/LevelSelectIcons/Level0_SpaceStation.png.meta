@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 431d5cf15e02834499c78bfabd6b23db
+guid: d96c8d4f2bb25f94493f9a6aa74f9264
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -166,5 +166,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: originres/ui/levelselect/levelselecticons/level0_spacestation
   assetBundleVariant: 

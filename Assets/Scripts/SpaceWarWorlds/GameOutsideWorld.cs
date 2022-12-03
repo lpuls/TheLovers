@@ -21,8 +21,11 @@ namespace Hamster.SpaceWar {
         }
 
         private IEnumerator PreloadAssets() {
+            Single<AtlasManager>.GetInstance().LoadAtlas("Res/SpriteAtlas/LevelSelectIcons");
             yield return new WaitForSeconds(1.0f);
             HideLoading();
+
+            Single<UIManager>.GetInstance().Open<LevelSelectController>();
         }
 
         protected IEnumerator LoadScene(string path, string sceneName, Config.GameModel gameModel) {
@@ -44,16 +47,16 @@ namespace Hamster.SpaceWar {
             yield break;
         }
 
-        private void OnGUI() {
-            if (GUI.Button(new Rect(0, 0, 200, 100), "Create Room")) {
-                StartCoroutine(LoadScene("Res/Scene/ServerScene", "ServerScene", Config.GameModel.Multiple));
-            }
-            if (GUI.Button(new Rect(0, 125, 200, 100), "Join Room")) {
-                StartCoroutine(LoadScene("Res/Scene/ClientScene", "ClientScene", Config.GameModel.Multiple));
-            }
-            if (GUI.Button(new Rect(0, 250, 200, 100), "Single Play")) {
-                StartCoroutine(LoadScene("Res/Scene/ServerScene", "ServerScene", Config.GameModel.Single));
-            }
+        public void GoToSinglePlay() {
+            StartCoroutine(LoadScene("Res/Scene/ServerScene", "ServerScene", Config.GameModel.Single));
+        }
+
+        public void GoToMultipleAsHoster() {
+            StartCoroutine(LoadScene("Res/Scene/ServerScene", "ServerScene", Config.GameModel.Multiple));
+        }
+
+        public void GoToMultipleAsGuess() {
+            StartCoroutine(LoadScene("Res/Scene/ClientScene", "ClientScene", Config.GameModel.Multiple));
         }
     }
 }
