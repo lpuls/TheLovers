@@ -30,7 +30,7 @@ namespace Hamster.SpaceWar {
 
             // ∆Ù”√Õ¯¬Á
             string levelPath = string.Empty;
-            if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData) && !string.IsNullOrEmpty(swapData.Setting.ServerIP)) {
+            if (TryGetWorldSwapData<SpaceWarSwapData>(out SpaceWarSwapData swapData)) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Mission>(swapData.LevelID, out Config.Mission mission)) {
                     levelPath = mission.Path;
                 }
