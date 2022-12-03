@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
     [SerializeField]
     public class LevelRandomSpawnScriptObject : LevelEventScriptObject {
-        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitAllDie; 
+        public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.WaitAllDie; 
         public int RandomSpawnCountMin = 3;
         public int RandomSpawnCountMax = 10;
         public string AIAssetPath = string.Empty;
@@ -14,10 +14,10 @@ namespace Hamster.SpaceWar {
         public List<UnitSpawnScriptObject> UnitSpawns = new List<UnitSpawnScriptObject>();
 
         public override bool IsComplete(ILevelManager levelManager) {
-            if (ELevelWaveCompleteType.WaitTime == CompleteType) {
+            if (ELevelEventCompleteType.WaitTime == CompleteType) {
                 return levelManager.GetTime() >= Time;
             }
-            else if (ELevelWaveCompleteType.WaitAllDie == CompleteType) {
+            else if (ELevelEventCompleteType.WaitAllDie == CompleteType) {
                 return levelManager.GetEnemeyCount() <= 0 && levelManager.GetPendingSpawnUnitCount() <= 0;
             }
             return false;

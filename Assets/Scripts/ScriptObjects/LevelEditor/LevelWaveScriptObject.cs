@@ -5,18 +5,18 @@ namespace Hamster.SpaceWar {
     [SerializeField]
     public class LevelWaveScriptObject : LevelEventScriptObject {
 
-        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
+        // public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.WaitTime;
         public List<UnitSpawnScriptObject> UnitSpawns = new();  // 敌人生成数据
 
-        public override bool IsComplete(ILevelManager levelManager) {
-            if (ELevelWaveCompleteType.WaitTime == CompleteType) {
-                return levelManager.GetTime() >= Time;
-            }
-            else if (ELevelWaveCompleteType.WaitAllDie == CompleteType) {
-                return levelManager.GetEnemeyCount() <= 0 && levelManager.GetPendingSpawnUnitCount() <= 0;
-            }
-            return false;
-        }
+        //public override bool IsComplete(ILevelManager levelManager) {
+        //    if (ELevelEventCompleteType.WaitTime == CompleteType) {
+        //        return levelManager.GetTime() >= Time;
+        //    }
+        //    else if (ELevelEventCompleteType.WaitAllDie == CompleteType) {
+        //        return levelManager.GetEnemeyCount() <= 0 && levelManager.GetPendingSpawnUnitCount() <= 0;
+        //    }
+        //    return false;
+        //}
 
         public override void OnLevel(ILevelManager levelManager) {
             base.OnLevel(levelManager);

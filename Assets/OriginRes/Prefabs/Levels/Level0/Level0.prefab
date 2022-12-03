@@ -207,8 +207,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8422438441101158098}
+  - {fileID: 555468671785706180}
   - {fileID: 575999275499060201}
-  - {fileID: 2172494121486183612}
+  - {fileID: 6044686783148729551}
   - {fileID: 3491252104784375396}
   - {fileID: 2280777502267692580}
   - {fileID: 835845627365553439}
@@ -217,6 +219,8 @@ Transform:
   - {fileID: 3662969248961527452}
   - {fileID: 8868163706393455918}
   - {fileID: 7845465663603017319}
+  - {fileID: 1990934293773724855}
+  - {fileID: 8500871035343625976}
   m_Father: {fileID: 6913372618819913112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,7 +323,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5194178288710156095
 MonoBehaviour:
@@ -1313,7 +1317,7 @@ Transform:
   - {fileID: 5717357183513231978}
   - {fileID: 8110571924120111062}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &615061868455756711
 MonoBehaviour:
@@ -1595,7 +1599,7 @@ Transform:
   - {fileID: 3897401270146951277}
   - {fileID: 7326189423361167112}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3427670122629675775
 MonoBehaviour:
@@ -1637,6 +1641,75 @@ MonoBehaviour:
   RandomSpawnIDs: 
   SpawnLocations: []
   EnableDebugDraw: 0
+--- !u!1 &2606966086383950694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990934293773724855}
+  - component: {fileID: 6705746479550420169}
+  m_Layer: 0
+  m_Name: DisablePlayerInput2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1990934293773724855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606966086383950694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6705746479550420169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606966086383950694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 2
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 3
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &2763374573569020460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1740,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5918704656573986891
 MonoBehaviour:
@@ -1872,7 +1945,7 @@ Transform:
   m_Children:
   - {fileID: 8036232794999747335}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3640939028943504194
 MonoBehaviour:
@@ -2313,6 +2386,144 @@ MonoBehaviour:
   RandomSpawnIDs: 
   SpawnLocations: []
   EnableDebugDraw: 0
+--- !u!1 &4642382571451052722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6044686783148729551}
+  - component: {fileID: 4657821842506435213}
+  m_Layer: 0
+  m_Name: EnablePlayerInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6044686783148729551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642382571451052722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4657821842506435213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642382571451052722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 2
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 2
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &4666847775558005225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555468671785706180}
+  - component: {fileID: 5643034945525976151}
+  m_Layer: 0
+  m_Name: WaitBeginCG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555468671785706180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666847775558005225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5643034945525976151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666847775558005225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 12.7
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 4
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
 --- !u!1 &4809565406337258089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,7 +2653,7 @@ Transform:
   - {fileID: 1217424866643498543}
   - {fileID: 5789379735939324230}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5372964936572716562
 MonoBehaviour:
@@ -3291,8 +3502,10 @@ MonoBehaviour:
   LevelProperty: 1
   ClientAsset: Res/Envs/ClientLevel0
   LevelWaves:
+  - {fileID: 3364693914029585706}
+  - {fileID: 5643034945525976151}
   - {fileID: 5918704656573986891}
-  - {fileID: 5918409430965830502}
+  - {fileID: 4657821842506435213}
   - {fileID: 4186413145813425360}
   - {fileID: 3427670122629675775}
   - {fileID: 3184713807021272911}
@@ -3301,6 +3514,8 @@ MonoBehaviour:
   - {fileID: 5194178288710156095}
   - {fileID: 4151745925185981645}
   - {fileID: 3640939028943504194}
+  - {fileID: 6705746479550420169}
+  - {fileID: 2565341288844953303}
   UnitPaths: []
   Time: 0
   CompleteType: 0
@@ -3815,6 +4030,75 @@ MonoBehaviour:
   Paths: []
   MissionID: 0
   EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &6732700297664904186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8422438441101158098}
+  - component: {fileID: 3364693914029585706}
+  m_Layer: 0
+  m_Name: DisablePlayerInput1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8422438441101158098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732700297664904186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3364693914029585706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732700297664904186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 0
+  CompleteType: 2
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 3
   ArgInt: 0
   RandomSpawnCountMin: 3
   RandomSpawnCountMax: 6
@@ -4361,7 +4645,7 @@ Transform:
   - {fileID: 6979679497868984860}
   - {fileID: 6477957875309306125}
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4186413145813425360
 MonoBehaviour:
@@ -4618,75 +4902,6 @@ MonoBehaviour:
   RandomSpawnIDs: 
   SpawnLocations: []
   EnableDebugDraw: 0
---- !u!1 &7648088325442257366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2172494121486183612}
-  - component: {fileID: 5918409430965830502}
-  m_Layer: 0
-  m_Name: SystemTalk_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2172494121486183612
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648088325442257366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5918409430965830502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648088325442257366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelProperty: 7
-  ClientAsset: 
-  LevelWaves: []
-  UnitPaths: []
-  Time: 2
-  CompleteType: 0
-  UnitSpawns: []
-  AsTransform: 1
-  DelaySpawn: 0
-  SpawnID: 0
-  LocationIndex: 0
-  AIAssetPath: 
-  PathProperty: {fileID: 0}
-  Step: 3
-  IsSoomth: 1
-  Paths: []
-  MissionID: 0
-  EventUI: 1
-  ArgInt: 2
-  RandomSpawnCountMin: 3
-  RandomSpawnCountMax: 6
-  RandomSpawnDelay: {x: 0, y: 0.03}
-  RandomSpawnIDs: 
-  SpawnLocations: []
-  EnableDebugDraw: 0
 --- !u!1 &7688592774467344114
 GameObject:
   m_ObjectHideFlags: 0
@@ -4921,7 +5136,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4151745925185981645
 MonoBehaviour:
@@ -5087,7 +5302,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5960133424501606685}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3184713807021272911
 MonoBehaviour:
@@ -5119,6 +5334,75 @@ MonoBehaviour:
   Paths: []
   MissionID: 1
   EventUI: 0
+  ArgInt: 0
+  RandomSpawnCountMin: 3
+  RandomSpawnCountMax: 6
+  RandomSpawnDelay: {x: 0, y: 0.03}
+  RandomSpawnIDs: 
+  SpawnLocations: []
+  EnableDebugDraw: 0
+--- !u!1 &7985259898951424761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8500871035343625976}
+  - component: {fileID: 2565341288844953303}
+  m_Layer: 0
+  m_Name: WaitEndCG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8500871035343625976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7985259898951424761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5960133424501606685}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2565341288844953303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7985259898951424761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43c194681fcd0418b77916ece1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelProperty: 7
+  ClientAsset: 
+  LevelWaves: []
+  UnitPaths: []
+  Time: 12.7
+  CompleteType: 0
+  UnitSpawns: []
+  AsTransform: 1
+  DelaySpawn: 0
+  SpawnID: 0
+  LocationIndex: 0
+  AIAssetPath: 
+  PathProperty: {fileID: 0}
+  Step: 3
+  IsSoomth: 1
+  Paths: []
+  MissionID: 0
+  EventUI: 4
   ArgInt: 0
   RandomSpawnCountMin: 3
   RandomSpawnCountMax: 6

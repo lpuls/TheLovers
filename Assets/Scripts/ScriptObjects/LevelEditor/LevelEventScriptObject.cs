@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Hamster.SpaceWar {
-    public enum ELevelWaveCompleteType {
+    public enum ELevelEventCompleteType {
         WaitTime,
         WaitAllDie,
         Continue
@@ -21,9 +21,19 @@ namespace Hamster.SpaceWar {
     [SerializeField]
     public class LevelEventScriptObject : ScriptableObject {
         public float Time = 0;
+        public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.Continue;
 
         public virtual bool IsComplete(ILevelManager levelManager) {
-            return levelManager.GetTime() >= Time;
+            if (ELevelEventCompleteType.WaitTime == CompleteType) {
+                return levelManager.GetTime() >= Time;
+            }
+            else if (ELevelEventCompleteType.WaitAllDie == CompleteType) {
+                return levelManager.GetEnemeyCount() <= 0 && levelManager.GetPendingSpawnUnitCount() <= 0;
+            }
+            else if (ELevelEventCompleteType.Continue == CompleteType) {
+                return true;
+            }
+            return false;
         }
 
         public virtual void OnLevel(ILevelManager levelManager) {

@@ -13,6 +13,7 @@ namespace Hamster.SpaceWar {
     public class ServerPlayerController : ServerBaseController {
 
         // 输入
+        protected bool _enableInput = true;
         protected int _operate = 0;
         protected int _operatorIndex = 0;
         protected InputCommand _inputCommand = new InputCommand();
@@ -25,6 +26,11 @@ namespace Hamster.SpaceWar {
 
 
         protected override void ProcessorInput(int operate) {
+            // 未启用输入时，不处理
+            if (!_enableInput)
+                return;
+
+            // 分析输入
             GameLogicUtility.GetOperateFromInput(transform, operate, _inputCommand);
 
             // 玩家进行移动
@@ -60,6 +66,10 @@ namespace Hamster.SpaceWar {
         public void ChangeWeapon(EAbilityIndex abilityIndex, int id) {
             if (null != _localAbilityComponent)
                 _localAbilityComponent.ChangeWeapon(abilityIndex, id);
+        }
+
+        public void EnableInput(bool enable) {
+            _enableInput = enable;
         }
 
         public override void OnAlive(float dt) {

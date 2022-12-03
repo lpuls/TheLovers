@@ -82,7 +82,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timelines:
-  - ID: 3
+  - ID: 1
+    Timeline: {fileID: 6447565326338484193}
+    StopOnNext: 1
+  - ID: 8
     Timeline: {fileID: 6447565325335591670}
     StopOnNext: 0
 --- !u!1 &6447565325335591668

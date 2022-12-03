@@ -16,7 +16,7 @@ namespace Hamster.SpaceWar {
             Spawn,
             MissionUI,
             Path,
-            UI,
+            Events,
             RandomSpawn
         }
 
@@ -36,7 +36,7 @@ namespace Hamster.SpaceWar {
 
         // 关卡波数
         public float Time = 0;
-        public ELevelWaveCompleteType CompleteType = ELevelWaveCompleteType.WaitTime;
+        public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.WaitTime;
         public List<LevelEditorProperty> UnitSpawns = new();  // 敌人生成数据
 
 
@@ -57,7 +57,7 @@ namespace Hamster.SpaceWar {
         public int MissionID = 0;
 
         // UI显示
-        public ELevelEventUI EventUI = ELevelEventUI.Warning;
+        public ELevelEventType EventUI = ELevelEventType.OpenWarning;
         public int ArgInt = 0;
 
         // 随机生成
@@ -176,7 +176,7 @@ namespace Hamster.SpaceWar {
                     if (childTransform.TryGetComponent<LevelEditorProperty>(out LevelEditorProperty temp)) {
                         if (temp.LevelProperty == LevelEditorProperty.ELevelProperty.Wave 
                             || temp.LevelProperty == ELevelProperty.MissionUI
-                            || temp.LevelProperty == ELevelProperty.UI
+                            || temp.LevelProperty == ELevelProperty.Events
                             || temp.LevelProperty == ELevelProperty.RandomSpawn) {
                             temp.UpdateWaveConfig();
                             LevelWaves.Add(temp);
@@ -258,12 +258,13 @@ namespace Hamster.SpaceWar {
                         levelMissionUIScriptObject.MissionID = MissionID;
                         return levelMissionUIScriptObject;
                     }
-                case ELevelProperty.UI: {
-                        LevelUIScriptObject levelUIScriptObject = ScriptableObject.CreateInstance<LevelUIScriptObject>();
+                case ELevelProperty.Events: {
+                        LevelGameEventScriptObject levelUIScriptObject = ScriptableObject.CreateInstance<LevelGameEventScriptObject>();
                         levelUIScriptObject.name = transform.parent.name + "_" + gameObject.name;
                         levelUIScriptObject.Time = Time;
-                        levelUIScriptObject.UIType = EventUI;
+                        levelUIScriptObject.EventType = EventUI;
                         levelUIScriptObject.ArgInt = ArgInt;
+                        levelUIScriptObject.CompleteType = CompleteType;
                         return levelUIScriptObject;
                     }
                 case ELevelProperty.RandomSpawn: {
@@ -364,10 +365,10 @@ namespace Hamster.SpaceWar {
                     break;
                 case LevelEditorProperty.ELevelProperty.Wave: {
                         // 结束类型
-                        levelEditorProperty.CompleteType = (ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
+                        levelEditorProperty.CompleteType = (ELevelEventCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
 
                         // 触发时间
-                        if (ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                        if (ELevelEventCompleteType.WaitTime == levelEditorProperty.CompleteType)
                             levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
 
                         // 敌人生成数据
@@ -425,18 +426,24 @@ namespace Hamster.SpaceWar {
                         }
                     }
                     break;
-                case LevelEditorProperty.ELevelProperty.UI: {
-                        levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
-                        levelEditorProperty.EventUI = (ELevelEventUI)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
+                case LevelEditorProperty.ELevelProperty.Events: {
+                        // 结束类型
+                        levelEditorProperty.CompleteType = (ELevelEventCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
+
+                        // 触发时间
+                        if (ELevelEventCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                            levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
+
+                        levelEditorProperty.EventUI = (ELevelEventType)EditorGUILayout.EnumPopup("节点类型", levelEditorProperty.EventUI);
                         levelEditorProperty.ArgInt = EditorGUILayout.IntField("int参数", levelEditorProperty.ArgInt);
                     }
                     break;
                 case LevelEditorProperty.ELevelProperty.RandomSpawn: {
                         // 结束类型
-                        levelEditorProperty.CompleteType = (ELevelWaveCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
+                        levelEditorProperty.CompleteType = (ELevelEventCompleteType)EditorGUILayout.EnumPopup("结束类型", levelEditorProperty.CompleteType);
 
                         // 触发时间
-                        if (ELevelWaveCompleteType.WaitTime == levelEditorProperty.CompleteType)
+                        if (ELevelEventCompleteType.WaitTime == levelEditorProperty.CompleteType)
                             levelEditorProperty.Time = EditorGUILayout.FloatField("持续时长", levelEditorProperty.Time);
 
                         levelEditorProperty.RandomSpawnCountMin = EditorGUILayout.IntField("最小生成数量", levelEditorProperty.RandomSpawnCountMin);
