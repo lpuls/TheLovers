@@ -9,6 +9,7 @@ namespace Hamster {
         private static World _instance = null;
 
         protected LoadingUI _loadingUI = null;
+        protected Animator _transitionUI = null;
         private Dictionary<Type, object> _managers = new Dictionary<Type, object>();
 
         public static T GetWorld<T>() where T : World {
@@ -60,6 +61,17 @@ namespace Hamster {
             }
         }
 
+        protected void InitTransitionUI() {
+            // 初始化转场界面
+            GameObject canvasGameObject = GameObject.Find("Canvas");
+            if (null != canvasGameObject) {
+                GameObject.DontDestroyOnLoad(canvasGameObject);
+                Transform transitionsInstance = canvasGameObject.transform.Find("Transitions");
+                if (null != transitionsInstance)
+                    _transitionUI = transitionsInstance.gameObject.TryGetOrAdd<Animator>();
+            }
+        }
+
         protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             // 初始化GM组件
             if (null != gmAssemlby)
@@ -98,6 +110,10 @@ namespace Hamster {
             _loadingUI.gameObject.SetActive(false);
         }
 
+        public void ShowTransition() {
+            // _transitionUI.Play("Transition", 0, 0);
+            _transitionUI.SetTrigger("Play");
+        }
 
         protected virtual void Update() {
             Asset.Update();

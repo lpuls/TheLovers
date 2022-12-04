@@ -101,6 +101,20 @@ namespace Hamster {
             return null;
         }
 
+        public void Show(Type controllerType) {
+            if (_uiInfos.TryGetValue(controllerType, out UIInfo info)) {
+                if (null != info.View) {
+                    info.View.Show();
+                }
+            }
+        }
+
+        public void Hide(Type controllerType) {
+            if (_uiInfos.TryGetValue(controllerType, out UIInfo info)) {
+                info.View.Hide();
+            }
+        }
+
         public void Close<T>(float delay = -1) {
             Close(typeof(T), true, delay);
         }

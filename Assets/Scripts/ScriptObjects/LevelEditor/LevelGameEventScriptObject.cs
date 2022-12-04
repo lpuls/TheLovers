@@ -7,7 +7,9 @@ namespace Hamster.SpaceWar {
         OpenMainUISystemTalkDialogue,
         EnablePlayerInput,
         DisablePlayerInput,
-        JustWait
+        JustWait,
+        ShowTransition,
+        HideMainUI
     }
 
     [SerializeField]
@@ -43,6 +45,24 @@ namespace Hamster.SpaceWar {
                     }
                     break;
                 case ELevelEventType.JustWait: {
+                        Debug.Log("JustWait");
+                    }
+                    break;
+                case ELevelEventType.ShowTransition: {
+                        if (levelManager.IsClient()) {
+                            World.GetWorld().ShowTransition();
+                            Debug.Log("Begin Transition");
+                        }
+                    }
+                    break;
+                case ELevelEventType.HideMainUI: {
+                        if (levelManager.IsClient()) {
+                            if (0 != ArgInt)
+                                Single<UIManager>.GetInstance().Show(typeof(MainUIController));
+                            else
+                                Single<UIManager>.GetInstance().Hide(typeof(MainUIController));
+                            Debug.Log("Show Or Hide Main UI " + ArgInt);
+                        }
                     }
                     break;
                 default:
