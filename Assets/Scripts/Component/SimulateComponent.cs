@@ -211,6 +211,7 @@ namespace Hamster.SpaceWar {
             Vector3 lastLocation = CurrentLocation;
             foreach (var item in _predicationCommands) {
                 NetPlayerCommand command = item;
+                _inputCommand.Direction = Vector3.zero;
                 GameLogicUtility.GetOperateFromInput(transform, command.Operate, _inputCommand);
                 movementComponent.Move(_inputCommand.Direction);
                 command.Location = GetMovementComponent().MoveTick(lastLocation, BaseFrameDataManager.LOGIC_FRAME_TIME, command.FrameIndex);
