@@ -16,15 +16,18 @@ namespace Hamster.SpaceWar {
 
             GameObject gameObject = behaviour.GetOwner();
             if (gameObject.TryGetComponent<MovementComponent>(out MovementComponent movementComponent)) {
-                bool inWorld = World.GetWorld<BaseSpaceWarWorld>().InWorld(gameObject.transform.position);
-                if (!inWorld && !notInWorld) {
-                    if (gameObject.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
-                        baseEnemy.ForceKill();
+                // todo 这边其实应该设置左右死线的，偷个懒
+                bool inWorld = World.GetWorld<BaseSpaceWarWorld>().InWorld(gameObject.transform.position - Direction * movementComponent.Speed);
+                if (!inWorld) {
+                    if (!notInWorld) {
+                        if (gameObject.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy)) {
+                            baseEnemy.ForceKill();
+                        }
+                        return EBehavourExecuteResult.Done;
                     }
-                    return EBehavourExecuteResult.Done;
                 }
                 else {
-                    notInWorld = true;
+                    notInWorld = false;
                     behaviour.GetBlackboard().SetValue<bool>(BBKey, notInWorld);
                 }
 
