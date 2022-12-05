@@ -20,6 +20,11 @@ namespace Hamster.SpaceWar {
             }
         }
 
+        public bool GameResult {
+            get;
+            set;
+        }
+
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
 

@@ -24,6 +24,11 @@ namespace Hamster.SpaceWar {
         protected float _dodgeTime = 0;
         [SerializeField] protected float _maxDodgeTime = 0.62f;
 
+        public override void Init() {
+            base.Init();
+
+            OnDie += OnPlayerDie;
+        }
 
         protected override void ProcessorInput(int operate) {
             // 未启用输入时，不处理
@@ -116,6 +121,13 @@ namespace Hamster.SpaceWar {
                     _propertyComponent.SetInvincible(false);
                     GameLogicUtility.SetDodgeDirty(gameObject);
                 }
+            }
+        }
+
+        private void OnPlayerDie(GameObject self, GameObject murderer) {
+            if (World.TryGetWorld<ServerSpaceWarWorld>(out ServerSpaceWarWorld world)) {
+                world.GameResult = false;
+                world.SetSystemPropertyDirty(EUpdateActorType.MissionResult);
             }
         }
 

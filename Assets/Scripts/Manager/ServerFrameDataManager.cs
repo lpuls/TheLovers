@@ -98,8 +98,8 @@ namespace Hamster.SpaceWar {
                         }
                         break;
                     case EUpdateActorType.MissionResult: {
-                            LevelManager levelManager = world.GetManager<LevelManager>();
-                            updateInfo.Data1.Boolean = levelManager.GetGameResult();
+                            //LevelManager levelManager = world.GetManager<LevelManager>();
+                            updateInfo.Data1.Boolean = (world as ServerSpaceWarWorld).GameResult;
                         }
                         break;
                     default:

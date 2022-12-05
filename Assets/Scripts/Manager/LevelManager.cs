@@ -58,8 +58,12 @@ namespace Hamster.SpaceWar {
             else if (nextWaveIndex >= _levelConfig.LevelWaves.Count) {
                 // TODO 通过关卡结束
                 _eventIndex = -1;
-                _gameResult = true;
-                World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.MissionResult);
+                // _gameResult = true;
+                if (World.TryGetWorld<ServerSpaceWarWorld>(out ServerSpaceWarWorld world)) {
+                    world.GameResult = true;
+                    world.SetSystemPropertyDirty(EUpdateActorType.MissionResult);
+                    //World.GetWorld<ServerSpaceWarWorld>().SetSystemPropertyDirty(EUpdateActorType.MissionResult);
+                }
             }
         }
 

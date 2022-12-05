@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public class ClientPlayerController : PlayerController {
+    public class ClientPlayerController : PlayerController, IMover {
 
         private GameLogicSyncModule _gameLogicSyncModule = null;
         private MovementComponent _movementComponent = null;
@@ -16,8 +16,10 @@ namespace Hamster.SpaceWar {
         public override void Init() {
             base.Init();
 
-            if (null == _movementComponent)
+            if (null == _movementComponent) {
                 _movementComponent = gameObject.TryGetOrAdd<MovementComponent>();
+                _movementComponent.Mover = this;
+            }
             if (null == _simulateComponent)
                 _simulateComponent = gameObject.TryGetOrAdd<SimulateComponent>();
             if (null == _propertyComponent)
@@ -67,6 +69,23 @@ namespace Hamster.SpaceWar {
             else {
                 GameLogicUtility.SetPlayerOperator(_netSyncComponent.NetID, input, GetFrameIndex());
             }
+        }
+
+        public virtual RaycastHit2D MoveRayCast(float distance, Vector3 direction) {
+            return Physics2D.BoxCast(transform.position, GetSize(), 0, direction, distance,
+                (1 << (int)ESpaceWarLayers.ENEMY) | (1 << (int)ESpaceWarLayers.BULLET) | (1 << (int)ESpaceWarLayers.PICKER));
+        }
+
+        public virtual Vector3 GetSize() {
+            // todo 这边先偷懒吧，毕竟只有玩家飞机会预测
+            return new Vector3(3.612638f, 1.211238f);
+        }
+
+        public bool OnHitSomething(RaycastHit2D raycastHit) {
+            CollisionProcessManager collisionProcessManager = World.GetWorld().GetManager<CollisionProcessManager>();
+            Debug.Assert(null != collisionProcessManager, "Collision Process Manager is invalid");
+            collisionProcessManager.AddCollisionResult(raycastHit, gameObject, (ESpaceWarLayers)gameObject.layer);
+            return true;
         }
 
         public override void Tick(float dt) {
