@@ -16,6 +16,11 @@ namespace Hamster {
             return _instance as T; 
         }
 
+        public static bool TryGetWorld<T>(out T world) where T : World {
+            world = _instance as T;
+            return null != world;
+        }
+
         public static World GetWorld() {
             return _instance;
         }
@@ -42,6 +47,15 @@ namespace Hamster {
 
         protected void RegisterManager<T>(T manager) {
             _managers.Add(typeof(T), manager);
+        }
+
+        public bool TryGetManager<T>(out T manager) {
+            manager = default;
+            if (_managers.TryGetValue(typeof(T), out object value)) {
+                manager = (T)value;
+                return null != manager;
+            }
+            return false;
         }
 
         public T GetManager<T>() {
@@ -111,8 +125,9 @@ namespace Hamster {
         }
 
         public void ShowTransition() {
-            // _transitionUI.Play("Transition", 0, 0);
-            _transitionUI.SetTrigger("Play");
+            _transitionUI.Play("Transition", 0, 0);
+            Debug.Log("Play Transition");
+            // _transitionUI.SetTrigger("Play");
         }
 
         protected virtual void Update() {
