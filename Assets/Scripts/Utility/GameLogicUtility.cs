@@ -100,9 +100,9 @@ namespace Hamster.SpaceWar {
             LocalAbilityComponent localAbilityComponent = ship.TryGetOrAdd<LocalAbilityComponent>();
             if (null != localAbilityComponent) {
                 if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(configID, out Config.UnitConfig unitConfig))
-                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, unitConfig.WeaponID);
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, unitConfig.WeaponID, false);
                 else
-                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, (int)Config.WeaponType.Galting);
+                    localAbilityComponent.ChangeWeapon(EAbilityIndex.MainWeapon, (int)Config.WeaponType.Galting, false);
             }
 
             // 服务端即是客户端也是服务端
@@ -276,7 +276,7 @@ namespace Hamster.SpaceWar {
             ClientFrameDataManager frameDataManager = World.GetWorld().GetManager<ClientFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(1, out Config.PckerItems info)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(configID, out Config.PckerItems info)) {
                 GameObject gameObject = frameDataManager.SpawnNetObject(netID, 0, info.Path, configID, position, ENetType.PickerItem);
                 if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetSimulatedProxy();

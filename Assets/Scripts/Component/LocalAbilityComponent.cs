@@ -28,16 +28,18 @@ namespace Hamster.SpaceWar {
             }
         }
 
-        public void ChangeWeapon(EAbilityIndex abilityIndex, int id) {
+        public void ChangeWeapon(EAbilityIndex abilityIndex, int id, bool isUpgrade=true) {
             // 判断是否升级
             int realID = id;
-            if (_weaponEquipIDs.TryGetValue((int)abilityIndex, out int equipID)) {
-                if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(equipID, out Config.Weapon equipWeaponInfo)) {
-                    if (id == equipWeaponInfo.TypeID)
-                        realID = equipWeaponInfo.NextLv;
-                    // NetxtID 为0时，说明没有下一个等级了
-                    if (0 == realID)
-                        realID = equipID;
+            if (isUpgrade) {
+                if (_weaponEquipIDs.TryGetValue((int)abilityIndex, out int equipID)) {
+                    if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.Weapon>(equipID, out Config.Weapon equipWeaponInfo)) {
+                        if (id == equipWeaponInfo.TypeID)
+                            realID = equipWeaponInfo.NextLv;
+                        // NetxtID 为0时，说明没有下一个等级了
+                        if (0 == realID)
+                            realID = equipID;
+                    }
                 }
             }
             _weaponEquipIDs[(int)abilityIndex] = realID;
