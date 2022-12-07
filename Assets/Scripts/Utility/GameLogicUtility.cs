@@ -122,7 +122,7 @@ namespace Hamster.SpaceWar {
             ServerFrameDataManager frameDataManager = World.GetWorld().GetManager<ServerFrameDataManager>();
             UnityEngine.Debug.Assert(null != frameDataManager, "Frame Data Manager Is Null");
 
-            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(1, out Config.PckerItems info)) {
+            if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.PckerItems>(configID, out Config.PckerItems info)) {
                 GameObject gameObject = frameDataManager.SpawnNetObject(0, 0, info.LogicPath, configID, position, ENetType.PickerItem);
                 if (gameObject.TryGetComponent<NetSyncComponent>(out NetSyncComponent netSyncComponent)) {
                     netSyncComponent.SetAuthority();
