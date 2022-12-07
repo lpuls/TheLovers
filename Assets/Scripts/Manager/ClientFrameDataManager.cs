@@ -13,7 +13,7 @@ namespace Hamster.SpaceWar {
         private FrameData _currentFrameData = null;
         private FrameData _preFrameData = null;
 
-        private byte[] _analyzeBytes = new byte[1024];
+        private byte[] _analyzeBytes = new byte[4096];
         private BinaryReader _binaryReader = null;
         private HashSet<NetSyncComponent> _predictionActors = new HashSet<NetSyncComponent>(32);
 
