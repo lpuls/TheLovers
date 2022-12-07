@@ -51,6 +51,10 @@ namespace Hamster.SpaceWar {
             private set;
         }
 
+        // 特效资源
+        public string SpawnEffectPath = "Res/VFX/ShipSpawn";
+        public string DeadEffectPath = "Res/VFX/DeadBoom";
+
         private void Awake() {
             _simulateComponent = GetComponent<SimulateComponent>();
             _animator = GetComponentInChildren<Animator>();
@@ -113,23 +117,29 @@ namespace Hamster.SpaceWar {
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.RoleState, out currentUpdateInfo)) {
                     switch ((EPlayerState)currentUpdateInfo.Data1.Int8) {
                         case EPlayerState.Spawning: {
-                                GameObject spawnEffect = Asset.Load("Res/VFX/ShipSpawn");
-                                spawnEffect.transform.position = transform.position;
-                                spawnEffect.transform.forward = transform.forward;
+                                if (!string.IsNullOrEmpty(SpawnEffectPath)) {
+                                    GameObject spawnEffect = Asset.Load(SpawnEffectPath);
+                                    spawnEffect.transform.position = transform.position;
+                                    spawnEffect.transform.forward = transform.forward;
+                                }
                             }
                             break;
                         case EPlayerState.Alive:
                             break;
                         case EPlayerState.Deading: {
-                                GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
-                                deadEffect.transform.position = transform.position;
+                                if (!string.IsNullOrEmpty(DeadEffectPath)) {
+                                    GameObject deadEffect = Asset.Load(DeadEffectPath);
+                                    deadEffect.transform.position = transform.position;
+                                }
                             }
                             break;
                         case EPlayerState.Dead: {
                                 if (null != _animator)
                                     _animator.SetTrigger("Dead");
-                                GameObject deadEffect = Asset.Load("Res/VFX/DeadBoom");
-                                deadEffect.transform.position = transform.position;
+                                if (!string.IsNullOrEmpty(DeadEffectPath)) {
+                                    GameObject deadEffect = Asset.Load(DeadEffectPath);
+                                    deadEffect.transform.position = transform.position;
+                                }
                             }
                             break;
                     }

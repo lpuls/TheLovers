@@ -34,7 +34,7 @@ namespace Config {
             "AiABKAkSDAoEUGF0aBgDIAEoCRIRCglMb2dpY1BhdGgYBCABKAkiqAEKClVu",
             "aXRDb25maWcSCgoCSUQYASABKAUSDAoEUGF0aBgCIAEoCRIRCglMb2dpY1Bh",
             "dGgYAyABKAkSDgoGSGVhbHRoGAQgASgFEg0KBVNwZWVkGAUgASgCEhcKD0Ry",
-            "b3BQcm9iYWJpbGl0eRgGIAMoBRINCgVEcm9wcxgHIAMoBRIUCgxJbXBhY3RE",
+            "b3BQcm9iYWJpbGl0eRgGIAEoBRINCgVEcm9wcxgHIAMoBRIUCgxJbXBhY3RE",
             "YW1hZ2UYCCABKAUSEAoIV2VhcG9uSUQYCSABKAUiXgoGV2VhcG9uEgoKAklE",
             "GAEgASgFEgwKBE5vdGUYAiABKAkSDAoEUGF0aBgDIAEoCRIOCgZOZXh0THYY",
             "BCABKAUSDgoGVHlwZUlEGAUgASgFEgwKBEljb24YBiABKAkiKwoIVmVjdG9y",
@@ -1053,7 +1053,7 @@ namespace Config {
       logicPath_ = other.logicPath_;
       health_ = other.health_;
       speed_ = other.speed_;
-      dropProbability_ = other.dropProbability_.Clone();
+      dropProbability_ = other.dropProbability_;
       drops_ = other.drops_.Clone();
       impactDamage_ = other.impactDamage_;
       weaponID_ = other.weaponID_;
@@ -1122,12 +1122,13 @@ namespace Config {
 
     /// <summary>Field number for the "DropProbability" field.</summary>
     public const int DropProbabilityFieldNumber = 6;
-    private static readonly pb::FieldCodec<int> _repeated_dropProbability_codec
-        = pb::FieldCodec.ForInt32(50);
-    private readonly pbc::RepeatedField<int> dropProbability_ = new pbc::RepeatedField<int>();
+    private int dropProbability_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> DropProbability {
+    public int DropProbability {
       get { return dropProbability_; }
+      set {
+        dropProbability_ = value;
+      }
     }
 
     /// <summary>Field number for the "Drops" field.</summary>
@@ -1180,7 +1181,7 @@ namespace Config {
       if (LogicPath != other.LogicPath) return false;
       if (Health != other.Health) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
-      if(!dropProbability_.Equals(other.dropProbability_)) return false;
+      if (DropProbability != other.DropProbability) return false;
       if(!drops_.Equals(other.drops_)) return false;
       if (ImpactDamage != other.ImpactDamage) return false;
       if (WeaponID != other.WeaponID) return false;
@@ -1195,7 +1196,7 @@ namespace Config {
       if (LogicPath.Length != 0) hash ^= LogicPath.GetHashCode();
       if (Health != 0) hash ^= Health.GetHashCode();
       if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
-      hash ^= dropProbability_.GetHashCode();
+      if (DropProbability != 0) hash ^= DropProbability.GetHashCode();
       hash ^= drops_.GetHashCode();
       if (ImpactDamage != 0) hash ^= ImpactDamage.GetHashCode();
       if (WeaponID != 0) hash ^= WeaponID.GetHashCode();
@@ -1232,7 +1233,10 @@ namespace Config {
         output.WriteRawTag(45);
         output.WriteFloat(Speed);
       }
-      dropProbability_.WriteTo(output, _repeated_dropProbability_codec);
+      if (DropProbability != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(DropProbability);
+      }
       drops_.WriteTo(output, _repeated_drops_codec);
       if (ImpactDamage != 0) {
         output.WriteRawTag(64);
@@ -1265,7 +1269,9 @@ namespace Config {
       if (Speed != 0F) {
         size += 1 + 4;
       }
-      size += dropProbability_.CalculateSize(_repeated_dropProbability_codec);
+      if (DropProbability != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DropProbability);
+      }
       size += drops_.CalculateSize(_repeated_drops_codec);
       if (ImpactDamage != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ImpactDamage);
@@ -1299,7 +1305,9 @@ namespace Config {
       if (other.Speed != 0F) {
         Speed = other.Speed;
       }
-      dropProbability_.Add(other.dropProbability_);
+      if (other.DropProbability != 0) {
+        DropProbability = other.DropProbability;
+      }
       drops_.Add(other.drops_);
       if (other.ImpactDamage != 0) {
         ImpactDamage = other.ImpactDamage;
@@ -1338,9 +1346,8 @@ namespace Config {
             Speed = input.ReadFloat();
             break;
           }
-          case 50:
           case 48: {
-            dropProbability_.AddEntriesFrom(input, _repeated_dropProbability_codec);
+            DropProbability = input.ReadInt32();
             break;
           }
           case 58:

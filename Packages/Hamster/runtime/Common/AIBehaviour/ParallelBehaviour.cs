@@ -16,6 +16,7 @@ namespace Hamster {
                 _resuls[behaviour.GetOwner()] = results;
             }
 
+            results.Clear();
             for (int i = 0; i < Behaviours.Count; i++) {
                 results.Add(EBehavourExecuteResult.Wait);
                 Behaviours[i].Initialize(behaviour);

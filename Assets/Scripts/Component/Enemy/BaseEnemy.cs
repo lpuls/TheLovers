@@ -45,11 +45,9 @@ namespace Hamster.SpaceWar {
 
         protected virtual void OnDieSpawnItem(GameObject deceased, GameObject killer) {
             if (Single<ConfigHelper>.GetInstance().TryGetConfig<Config.UnitConfig>(_netSyncComponent.ConfigID, out Config.UnitConfig config)) {
-                for (int i = 0; i < config.Drops.Count; i++) {
-                    if (Random.Range(0, 100.0f) <= config.DropProbability[i]) {
-                        GameLogicUtility.ServerCreatePickerItem(config.Drops[i], transform.position);
-                        break;
-                    }
+                if (Random.Range(0, 100.0f) <= config.DropProbability) {
+                    int index = Random.Range(0, config.Drops.Count);
+                    GameLogicUtility.ServerCreatePickerItem(config.Drops[index], transform.position);
                 }
             }
         }

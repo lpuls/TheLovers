@@ -55,7 +55,8 @@ namespace Hamster.SpaceWar {
         private static BaseBehaviour CreateRandomMove(string[] commands) {
             RandomMove behaviour = ScriptableObject.CreateInstance<RandomMove>();
             behaviour.Loop = "true" == commands[1].ToLower();
-            behaviour.BBKey = string.Format("{0}_Target", string.Join('_', commands));
+            behaviour.RandomLocationBBKey = string.Format("{0}_Target", string.Join('_', commands));
+            behaviour.MoveTimeBBKey = string.Format("{0}_MoveTime", string.Join('_', commands));
             return behaviour;
         }
 
