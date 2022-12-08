@@ -1,6 +1,6 @@
 Executor
     ParallelBehaviour
-        CastAbility;true;0;1.0
+        CastAbility;true;0;0.3
         EnemyMoveByPath
     End
 ExecutorEnd

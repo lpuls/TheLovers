@@ -1,7 +1,7 @@
 Executor
     MoveIntoScreen
     ParallelBehaviour
-        CastAbility;true;0;1.0
+        CastAbility;true;0;0.5
         RandomMove;true
     End
 ExecutorEnd

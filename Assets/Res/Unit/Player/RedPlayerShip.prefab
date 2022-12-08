@@ -2124,6 +2124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1760383616008518605}
     m_Modifications:
+    - target: {fileID: 1801441721880468, guid: d59a92cd94d381c42ad8378477c7a059, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1849337731742294, guid: d59a92cd94d381c42ad8378477c7a059, type: 3}
       propertyPath: m_Name
       value: ToonTallFireRed
@@ -2186,6 +2190,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1760570537065286381}
     m_Modifications:
+    - target: {fileID: 1801441721880468, guid: d59a92cd94d381c42ad8378477c7a059, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1849337731742294, guid: d59a92cd94d381c42ad8378477c7a059, type: 3}
       propertyPath: m_Name
       value: ToonTallFireRed
