@@ -1,48 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Hamster {
+    public static class BinaryHelper {
+        public static void Write(this BinaryWriter binaryWrite, UnityEngine.Vector2 value) {
+            binaryWrite.Write(value.x);
+            binaryWrite.Write(value.y);
+        }
 
-    public interface ISaver {
-        int GetSaveID();
-        void Save(BinaryWriter binaryWriter);
-        void Load(BinaryReader binaryReader);
-        void Reset();
+        public static void Write(this BinaryWriter binaryWrite, UnityEngine.Vector3 value) {
+            binaryWrite.Write(value.x);
+            binaryWrite.Write(value.y);
+            binaryWrite.Write(value.z);
+        }
+
+        public static UnityEngine.Vector2 ReadVector2(this BinaryReader binaryWrite) {
+            return new UnityEngine.Vector2(binaryWrite.ReadSingle(), binaryWrite.ReadSingle());
+        }
+
+        public static UnityEngine.Vector3 ReadVector3(this BinaryReader binaryWrite) {
+            return new UnityEngine.Vector3(binaryWrite.ReadSingle(), binaryWrite.ReadSingle(), binaryWrite.ReadSingle());
+        }
+
     }
 
     public class SaveHelper {
         private int _version = 0;
         private string _savePath = string.Empty;
-        private Dictionary<int, ISaver> _savers = new Dictionary<int, ISaver>(new Int32Comparer());
+        private bool _isDirty = false;
+
+        public int SaveCount = 0;
+
         private Action _onLoadComplete;
         private Action _onSaveComplete;
 
-        public SaveHelper(string path, int version, params ISaver[] savers) {
+        public SaveHelper(string path, int version) {
             _savePath = path;
             _version = version;
-            for (int i = 0; i < savers.Length; i++) {
-                _savers.Add(savers[i].GetSaveID(), savers[i]);
-            }
         }
 
+        protected virtual void SaveData(BinaryWriter binaryWriter) {
+            
+        }
+
+        protected virtual void LoadData(BinaryReader binaryReader) {
+        }
+
+        public void SetDirty() {
+            _isDirty = true;
+        }
+
+
         public void Save() {
+            if (!_isDirty)
+                return;
+            _isDirty = false;
+
             BinaryWriter binaryWriter = new BinaryWriter(new FileStream(_savePath, FileMode.OpenOrCreate));
 
-            // 写入版本号和数据数量
+            // 写入版本号和数据
             binaryWriter.Write(_version);
-            binaryWriter.Write(_savers.Count);
-
-            // 写入数据
-            var it = _savers.GetEnumerator();
-            while (it.MoveNext()) {
-                ISaver saver = it.Current.Value;
-                binaryWriter.Write(saver.GetSaveID());
-                saver.Save(binaryWriter);
-            }
+            SaveData(binaryWriter);
 
             binaryWriter.Close();
-            
+
             _onSaveComplete?.Invoke();
         }
 
@@ -61,25 +82,11 @@ namespace Hamster {
             int version = binaryReader.ReadInt32();
             if (version != _version)
                 throw new System.Exception("The version of save data is not match!!");
-
-            int count = binaryReader.ReadInt32();
-            for (int i = 0; i < count; i++) {
-                int saverID = binaryReader.ReadInt32();
-                if (!_savers.TryGetValue(saverID, out ISaver saver))
-                    throw new System.Exception("Invalid Saver ID " + saverID);
-                saver.Load(binaryReader);
-            }
+            LoadData(binaryReader);
 
             binaryReader.Close();
 
             _onLoadComplete?.Invoke();
-        }
-
-        public void Reset() {
-            var it = _savers.GetEnumerator();
-            while (it.MoveNext()) {
-                it.Current.Value.Reset();
-            }
         }
 
         public bool HasSaveData() {
