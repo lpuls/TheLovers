@@ -13,6 +13,11 @@ namespace Hamster.SpaceWar {
 
         private GameLogicSyncModule _logicSyncModule = null;
 
+        private bool _isSpawnPlayer = false;
+        private float _trySpawnDelta = 0;
+        private int _retrySpawnPlayerCount = 0;
+        public bool IsSpawnPlayerSuccess = false;
+
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             base.InitWorld();
 
@@ -49,6 +54,12 @@ namespace Hamster.SpaceWar {
             _frameDataManager.OnBeginSimulate += OnBeginSimulate;
             _frameDataManager.OnFrameUpdate += _levelManager.OnFrameDataUpdate;
 
+            // 创建战机
+            if (_netDevice.IsValid) {
+                ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
+                module.RequestSpawnShipToServer(2);
+                _retrySpawnPlayerCount++;
+            }
         }
 
         protected override IEnumerator PreloadAssets() {
@@ -120,6 +131,18 @@ namespace Hamster.SpaceWar {
 
             base.Update();
 
+            // 尝试创建角色
+            if (!IsSpawnPlayerSuccess && _retrySpawnPlayerCount < 5) {
+                _trySpawnDelta += Time.deltaTime;
+                if (_trySpawnDelta >= 3.0f) {
+                    ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
+                    module.RequestSpawnShipToServer(2);
+                    _retrySpawnPlayerCount++;
+                    _trySpawnDelta -= 3.0f;
+                }
+            }
+
+            // 更新逻辑
             _netDevice.Update();
             _frameDataManager.Update();
         }
@@ -129,7 +152,7 @@ namespace Hamster.SpaceWar {
 #endif
 
         private void OnGUI() {
-            GUILayout.Label("Frame " + _frameDataManager.GameLogicFrame);
+            // GUILayout.Label("Frame " + _frameDataManager.GameLogicFrame);
 #if UNITY_EDITOR
             style.fontSize = 24;
             if (null != _logicSyncModule) {
@@ -137,10 +160,10 @@ namespace Hamster.SpaceWar {
                 GUILayout.Label("Max Pack " + _logicSyncModule.MaxSize, style);
             }
 #endif
-            if (GUILayout.Button("Spawn Ship")) {
-                ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
-                module.RequestSpawnShipToServer(2);
-            }
+            //if (GUILayout.Button("Spawn Ship")) {
+            //    ClientGameLogicEventModule module = _netDevice.GetModule(ClientGameLogicEventModule.CLIENT_NET_GAME_LOGIC_READY_EVENT_ID) as ClientGameLogicEventModule;
+            //    module.RequestSpawnShipToServer(2);
+            //}
         }
 
         public void OnBeginSimulate() {

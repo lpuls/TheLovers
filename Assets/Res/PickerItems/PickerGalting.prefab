@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 766396955604537536}
   - component: {fileID: 2846998651463066665}
   m_Layer: 0
-  m_Name: PckerGalting
+  m_Name: PickerGalting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

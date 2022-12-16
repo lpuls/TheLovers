@@ -172,7 +172,7 @@ namespace Hamster.SpaceWar {
         }
 
         public void OnGUI() {
-            GUILayout.Label("Frame " + _serveFrameDataManager.ServerLogicFrame);
+            // GUILayout.Label("Frame " + _serveFrameDataManager.ServerLogicFrame);
         }
 
 

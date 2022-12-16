@@ -197,7 +197,9 @@ namespace Hamster.SpaceWar {
             //    //    ship.AddComponent<ClientPlayerController>();
             //    //}
             //}
-            World.GetWorld<BaseSpaceWarWorld>().PlayerNetID = packet.ReadInt32();
+            ClientSpaceWarWorld clientSpaceWarWorld = World.GetWorld<ClientSpaceWarWorld>();
+            clientSpaceWarWorld.PlayerNetID = packet.ReadInt32();
+            clientSpaceWarWorld.IsSpawnPlayerSuccess = true;
             RequestReadyToServer();
         }
 
