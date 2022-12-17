@@ -148,15 +148,15 @@ namespace Hamster.SpaceWar {
                 // 检查角色生命值变化
                 if (current.TryGetUpdateInfo(netID, EUpdateActorType.Health, out currentUpdateInfo)) {
                     // 根据是否为主控角色
+                    int newHealth = currentUpdateInfo.Data1.Int16;
                     if (null != _mainUIModule) {
                         _mainUIModule.MaxHealth = _maxHealth;
-                        _mainUIModule.Health.SetValue(_health);
+                        _mainUIModule.Health.SetValue(newHealth);
                     }
                     else if (null != _headHealthUI) {
                         _headHealthUI.SetHealth(_health, _maxHealth);
                     }
 
-                    int newHealth = currentUpdateInfo.Data1.Int16;
                     if (_health > currentUpdateInfo.Data1.Int16) {
 
                         // todo update health ui
