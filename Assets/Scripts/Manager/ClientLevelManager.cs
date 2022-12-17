@@ -67,6 +67,8 @@ namespace Hamster.SpaceWar {
                 if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info)) {
                     SetLevelEventIndex(info.Data1.Int32);
                 }
+
+                // todo 这么实现是有问题的，不应该由客户端实现跳转，为了方便先这么实现
                 if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.MissionResult, out info)) {
                     // 关闭主界面UI
                     Single<UIManager>.GetInstance().Close<MainUIController>();

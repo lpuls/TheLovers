@@ -123,6 +123,11 @@ namespace Hamster.SpaceWar {
                     destroyInfo.NetID = netSyncComponent.NetID;
                     destroyInfo.Reason = netSyncComponent.DestroyReason;
                     frameData.DestroyInfos.Add(destroyInfo);
+
+                    // 判断是否为玩家角色
+                    if (ENetType.Player == netSyncComponent.NetType) {
+                        _players.Remove(netSyncComponent);
+                    }
                 }
                 else if (netSyncComponent.IsNewObject) {
                     netSyncComponent.IsNewObject = false;

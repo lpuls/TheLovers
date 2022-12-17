@@ -126,8 +126,13 @@ namespace Hamster.SpaceWar {
 
         private void OnPlayerDie(GameObject self, GameObject murderer) {
             if (World.TryGetWorld<ServerSpaceWarWorld>(out ServerSpaceWarWorld world)) {
-                world.GameResult = false;
-                world.SetSystemPropertyDirty(EUpdateActorType.MissionResult);
+                if (world.TryGetManager<ServerFrameDataManager>(out ServerFrameDataManager frameDataManager)) {
+                    // 这个方法会先调用，然后才更新玩家数组，所以如果只剩下一个玩家且当前玩家死亡了，则说明玩家死光了
+                    if (frameDataManager.GetPlayers().Count <= 1) {
+                        world.GameResult = false;
+                        world.SetSystemPropertyDirty(EUpdateActorType.MissionResult);
+                    }
+                }
             }
         }
 
