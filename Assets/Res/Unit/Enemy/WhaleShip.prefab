@@ -98,7 +98,7 @@ MonoBehaviour:
   UpdateColorMaxTime: 0.1
   _headHealthUI: {fileID: 9092383193631978776}
   SpawnEffectPath: Res/VFX/ShipSpawn
-  DeadEffectPath: Res/VFX/BossDeadBoom
+  DeadEffectPath: Res/VFX/DeadBoom
 --- !u!114 &6549720818273476132
 MonoBehaviour:
   m_ObjectHideFlags: 0
