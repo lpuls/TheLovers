@@ -12,9 +12,9 @@ namespace Hamster.SpaceWar {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
+            UIManager.ResetUI();
             base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
 
-            InitLoading();
             StartCoroutine(EnterGame());
         }
 

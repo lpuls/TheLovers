@@ -12,7 +12,7 @@ public class B : UnityEngine.ScriptableObject {
 [ExecuteInEditMode]
 public class TestScript : MonoBehaviour {
     public AIBehaviourScript Script = null;
-    public AIBehaviour AIBehaviour = new AIBehaviour();
+    public AIBehaviourRunner AIBehaviour = new AIBehaviourRunner();
 
     public void Awake() {
         AIBehaviour.Initialize(Script, gameObject);

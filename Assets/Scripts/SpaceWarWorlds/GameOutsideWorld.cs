@@ -14,9 +14,8 @@ namespace Hamster.SpaceWar {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
             // base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
-            UIManager.ResetUICamera();
+            UIManager.ResetUI();
 
-            InitLoading();
             StartCoroutine(PreloadAssets());
         }
 

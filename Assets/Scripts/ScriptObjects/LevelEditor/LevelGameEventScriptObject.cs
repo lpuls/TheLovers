@@ -50,7 +50,7 @@ namespace Hamster.SpaceWar {
                     break;
                 case ELevelEventType.ShowTransition: {
                         if (levelManager.IsClient()) {
-                            World.GetWorld().ShowTransition();
+                            Single<UIManager>.GetInstance().ShowTransition();
                             Debug.Log("Begin Transition");
                         }
                     }
@@ -87,6 +87,13 @@ namespace Hamster.SpaceWar {
             switch (EventType) {
                 case ELevelEventType.OpenWarning: {
                         Single<UIManager>.GetInstance().Close<WarningUIController>();
+                    }
+                    break;
+                case ELevelEventType.ShowTransition: {
+                        if (levelManager.IsClient()) {
+                            Single<UIManager>.GetInstance().HideTransition();
+                            Debug.Log("Begin Transition");
+                        }
                     }
                     break;
                 default:

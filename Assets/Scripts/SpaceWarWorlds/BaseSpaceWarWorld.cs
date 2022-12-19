@@ -24,10 +24,10 @@ namespace Hamster.SpaceWar {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             ConfigHelper = Single<ConfigHelper>.GetInstance();
             UIManager = Single<UIManager>.GetInstance();
-            InitLoading();
-            InitTransitionUI();
+
+            UIManager.ResetUI();
             // base.InitWorld(typeof(Config.GameSetting).Assembly, typeof(MainUIController).Assembly, GetType().Assembly);
-            UIManager.ResetUICamera();
+            // UIManager.ResetUICamera();
 
             // 根据视口大小计算可行动区域
             CalWorldSize();

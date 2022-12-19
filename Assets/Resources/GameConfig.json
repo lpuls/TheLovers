@@ -1,47 +1,60 @@
 {
-    "UseAssetBundle": true,
+    "GameName": "Lover",
+    "BuildScenes": [
+        "Assets/Scenes/EnterScene.unity",
+        "Assets/Res/Scene/GameOutsideScene.unity",
+        "Assets/Res/Scene/ServerScene.unity",
+        "Assets/Res/Scene/ClientScene.unity"
+    ],
     "Platforms": [
         {
             "Platform": "Android",
             "AssetBundlePath": "/../AssetBundle/Android",
             "Manifast": "Android",
             "BuildAssetBundlePath": "/../../Build/Lover/AssetBundle/Android",
-            "BuildPath": "/../../Build/Lover/Android"
+            "BuildPlayerPath": "/../../Build/Lover/Android",
+            "IsRelease": false
         },
         {
             "Platform": "IPhonePlayer",
             "AssetBundlePath": "/../AssetBundle/Ios",
             "Manifast": "Ios",
             "BuildAssetBundlePath": "/../../Build/Lover/AssetBundle/Android",
-            "BuildPath": "/../../Build/Lover/Ios"
+            "BuildPlayerPath": "/../../Build/Lover/Ios",
+            "IsRelease": false
         },
         {
             "Platform": "WindowsPlayer",
             "AssetBundlePath": "/../AssetBundle/Win",
             "Manifast": "Win",
             "BuildAssetBundlePath": "/../../Build/Lover/Win/AssetBundle/Win",
-            "BuildPath": "/../../Build/Lover/Win"
+            "BuildPlayerPath": "/../../Build/Lover/Win",
+            "IsRelease": true
         },
         {
             "Platform": "WindowsEditor",
             "AssetBundlePath": "/../AssetBundle/Win",
             "Manifast": "Win",
             "BuildAssetBundlePath": "/../AssetBundle/Win",
-            "BuildPath": ""
+            "BuildPlayerPath": "",
+            "IsRelease": false,
+            "UseAssetBundle": false
         },
         {
             "Platform": "OSXEditor",
             "AssetBundlePath": "/../AssetBundle/Mac",
             "Manifast": "Mac",
             "BuildAssetBundlePath": "/../AssetBundle/Mac",
-            "BuildPath": ""
+            "BuildPlayerPath": "",
+            "IsRelease": false
         },
         {
             "Platform": "WebGLPlayer",
             "AssetBundlePath": "/../AssetBundle/Web",
             "Manifast": "Web",
             "BuildAssetBundlePath": "/../../Build/Lover/Web/AssetBundle/Web",
-            "BuildPath": "/../../Build/Lover/Web"
+            "BuildPlayerPath": "/../../Build/Lover/Web",
+            "IsRelease": false
         }
     ]
 }
