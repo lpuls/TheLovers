@@ -70,4 +70,11 @@ public class AtlasManager {
         }
         Asset.Unload(path);
     }
+
+    public void UnloadAll() {
+        foreach (var item in _sprites) {
+            Asset.Unload(item.Key);
+        }
+        _sprites.Clear();
+    }
 }

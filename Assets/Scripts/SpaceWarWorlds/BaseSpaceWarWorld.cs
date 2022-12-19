@@ -131,6 +131,7 @@ namespace Hamster.SpaceWar {
             SetProgress(0);
             yield return new WaitForSeconds(0.1f);
 
+            Single<AtlasManager>.GetInstance().UnloadAll();
             Single<UIManager>.GetInstance().CloseAll();
             Asset.UnloadAll();
             SetProgress(50);

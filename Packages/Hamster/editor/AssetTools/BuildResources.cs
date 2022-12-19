@@ -36,7 +36,7 @@ namespace Hamster.Editor {
 
         [MenuItem("Tools/Res/Build Win Editor AssetBundle")]
         static void ExportWinEditorResource() {
-            BuildByPlatform("WindowsPlayer", BuildTarget.StandaloneWindows, false);
+            BuildByPlatform("WindowsEditor", BuildTarget.StandaloneWindows, false);
         }
 
         [MenuItem("Tools/Res/Build Win Player AssetBundle")]

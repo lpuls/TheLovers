@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Hamster.SpaceWar {
     [SerializeField]
     public class LevelRandomSpawnScriptObject : LevelEventScriptObject {
-        public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.WaitAllDie; 
+        //public ELevelEventCompleteType CompleteType = ELevelEventCompleteType.WaitAllDie; 
         public int RandomSpawnCountMin = 3;
         public int RandomSpawnCountMax = 10;
         public string AIAssetPath = string.Empty;

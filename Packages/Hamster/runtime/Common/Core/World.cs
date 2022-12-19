@@ -94,7 +94,11 @@ namespace Hamster {
             // 初始化资源
             TextAsset gameConfigText = Resources.Load<TextAsset>("GameConfig");
             GameConfig gameConfig = JsonUtility.FromJson<GameConfig>(gameConfigText.text);
+#if UNITY_EDITOR
+            Asset.UseAssetBundle = true;
+#else
             Asset.UseAssetBundle = gameConfig.UseAssetBundle;
+#endif
             if (gameConfig.FindPlatformConfig(Application.platform.ToString(), out PlatformConfig value)) {
                 Asset.AssetBundleBasePath = string.Format("{0}{1}", Application.dataPath, value.AssetBundlePath);
                 Asset.Initialize("AssetBundleConfig", new string[] { value.Manifast });
