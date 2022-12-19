@@ -186,22 +186,15 @@ namespace Hamster.SpaceWar {
                 return;
             }
 
+            float logicFrameTime = World.GetWorld<FixTickWorld>().LogicFrameTime;
+
             // 如果服务端存放的帧数较多了，直接一路追上去
             if (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
-                LogicTime = LOGIC_FRAME_TIME;
                 while (_frameDatas.Count >= MAX_SERVER_FRAME_COUNT) {
                     NextFrame();
                 }
-                LogicTime = 0;
             }
-
-            // 更新逻辑时间
-            LogicTime += Time.deltaTime;
-            while (LogicTime >= LOGIC_FRAME_TIME) {
-                UpdateTickers();
-                NextFrame();
-                LogicTime -= LOGIC_FRAME_TIME;
-            }
+            NextFrame();
         }
 
         public void AddPredictionActor(NetSyncComponent netSyncComponent) {

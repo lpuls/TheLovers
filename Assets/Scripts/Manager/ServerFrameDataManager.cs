@@ -70,19 +70,14 @@ namespace Hamster.SpaceWar {
             if (!IsGameStart)
                 return;
 
-            LogicTime += Time.deltaTime;
-            while (LogicTime >= LOGIC_FRAME_TIME) {
-                UpdateTickers();
-                Tick();
-                LogicTime -= LOGIC_FRAME_TIME;
-            }
+            Tick();
         }
 
         public void Tick() {
             BaseSpaceWarWorld world = World.GetWorld<BaseSpaceWarWorld>();
 
             FrameData frameData = ObjectPool<FrameData>.Malloc();
-            frameData.FrameIndex = ServerLogicFrame++;
+            frameData.FrameIndex = world.FrameIndex;
 
 
             List<int> pendingKillActors = ListPool<int>.Malloc();

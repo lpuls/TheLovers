@@ -64,8 +64,8 @@ namespace Hamster.SpaceWar {
             // 初始化或注册事件
             _serveFrameDataManager.OnGameStart += OnGameStart;
             _serveFrameDataManager.OnNewFrameData += _clientFrameDataManager.AddNewFrameData;
-            _serveFrameDataManager.AddTicker(_collisionResultManager);
-            _serveFrameDataManager.AddTicker(_levelManager);
+            AddTicker(_collisionResultManager);
+            AddTicker(_levelManager);
             _clientFrameDataManager.OnBeginSimulate += OnBeginSimulate;
             _clientFrameDataManager.OnFrameUpdate += _clientLevelManager.OnFrameDataUpdate;
 
@@ -128,15 +128,6 @@ namespace Hamster.SpaceWar {
 
             HideLoading();
         }
-
-        public override void AddTicker(IServerTicker serverTicker) {
-            _serveFrameDataManager.AddTicker(serverTicker);
-        }
-
-        public override void RemoveTicker(IServerTicker serverTicker) {
-            _serveFrameDataManager.RemoveTicker(serverTicker);
-        }
-
         private void OnGameStart() {
         }
 
@@ -159,10 +150,14 @@ namespace Hamster.SpaceWar {
             base.Update();
             if (null != _netDevice)
                 _netDevice.Update();
-            
+
+            Tick();
+            // _enemyManager.Update();
+        }
+
+        protected override void FixTick() {
             _serveFrameDataManager.Update();
             _clientFrameDataManager.Update();
-            // _enemyManager.Update();
         }
 
         public void OnDestroy() {

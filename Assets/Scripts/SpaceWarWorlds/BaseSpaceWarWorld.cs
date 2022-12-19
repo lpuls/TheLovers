@@ -6,15 +6,7 @@ using UnityEngine;
 
 namespace Hamster.SpaceWar {
 
-    public interface IServerTicker {
-
-        int GetPriority();
-
-        void Tick(float dt);
-        bool IsEnable();
-    }
-
-    public class BaseSpaceWarWorld : World {
+    public class BaseSpaceWarWorld : FixTickWorld {
         public Vector3 WorldSize = Vector3.one;
 
         protected WaitForEndOfFrame _waiForEendOfFrame = new WaitForEndOfFrame();
@@ -112,12 +104,6 @@ namespace Hamster.SpaceWar {
                     ((float)x) / 100 - WorldSize.x,
                     ((float)y) / 100 - WorldSize.y
                 );
-        }
-
-        public virtual void AddTicker(IServerTicker serverTicker) {
-        }
-
-        public virtual void RemoveTicker(IServerTicker serverTicker) {
         }
 
         public void GoBackToOutside() {

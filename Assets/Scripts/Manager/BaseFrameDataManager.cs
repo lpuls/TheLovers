@@ -317,13 +317,6 @@ namespace Hamster.SpaceWar {
         }
     }
 
-    public enum EServerTickLayers {
-        PreTick = 0,
-        Tick = 1,
-        LateTick = 2,
-        Max
-    }
-
 
     public class BaseFrameDataManager {
         public const float LOGIC_FRAME_TIME = 1 / 15.0f;
@@ -331,8 +324,8 @@ namespace Hamster.SpaceWar {
 
         protected Dictionary<int, NetSyncComponent> _netActors = new Dictionary<int, NetSyncComponent>(new Int32Comparer());
         //protected HashSet<IServerTicker> _tickers = new HashSet<IServerTicker>();
-        protected List<IServerTicker> _pendingAddTickers = new List<IServerTicker>(128);
-        protected HashSet<IServerTicker>[] _tickers = new HashSet<IServerTicker>[(int)EServerTickLayers.Max];
+        // protected List<IServerTicker> _pendingAddTickers = new List<IServerTicker>(128);
+        // protected HashSet<IServerTicker>[] _tickers = new HashSet<IServerTicker>[(int)EServerTickLayers.Max];
 
         public bool IsGameStart {
             get;
@@ -347,10 +340,6 @@ namespace Hamster.SpaceWar {
         public BaseFrameDataManager() {
             CurrentPlayerCount = 0;
             IsGameStart = false;
-
-            for (int i = 0; i < _tickers.Length; i++) {
-                _tickers[i] = new HashSet<IServerTicker>();
-            }
         }
 
         public Dictionary<int, NetSyncComponent> GetAllNetActor() {
@@ -405,36 +394,6 @@ namespace Hamster.SpaceWar {
             }
 
             ListPool<int>.Free(pendingKillActors);
-        }
-
-        public void UpdateTickers() {
-            var pendingIt = _pendingAddTickers.GetEnumerator();
-            while (pendingIt.MoveNext()) {
-                int index = pendingIt.Current.GetPriority();
-                Debug.Assert(index >= 0 && index < (int)EServerTickLayers.Max, "Server tick priority out of range");
-                _tickers[index].Add(pendingIt.Current);
-            }
-            _pendingAddTickers.Clear();
-
-            for (int i = 0; i < _tickers.Length; i++) {
-                var it = _tickers[i].GetEnumerator();
-                while (it.MoveNext()) {
-                    IServerTicker ticker = it.Current;
-                    if (ticker.IsEnable())
-                        ticker.Tick(LOGIC_FRAME_TIME);
-                }
-            }
-            
-        }
-
-        public void AddTicker(IServerTicker serverTicker) {
-            _pendingAddTickers.Add(serverTicker);
-        }
-
-        public void RemoveTicker(IServerTicker serverTicker) {
-            int index = serverTicker.GetPriority();
-            Debug.Assert(index >= 0 && index < (int)EServerTickLayers.Max, "Server tick priority out of range");
-            _tickers[index].Remove(serverTicker);
         }
     }
 }

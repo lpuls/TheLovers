@@ -13,7 +13,6 @@ namespace Hamster.SpaceWar {
 
         private GameLogicSyncModule _logicSyncModule = null;
 
-        private bool _isSpawnPlayer = false;
         private float _trySpawnDelta = 0;
         private int _retrySpawnPlayerCount = 0;
         public bool IsSpawnPlayerSuccess = false;
@@ -101,7 +100,7 @@ namespace Hamster.SpaceWar {
         }
 
         public int GetFrameIndex() {
-            return _frameDataManager.GameLogicFrame;
+            return FrameIndex;
         }
 
         public FrameData GetCurrentFrameData() {
@@ -114,7 +113,7 @@ namespace Hamster.SpaceWar {
 
 
         public float GetLogicFramepercentage() {
-            return _frameDataManager.GetLogicFramepercentage();
+            return LogicTime / LogicFrameTime;
         }
 
         private void OnFrameUpdate(FrameData pre, FrameData current) {
@@ -144,6 +143,10 @@ namespace Hamster.SpaceWar {
 
             // 更新逻辑
             _netDevice.Update();
+            Tick();
+        }
+
+        protected override void FixTick() {
             _frameDataManager.Update();
         }
 
@@ -168,14 +171,6 @@ namespace Hamster.SpaceWar {
 
         public void OnBeginSimulate() {
             Single<UIManager>.GetInstance().Open<MainUIController>();
-        }
-
-        public override void AddTicker(IServerTicker serverTicker) {
-            _frameDataManager.AddTicker(serverTicker);
-        }
-
-        public override void RemoveTicker(IServerTicker serverTicker) {
-            _frameDataManager.RemoveTicker(serverTicker);
         }
 
     }
