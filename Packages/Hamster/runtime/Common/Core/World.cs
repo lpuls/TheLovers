@@ -92,13 +92,13 @@ namespace Hamster {
                 GMAttributeProcessor.Processor(gmAssemlby);
 
             // 初始化资源
-#if UNITY_EDITOR
-            Asset.UseAssetBundle = false;
-#else
-            Asset.UseAssetBundle = true;
-#endif
-            Asset.AssetBundleBasePath = Application.dataPath + "/../AssetBundle/Win";
-            Asset.Initialize("AssetBundleConfig", new string[] { "Win" });
+            TextAsset gameConfigText = Resources.Load<TextAsset>("GameConfig");
+            GameConfig gameConfig = JsonUtility.FromJson<GameConfig>(gameConfigText.text);
+            Asset.UseAssetBundle = gameConfig.UseAssetBundle;
+            if (gameConfig.FindPlatformConfig(Application.platform.ToString(), out PlatformConfig value)) {
+                Asset.AssetBundleBasePath = string.Format("{0}{1}", Application.dataPath, value.AssetBundlePath);
+                Asset.Initialize("AssetBundleConfig", new string[] { value.Manifast });
+            }
 
             // 初始化配置文件
             if (null != configAssembly) {

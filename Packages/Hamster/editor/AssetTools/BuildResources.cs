@@ -8,24 +8,78 @@ using UnityEngine.U2D;
 #if UNITY_EDITOR
 namespace Hamster.Editor {
     public class BuildResources : EditorWindow {
-        [MenuItem("Tools/Res/Build AssetBundle")]
-        static void ExportResource() {
+
+        private static void BuildByPlatform(string platform, BuildTarget buildTarget, bool deleteFolder) {
             CleanAllAssetBundleName();
 
             AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
             directGraph.Build(Application.dataPath + "/Res");
-        
-            BuildPipeline.BuildAssetBundles(Application.dataPath + "/../AssetBundle/Win", BuildAssetBundleOptions.StrictMode, BuildTarget.StandaloneWindows);
+
+            TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Resources/GameConfig.json");
+            GameConfig gameConfig = JsonUtility.FromJson<GameConfig>(textAsset.text);
+            if (gameConfig.FindPlatformConfig(platform, out PlatformConfig value)) {
+                string path = string.Format("{0}{1}", Application.dataPath, value.BuildAssetBundlePath);
+                bool exitstFile = Directory.Exists(path);
+                if (deleteFolder) {
+                    if (exitstFile) {
+                        Directory.Delete(path, true);
+                    }
+                }
+                if (!exitstFile) {
+                    Directory.CreateDirectory(path);
+                }
+                BuildPipeline.BuildAssetBundles(path,
+                    BuildAssetBundleOptions.StrictMode,
+                    buildTarget);
+            }
+        }
+
+        [MenuItem("Tools/Res/Build Win Editor AssetBundle")]
+        static void ExportWinEditorResource() {
+            BuildByPlatform("WindowsPlayer", BuildTarget.StandaloneWindows, false);
+        }
+
+        [MenuItem("Tools/Res/Build Win Player AssetBundle")]
+        static void ExportWinPlayerResource() {
+            BuildByPlatform("WindowsPlayer", BuildTarget.StandaloneWindows, true);
+        }
+
+        [MenuItem("Tools/Res/Build Win Player")]
+        static void BuildWinPlayer() {
+            TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Resources/GameConfig.json");
+            GameConfig gameConfig = JsonUtility.FromJson<GameConfig>(textAsset.text);
+            if (gameConfig.FindPlatformConfig(RuntimePlatform.WindowsPlayer.ToString(), out PlatformConfig value)) {
+                string path = string.Format("{0}{1}", Application.dataPath, value.BuildPath);
+                
+                // 清理整个文件夹
+                if (Directory.Exists(path))
+                    Directory.Delete(path, true);
+                Directory.CreateDirectory(path);
+
+                // 开始构建
+                BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+                buildPlayerOptions.scenes = new string[] {
+                    "Assets/Scenes/EnterScene.unity",
+                    "Assets/Res/Scene/GameOutsideScene.unity",
+                    "Assets/Res/Scene/ServerScene.unity",
+                    "Assets/Res/Scene/ClientScene.unity",
+                };
+                buildPlayerOptions.locationPathName = path + "/Win.exe";
+                buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
+                buildPlayerOptions.options = BuildOptions.AllowDebugging | BuildOptions.Development;
+
+                BuildPipeline.BuildPlayer(buildPlayerOptions);
+            }
         }
 
         [MenuItem("Tools/Res/Build Android AssetBundle")]
         static void ExportAndroidResource() {
-            CleanAllAssetBundleName();
+            BuildByPlatform("Android", BuildTarget.Android, true);
+        }
 
-            AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
-            directGraph.Build(Application.dataPath + "/Res");
-
-            BuildPipeline.BuildAssetBundles(Application.dataPath + "/../AssetBundle/Android", BuildAssetBundleOptions.StrictMode, BuildTarget.Android);
+        [MenuItem("Tools/Res/Build Web AssetBundle")]
+        static void ExportWebResource() {
+            BuildByPlatform("WebGLPlayer", BuildTarget.Android, true);
         }
 
         [MenuItem("Tools/Res/Update AssetBundle")]

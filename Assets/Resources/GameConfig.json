@@ -1,0 +1,47 @@
+{
+    "UseAssetBundle": true,
+    "Platforms": [
+        {
+            "Platform": "Android",
+            "AssetBundlePath": "/../AssetBundle/Android",
+            "Manifast": "Android",
+            "BuildAssetBundlePath": "/../../Build/Lover/AssetBundle/Android",
+            "BuildPath": "/../../Build/Lover/Android"
+        },
+        {
+            "Platform": "IPhonePlayer",
+            "AssetBundlePath": "/../AssetBundle/Ios",
+            "Manifast": "Ios",
+            "BuildAssetBundlePath": "/../../Build/Lover/AssetBundle/Android",
+            "BuildPath": "/../../Build/Lover/Ios"
+        },
+        {
+            "Platform": "WindowsPlayer",
+            "AssetBundlePath": "/../AssetBundle/Win",
+            "Manifast": "Win",
+            "BuildAssetBundlePath": "/../../Build/Lover/Win/AssetBundle/Win",
+            "BuildPath": "/../../Build/Lover/Win"
+        },
+        {
+            "Platform": "WindowsEditor",
+            "AssetBundlePath": "/../AssetBundle/Win",
+            "Manifast": "Win",
+            "BuildAssetBundlePath": "/../AssetBundle/Win",
+            "BuildPath": ""
+        },
+        {
+            "Platform": "OSXEditor",
+            "AssetBundlePath": "/../AssetBundle/Mac",
+            "Manifast": "Mac",
+            "BuildAssetBundlePath": "/../AssetBundle/Mac",
+            "BuildPath": ""
+        },
+        {
+            "Platform": "WebGLPlayer",
+            "AssetBundlePath": "/../AssetBundle/Web",
+            "Manifast": "Web",
+            "BuildAssetBundlePath": "/../../Build/Lover/Web/AssetBundle/Web",
+            "BuildPath": "/../../Build/Lover/Web"
+        }
+    ]
+}
