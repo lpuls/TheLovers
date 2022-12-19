@@ -34,23 +34,22 @@ namespace Hamster.Editor {
             }
         }
 
-        [MenuItem("Tools/Res/Build Win Editor AssetBundle")]
+        [MenuItem("Tools/Build/Build Win Editor AssetBundle", false, 100)]
         static void ExportWinEditorResource() {
             BuildByPlatform("WindowsEditor", BuildTarget.StandaloneWindows, false);
         }
 
-        [MenuItem("Tools/Res/Build Win Player AssetBundle")]
+        [MenuItem("Tools/Build/Build Win Player AssetBundle", false, 100)]
         static void ExportWinPlayerResource() {
             BuildByPlatform("WindowsPlayer", BuildTarget.StandaloneWindows, true);
         }
 
-        [MenuItem("Tools/Res/Build Win Player")]
-        static void BuildWinPlayer() {
+        private static void BuildPlayer(string platformName) {
             TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Resources/GameConfig.json");
             GameConfig gameConfig = JsonUtility.FromJson<GameConfig>(textAsset.text);
-            if (gameConfig.FindPlatformConfig(RuntimePlatform.WindowsPlayer.ToString(), out PlatformConfig value)) {
-                string path = string.Format("{0}{1}", Application.dataPath, value.BuildPath);
-                
+            if (gameConfig.FindPlatformConfig(platformName, out PlatformConfig value)) {
+                string path = string.Format("{0}{1}", Application.dataPath, value.BuildPlayerPath);
+
                 // 清理整个文件夹
                 if (Directory.Exists(path))
                     Directory.Delete(path, true);
@@ -58,37 +57,50 @@ namespace Hamster.Editor {
 
                 // 开始构建
                 BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-                buildPlayerOptions.scenes = new string[] {
-                    "Assets/Scenes/EnterScene.unity",
-                    "Assets/Res/Scene/GameOutsideScene.unity",
-                    "Assets/Res/Scene/ServerScene.unity",
-                    "Assets/Res/Scene/ClientScene.unity",
-                };
-                buildPlayerOptions.locationPathName = path + "/Win.exe";
+                buildPlayerOptions.scenes = gameConfig.BuildScenes.ToArray();
+                buildPlayerOptions.locationPathName = string.Format("{0}/{1}.exe", path, gameConfig.GameName);  // path + "/Win.exe";
                 buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
-                buildPlayerOptions.options = BuildOptions.AllowDebugging | BuildOptions.Development;
+                if (value.IsRelease)
+                    buildPlayerOptions.options = BuildOptions.None;
+                else
+                    buildPlayerOptions.options = BuildOptions.AllowDebugging | BuildOptions.Development;
 
                 BuildPipeline.BuildPlayer(buildPlayerOptions);
             }
         }
 
-        [MenuItem("Tools/Res/Build Android AssetBundle")]
+        [MenuItem("Tools/Build/Build Win Player", false, 100)]
+        static void BuildWinPlayer() {
+            BuildPlayer(RuntimePlatform.WindowsPlayer.ToString());
+        }
+
+        [MenuItem("Tools/Build/Build Android AssetBundle", false, 111)]
         static void ExportAndroidResource() {
             BuildByPlatform("Android", BuildTarget.Android, true);
         }
 
-        [MenuItem("Tools/Res/Build Web AssetBundle")]
+        [MenuItem("Tools/Build/Build Android Player", false, 111)]
+        static void BuildAndroidPlayer() {
+            BuildPlayer(RuntimePlatform.Android.ToString());
+        }
+
+        [MenuItem("Tools/Build/Build Web AssetBundle", false, 122)]
         static void ExportWebResource() {
             BuildByPlatform("WebGLPlayer", BuildTarget.Android, true);
         }
 
-        [MenuItem("Tools/Res/Update AssetBundle")]
+        [MenuItem("Tools/Build/Build Web Player", false, 122)]
+        static void BuildWebPlayer() {
+            BuildPlayer(RuntimePlatform.WebGLPlayer.ToString());
+        }
+
+        [MenuItem("Tools/Build/Update AssetBundle", false, 133)]
         static void UpdateResourceGraph() {
             AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
             directGraph.Build(Application.dataPath + "/Res");
         }
 
-        [MenuItem("Tools/Res/Clean All AssetBundleName")]
+        [MenuItem("Tools/Build/Clean All AssetBundleName", false, 133)]
         static void CleanAllAssetBundleName() {
             List<AssetImporter> importers = new List<AssetImporter>();
             CleanAllAssetBundleName(Application.dataPath, importers);
@@ -99,7 +111,7 @@ namespace Hamster.Editor {
             EditorUtility.ClearProgressBar();
         }
 
-        [MenuItem("Tools/Res/Show Depedens Graph")]
+        [MenuItem("Tools/Build/Show Depedens Graph", false, 133)]
         static void ShowDepedensGraph() {
             AssetBundleNameDirectGraph directGraph = new AssetBundleNameDirectGraph("assetbundlemanifest");
             directGraph.Build(Application.dataPath + "/Res");
