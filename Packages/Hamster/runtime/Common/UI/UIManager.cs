@@ -32,6 +32,10 @@ namespace Hamster {
         private IUIController _current = null;
         private Dictionary<Type, UIInfo> _uiInfos = new Dictionary<Type, UIInfo>();
 
+        // 固定功能
+        private LoadingUI _loadingUI = null;
+        private TransitionUI _transitionUI = null;
+
         public void Initialize(Assembly assembly) {
             if (_isInit)
                 return;
@@ -55,23 +59,52 @@ namespace Hamster {
 
                 _uiInfos[classType] = uiInfo;
             }
-
-            GameObject canvas = GameObject.Find("Canvas");
-            _canvas = canvas.GetComponent<RectTransform>();
-            GameObject.DontDestroyOnLoad(_canvas);
-
-            GameObject eventSystem = GameObject.Find("EventSystem");
-            GameObject.DontDestroyOnLoad(eventSystem);
         }
 
-        public void ResetUICamera() {
-            GameObject gameObject = GameObject.Find("UICamera");
-            if (gameObject.TryGetComponent<Camera>(out Camera camera) && _canvas.TryGetComponent<Canvas>(out Canvas canvas)) {
-                canvas.worldCamera = camera;
+        public void ResetUI() {
+            GameObject canvas = GameObject.Find("Canvas");
+            _canvas = canvas.GetComponent<RectTransform>();
+
+            // 初始化常驻UI
+            if (null != canvas) {
+                // GameObject.DontDestroyOnLoad(canvas);
+                Transform loadingInstance = canvas.transform.Find("Loading");
+                if (null != loadingInstance) {
+                    _loadingUI = loadingInstance.gameObject.TryGetOrAdd<LoadingUI>();
+                    _loadingUI.gameObject.SetActive(false);
+                }
+
+                Transform transitionsInstance = canvas.transform.Find("Transitions");
+                if (null != transitionsInstance) {
+                    _transitionUI = transitionsInstance.gameObject.TryGetOrAdd<TransitionUI>();
+                    _transitionUI.gameObject.SetActive(false);
+                }
+
             }
-            else {
-                Debug.LogError("Can't Find UICamera or Canvas");
-            }
+        }
+
+        public void SetLoadingProgress(int value) {
+            _loadingUI.SetProgress(value / 100.0f);
+        }
+
+        public void ShowLoading() {
+            UnityEngine.Debug.Assert(null != _loadingUI, "Loading Is Null");
+            _loadingUI.gameObject.SetActive(true);
+        }
+
+        public void HideLoading() {
+            UnityEngine.Debug.Assert(null != _loadingUI, "Loading Is Null");
+            _loadingUI.gameObject.SetActive(false);
+        }
+
+        public void ShowTransition() {
+            UnityEngine.Debug.Assert(null != _transitionUI, "Transition Is Null");
+            _transitionUI.ShowTransition();
+        }
+
+        public void HideTransition() {
+            UnityEngine.Debug.Assert(null != _transitionUI, "Transition Is Null");
+            _transitionUI.HideTransition();
         }
 
         public UIModule GetModule<T>() where T : IUIController {

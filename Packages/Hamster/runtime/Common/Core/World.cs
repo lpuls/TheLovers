@@ -64,28 +64,6 @@ namespace Hamster {
             return default;
         }
 
-        protected void InitLoading() {
-            // 初始化加载界面
-            GameObject canvasGameObject = GameObject.Find("Canvas");
-            if (null != canvasGameObject) {
-                GameObject.DontDestroyOnLoad(canvasGameObject);
-                Transform loadingInstance = canvasGameObject.transform.Find("Loading");
-                if (null != loadingInstance)
-                    _loadingUI = loadingInstance.gameObject.TryGetOrAdd<LoadingUI>();
-            }
-        }
-
-        protected void InitTransitionUI() {
-            // 初始化转场界面
-            GameObject canvasGameObject = GameObject.Find("Canvas");
-            if (null != canvasGameObject) {
-                GameObject.DontDestroyOnLoad(canvasGameObject);
-                Transform transitionsInstance = canvasGameObject.transform.Find("Transitions");
-                if (null != transitionsInstance)
-                    _transitionUI = transitionsInstance.gameObject.TryGetOrAdd<Animator>();
-            }
-        }
-
         protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             // 初始化GM组件
             if (null != gmAssemlby)
@@ -113,26 +91,32 @@ namespace Hamster {
             }
         }
 
-        public void SetProgress(int value) {
-            _loadingUI.SetProgress(value / 100.0f);
-        }
-
-        public void ShowLoading() {
-            _loadingUI.gameObject.SetActive(true);
-        }
-
-        public void HideLoading() {
-            _loadingUI.gameObject.SetActive(false);
-        }
-
-        public void ShowTransition() {
-            _transitionUI.Play("Transition", 0, 0);
-            Debug.Log("Play Transition");
-            // _transitionUI.SetTrigger("Play");
-        }
-
         protected virtual void Update() {
             Asset.Update();
         }
+
+        #region 通用功能
+        public void ShowLoading() {
+            this.UIManager.ShowLoading();
+        }
+
+        public void HideLoading() {
+            this.UIManager.HideLoading();
+        }
+
+        public void SetProgress(int value) {
+            this.UIManager.SetLoadingProgress(value);
+        }
+
+        public void ShowTransition() {
+            this.UIManager.ShowTransition();
+        }
+
+        public void HideTransition() {
+            this.UIManager.HideTransition();
+
+        }
+
+        #endregion
     }
 }
