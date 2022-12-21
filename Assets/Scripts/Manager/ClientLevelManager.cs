@@ -6,6 +6,7 @@ namespace Hamster.SpaceWar {
         private float _time = 0.0f;
         private int _eventIndex = 0;
         private LevelConfigScriptObject _levelConfig = null;
+        private LevelTimelinePlayerComponent _levelTimelinePlayerComponent = null;
 
         public void DestroyAllUnit() {
         }
@@ -31,6 +32,7 @@ namespace Hamster.SpaceWar {
 
         public void Initilze(string configPath) {
             _levelConfig = Asset.Load<LevelConfigScriptObject>(configPath);
+            _levelTimelinePlayerComponent = GameObjectExtend.LoadAndGetComponent<LevelTimelinePlayerComponent>(_levelConfig.ClientAsset, out GameObject _);
             _time = 0;
             _eventIndex = -1;
         }
@@ -50,15 +52,21 @@ namespace Hamster.SpaceWar {
                 if (null != nextWave) {
                     _time = 0;
                     _eventIndex = index;
+
+                    // 执行事件内容
                     nextWave.OnEnter(this);
+
+                    // 播放现表现
+                    _levelTimelinePlayerComponent.PlayTimeline(index);
                 }
             }
         }
 
         public void OnFrameDataUpdate(FrameData pre, FrameData current) {
             if (null != current) {
-                if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info))
+                if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.LevelEventIndex, out UpdateInfo info)) {
                     SetLevelEventIndex(info.Data1.Int32);
+                }
                 if (current.TryGetUpdateInfo(BaseFrameDataManager.SYSTEM_NET_ACTOR_ID, EUpdateActorType.MissionResult, out info)) {
                     // 关闭主界面UI
                     Single<UIManager>.GetInstance().Close<MainUIController>();

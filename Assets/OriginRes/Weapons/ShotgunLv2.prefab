@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa324d45f3767e3419bfb9bef708ac08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawner: {fileID: 11400000, guid: d1cafcac1d6f96141846c6265f17fe93, type: 2}
+  Spawner: {fileID: 11400000, guid: 5cc7746fa329fbb40bfd8b344548c4cf, type: 2}
   CD: 0.08
-  Delay: 0
+  DelayDelta: 0
   Reset: 0
   WriteToSpawner: 0
   Delays:
@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016890776604500883, guid: d30e045863457914aa85772dc769fca5, type: 3}
       propertyPath: m_Name
-      value: OriginBullet
+      value: Bullet1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30e045863457914aa85772dc769fca5, type: 3}
@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016890776604500883, guid: d30e045863457914aa85772dc769fca5, type: 3}
       propertyPath: m_Name
-      value: OriginBullet
+      value: Bullet2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30e045863457914aa85772dc769fca5, type: 3}
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016890776604500883, guid: d30e045863457914aa85772dc769fca5, type: 3}
       propertyPath: m_Name
-      value: OriginBullet
+      value: Bullet3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30e045863457914aa85772dc769fca5, type: 3}
@@ -309,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016890776604500883, guid: d30e045863457914aa85772dc769fca5, type: 3}
       propertyPath: m_Name
-      value: OriginBullet
+      value: Bullet0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30e045863457914aa85772dc769fca5, type: 3}
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016890776604500883, guid: d30e045863457914aa85772dc769fca5, type: 3}
       propertyPath: m_Name
-      value: OriginBullet
+      value: Bullet4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30e045863457914aa85772dc769fca5, type: 3}

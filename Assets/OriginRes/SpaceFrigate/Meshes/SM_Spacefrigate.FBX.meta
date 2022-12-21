@@ -133,5 +133,5 @@ ModelImporter:
   remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
-  assetBundleName: res/unit/enemy/whaleship
+  assetBundleName: originres/spacefrigate/meshes/sm_spacefrigate
   assetBundleVariant: 
